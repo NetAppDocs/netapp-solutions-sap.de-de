@@ -1,0 +1,43 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-dr-anf_disaster_recovery_testing_overview.html 
+keywords: disaster, recovery, strategy, workflow, testing, internal, documentation 
+summary: Um eine effiziente Disaster Recovery-Strategie zu implementieren, müssen Sie den erforderlichen Workflow testen. Der Test zeigt, ob die Strategie funktioniert und ob die interne Dokumentation ausreichend ist, und ermöglicht es Administratoren auch, die erforderlichen Verfahren zu trainieren. 
+---
+= Disaster Recovery-Tests
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-dr-anf_monitoring_anf_cross-region_replication.html["Früher: Monitoring ANF-Cross-Region Replikation."]
+
+Um eine effiziente Disaster Recovery-Strategie zu implementieren, müssen Sie den erforderlichen Workflow testen. Der Test zeigt, ob die Strategie funktioniert und ob die interne Dokumentation ausreichend ist, und ermöglicht es Administratoren auch, die erforderlichen Verfahren zu trainieren.
+
+Die regionale ANF Replizierung ermöglicht Disaster-Recovery-Tests ohne Risiko für RTO und RPO. Disaster-Recovery-Tests können ohne Unterbrechung der Datenreplizierung durchgeführt werden.
+
+Der Workflow für Disaster Recovery-Tests nutzt die ANF-Funktionen, um auf Basis vorhandener Snapshot-Backups am Disaster-Recovery-Ziel neue Volumes zu erstellen. Siehe https://docs.microsoft.com/en-us/azure/azure-netapp-files/snapshots-introduction["Wie Azure NetApp Files Snapshots funktionieren - Microsoft Docs"^].
+
+Je nachdem, ob die Backup-Replizierung des Protokolls Bestandteil der Disaster Recovery-Einrichtung ist oder nicht, unterscheiden sich die Schritte für die Disaster Recovery leicht. In diesem Abschnitt werden die Disaster Recovery-Tests für die reine Daten-Backup-Replizierung sowie für die Replizierung von Daten-Volumes in Kombination mit der Replizierung des Backup-Volumes für das Protokoll beschrieben.
+
+Gehen Sie wie folgt vor, um Disaster-Recovery-Tests durchzuführen:
+
+. Bereiten Sie den Zielhost vor.
+. Erstellen neuer Volumes auf Basis von Snapshot Backups am Disaster-Recovery-Standort
+. Mounten Sie die neuen Volumes am Ziel-Host.
+. Stellen Sie die HANA Datenbank wieder her.
++
+** Nur Daten-Volume-Recovery.
+** Recovery mit replizierten Protokoll-Backups vorführen.
+
+
+
+
+In den folgenden Abschnitten werden diese Schritte detailliert beschrieben.
+
+image:saphana-dr-anf_image18.png["Fehler: Fehlendes Grafikbild"]
+
+link:saphana-dr-anf_prepare_the_target_host.html["Als Nächstes: Bereiten Sie den Zielhost vor."]

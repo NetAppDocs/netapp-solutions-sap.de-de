@@ -1,0 +1,26 @@
+---
+sidebar: sidebar 
+permalink: bp/saphana_aff_fc_san_fabric_setup.html 
+keywords: fabric, FCP, SAN 
+summary: Jeder SAP HANA-Server muss über eine redundante FCP-SAN-Verbindung mit einer Bandbreite von mindestens 8 Gbit/s. Für jeden an einen Storage Controller angeschlossenen SAP HANA-Host muss am Storage Controller mindestens eine Bandbreite von 8 GB/s konfiguriert sein. 
+---
+= EINRICHTUNG VON SAN Fabric
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana_aff_fc_infrastructure_setup_and_configuration_overview.html["Früher: Einrichtung und Konfiguration der Infrastruktur."]
+
+Jeder SAP HANA-Server muss über eine redundante FCP-SAN-Verbindung mit einer Bandbreite von mindestens 8 Gbit/s. Für jeden an einen Storage Controller angeschlossenen SAP HANA-Host muss am Storage Controller mindestens eine Bandbreite von 8 GB/s konfiguriert sein.
+
+Die folgende Abbildung zeigt ein Beispiel mit vier SAP HANA-Hosts, die mit zwei Storage-Controllern verbunden sind. Jeder SAP HANA-Host verfügt über zwei FCP-Ports, die mit der redundanten Fabric verbunden sind. Auf der Storage-Ebene sind vier FCP-Ports so konfiguriert, dass sie den erforderlichen Durchsatz für jeden SAP HANA Host liefern.
+
+image:saphana_aff_fc_image9.png["Fehler: Fehlendes Grafikbild"]
+
+Zusätzlich zum Zoning auf der Switch-Ebene müssen Sie jede LUN auf dem Storage-System den Hosts zuordnen, die mit dieser LUN verbunden sind. Einfachheit beim Zoning auf dem Switch; das heißt, Festlegung eines Zoneneinteils, in dem alle Host-HBAs alle Controller-HBAs sehen können.
+
+link:saphana_aff_fc_time_synchronization.html["Weiter: Zeitsynchronisierung."]

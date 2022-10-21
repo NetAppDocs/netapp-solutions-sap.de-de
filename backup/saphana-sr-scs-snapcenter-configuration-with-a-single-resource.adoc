@@ -1,0 +1,196 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-sr-scs-snapcenter-configuration-with-a-single-resource.html 
+keywords: virtual ip, single resource, configuration, 
+summary: 'Eine SnapCenter-Ressource wird mit der virtuellen IP-Adresse (Hostname) der HANA System Replication-Umgebung konfiguriert. Bei diesem Ansatz kommuniziert SnapCenter immer mit dem primären Host, unabhängig davon, ob Host 1 oder Host 2 der primäre Host ist.' 
+---
+= SnapCenter Konfiguration mit einer einzigen Ressource
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-sr-scs-snapcenter-4.6-configuration-using-a-resource-group.html["Zurück: SnapCenter 4.6 Konfiguration unter Verwendung einer Ressourcengruppe."]
+
+Eine SnapCenter-Ressource wird mit der virtuellen IP-Adresse (Hostname) der HANA System Replication-Umgebung konfiguriert. Bei diesem Ansatz kommuniziert SnapCenter immer mit dem primären Host, unabhängig davon, ob Host 1 oder Host 2 der primäre Host ist. Die Datenvolumen beider SAP HANA-Hosts sind in der SnapCenter Ressource enthalten.
+
+
+NOTE: Wir gehen davon aus, dass die virtuelle IP-Adresse immer an den primären SAP HANA-Host gebunden ist. Das Failover der virtuellen IP-Adresse erfolgt außerhalb von SnapCenter im Rahmen des Failover-Workflows zur HANA-Systemreplizierung.
+
+Wird ein Backup mit Host 1 als primärer Host ausgeführt, wird ein datenbankkonsistentes Snapshot-Backup auf dem Datenvolumen von Host 1 erstellt. Da das Daten-Volume des Hosts 2 Teil der SnapCenter Ressource ist, wird für dieses Volume eine weitere Snapshot Kopie erstellt. Diese Snapshot Kopie ist nicht datenbankkonsistent, sondern nur ein Crash-Image des sekundären Hosts.
+
+Der SAP HANA Backup-Katalog und die SnapCenter-Ressource umfassen das auf Host 1 erstellte Backup.
+
+image:saphana-sr-scs-image27.png["Fehler: Fehlendes Grafikbild"]
+
+Die folgende Abbildung zeigt den Backup-Vorgang nach dem Failover auf Host 2 und die Replizierung von Host 2 zu Host 1. SnapCenter kommuniziert automatisch mit Host 2, indem die in der SnapCenter-Ressource konfigurierte virtuelle IP-Adresse verwendet wird. Backups werden jetzt auf Host 2 erstellt. Von SnapCenter werden zwei Snapshot-Kopien erstellt: Ein datenbankkonsistentes Backup auf dem Daten-Volume bei Host 2 und eine Snapshot-Kopie des Crash-Images am Daten-Volume beim Host 1. Der SAP HANA-Backup-Katalog und die SnapCenter-Ressource enthalten nun das bei Host 1 erstellte Backup und das auf Host 2 erstellte Backup.
+
+Die allgemeine Ordnung und Sauberkeit der Daten- und Log-Backups basiert auf der definierten SnapCenter-Aufbewahrungsrichtlinie und die Backups werden unabhängig vom primären oder sekundären Host gelöscht.
+
+image:saphana-sr-scs-image28.png["Fehler: Fehlendes Grafikbild"]
+
+Wie im Abschnitt beschrieben link:saphana-sr-scs-storage-snapshot-backups-and-sap-system-replication.html["Storage Snapshot Backups und SAP System Replication"], Eine Wiederherstellungsfunktion mit Storage-basierten Snapshot-Backups ist unterschiedlich, je nachdem, welches Backup wiederhergestellt werden muss. Es ist wichtig zu ermitteln, auf welchem Host das Backup erstellt wurde, um festzustellen, ob die Wiederherstellung auf dem lokalen Speichervolumen durchgeführt werden kann, oder ob die Wiederherstellung auf dem Speichervolumen des anderen Hosts durchgeführt werden muss.
+
+Bei einer SnapCenter-Konfiguration mit nur einem Mitarbeiter ist SnapCenter nicht bewusst, wo das Backup erstellt wurde. NetApp empfiehlt daher, dem SnapCenter Backup-Workflow ein Pre-Backup-Skript hinzuzufügen, um zu ermitteln, welcher Host derzeit der primäre SAP HANA-Host ist.
+
+Die folgende Abbildung zeigt die Identifikation des Backup-Hosts.
+
+image:saphana-sr-scs-image29.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+== SnapCenter-Konfiguration
+
+Die folgende Abbildung zeigt das Lab-Setup und eine Übersicht über die erforderliche SnapCenter-Konfiguration.
+
+image:saphana-sr-scs-image30.png["Fehler: Fehlendes Grafikbild"]
+
+Um Backup-Vorgänge unabhängig davon durchzuführen, welcher SAP HANA Host primär ist und selbst wenn ein Host ausfällt, muss das SnapCenter SAP HANA Plug-in auf einem zentralen Plug-in-Host implementiert werden. In unserer Lab-Einrichtung wurde der SnapCenter Server als zentraler Plug-in-Host verwendet, und wir haben das SAP HANA Plug-in auf dem SnapCenter Server implementiert.
+
+In der HANA-Datenbank wurde ein Benutzer erstellt, um Backup-Vorgänge durchzuführen. Auf dem SnapCenter-Server, auf dem das SAP HANA-Plug-in installiert wurde, wurde ein User-Store-Schlüssel konfiguriert. Der Benutzerspeicherschlüssel enthält die virtuelle IP-Adresse der SAP HANA System Replication Hosts (`ssr-vip`).
+
+....
+hdbuserstore.exe -u SYSTEM set SSRKEY ssr-vip:31013 SNAPCENTER <password>
+....
+Weitere Informationen zu SAP HANA Plug-in-Implementierungsoptionen und User-Store-Konfiguration finden Sie im technischen Bericht TR-4614: https://www.netapp.com/us/media/tr-4614.pdf["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"^].
+
+In SnapCenter wird die Ressource wie in der folgenden Abbildung dargestellt mit dem Benutzer-Speicherschlüssel konfiguriert, vorher konfiguriert, und dem SnapCenter-Server als der konfiguriert `hdbsql` Kommunikations-Host.
+
+image:saphana-sr-scs-image31.png["Fehler: Fehlendes Grafikbild"]
+
+Die Datenvolumen der beiden SAP HANA-Hosts sind in der Storage-Platzbedarf-Konfiguration enthalten, wie die folgende Abbildung zeigt.
+
+image:saphana-sr-scs-image32.png["Fehler: Fehlendes Grafikbild"]
+
+Wie zuvor bereits besprochen, ist bei SnapCenter nicht bekannt, wo das Backup erstellt wurde. NetApp empfiehlt daher, ein Skript vor dem Backup im SnapCenter Backup Workflow hinzuzufügen, um zu ermitteln, welcher Host derzeit der primäre SAP HANA Host ist. Sie können diese Identifizierung mithilfe einer SQL-Anweisung durchführen, die dem Backup-Workflow hinzugefügt wird, wie die folgende Abbildung zeigt.
+
+....
+Select host from “SYS”.M_DATABASE
+....
+image:saphana-sr-scs-image33.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+== SnapCenter Backup-Vorgang
+
+Backup-Vorgänge werden jetzt wie gewohnt ausgeführt. Die allgemeine Ordnung und Sauberkeit der Daten und Log-Backups wird unabhängig davon durchgeführt, welcher SAP HANA-Host primärer oder sekundärer ist.
+
+Die Backup-Jobprotokolle enthalten die Ausgabe der SQL-Anweisung, mit der Sie den SAP HANA-Host identifizieren können, auf dem das Backup erstellt wurde.
+
+Die folgende Abbildung zeigt das Backup-Jobprotokoll mit Host 1 als primärer Host.
+
+image:saphana-sr-scs-image34.png["Fehler: Fehlendes Grafikbild"]
+
+Diese Abbildung zeigt das Backup-Jobprotokoll mit Host 2 als primärer Host.
+
+image:saphana-sr-scs-image35.png["Fehler: Fehlendes Grafikbild"]
+
+Die folgende Abbildung zeigt den SAP HANA Backup-Katalog in SAP HANA Studio. Ist die SAP HANA-Datenbank online, ist der SAP HANA-Host, auf dem das Backup erstellt wurde, im SAP HANA Studio sichtbar.
+
+
+NOTE: Der SAP HANA-Backup-Katalog auf dem Filesystem, der während eines Restore- und Recovery-Vorgangs verwendet wird, enthält nicht den Host-Namen, in dem das Backup erstellt wurde. Der einzige Weg, um den Host zu identifizieren, wenn die Datenbank ausfällt, ist die Kombination der Backup-Katalog-Einträge mit dem `backup.log` Datei beider SAP HANA-Hosts.
+
+image:saphana-sr-scs-image36.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+== Restore und Recovery
+
+Wie bereits besprochen, müssen Sie feststellen können, wo das ausgewählte Backup erstellt wurde, um den erforderlichen Wiederherstellungsvorgang zu definieren. Wenn die SAP HANA Datenbank noch online ist, kann mit SAP HANA Studio der Host identifiziert werden, auf dem das Backup erstellt wurde. Wenn die Datenbank offline ist, sind die Informationen nur im SnapCenter-Backup-Jobprotokoll verfügbar.
+
+Die folgende Abbildung zeigt die verschiedenen Wiederherstellungsvorgänge je nach ausgewähltem Backup.
+
+Wenn ein Wiederherstellungsvorgang nach dem Zeitstempel T3 ausgeführt werden muss und Host 1 der primäre ist, können Sie das bei T1 oder T3 erstellte Backup mithilfe von SnapCenter wiederherstellen. Diese Snapshot-Backups sind auf dem an Host 1 angebundenen Storage Volume verfügbar.
+
+Wenn Sie mithilfe des Backup wiederherstellen müssen, der am Host 2 (T2) erstellt wurde, eine Snapshot-Kopie im Storage Volume von Host 2 ist, muss der Backup für den Host 1 zur Verfügung gestellt werden. Sie können dieses Backup zur Verfügung stellen, indem Sie eine NetApp FlexClone Kopie aus dem Backup erstellen, die FlexClone Kopie in Host 1 mounten und die Daten am ursprünglichen Speicherort kopieren.
+
+image:saphana-sr-scs-image37.png["Fehler: Fehlendes Grafikbild"]
+
+Mit einer einzelnen SnapCenter Ressourcenkonfiguration werden Snapshot Kopien auf beiden Storage-Volumes sowohl von SAP HANA System Replication Hosts erstellt. Nur das Snapshot-Backup, das auf dem Storage-Volume des primären SAP HANA-Hosts erstellt wird, ist für die zukünftige Recovery gültig. Die auf dem Storage Volume des sekundären SAP HANA-Hosts erstellte Snapshot Kopie ist ein Crash-Image, das nicht für die zukünftige Recovery verwendet werden kann.
+
+Eine Wiederherstellung mit SnapCenter kann auf zwei verschiedene Arten durchgeführt werden:
+
+* Stellen Sie nur das gültige Backup wieder her
+* Stellen Sie die komplette Ressource einschließlich des gültigen Backups und des Crash-imageIn den folgenden Abschnitten werden die beiden verschiedenen Wiederherstellungsvorgänge näher erläutert.
+
+
+Eine Wiederherstellung aus einem Backup, das auf dem anderen Host erstellt wurde, wird im Abschnitt beschrieben link:saphana-sr-scs-restore-and-recovery-from-a-backup-created-at-the-other-host.html["Wiederherstellung aus einem Backup, das auf dem anderen Host erstellt wurde"].
+
+Die folgende Abbildung zeigt die Wiederherstellungen mit einer einzelnen SnapCenter Ressourcenkonfiguration.
+
+image:saphana-sr-scs-image38.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+=== SnapCenter Restore nur für gültige Backups
+
+Die folgende Abbildung zeigt einen Überblick über das in diesem Abschnitt beschriebene Wiederherstellungsszenario.
+
+Bei T1 am Host 1 wurde ein Backup erstellt. Ein Failover wurde an Host 2 durchgeführt. Nach einem bestimmten Zeitpunkt wurde ein weiteres Failover zurück zu Host 1 durchgeführt. Zum aktuellen Zeitpunkt ist Host 1 der primäre Host.
+
+. Es ist ein Fehler aufgetreten, und Sie müssen das am T1 erstellte Backup am Host 1 wiederherstellen.
+. Der sekundäre Host (Host 2) wird heruntergefahren, aber es wird kein Wiederherstellungsvorgang ausgeführt.
+. Das Speichervolumen von Host 1 wird auf dem bei T1 erstellten Backup wiederhergestellt.
+. Eine vorwärts gerichteten Wiederherstellung wird mit Protokollen von Host 1 und Host 2 durchgeführt.
+. Host 2 wird gestartet, und die Neusynchronisierung der Systemreplizierung von Host 2 wird automatisch gestartet.
+
+
+image:saphana-sr-scs-image39.png["Fehler: Fehlendes Grafikbild"]
+
+Die folgende Abbildung zeigt den SAP HANA Backup-Katalog in SAP HANA Studio. Die hervorgehobene Sicherung zeigt die Sicherung, die am T1 bei Host 1 erstellt wurde.
+
+image:saphana-sr-scs-image40.png["Fehler: Fehlendes Grafikbild"]
+
+Im SAP HANA Studio wird eine Wiederherstellung gestartet. Wie die folgende Abbildung zeigt, ist der Name des Hosts, auf dem das Backup erstellt wurde, im Wiederherstellungsworkflow nicht sichtbar.
+
+
+NOTE: In unserem Testszenario waren wir in der Lage, das richtige Backup (das Backup beim Host 1 erstellt wurde) in SAP HANA Studio zu identifizieren, als die Datenbank noch online war. Wenn die Datenbank nicht verfügbar ist, müssen Sie das SnapCenter Backup-Jobprotokoll prüfen, um das richtige Backup zu finden.
+
+image:saphana-sr-scs-image41.png["Fehler: Fehlendes Grafikbild"]
+
+In SnapCenter wird das Backup ausgewählt und ein Restore-Vorgang auf Dateiebene durchgeführt. Auf dem Bildschirm Wiederherstellung auf Dateiebene wird nur das Host 1 Volume ausgewählt, sodass nur das gültige Backup wiederhergestellt wird.
+
+image:saphana-sr-scs-image42.png["Fehler: Fehlendes Grafikbild"]
+
+Nach der Wiederherstellung wird das Backup in SAP HANA Studio grün hervorgehoben. Sie müssen nicht einen zusätzlichen Log-Backup-Speicherort eingeben, weil der Dateipfad der Log-Backups von Host 1 und Host 2 im Backup-Katalog enthalten sind.
+
+image:saphana-sr-scs-image43.png["Fehler: Fehlendes Grafikbild"]
+
+Nach Abschluss der vorwärts gerichteten Recovery wird der sekundäre Host (Host 2) gestartet und die Resynchronisierung der SAP HANA System Replication gestartet.
+
+
+NOTE: Obwohl der sekundäre Host aktuell ist (kein Restore-Vorgang für Host 2 durchgeführt), führt SAP HANA eine vollständige Replizierung aller Daten durch. Dieses Verhalten ist Standard nach einem Restore- und Recovery-Vorgang mit SAP HANA System Replication.
+
+image:saphana-sr-scs-image44.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+=== SnapCenter Restore von gültigem Backup- und Crash-Image
+
+Die folgende Abbildung zeigt einen Überblick über das in diesem Abschnitt beschriebene Wiederherstellungsszenario.
+
+Bei T1 am Host 1 wurde ein Backup erstellt. Ein Failover wurde an Host 2 durchgeführt. Nach einem bestimmten Zeitpunkt wurde ein weiteres Failover zurück zu Host 1 durchgeführt. Zum aktuellen Zeitpunkt ist Host 1 der primäre Host.
+
+. Es ist ein Fehler aufgetreten, und Sie müssen das am T1 erstellte Backup am Host 1 wiederherstellen.
+. Der sekundäre Host (Host 2) wird heruntergefahren und das T1-Absturzabbild wird wiederhergestellt.
+. Das Speichervolumen von Host 1 wird auf dem bei T1 erstellten Backup wiederhergestellt.
+. Eine vorwärts gerichteten Wiederherstellung wird mit Protokollen von Host 1 und Host 2 durchgeführt.
+. Host 2 wird gestartet und eine Resynchronisierung der Systemreplizierung von Host 2 wird automatisch gestartet.
+
+
+image:saphana-sr-scs-image45.png["Fehler: Fehlendes Grafikbild"]
+
+Der Restore- und Recovery-Vorgang mit SAP HANA Studio entspricht den im Abschnitt beschriebenen Schritten link:saphana-sr-scs-snapcenter-configuration-with-a-single-resource.html#snapcenter-restore-of-the-valid-backup-only["SnapCenter Restore nur für gültige Backups"].
+
+Um den Wiederherstellungsvorgang durchzuführen, wählen Sie in SnapCenter die Option Ressource abschließen. Die Volumes beider Hosts werden wiederhergestellt.
+
+image:saphana-sr-scs-image46.png["Fehler: Fehlendes Grafikbild"]
+
+Nach Abschluss der erweiterten Recovery wird der sekundäre Host (Host 2) gestartet und die Resynchronisierung von SAP HANA System Replication gestartet. Eine vollständige Replizierung aller Daten wird durchgeführt.
+
+image:saphana-sr-scs-image47.png["Fehler: Fehlendes Grafikbild"]
+
+link:saphana-sr-scs-restore-and-recovery-from-a-backup-created-at-the-other-host.html["Danach: Wiederherstellung und Recovery aus einem auf dem anderen Host erstellten Backup."]

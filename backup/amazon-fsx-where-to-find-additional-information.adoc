@@ -1,0 +1,51 @@
+---
+sidebar: sidebar 
+permalink: backup/amazon-fsx-where-to-find-additional-information.html 
+keywords:  
+summary:  
+---
+= Wo Sie weitere Informationen finden
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:amazon-fsx-restore-and-recover-from-secondary-storage.html["Früher: Wiederherstellung von sekundärem Storage."]
+
+Sehen Sie sich die folgenden Dokumente und/oder Websites an, um mehr über die in diesem Dokument beschriebenen Informationen zu erfahren:
+
+* FSX für NetApp ONTAP Benutzerhandbuch – Was ist Amazon FSX für NetApp ONTAP?
++
+https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/what-is-fsx-ontap.html[]
+
+* Ressourcen-Seite zu SnapCenter
++
+https://www.netapp.com/us/documentation/snapcenter-software.aspx["https://www.netapp.com/us/documentation/snapcenter-software.aspx"^]
+
+* SnapCenter-Softwaredokumentation
++
+https://docs.netapp.com/us-en/snapcenter/index.html["https://docs.netapp.com/us-en/snapcenter/index.html"^]
+
+* TR-4667: Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter
++
+https://www.netapp.com/pdf.html?item=/media/17111-tr4667.pdf[]
+
+* TR-4719: SAP HANA System Replication – Backup und Recovery mit SnapCenter
++
+https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-sr-scs-sap-hana-system-replication-overview.html["https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-sr-scs-sap-hana-system-replication-overview.html"^]
+
+
+
+
+
+== Versionsverlauf
+
+|===
+| Version | Datum | Versionsverlauf des Dokuments 
+
+
+| Version 1.0 | Mai 2022 | Erste Version. 
+|===

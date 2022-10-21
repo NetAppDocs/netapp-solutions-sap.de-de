@@ -1,0 +1,70 @@
+---
+sidebar: sidebar 
+permalink: bp/saphana_aff_fc_where_to_find_additional_information.html 
+keywords:  
+summary:  
+---
+= Wo Sie weitere Informationen finden
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana_aff_fc_adding_additional_data_volume_partitions_for_sap_hana_single-host_systems.html["Früher: Zusätzliche Daten-Volume-Partitionen für SAP HANA Single-Host-Systeme hinzufügen."]
+
+Weitere Informationen zu den in diesem Dokument beschriebenen Daten finden Sie in den folgenden Dokumenten bzw. auf den folgenden Websites:
+
+* Best Practices und Empfehlungen für Scale-up-Implementierungen von SAP HANA auf VMware vSphere
++
+http://www.vmware.com/files/pdf/SAP_HANA_on_vmware_vSphere_best_practices_guide.pdf["www.vmware.com/files/pdf/SAP_HANA_on_vmware_vSphere_best_practices_guide.pdf"^]
+
+* Best Practices und Empfehlungen für Scale-out-Implementierungen von SAP HANA auf VMware vSphere
++
+http://www.vmware.com/files/pdf/sap-hana-scale-out-deployments-on-vsphere.pdf["http://www.vmware.com/files/pdf/sap-hana-scale-out-deployments-on-vsphere.pdf"^]
+
+* SAP Certified Enterprise Storage Hardware for SAP HANA
++
+https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/enterprise-storage.html["https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/enterprise-storage.html"^]
+
+* SAP HANA Storage-Anforderungen
++
+http://go.sap.com/documents/2015/03/74cdb554-5a7c-0010-82c7-eda71af511fa.html["http://go.sap.com/documents/2015/03/74cdb554-5a7c-0010-82c7-eda71af511fa.html"^]
+
+* SAP HANA Tailored Data Center Integration Häufig gestellte Fragen
++
+https://www.sap.com/documents/2016/05/e8705aae-717c-0010-82c7-eda71af511fa.html["https://www.sap.com/documents/2016/05/e8705aae-717c-0010-82c7-eda71af511fa.html"^]
+
+* TR-4646: SAP HANA Disaster Recovery with Storage Replication Using SnapCenter 4.0 SAP HANA Plug-in
++
+https://www.netapp.com/us/media/tr-4646.pdf["https://www.netapp.com/us/media/tr-4646.pdf"^]
+
+* TR-4614: SAP HANA Backup and Recovery with SnapCenter
++
+https://www.netapp.com/us/media/tr-4614.pdf["https://www.netapp.com/us/media/tr-4614.pdf"^]
+
+* TR-4338: SAP HANA on VMware vSphere with NetApp FAS and AFF Systems
++
+http://www.netapp.com/us/media/tr-4338.pdf["www.netapp.com/us/media/tr-4338.pdf"^]
+
+* TR-4667: Automatisierung von SAP Systemkopien mithilfe des SnapCenter 4.0 SAP HANA Plugin
++
+https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html"^]
+
+* NetApp Dokumentationszentren
++
+https://www.netapp.com/us/documentation/index.aspx["https://www.netapp.com/us/documentation/index.aspx"^]
+
+* NetApp AFF Storage-Systemressourcen
++
+https://mysupport.netapp.com/info/web/ECMLP2676498.html["https://mysupport.netapp.com/info/web/ECMLP2676498.html"^]
+
+* SAP HANA Softwarelösungen
++
+file:///C:/Users/mschoen/NetApp%20Inc/SAP%20TME%20-%20Dokumente/Projects/HANA-BestPracticeGuide-TRs/2018_sept/www.netapp.com/us/solutions/applications/sap/index.aspx%23sap-hana["www.netapp.com/us/solutions/applications/sap/index.aspx#sap-hana"^]
+
+
+
+link:saphana_aff_fc_update_history.html["Weiter: Aktualisierungsverlauf."]

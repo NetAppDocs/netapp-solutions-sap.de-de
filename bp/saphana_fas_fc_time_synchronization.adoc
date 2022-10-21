@@ -1,0 +1,20 @@
+---
+sidebar: sidebar 
+permalink: bp/saphana_fas_fc_time_synchronization.html 
+keywords: time, synchronization, storage, controllers, sap, hana, database, hosts 
+summary: Sie müssen die Zeit zwischen den Storage-Controllern und den SAP HANA Datenbank-Hosts synchronisieren. 
+---
+= Zeitsynchronisierung
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana_fas_fc_san_fabric_setup.html["Früher: SAN Fabric Einrichtung."]
+
+Sie müssen die Zeit zwischen den Storage-Controllern und den SAP HANA Datenbank-Hosts synchronisieren. Es muss der gleiche Zeitserver für alle Storage Controller und alle SAP HANA-Hosts festgelegt sein.
+
+link:saphana_fas_fc_storage_controller_setup.html["Weiter: Einrichtung von Storage Controller."]

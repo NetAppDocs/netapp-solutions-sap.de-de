@@ -1,0 +1,33 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/sc-copy-clone-sap-hana-system-refresh-operation-workflows-using-storage-snapshot-backups.html 
+keywords: tenant create, rename, drop, refresh 
+summary: Die für die Aktualisierung eines SAP HANA Systems erforderlichen Schritte hängen von der Mandantenkonfiguration des Quellsystems und dem erforderlichen Mandantennamen am Zielsystem ab, wie in der folgenden Abbildung dargestellt. 
+---
+= Workflows für SAP HANA Systemaktualisierungen mithilfe von Storage-Snapshot-Backups
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:sc-copy-clone-overview-of-sap-system-clone-workflow-with-snapcenter.html["Zurück: Überblick über den SAP Systemklonworkflow mit SnapCenter."]
+
+Die für die Aktualisierung eines SAP HANA Systems erforderlichen Schritte hängen von der Mandantenkonfiguration des Quellsystems und dem erforderlichen Mandantennamen am Zielsystem ab, wie in der folgenden Abbildung dargestellt.
+
+Da der Mandantenname in der Systemdatenbank konfiguriert ist, steht nach der Wiederherstellung der Systemdatenbank auch der Mandantenname des Quellsystems auf dem Zielsystem zur Verfügung. Daher kann der Mandant im Zielsystem nur mit demselben Namen wie der Quellmandant wiederhergestellt werden, wie in Option 1 in der folgenden Abbildung dargestellt. Wenn der Mandantenname im Zielsystem anders sein muss, muss er zuerst mit demselben Namen wie der Quellmandant wiederhergestellt und dann in den erforderlichen Zielmandanten-Namen umbenannt werden. Dies ist Option 2 in der folgenden Abbildung.
+
+Eine Ausnahme dieser Regel ist ein HANA-System mit einem einzelnen Mandanten, wobei der Mandantenname mit dem System-SID identisch ist. Diese Konfiguration ist nach der anfänglichen HANA-Installation die Standardeinstellung. Diese spezifische Konfiguration wird von der HANA-Datenbank gekennzeichnet. In diesem Fall kann die Mandantenwiederherstellung am Zielsystem mit dem Mandantennamen des Zielsystems durchgeführt werden, was ebenfalls mit der System-SID des Zielsystems identisch sein muss. Dieser Workflow wird in Option 3 in der folgenden Abbildung dargestellt.
+
+
+NOTE: Sobald ein Mandant beim Erstellen, Umbenennen oder Ablegen im Quellsystem ausgeführt wird, wird dieses Konfigurationsflag von der HANA-Datenbank gelöscht. Somit ist auch dann, wenn die Konfiguration an Mandant = SID zurückgebracht wurde, das Flag nicht mehr verfügbar und die Ausnahme hinsichtlich der Mandantenwiederherstellung mit Workflow 3 ist nicht mehr möglich. In diesem Fall ist Option 2 der erforderliche Workflow.
+
+image:sc-copy-clone-image11.png["Fehler: Fehlendes Grafikbild"]
+
+Diese Abbildung zeigt das Konfigurationsflag für die erste MDC-Einzelmandant-Installation.
+
+image:sc-copy-clone-image12.png["Fehler: Fehlendes Grafikbild"]
+
+link:sc-copy-clone-automation-example-scripts.html["Weiter: Beispielskripte zur Automatisierung."]

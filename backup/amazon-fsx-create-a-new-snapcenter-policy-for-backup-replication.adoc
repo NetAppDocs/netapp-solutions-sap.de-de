@@ -1,0 +1,54 @@
+---
+sidebar: sidebar 
+permalink: backup/amazon-fsx-create-a-new-snapcenter-policy-for-backup-replication.html 
+keywords: policy, backup, replication, snapshot 
+summary: In diesem Abschnitt wird die Konfiguration einer Richtlinie für die Backup-Replikation beschrieben. 
+---
+= Erstellen einer neuen SnapCenter-Richtlinie für Backup-Replizierung
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:amazon-fsx-add-a-backup-svm-to-snapcenter.html["Früher: Fügen Sie eine Backup-SVM zu SnapCenter hinzu."]
+
+Sie müssen eine Richtlinie für die Backup-Replikation wie folgt konfigurieren:
+
+. Geben Sie einen Namen für die Richtlinie ein.
++
+image:amazon-fsx-image79.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie Snapshot Backup und eine Zeitplanfrequenz aus. Für die Backup-Replizierung wird täglich verwendet.
++
+image:amazon-fsx-image80.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie die Aufbewahrung für die Snapshot-Backups aus.
++
+image:amazon-fsx-image81.png["Fehler: Fehlendes Grafikbild"]
+
++
+Dies ist die Aufbewahrung für die täglichen Snapshot Backups, die im primären Storage erstellt wurden. Die Aufbewahrung für sekundäre Backups auf dem SnapVault-Ziel wurde bereits mit dem Befehl „Add rule“ auf der ONTAP-Ebene konfiguriert. Siehe „Konfigurieren von Replikationsbeziehungen auf FSX für ONTAP-Dateisysteme“ (xref).
+
++
+image:amazon-fsx-image82.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie das Feld SnapVault aktualisieren aus, und geben Sie eine benutzerdefinierte Bezeichnung an.
++
+Dieses Etikett muss mit der SnapMirror-Bezeichnung im übereinstimmen `add rule` Befehl auf ONTAP-Ebene.
+
++
+image:amazon-fsx-image83.png["Fehler: Fehlendes Grafikbild"]
+
++
+image:amazon-fsx-image84.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+Die neue SnapCenter-Richtlinie ist jetzt konfiguriert.
+
+image:amazon-fsx-image85.png["Fehler: Fehlendes Grafikbild"]
+
+link:amazon-fsx-add-a-policy-to-resource-protection.html["Weiter: Fügen Sie eine Richtlinie zu Ressourcenschutz hinzu."]

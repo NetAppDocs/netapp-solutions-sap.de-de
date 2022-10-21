@@ -1,0 +1,34 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-sr-scs-storage-snapshot-backups-and-sap-system-replication.html 
+keywords: Snapshot, storage, backup, primary host, sql 
+summary: Backup-Vorgänge werden immer auf dem primären SAP HANA-Host durchgeführt. Die erforderlichen SQL-Befehle für den Backup-Vorgang können nicht auf dem sekundären SAP HANA-Host ausgeführt werden. 
+---
+= Storage Snapshot Backups und SAP System Replication
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-sr-scs-sap-hana-system-replication-overview.html["Früher: Überblick über SAP HANA System Replication."]
+
+Backup-Vorgänge werden immer auf dem primären SAP HANA-Host durchgeführt. Die erforderlichen SQL-Befehle für den Backup-Vorgang können nicht auf dem sekundären SAP HANA-Host ausgeführt werden.
+
+Für SAP HANA-Backup-Vorgänge sind die primären und sekundären SAP HANA-Hosts eine Einheit. Sie verwenden denselben SAP HANA Backup-Katalog und nutzen die Backups für die Wiederherstellung und das Recovery, unabhängig davon, ob das Backup auf dem primären oder sekundären SAP HANA-Host erstellt wurde.
+
+Da jedes Backup für die Wiederherstellung verwendet und mithilfe von Log-Backups von beiden Hosts durchgeführt werden kann, ist ein gemeinsamer Backup-Ort für Protokolle erforderlich, auf den von beiden Hosts zugegriffen werden kann. NetApp empfiehlt die Verwendung eines Shared Storage Volume. Sie sollten jedoch auch das Ziel der Protokollsicherung in Unterverzeichnisse innerhalb des gemeinsam genutzten Volumes trennen.
+
+Jeder SAP HANA-Host verfügt über ein eigenes Storage-Volume. Wenn Sie einen Storage-basierten Snapshot für ein Backup verwenden, wird ein Datenbank-konsistenter Snapshot auf dem Speicher-Volume des primären SAP HANA-Hosts erstellt.
+
+image:saphana-sr-scs-image3.png["Fehler: Fehlendes Grafikbild"]
+
+Wenn ein Failover zu Host 2 durchgeführt wird, wird Host 2 zum primären Host, die Backups werden auf Host 2 ausgeführt und Snapshot Backups werden auf dem Storage Volume von Host 2 erstellt.
+
+Das auf Host 2 erstellte Backup kann direkt auf der Speicherebene wiederhergestellt werden. Wenn Sie ein Backup verwenden müssen, das auf Host 1 erstellt wurde, muss das Backup vom Host-1-Speicher-Volume auf das Host-2-Speicher-Volume kopiert werden. Die vorwärts-Wiederherstellung verwendet die Protokoll-Backups von beiden Hosts.
+
+image:saphana-sr-scs-image4.png["Fehler: Fehlendes Grafikbild"]
+
+link:saphana-sr-scs-snapcenter-configuration-options-for-sap-system-replication.html["Als Nächstes: SnapCenter Konfigurationsoptionen für SAP System Replication."]

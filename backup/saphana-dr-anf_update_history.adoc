@@ -1,0 +1,26 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-dr-anf_update_history.html 
+keywords:  
+summary:  
+---
+= Aktualisierungsverlauf
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-dr-anf_hana_database_recovery_01.html["Früher: HANA Datenbank-Recovery"]
+
+An dieser Lösung wurden seit ihrer ersten Veröffentlichung folgende technische Änderungen vorgenommen:
+
+[cols="25,25,50"]
+|===
+| Version | Datum | Zusammenfassung aktualisieren 
+
+
+| Version 1.0 | April 2021 | Ausgangsversion 
+|===

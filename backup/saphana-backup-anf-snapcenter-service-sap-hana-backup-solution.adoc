@@ -1,0 +1,112 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-snapcenter-service-sap-hana-backup-solution.html 
+keywords: solution components, scheduling, retention, 
+summary: In diesem Abschnitt werden die durch die SnapCenter-Service-Backup-Lösung behandelten Bereiche beschrieben. 
+---
+= SnapCenter Service SAP HANA Backup-Lösung
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-backup-anf-snapcenter-service-architecture.html["Früher: SnapCenter Service Architektur."]
+
+
+
+== Lösungskomponenten
+
+Die SnapCenter-Service-Backup-Lösung für SAP HANA umfasst folgende Bereiche:
+
+* SAP HANA Daten-Backup mit Storage-basierten Snapshot Kopien:
++
+** Backup-Planung
+** On-Demand-Backups
+** Retentionmanagement
+** Allgemeine Ordnung und Sauberkeit des SAP HANA Backup-Katalogs
+** Wiederherstellungsvorgang
+
+
+* Backup außerhalb des Datenvolumens mit Storage-basierten Snapshot Kopien
++
+** SnapCenter unterscheidet zwischen nicht-Daten-Volumes, die zu einem bestimmten HANA-System gehören, beispielsweise dem HANA-Shared-Volume und globalen, nicht-Daten-Volumes, die nicht zu einem bestimmten HANA-System gehören, wie z. B. dem SAP-Transportverzeichnis.
+** Backup-Planung
+** On-Demand-Backups
+** Retentionmanagement
+** Wiederherstellungsvorgang
+
+
+* Dateibasiertes Backup für Integritätsprüfungen der Datenbankblöcke oder Backup an einem zweiten Ort:
++
+** Backup-Planung
+** On-Demand-Backups
+** Retentionmanagement
+** Allgemeine Ordnung und Sauberkeit des SAP HANA Backup-Katalogs
+
+
+* Aufbewahrungsmanagement von HANA-Datenbankprotokoll-Backup:
++
+** Retentionmanagement basierend auf der Aufbewahrung von Daten-Backups
+** Allgemeine Ordnung und Sauberkeit des SAP HANA Backup-Katalogs
+
+
+
+
+Snapshot Daten-Backups werden mit dem SnapCenter Service ausgeführt, indem der Speicherpunkt des SAP HANA Datenbank-Backups ausgelöst wird. Dadurch basiert die auf der Storage-Ebene erstellte Snapshot Kopie auf einem konsistenten Image der SAP HANA Datenbank.
+
+Für ein vollständiges Backup aller mit SAP HANA verbundenen Ressourcen bietet SnapCenter Service auch die Möglichkeit, alle nicht aus Daten stammenden Volumes mit Storage-basierten Snapshot Kopien zu sichern. Sie können nicht-Daten-Volumes unabhängig vom Datenbank-Daten-Backup planen, um individuelle Aufbewahrungs- und Sicherungsrichtlinien zu aktivieren.
+
+SAP empfiehlt, Storage-basierte Snapshot-Backups mit einem wöchentlichen dateibasierten Backup zu kombinieren, um eine Integritätsprüfung für Blöcke durchzuführen. Sie können die Integritätsprüfung der Blöcke in SnapCenter ausführen. Block-Integritätsprüfung (dateibasierte) Backups werden auch verwendet, um Backups in einen zweiten Storage-Standort zu verlagern.
+
+SnapCenter Service verwaltet anhand Ihrer konfigurierbaren Aufbewahrungsrichtlinien die allgemeine Ordnung und Sauberkeit der Daten-Backups, Protokoll-Backups und den SAP HANA Backup-Katalog.
+
+Die folgende Abbildung fasst die Backup-Lösung zusammen.
+
+image:saphana-backup-anf-image9.png["Fehler: Fehlendes Grafikbild"]
+
+Beim Ausführen eines Storage-basierten Snapshot Backups von Volumes ohne Daten führt der SnapCenter-Service die folgenden Aufgaben aus:
+
+. Erstellt eine Storage-Snapshot-Kopie des nicht-Daten-Volumes
+. Löscht Storage-Snapshot-Kopien auf der Grundlage der definierten Aufbewahrungsrichtlinie.
+
+
+Beim Ausführen eines Storage-basierten Snapshot-Backups der SAP HANA-Datenbank führt der SnapCenter-Service die folgenden Aufgaben aus:
+
+. Erstellung eines SAP HANA-Backup-Speicherpunktes, um ein konsistentes Image auf der Persistenzschicht zu erstellen.
+. Erstellt eine Storage-Snapshot-Kopie des Daten-Volumes
+. Registriert das Storage Snapshot-Backup im SAP HANA Backup-Katalog.
+. Gibt den Speicherpunkt für SAP HANA-Backup frei.
+. Löscht Storage-Snapshot-Kopien auf der Grundlage der definierten Aufbewahrungsrichtlinie.
+. Löscht die Einträge des SAP HANA-Backup-Katalogs basierend auf der festgelegten Aufbewahrungsrichtlinie.
+. Sobald eine Datensicherung manuell oder auf Grundlage der Aufbewahrungsrichtlinie gelöscht wurde, löscht der SnapCenter Service alle Log-Backups, die älter als die älteste Datensicherung sind. Log-Backups werden im Dateisystem und im SAP HANA Backup-Katalog gelöscht.
+
+
+
+
+== Unterstützte SAP HANA-Versionen und -Konfigurationen
+
+Der SnapCenter Service unterstützt SAP HANA Konfigurationen für Einzelhost und mehrere Hosts, die mit Azure NetApp Files Volumes verbunden sind.
+
+Der SnapCenter-Service unterstützt die folgenden SAP HANA-Architekturen und -Releases:
+
+* SAP HANA Single-Container:
++
+** SAP HANA 1.0 SPS12
+
+
+* Mandantenfähige SAP HANA Datenbank-Container (MDC) mit einzelnen oder mehreren Mandanten:
++
+** SAP HANA 2.0 SPS4 und höher
+
+
+
+
+
+NOTE: Die Snapshot Backup-Unterstützung für MDC-Systeme wurde von SAP mit HANA 2.0 SP1 für Einzelmandant-Systeme und mit HANA 2.0 SPS4 für mehrere Mandantensysteme eingeführt.
+
+Die Kombination von Daten-Snapshot-Backups mit SnapCenter Service und Protokollierung von Backups mit einer Backint-Lösung wird nicht unterstützt. Log-Backups müssen so konfiguriert werden, dass sie in ein Dateisystem geschrieben werden.
+
+link:saphana-backup-anf-snapcenter-service-concepts-and-best-practices.html["Als Nächstes: SnapCenter-Servicekonzepte und Best Practices."]

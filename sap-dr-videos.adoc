@@ -1,0 +1,28 @@
+---
+sidebar: sidebar 
+permalink: sap-dr-videos.html 
+summary: Eine Reihe von Videos und Demos zu den Themen SAP Backup, Restore und Disaster Recovery 
+keywords: netapp, solutions, SAP, backup, restore, disaster recover, dr, videos, demos 
+---
+= Videos und Demos zu SAP Backup, Restore und Disaster Recovery
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:table-stripes: odd
+:imagesdir: ./media/
+
+
+[role="lead"]
+Überblick über die Videos und Demos zu den Highlights SAP Backup, Restore und Disaster Recovery.
+
+
+
+=== Videos und Demos zu SAP Backup, Restore und Disaster Recovery
+
+* link:https://www.netapp.tv/details/25592["Stellen Sie die Verfügbarkeit von SAP Applikationen sicher und minimieren Sie Ausfallzeiten"]
+* link:https://www.netapp.tv/details/28399["Optimieren Sie Ihre Datensicherung für SAP HANA auf Azure NetApp Files"]
+* link:https://www.netapp.tv/details/28398["Disaster-Recovery-Optionen für SAP HANA"]
+* link:https://www.netapp.tv/details/28406["Technischer Bericht: SAP HANA Disaster Recovery with ANF and Cross-Region Replication"]
+

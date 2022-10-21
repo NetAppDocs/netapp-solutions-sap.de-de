@@ -1,0 +1,84 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-sr-scs-restore-and-recovery-from-a-backup-created-at-the-other-host.html 
+keywords: restore, backup, recovery 
+summary: Ein Restore-Vorgang aus einem Backup, das auf dem anderen SAP HANA-Host erstellt wurde, ist ein gültiges Szenario für beide SnapCenter-Konfigurationsoptionen. 
+---
+= Wiederherstellung und Recovery von einem auf dem anderen Host erstellten Backup
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-sr-scs-snapcenter-configuration-with-a-single-resource.html["Zurück – SnapCenter Konfiguration mit einer einzigen Ressource."]
+
+Ein Restore-Vorgang aus einem Backup, das auf dem anderen SAP HANA-Host erstellt wurde, ist ein gültiges Szenario für beide SnapCenter-Konfigurationsoptionen.
+
+Die folgende Abbildung zeigt einen Überblick über das in diesem Abschnitt beschriebene Wiederherstellungsszenario.
+
+Bei T1 am Host 1 wurde ein Backup erstellt. Ein Failover wurde an Host 2 durchgeführt. Zum aktuellen Zeitpunkt ist Host 2 der primäre Host.
+
+. Es ist ein Fehler aufgetreten, und Sie müssen das am T1 erstellte Backup am Host 1 wiederherstellen.
+. Der primäre Host (Host 1) wird heruntergefahren.
+. Die Backup-Daten T1 von Host 1 wird auf Host 2 wiederhergestellt.
+. Eine Weiterleitung der Recovery erfolgt mithilfe von Protokollen von Host 1 und Host 2.
+. Host 1 wird gestartet, und die Neusynchronisierung der Systemreplizierung von Host 1 wird automatisch gestartet.
+
+
+image:saphana-sr-scs-image48.png["Fehler: Fehlendes Grafikbild"]
+
+Die folgende Abbildung zeigt den SAP HANA Backup-Katalog und hebt das auf Host 1 erstellte Backup hervor, das für den Restore- und Recovery-Vorgang verwendet wurde.
+
+image:saphana-sr-scs-image49.png["Fehler: Fehlendes Grafikbild"]
+
+Die Wiederherstellung umfasst die folgenden Schritte:
+
+. Erstellen Sie einen Klon aus dem Backup, das auf Host 1 erstellt wurde.
+. Mounten Sie das geklonte Volume unter Host 2.
+. Kopieren Sie die Daten vom geklonten Volume in den ursprünglichen Speicherort.
+
+
+In SnapCenter wird das Backup ausgewählt und der Klonvorgang gestartet.
+
+image:saphana-sr-scs-image50.png["Fehler: Fehlendes Grafikbild"]
+
+Sie müssen den Klon-Server und die NFS-Export-IP-Adresse angeben.
+
+
+NOTE: Bei einer SnapCenter-Konfiguration mit einer Einzelressource ist das SAP HANA-Plug-in nicht auf dem Datenbank-Host installiert. Zum Ausführen des SnapCenter Clone Workflows kann jeder Host mit einem installierten HANA-Plug-in als Klon-Server verwendet werden.
+
++ in einer SnapCenter-Konfiguration mit separaten Ressourcen wird der HANA-Datenbank-Host als Klon-Server ausgewählt, und ein Mount-Skript wird verwendet, um den Klon auf dem Ziel-Host zu mounten.
+
+image:saphana-sr-scs-image51.png["Fehler: Fehlendes Grafikbild"]
+
+Um den Verbindungspfad zu bestimmen, der zum Mounten des geklonten Volume erforderlich ist, prüfen Sie das Jobprotokoll des Klonjobs, wie in der folgenden Abbildung dargestellt.
+
+image:saphana-sr-scs-image52.png["Fehler: Fehlendes Grafikbild"]
+
+Das geklonte Volume kann jetzt angehängt werden.
+
+....
+stlrx300s8-5:/mnt/tmp # mount 192.168.173.101:/Scc373da37-00ff-4694-b1e1-8153dbd46caf /mnt/tmp
+....
+Das geklonte Volume enthält die Daten der HANA-Datenbank.
+
+....
+stlrx300s8-5:/mnt/tmp/# ls –al
+drwxr-x--x 2 ssradm sapsys 4096 Jun 27 11:12 hdb00001
+drwx------ 2 ssradm sapsys 4096 Jun 21 09:38 hdb00002.00003
+drwx------ 2 ssradm sapsys 4096 Jun 27 11:12 hdb00003.00003
+-rw-r--r-- 1 ssradm sapsys   22 Jun 27 11:12 nameserver.lck
+....
+Die Daten werden an den ursprünglichen Speicherort kopiert.
+
+....
+stlrx300s8-5:/mnt/tmp # cp -Rp hdb00001 /hana/data/SSR/mnt00001/
+stlrx300s8-5:/mnt/tmp # cp -Rp hdb00002.00003/ /hana/data/SSR/mnt00001/
+stlrx300s8-5:/mnt/tmp # cp -Rp hdb00003.00003/ /hana/data/SSR/mnt00001/
+....
+Die Recovery mit SAP HANA Studio wird wie im Abschnitt beschrieben durchgeführt link:saphana-sr-scs-snapcenter-configuration-with-a-single-resource.html#snapcenter-restore-of-the-valid-backup-only["SnapCenter Restore nur für gültige Backups"].
+
+link:saphana-sr-scs-where-to-find-additional-information_overview.html["Weiter: Wo finden Sie zusätzliche Informationen."]

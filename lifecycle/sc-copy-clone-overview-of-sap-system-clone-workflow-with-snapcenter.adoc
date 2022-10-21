@@ -1,0 +1,43 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/sc-copy-clone-overview-of-sap-system-clone-workflow-with-snapcenter.html 
+keywords: system clone, target host, clone create 
+summary: Die FlexClone Technologie ermöglicht einen schnellen Bereitstellungsprozess und sorgt für deutliche Kapazitätseinsparungen, da das Reparatursystem normalerweise nur für einen kurzen Zeitraum verwendet wird. 
+---
+= Überblick über den SAP Systemklonen-Workflow mit SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:sc-copy-clone-overview-of-sap-system-copy-workflow-with-snapcenter.html["Zurück: Überblick über den Workflow zur SAP Systemkopie mit SnapCenter."]
+
+Wie im vorherigen Abschnitt beschrieben, kann SnapCenter Klone von Datensätzen von jedem vorhandenen Snapshot Backup managen und diese Datensätze schnell auf jedes beliebige Zielsystem bereitstellen. Dabei ist es besonders wichtig, dass Produktionsdaten auf ein Reparatursystem zur Behebung logischer Beschädigungen schnell bereitgestellt werden, da es häufig erforderlich ist, das Reparatursystem zurückzusetzen und einen anderen Produktionsdatensatz zu wählen. Die FlexClone Technologie ermöglicht einen schnellen Bereitstellungsprozess und sorgt für deutliche Kapazitätseinsparungen, da das Reparatursystem normalerweise nur für einen kurzen Zeitraum verwendet wird.
+
+In der folgenden Abbildung sind die erforderlichen Schritte für einen Klon-Vorgang im SAP-System mit SnapCenter zusammengefasst.
+
+. Bereiten Sie den Zielhost vor.
+. SnapCenter Clone erstellt einen Workflow für das gemeinsame HANA Volume.
+. Starten Sie SAP HANA Services.
+. SnapCenter Clone erstellen einen Workflow für das HANA Daten-Volume, einschließlich Datenbank-Recovery.
+. Das HANA-System kann jetzt als Reparatursystem verwendet werden.
+
+
+
+NOTE: Wenn Sie das System auf ein anderes Snapshot Backup zurücksetzen müssen, reichen die Schritte 6 und Schritt 4 aus. Das gemeinsame HANA-Volume kann weiterhin gemountet werden.
+
+Wenn das System nicht mehr benötigt wird, erfolgt die Bereinigung mit den folgenden Schritten.
+
+. SnapCenter Clone Delete Workflow für das HANA Daten-Volume einschließlich Datenbankabschaltung.
+. Stoppen Sie SAP HANA Services.
+. SnapCenter Clone Delete Workflows für das gemeinsam genutzte HANA Volume
+
+
+image:sc-copy-clone-image10.png["Fehler: Fehlendes Grafikbild"]
+
+Den Abschnitt link:sc-copy-clone-sap-system-clone-with-snapcenter.html["„SAP Systemklon mit SnapCenter“"] Enthält eine detaillierte Schritt-für-Schritt-Beschreibung des Systemklonworkflows.
+
+link:sc-copy-clone-sap-hana-system-refresh-operation-workflows-using-storage-snapshot-backups.html["Als Nächstes: Workflows für SAP HANA zur Systemaktualisierung mithilfe von Storage-Snapshot-Backups"]

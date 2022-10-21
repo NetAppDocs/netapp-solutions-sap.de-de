@@ -1,0 +1,224 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-snapcenter-service-concepts-and-best-practices.html 
+keywords:  
+summary:  
+---
+= SnapCenter-Servicekonzepte und Best Practices
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-backup-anf-snapcenter-service-sap-hana-backup-solution.html["Früher: SnapCenter Service SAP HANA Backup-Lösung."]
+
+
+
+== Datensicherung Strategie
+
+Vor dem Konfigurieren des SnapCenter-Dienstes muss die Datensicherungsstrategie auf Grundlage der RTO- und RPO-Anforderungen der verschiedenen SAP Systeme definiert werden.
+
+Ein gemeinsamer Ansatz besteht in der Definition von Systemtypen wie Systemen für Produktion, Entwicklung, Test oder Sandbox. Alle SAP-Systeme des gleichen Systemtyps haben typischerweise die gleichen Datenschutzparameter.
+
+Sie müssen die folgenden Parameter definieren:
+
+* Wie oft ein Snapshot Backup ausgeführt wird
+* Wie lange ein Snapshot Backup aufbewahrt wird
+* Wie oft wird eine Block-Integritätsprüfung (dateibasierte Backups) ausgeführt
+* Wie lange wird ein Backup zur Integritätsprüfung von Blöcken (dateibasiertes Backup) aufbewahrt?
+
+
+Die folgende Tabelle zeigt ein Beispiel für die Datenschutzparameter für die Produktion, Entwicklung und Prüfung des Systemtyps. Für das Produktionssystem wurde eine hohe Backup-Häufigkeit definiert und wöchentliche dateibasierte Backups durchgeführt. Die Test- und Entwicklungssysteme haben geringere Anforderungen und Snapshot Backups sind weniger geplant.
+
+|===
+| Parameter | Produktionssysteme auszuführen | Entwicklungssysteme | Testsysteme 
+
+
+| Häufigkeit von Snapshot-Backups | Alle 4 Stunden | Alle 6 Stunden | Alle 12 Stunden 
+
+
+| Snapshot Backup-Aufbewahrung | 3 Tage | 3 Tage | 3 Tage 
+
+
+| Block-Integritätsprüfung | Einmal in der Woche | Einmal in der Woche | Einmal in der Woche 
+
+
+| Aufbewahrung der Block-Integritätsprüfung | 4 Wochen | 2 Wochen | 1 Woche 
+|===
+In der folgenden Tabelle werden die Richtlinien aufgeführt, die für die Datensicherheitsparameter für Snapshot-Backup-Vorgänge konfiguriert werden müssen.
+
+|===
+| Parameter | Policy SnapshotAlly4h | Policy SnapshotAlly6h | Policy SnapshotEvery12h 
+
+
+| Backup-Typ | Auf Snapshot Kopien basierend | Auf Snapshot Kopien basierend | Auf Snapshot Kopien basierend 
+
+
+| Zeitplantyp | Stündlich | Stündlich | Stündlich 
+
+
+| Aufbewahrung | Anzahl = 18 | Anzahl = 12 | Anzahl = 3 
+
+
+| Backup-Zeitplan | Alle 4 Stunden | Alle 6 Stunden | Alle 12 Stunden 
+|===
+In der folgenden Tabelle werden die Richtlinien aufgeführt, die für die Datensicherungsparameter für dateibasierte Backup-Vorgänge konfiguriert werden müssen.
+
+|===
+| Parameter | Policy FileBased4Week | Policy FileBased2Weeks | Policy FileBased1Week 
+
+
+| Backup-Typ | File-basiert | File-basiert | File-basiert 
+
+
+| Zeitplantyp | Wöchentlich | Wöchentlich | Wöchentlich 
+
+
+| Aufbewahrung | Anzahl = 4 | Anzahl = 2 | Anzahl = 1 
+
+
+| Backup-Zeitplan | Jeden Sonntag | Jeden Sonntag | Jeden Sonntag 
+|===
+
+
+=== SnapCenter-Service-Richtlinien
+
+Im SnapCenter-Dienst umfasst eine einzelne Schutzrichtlinie die folgenden Parameter:
+
+* Backup-Typ
++
+** Snapshot-basiert
+** File-basiert
+
+
+* Planung und Aufbewahrung
++
+** Zeitpläne: Stündlich, Täglich, Wöchentlich, Monatlich. Eine einzelne Richtlinie kann mehrere Zeitpläne haben.
+** Für jeden Zeitplan wird eine Start- oder Endzeit und die Häufigkeit konfiguriert.
+** Für jeden Zeitplan wird eine Aufbewahrung konfiguriert. Die Aufbewahrung kann zeitbasiert oder Zählerbasiert sein.
+
+
+
+
+Die folgende Abbildung zeigt einen Screenshot der Richtlinienkonfiguration.
+
+image:saphana-backup-anf-image10.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+== Backup-Vorgänge
+
+SAP führte die Unterstützung von Snapshot Backups für MDC-Mehrmandantensysteme mit HANA 2.0 SPS4 ein. In einem SAP HANA MDC-System ist die Mandantenkonfiguration nicht unbedingt statisch. Mandanten können hinzugefügt oder gelöscht werden. Der SnapCenter-Dienst kann sich nicht auf die Konfiguration verlassen, die beim Hinzufügen der HANA-Datenbank zu SnapCenter erkannt wird. Der SnapCenter Service muss wissen, welche Mandanten zum Zeitpunkt der Ausführung des Backup-Vorgangs verfügbar sind.
+
+Somit müssen bei jedem Backup-Vorgang die Mandantendaten angezeigt werden. Der nächste Schritt ist der Snapshot-Backup-Vorgang selbst. Dieser Schritt beinhaltet den SQL-Befehl, um den HANA-Backup-Speicherpunkt auszulösen, das Azure NetApp Files Snapshot-Backup und den SQL-Befehl zum Schließen des HANA-Backup-Speicherpunktes. Mit dem Befehl close aktualisiert die HANA-Datenbank den Backup-Katalog der Systemdatenbank und jeden Mandanten.
+
+
+NOTE: SAP unterstützt keine Snapshot Backup-Vorgänge für MDC-Systeme, wenn ein oder mehrere Mandanten angehalten werden.
+
+Für das Aufbewahrungsmanagement von Daten-Backups und das HANA-Backup-Katalogmanagement muss der SnapCenter-Service die Kataloglösch-Operationen für die Systemdatenbank und alle Mandantendatenbanken ausführen, die im ersten Schritt identifiziert wurden. Auf die gleiche Weise für die Log-Backups muss der SnapCenter-Service-Workflow auf jedem Mandanten ausgeführt werden, der Teil des Backup-Vorgangs war.
+
+Die folgende Abbildung zeigt einen Überblick über den Backup-Workflow.
+
+image:saphana-backup-anf-image11.jpg["Fehler: Fehlendes Grafikbild"]
+
+
+
+=== Backup-Workflow für Snapshot-Backups der HANA-Datenbank
+
+Der SnapCenter-Dienst führt das Backup der SAP HANA-Datenbank in folgender Reihenfolge aus:
+
+. Liest die Liste der Mandanten aus der HANA-Datenbank.
+. Speichert Mandanteninformationen in den Metadaten des SnapCenter-Service für den Backup-Vorgang.
+. Löst einen globalen, synchronisierten Backup-Speicherpunkt von SAP HANA aus, um ein konsistentes Datenbank-Image auf der Persistenzschicht zu erstellen.
++
+Für ein SAP HANA MDC-System mit einem oder mehreren Mandanten wird ein synchronisierter globaler Backup-Speicherpunkt für die Systemdatenbank und für jede Mandantendatenbank erstellt.
+
+. Erstellung von Azure NetApp Files Snapshot Kopien für alle für das HANA System konfigurierten Daten-Volumes In unserem Beispiel einer HANA-Datenbank mit einem einzigen Host gibt es nur ein Daten-Volume. Bei einer SAP HANA Datenbank mit mehreren Hosts sind mehrere Daten-Volumes vorhanden.
+. Registriert das Azure NetApp Files Snapshot-Backup im SAP HANA Backup-Katalog.
+. Löscht den Speicherpunkt für SAP HANA-Backup.
+. Löscht die Azure NetApp Files Snapshot Kopien und die Backup-Einträge in seiner Datenbank sowie im SAP HANA Backup-Katalog basierend auf der für Backups definierten Aufbewahrungsrichtlinie. HANA-Backup-Katalogvorgänge werden für die Systemdatenbank und alle Mandanten ausgeführt.
+. Löscht alle Log-Backups auf dem Dateisystem und im SAP HANA-Backup-Katalog, die älter sind als die älteste Datensicherung, die im SAP HANA-Backup-Katalog identifiziert wurde. Diese Vorgänge werden für die Systemdatenbank und alle Mandanten durchgeführt.
+
+
+
+
+=== Backup-Workflow für die Überprüfung der Blockintegrität
+
+Der SnapCenter-Dienst führt die Integritätsprüfung der Blöcke in folgender Reihenfolge aus:
+
+. Liest die Liste der Mandanten aus der HANA-Datenbank.
+. Löst einen dateibasierten Backup-Vorgang für die Systemdatenbank und jeden Mandanten aus.
+. Löscht dateibasierte Backups in seiner Datenbank, im Filesystem und im SAP HANA-Backup-Katalog basierend auf der Aufbewahrungsrichtlinie, die für die Überprüfung der Blockintegrität definiert ist. Das Löschen des Backups im Filesystem und der HANA-Backup-Katalog werden für die Systemdatenbank und alle Mandanten durchgeführt.
+. Löscht alle Log-Backups auf dem Dateisystem und im SAP HANA-Backup-Katalog, die älter sind als die älteste Datensicherung, die im SAP HANA-Backup-Katalog identifiziert wurde. Diese Vorgänge werden für die Systemdatenbank und alle Mandanten durchgeführt.
+
+
+
+
+== Management der Backup-Aufbewahrung und allgemeine Ordnung der Daten und Backup-Protokollierung
+
+Das Management der Daten-Backup-Aufbewahrung und die allgemeine Ordnung der Backup-Erstellung können in vier Hauptbereiche unterteilt werden, einschließlich Aufbewahrungsmanagement folgender Bereiche:
+
+* Snapshot Backups
+* Dateibasierten Backups
+* Daten-Backups im SAP HANA Backup-Katalog
+* Protokollierung von Backups im SAP HANA Backup-Katalog und im Filesystem
+
+
+Die folgende Abbildung bietet einen Überblick über die verschiedenen Workflows und die Abhängigkeiten jedes einzelnen Vorgangs. In den folgenden Abschnitten werden die verschiedenen Operationen im Detail beschrieben.
+
+image:saphana-backup-anf-image12.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+=== Aufbewahrungsmanagement von Snapshot-Backups
+
+SnapCenter Service kümmert sich um die allgemeine Ordnung und Sauberkeit von SAP HANA Datenbank-Backups und Backups nicht-Datenvolumen, indem Snapshot Kopien im Storage und im SnapCenter Service Repository gemäß einer in der SnapCenter Service Backup-Richtlinie festgelegten Aufbewahrung gelöscht werden.
+
+Die Aufbewahrungsmanagement-Logik wird mit jedem Backup Workflow in SnapCenter ausgeführt.
+
+Sie können Snapshot-Backups auch manuell in SnapCenter löschen.
+
+
+
+=== Aufbewahrungsmanagement von dateibasierten Backups
+
+Der SnapCenter Service kümmert sich um die allgemeine Ordnung und Sauberkeit der dateibasierten Backups, indem die Backups auf dem Filesystem gemäß einer in der SnapCenter Service Backup Policy definierten Aufbewahrung gelöscht werden.
+
+Die Aufbewahrungsmanagement-Logik wird mit jedem Backup Workflow in SnapCenter ausgeführt.
+
+
+
+=== Aufbewahrungsmanagement von Daten-Backups im SAP HANA Backup-Katalog
+
+Wenn der SnapCenter-Dienst ein Backup löscht (Snapshot oder dateibasiert), wird diese Datensicherung auch im SAP HANA Backup-Katalog gelöscht.
+
+
+
+=== Aufbewahrungsmanagement von Protokoll-Backups
+
+Die SAP HANA Datenbank erstellt automatisch Protokoll-Backups. Diese Backup-Durchläufe für das Protokoll erstellen Backup-Dateien für jeden einzelnen SAP HANA Service in einem in SAP HANA konfigurierten Backup-Verzeichnis.
+
+Log-Backups, die älter als die aktuelle Datensicherung sind, werden für die zukünftige Recovery nicht mehr benötigt und können gelöscht werden.
+
+Der SnapCenter Service übernimmt die allgemeine Ordnung und Sauberkeit der Log-Datei-Backups auf Filesystem-Ebene sowie im SAP HANA Backup-Katalog, indem die folgenden Aufgaben ausgeführt werden:
+
+. Liest den SAP HANA-Backup-Katalog, um die Backup-ID des ältesten erfolgreichen dateibasierten oder Snapshot-Backups zu erhalten
+. Löscht alle Log-Backups im SAP HANA-Katalog und das Dateisystem, die älter als diese Backup-ID sind.
++
+Der SnapCenter-Dienst kümmert sich nur um die allgemeine Ordnung und Sauberkeit der von SnapCenter erstellten Backups. Falls zusätzliche dateibasierte Backups außerhalb von SnapCenter erstellt werden, müssen Sie sicherstellen, dass die dateibasierten Backups aus dem Backup-Katalog gelöscht werden. Wird eine solche Datensicherung nicht manuell aus dem Backup-Katalog gelöscht, kann sie zur ältesten Datensicherung werden, und ältere Log-Backups werden erst gelöscht, wenn diese dateibasierte Sicherung gelöscht wird.
+
+
+
+
+NOTE: Sie können das Backup-Aufbewahrungsmanagement für Protokolle nicht mit der aktuellen Version des SnapCenter Service deaktivieren.
+
+
+
+== Kapazitätsanforderungen für Snapshot Backups
+
+Dabei müssen Sie die höhere Blockänderungsrate auf Storage-Ebene in Relation zur Änderungsrate bei herkömmlichen Datenbanken berücksichtigen. Aufgrund des HANA-Tabellen-Zusammenführungsprozesses des Spaltenspeichers wird die komplette Tabelle auf die Festplatte geschrieben, nicht nur die geänderten Blöcke. Die Daten unseres Kundenstamms zeigen eine tägliche Änderungsrate zwischen 20 % und 50 %, wenn mehrere Snapshot-Backups während des Tages erstellt werden.
+
+link:saphana-backup-anf-lab-setup-used-for-this-report.html["Weiter: Einrichtung des Labors, das für diesen Bericht verwendet wird."]

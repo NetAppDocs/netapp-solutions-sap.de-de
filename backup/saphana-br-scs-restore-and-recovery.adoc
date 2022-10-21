@@ -1,0 +1,538 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-br-scs-restore-and-recovery.html 
+keywords: automated, restore, recovery, single-tenant, manual recovery 
+summary: In den folgenden Abschnitten werden die Wiederherstellungs- und Recovery-Workflows von drei verschiedenen Szenarien und Beispielkonfigurationen beschrieben. 
+---
+= Restore und Recovery
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-br-scs-block-integrity-check.html["Zurück: Block-Integritätsprüfung."]
+
+In den folgenden Abschnitten werden die Wiederherstellungs- und Recovery-Workflows von drei verschiedenen Szenarien und Beispielkonfigurationen beschrieben.
+
+* Automatisierte Wiederherstellung und Wiederherstellung:
++
+** Automatisch ermittelte HANA-System SS1
+** SAP HANA ein einzelner Host, MDC ein Mandantensystem mit NFS
+
+
+* Restore und Recovery einzelner Mandanten:
++
+** Automatisch ermittelte HANA-System SM1
+** SAP HANA einzelner Host, MDC mandantenfähiges System mit NFS
+
+
+* Wiederherstellung mit manueller Wiederherstellung:
++
+** Manuell konfiguriertes HANA-System SS2
+** SAP HANA einzelner Host, MDC mandantenfähiges System mit NFS
+
+
+
+
+In den folgenden Abschnitten werden die Unterschiede zwischen einem einzelnen SAP HANA Host und mehreren Hosts sowie in HANA-Systemen mit Fibre Channel-SAN-Anbindung hervorgehoben.
+
+Die Beispiele zeigen, dass SAP HANA Studio als Tool zur manuellen Wiederherstellung dient. Sie können auch SAP HANA Cockpit oder HANA SQL Statements verwenden.
+
+
+
+== Automatisiertes Restore und Recovery
+
+Bei SnapCenter 4.3 werden automatisierte Restore- und Recovery-Vorgänge für einzelne HANA-Container oder MDC-Mandantensysteme unterstützt, die von SnapCenter automatisch erkannt wurden.
+
+Sie können eine automatisierte Wiederherstellung und Operation mit den folgenden Schritten ausführen:
+
+. Wählen Sie das Backup aus, das für den Wiederherstellungsvorgang verwendet werden soll. Das Backup kann aus den folgenden Speicheroptionen ausgewählt werden:
++
+** Primärspeicher
+** Externer Backup-Storage (SnapVault Ziel)
+
+
+. Wählen Sie den Wiederherstellungstyp aus. Wählen Sie mit Volume Revert oder ohne Volume Revert die Option Complete Restore.
++
+
+NOTE: Die Option Volume Revert ist nur für die Wiederherstellung von Vorgängen im primären Storage und, wenn die HANA Datenbank NFS als Storage-Protokoll verwendet.
+
+. Wählen Sie den Wiederherstellungstyp aus den folgenden Optionen aus:
++
+** Auf den letzten Stand
+** Zeitpunktgenau
+** Zu einem bestimmten Daten-Backup
+** Keine Wiederherstellung
++
+
+NOTE: Der ausgewählte Wiederherstellungstyp wird für die Wiederherstellung des Systems und der Mandanten-Datenbank verwendet.
+
+
+
+
+
+Als Nächstes führt SnapCenter die folgenden Operationen durch:
+
+. Die HANA-Datenbank wird gestoppt.
+. Die Datenbank wird wiederhergestellt.
++
+Abhängig vom ausgewählten Wiederherstellungstyp und dem verwendeten Storage-Protokoll werden verschiedene Operationen ausgeführt.
+
++
+** Wenn die Option „NFS“ und „Volume revert“ ausgewählt sind, hängt SnapCenter das Volume ab, stellt das Volume mithilfe von Volume-basierten SnapRestore auf der Storage-Ebene wieder her und hängt das Volume an.
+** Wenn NFS ausgewählt ist und die Volume-Zurücksetzung nicht ausgewählt ist, stellt SnapCenter alle Dateien mithilfe von SnapRestore-Vorgängen mit einer einzigen Datei auf der Storage-Ebene wieder her.
+** Wenn Fibre Channel SAN ausgewählt ist, hängt SnapCenter die LUN(s) ab, stellt die LUN(s) anhand einzelner Datei-SnapRestore-Vorgänge auf der Storage-Ebene wieder her und erkennt und hängt die LUN(s) an.
+
+
+. Es stellt die Datenbank wieder her:
++
+.. Es stellt die Systemdatenbank wieder her.
+.. Die Mandantendatenbank wird wiederhergestellt.
++
+Bei HANA-Systemen mit einzelnen Containern erfolgt die Recovery in einem Schritt:
+
+.. Es startet die HANA-Datenbank.
+
+
+
+
+
+NOTE: Wenn keine Wiederherstellung ausgewählt ist, beendet SnapCenter und der Wiederherstellungsvorgang für das System, die Mandantendatenbank muss manuell durchgeführt werden.
+
+Dieser Abschnitt enthält die Schritte für den automatisierten Restore- und Recovery-Vorgang des automatisch erkannten HANA-Systems SS1 (SAP HANA einzelner Host, MDC einzelnes Mandantensystem mit NFS).
+
+. Wählen Sie ein Backup in SnapCenter aus, das für den Wiederherstellungsvorgang verwendet werden soll.
++
+
+NOTE: Sie können Restores von primärem oder externem Backup-Storage wählen.
+
++
+image:saphana-br-scs-image96.png["Fehler: Fehlendes Grafikbild"]
+
++
+image:saphana-br-scs-image97.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie den Umfang und den Typ der Wiederherstellung aus.
++
+Die folgenden drei Screenshots zeigen die Restore-Optionen für die Wiederherstellung vom primären Volume mit NFS, die Wiederherstellung vom sekundären mit NFS und die Wiederherstellung vom primären Speicher mit Fibre Channel SAN.
+
++
+Die Restore-Optionen für die Wiederherstellung aus dem primären Speicher.
+
++
+
+NOTE: Die Option zur Umrüstung von Volumes ist nur für die Wiederherstellung von Vorgängen von Primärquelle mit NFS verfügbar.
+
++
+image:saphana-br-scs-image98.png["Fehler: Fehlendes Grafikbild"]
+
++
+Die Wiederherstellungsoptionen für die Wiederherstellung von einem externen Backup-Speicher.
+
++
+image:saphana-br-scs-image99.jpeg["Fehler: Fehlendes Grafikbild"]
+
++
+Die Wiederherstellungsoptionen für die Wiederherstellung aus dem primären Speicher mit Fibre Channel SAN.
+
++
+image:saphana-br-scs-image100.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie „Recovery Scope“ aus, und stellen Sie den Speicherort für das Backup und das Katalog-Backup bereit.
++
+
+NOTE: SnapCenter verwendet den Standardpfad oder die geänderten Pfade in der HANA global.ini-Datei, um die Backup-Standorte für das Protokoll und den Katalog vorab aufzufüllen.
+
++
+image:saphana-br-scs-image101.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie die optionalen Befehle zur Vorratspeicher ein.
++
+image:saphana-br-scs-image102.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie die optionalen Befehle nach der Wiederherstellung ein.
++
+image:saphana-br-scs-image103.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie die optionalen E-Mail-Einstellungen ein.
++
+image:saphana-br-scs-image104.png["Fehler: Fehlendes Grafikbild"]
+
+. Um den Wiederherstellungsvorgang zu starten, klicken Sie auf Fertig stellen.
++
+image:saphana-br-scs-image105.png["Fehler: Fehlendes Grafikbild"]
+
+. SnapCenter führt den Wiederherstellungsvorgang und die Wiederherstellung aus. Dieses Beispiel zeigt die Jobdetails des Wiederherstellungsjobs.
++
+image:saphana-br-scs-image106.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+
+
+== Restore- und Recovery-Vorgang für einzelne Mandanten
+
+Mit SnapCenter 4.3 werden Restore-Vorgänge für einzelne Mandanten für HANA MDC-Systeme mit einem einzelnen Mandanten oder mit mehreren Mandanten, die von SnapCenter automatisch erkannt wurden, unterstützt.
+
+Sie können eine Restore- und Recovery-Operation mit nur einem Mandanten durchführen:
+
+. Stoppen Sie den Mieter wiederhergestellt werden.
+. Stellen Sie den Mandanten mit SnapCenter wieder her.
++
+** Bei einer Wiederherstellung vom primären Speicher führt SnapCenter folgende Operationen aus:
++
+*** *NFS.* Speicher einzelne Datei SnapRestore Operationen für alle Dateien der Mandanten-Datenbank.
+*** *SAN.* Klonen und verbinden Sie die LUN mit dem Datenbank-Host und kopieren Sie alle Dateien der Mandanten-Datenbank.
+
+
+** Bei einer Wiederherstellung vom sekundären Storage führt SnapCenter folgende Operationen aus:
++
+*** *NFS.* Speicher-SnapVault Wiederherstellen von Vorgängen für alle Dateien der Mandanten-Datenbank
+*** *SAN.* Klonen und verbinden Sie die LUN mit dem Datenbank-Host und kopieren Sie alle Dateien der Mandanten-Datenbank
+
+
+
+
+. Stellen Sie den Mandanten mit HANA Studio, Cockpit oder SQL-Anweisung wieder her.
+
+
+Dieser Abschnitt enthält die Schritte für den Restore- und Recovery-Vorgang vom primären Storage des automatisch erkannten HANA-Systems SM1 (SAP HANA Single-Host, MDC Multiple-Tenant-System via NFS). Aus Benutzereingangsperspektive sind die Workflows bei Restores aus sekundärem oder bei einer Wiederherstellung in einem Fibre Channel SAN-Setup identisch.
+
+. Beenden Sie die Mandantendatenbank.
++
+....
+sm1adm@hana-2:/usr/sap/SM1/HDB00> hdbsql -U SYSKEY
+Welcome to the SAP HANA Database interactive terminal.
+Type:  \h for help with commands
+       \q to quit
+hdbsql=>
+hdbsql SYSTEMDB=> alter system stop database tenant2;
+0 rows affected (overall time 14.215281 sec; server time 14.212629 sec)
+hdbsql SYSTEMDB=>
+....
+. Wählen Sie ein Backup in SnapCenter aus, das für den Wiederherstellungsvorgang verwendet werden soll.
++
+image:saphana-br-scs-image107.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie den wiederherzustellenden Mandanten aus.
++
+
+NOTE: SnapCenter zeigt eine Liste aller Mandanten an, die im ausgewählten Backup enthalten sind.
+
++
+image:saphana-br-scs-image108.png["Fehler: Fehlendes Grafikbild"]
+
++
+Die Recovery einzelner Mandanten wird mit SnapCenter 4.3 nicht unterstützt. Keine Wiederherstellung ist vorausgewählt und kann nicht geändert werden.
+
++
+image:saphana-br-scs-image109.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie die optionalen Befehle zur Vorratspeicher ein.
++
+image:saphana-br-scs-image110.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie optionale Befehle nach der Wiederherstellung ein.
++
+image:saphana-br-scs-image111.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie die optionalen E-Mail-Einstellungen ein.
++
+image:saphana-br-scs-image112.png["Fehler: Fehlendes Grafikbild"]
+
+. Um den Wiederherstellungsvorgang zu starten, klicken Sie auf Fertig stellen.
++
+image:saphana-br-scs-image113.png["Fehler: Fehlendes Grafikbild"]
+
++
+Der Wiederherstellungsvorgang wird von SnapCenter ausgeführt. Dieses Beispiel zeigt die Jobdetails des Wiederherstellungsjobs.
+
++
+image:saphana-br-scs-image114.png["Fehler: Fehlendes Grafikbild"]
+
++
+
+NOTE: Nach Abschluss der Mandantenwiederherstellung werden nur die mandantenrelevanten Daten wiederhergestellt. Auf dem Filesystem des HANA-Datenbank-Hosts sind die wiederhergestellte Datendatei und die Snapshot Backup ID-Datei des Mandanten verfügbar.
+
++
+....
+sm1adm@hana-2:/usr/sap/SM1/HDB00> ls -al /hana/data/SM1/mnt00001/*
+-rw-r--r-- 1 sm1adm sapsys   17 Dec  6 04:01 /hana/data/SM1/mnt00001/nameserver.lck
+/hana/data/SM1/mnt00001/hdb00001:
+total 3417776
+drwxr-x--- 2 sm1adm sapsys       4096 Dec  6 01:14 .
+drwxr-x--- 6 sm1adm sapsys       4096 Nov 20 09:35 ..
+-rw-r----- 1 sm1adm sapsys 3758096384 Dec  6 03:59 datavolume_0000.dat
+-rw-r----- 1 sm1adm sapsys          0 Nov 20 08:36 __DO_NOT_TOUCH_FILES_IN_THIS_DIRECTORY__
+-rw-r----- 1 sm1adm sapsys         36 Nov 20 08:37 landscape.id
+/hana/data/SM1/mnt00001/hdb00002.00003:
+total 67772
+drwxr-xr-- 2 sm1adm sapsys      4096 Nov 20 08:37 .
+drwxr-x--- 6 sm1adm sapsys      4096 Nov 20 09:35 ..
+-rw-r--r-- 1 sm1adm sapsys 201441280 Dec  6 03:59 datavolume_0000.dat
+-rw-r--r-- 1 sm1adm sapsys         0 Nov 20 08:37 __DO_NOT_TOUCH_FILES_IN_THIS_DIRECTORY__
+/hana/data/SM1/mnt00001/hdb00002.00004:
+total 3411836
+drwxr-xr-- 2 sm1adm sapsys       4096 Dec  6 03:57 .
+drwxr-x--- 6 sm1adm sapsys       4096 Nov 20 09:35 ..
+-rw-r--r-- 1 sm1adm sapsys 3758096384 Dec  6 01:14 datavolume_0000.dat
+-rw-r--r-- 1 sm1adm sapsys          0 Nov 20 09:35 __DO_NOT_TOUCH_FILES_IN_THIS_DIRECTORY__
+-rw-r----- 1 sm1adm sapsys     155648 Dec  6 01:14 snapshot_databackup_0_1
+/hana/data/SM1/mnt00001/hdb00003.00003:
+total 3364216
+drwxr-xr-- 2 sm1adm sapsys       4096 Dec  6 01:14 .
+drwxr-x--- 6 sm1adm sapsys       4096 Nov 20 09:35 ..
+-rw-r--r-- 1 sm1adm sapsys 3758096384 Dec  6 03:59 datavolume_0000.dat
+-rw-r--r-- 1 sm1adm sapsys          0 Nov 20 08:37 __DO_NOT_TOUCH_FILES_IN_THIS_DIRECTORY__
+sm1adm@hana-2:/usr/sap/SM1/HDB00>
+....
+. Starten Sie die Recovery mit HANA Studio.
++
+image:saphana-br-scs-image115.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie den Mandanten aus.
++
+image:saphana-br-scs-image116.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie den Wiederherstellungstyp aus.
++
+image:saphana-br-scs-image117.png["Fehler: Fehlendes Grafikbild"]
+
+. Stellen Sie den Speicherort des Backup-Katalogs bereit.
++
+image:saphana-br-scs-image118.png["Fehler: Fehlendes Grafikbild"]
+
++
+image:saphana-br-scs-image119.png["Fehler: Fehlendes Grafikbild"]
+
++
+Im Backup-Katalog wird das wiederhergestellte Backup mit einem grünen Symbol hervorgehoben. Die externe Backup-ID zeigt den Backup-Namen an, der zuvor in SnapCenter ausgewählt wurde.
+
+. Wählen Sie den Eintrag mit dem grünen Symbol aus, und klicken Sie auf Weiter.
++
+image:saphana-br-scs-image120.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie den Backup-Speicherort für das Protokoll an.
++
+image:saphana-br-scs-image121.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie die anderen Einstellungen nach Bedarf aus.
++
+image:saphana-br-scs-image122.png["Fehler: Fehlendes Grafikbild"]
+
+. Starten Sie den Recovery-Vorgang des Mandanten.
++
+image:saphana-br-scs-image123.png["Fehler: Fehlendes Grafikbild"]
+
++
+image:saphana-br-scs-image124.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+
+
+=== Manuelle Wiederherstellung
+
+Gehen Sie wie folgt vor, um ein SAP HANA MDC-Einzelmandant-System mit SAP HANA Studio und SnapCenter wiederherzustellen:
+
+. Vorbereitung des Restore- und Recovery-Prozesses mit SAP HANA Studio:
++
+.. Wählen Sie Recover System Database und bestätigen Sie das Herunterfahren des SAP HANA-Systems.
+.. Wählen Sie den Wiederherstellungstyp und den Speicherort für die Protokollsicherung aus.
+.. Es wird eine Liste der Daten-Backups angezeigt. Wählen Sie Backup, um die externe Backup-ID anzuzeigen.
+
+
+. Führen Sie den Wiederherstellungsprozess mit SnapCenter aus:
++
+.. Wählen Sie in der Topologieansicht der Ressource lokale Kopien aus, die aus dem primären Storage oder Vault-Kopien wiederhergestellt werden sollen, wenn Sie eine Wiederherstellung aus einem externen Backup-Storage durchführen möchten.
+.. Wählen Sie das SnapCenter Backup aus, das mit der externen Backup-ID oder dem Kommentarfeld aus SAP HANA Studio übereinstimmt.
+.. Starten Sie den Wiederherstellungsprozess.
++
+
+NOTE: Wenn eine Volume-basierte Wiederherstellung aus dem primären Speicher ausgewählt wird, müssen die Daten-Volumes vor der Wiederherstellung von allen SAP HANA-Datenbank-Hosts abgehängt und nach Abschluss des Wiederherstellungsprozesses erneut gemountet werden.
+
++
+
+NOTE: Bei einer SAP HANA-Konfiguration mit mehreren Hosts mit FC werden die Unmount- und Mount-Vorgänge im Rahmen des Shutdown- und Startvorgangs der Datenbank vom SAP HANA-Namensserver ausgeführt.
+
+
+
+. Führen Sie den Recovery-Prozess für die Systemdatenbank mit SAP HANA Studio aus:
++
+.. Klicken Sie in der Backup-Liste auf Aktualisieren, und wählen Sie das verfügbare Backup für die Recovery aus (wird durch ein grünes Symbol angezeigt).
+.. Starten Sie den Wiederherstellungsprozess. Nach Abschluss des Wiederherstellungsprozesses wird die Systemdatenbank gestartet.
+
+
+. Führen Sie den Recovery-Prozess für die Mandantendatenbank mit SAP HANA Studio aus:
++
+.. Wählen Sie die Option „Tenant Database wiederherstellen“ und wählen Sie den Mieter aus, der wiederhergestellt werden soll.
+.. Wählen Sie den Wiederherstellungstyp und den Speicherort für die Protokollsicherung aus.
++
+Es wird eine Liste der Daten-Backups angezeigt. Da das Daten-Volume bereits wiederhergestellt ist, wird das Mandanten-Backup als verfügbar angezeigt (in grün).
+
+.. Wählen Sie dieses Backup aus, und starten Sie den Wiederherstellungsprozess. Nach Abschluss des Recovery-Prozesses wird die Mandantendatenbank automatisch gestartet.
+
+
+
+
+Im folgenden Abschnitt werden die Schritte der Wiederherstellungs- und Wiederherstellungsvorgänge des manuell konfigurierten HANA-Systems SS2 beschrieben (SAP HANA einzelner Host, MDC-Mehrmandantensystem mit NFS).
+
+. Wählen Sie in SAP HANA Studio die Option Systemdatenbank wiederherstellen aus, um die Wiederherstellung der Systemdatenbank zu starten.
++
+image:saphana-br-scs-image125.png["Fehler: Fehlendes Grafikbild"]
+
+. Klicken Sie auf OK, um die SAP HANA-Datenbank herunterzufahren.
++
+image:saphana-br-scs-image126.png["Fehler: Fehlendes Grafikbild"]
+
++
+Das SAP HANA-System wird heruntergefahren und der Wiederherstellungsassistent wird gestartet.
+
+. Wählen Sie den Wiederherstellungstyp aus, und klicken Sie auf Weiter.
++
+image:saphana-br-scs-image127.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie den Speicherort des Backup-Katalogs an, und klicken Sie auf Weiter.
++
+image:saphana-br-scs-image128.png["Fehler: Fehlendes Grafikbild"]
+
+. Eine Liste der verfügbaren Backups wird basierend auf dem Inhalt des Backup-Katalogs angezeigt. Wählen Sie das gewünschte Backup und notieren Sie sich die externe Backup ID: In unserem Beispiel das aktuellste Backup.
++
+image:saphana-br-scs-image129.png["Fehler: Fehlendes Grafikbild"]
+
+. Heben Sie die Bereitstellung aller Daten-Volumes auf.
++
+....
+umount /hana/data/SS2/mnt00001
+....
++
+
+NOTE: Bei einem SAP HANA mehrere Host-System mit NFS müssen alle Daten-Volumes auf jedem Host abgehängt werden.
+
++
+
+NOTE: Bei einer SAP HANA-Konfiguration mit mehreren Hosts mit FC wird der Unmount-Vorgang im Rahmen des Herunterfahrens vom SAP HANA-Namensserver ausgeführt.
+
+. Wählen Sie in der SnapCenter GUI die Ansicht der Ressourcen-Topologie aus und wählen Sie das Backup aus, das wiederhergestellt werden soll, beispielsweise das aktuellste primäre Backup. Klicken Sie auf das Symbol Wiederherstellen, um die Wiederherstellung zu starten.
++
+image:saphana-br-scs-image130.png["Fehler: Fehlendes Grafikbild"]
+
++
+Der SnapCenter-Wiederherstellungsassistent wird gestartet.
+
+. Wählen Sie den Wiederherstellungstyp Complete Resource or File Level aus.
++
+Wählen Sie „Complete Resource“ aus, um eine Volume-basierte Wiederherstellung zu verwenden.
+
++
+image:saphana-br-scs-image131.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie Dateiebene und Alle, um einen SnapRestore-Vorgang mit einer einzigen Datei für alle Dateien zu verwenden.
++
+image:saphana-br-scs-image132.png["Fehler: Fehlendes Grafikbild"]
+
++
+
+NOTE: Wählen Sie für eine Wiederherstellung auf Dateiebene eines SAP HANA-Host-Systems mit mehreren Hosts alle Volumes aus.
+
++
+image:saphana-br-scs-image133.png["Fehler: Fehlendes Grafikbild"]
+
+. (Optional) Geben Sie die Befehle an, die aus dem SAP HANA-Plug-in ausgeführt werden sollen, das auf dem zentralen HANA-Plug-in-Host ausgeführt wird. Klicken Sie Auf Weiter.
++
+image:saphana-br-scs-image134.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie die optionalen Befehle an, und klicken Sie auf Weiter.
++
+image:saphana-br-scs-image135.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie die Benachrichtigungseinstellungen an, damit SnapCenter eine Status-E-Mail und ein Jobprotokoll senden kann. Klicken Sie Auf Weiter.
++
+image:saphana-br-scs-image136.png["Fehler: Fehlendes Grafikbild"]
+
+. Überprüfen Sie die Zusammenfassung und klicken Sie auf Fertig stellen, um die Wiederherstellung zu starten.
++
+image:saphana-br-scs-image137.png["Fehler: Fehlendes Grafikbild"]
+
+. Der Wiederherstellungsauftrag wird gestartet, und das Jobprotokoll kann durch Doppelklicken auf die Protokollzeile im Aktivitätsfenster angezeigt werden.
++
+image:saphana-br-scs-image138.png["Fehler: Fehlendes Grafikbild"]
+
+. Warten Sie, bis der Wiederherstellungsvorgang abgeschlossen ist. Mounten Sie auf jedem Datenbank-Host alle Daten-Volumes. In unserem Beispiel muss nur ein Volume auf dem Datenbank-Host neu eingebunden werden.
++
+....
+mount /hana/data/SP1/mnt00001
+....
+. Gehen Sie zu SAP HANA Studio und klicken Sie auf Aktualisieren, um die Liste der verfügbaren Backups zu aktualisieren. Das mit SnapCenter wiederhergestellte Backup wird durch ein grünes Symbol in der Liste der Backups angezeigt. Wählen Sie das Backup aus, und klicken Sie auf Weiter.
++
+image:saphana-br-scs-image139.png["Fehler: Fehlendes Grafikbild"]
+
+. Stellen Sie den Speicherort der Protokoll-Backups bereit. Klicken Sie Auf Weiter.
++
+image:saphana-br-scs-image140.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie je nach Bedarf andere Einstellungen aus. Stellen Sie sicher, dass Delta-Backups verwenden nicht ausgewählt ist. Klicken Sie Auf Weiter.
++
+image:saphana-br-scs-image141.png["Fehler: Fehlendes Grafikbild"]
+
+. Überprüfen Sie die Wiederherstellungseinstellungen, und klicken Sie auf Fertig stellen.
++
+image:saphana-br-scs-image142.png["Fehler: Fehlendes Grafikbild"]
+
+. Der Wiederherstellungsprozess wird gestartet. Warten Sie, bis die Wiederherstellung der Systemdatenbank abgeschlossen ist.
++
+image:saphana-br-scs-image143.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie in SAP HANA Studio den Eintrag für die Systemdatenbank aus, und starten Sie Backup Recovery - Rcover Tenant Database.
++
+image:saphana-br-scs-image144.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie den zu wiederherzuenden Mieter aus, und klicken Sie auf Weiter.
++
+image:saphana-br-scs-image145.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie den Wiederherstellungstyp an, und klicken Sie auf Weiter.
++
+image:saphana-br-scs-image146.png["Fehler: Fehlendes Grafikbild"]
+
+. Bestätigen Sie den Speicherort des Backup-Katalogs, und klicken Sie auf Weiter.
++
+image:saphana-br-scs-image147.png["Fehler: Fehlendes Grafikbild"]
+
+. Vergewissern Sie sich, dass die Mandantendatenbank offline ist. Klicken Sie auf OK, um fortzufahren.
++
+image:saphana-br-scs-image148.png["Fehler: Fehlendes Grafikbild"]
+
+. Da die Wiederherstellung des Daten-Volumes vor der Wiederherstellung der Systemdatenbank erfolgt ist, ist das Mandanten-Backup sofort verfügbar. Wählen Sie das grün markierte Backup aus, und klicken Sie auf Weiter.
++
+image:saphana-br-scs-image149.png["Fehler: Fehlendes Grafikbild"]
+
+. Bestätigen Sie den Speicherort für die Protokollsicherung und klicken Sie auf Weiter.
++
+image:saphana-br-scs-image150.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie je nach Bedarf andere Einstellungen aus. Stellen Sie sicher, dass Delta-Backups verwenden nicht ausgewählt ist. Klicken Sie Auf Weiter.
++
+image:saphana-br-scs-image151.png["Fehler: Fehlendes Grafikbild"]
+
+. Überprüfen Sie die Wiederherstellungseinstellungen und starten Sie den Wiederherstellungsprozess der Mandantendatenbank, indem Sie auf Fertig stellen klicken.
++
+image:saphana-br-scs-image152.png["Fehler: Fehlendes Grafikbild"]
+
+. Warten Sie, bis die Wiederherstellung abgeschlossen ist und die Mandantendatenbank gestartet wird.
++
+image:saphana-br-scs-image153.png["Fehler: Fehlendes Grafikbild"]
+
++
+Das SAP HANA System ist betriebsbereit.
+
++
+
+NOTE: Bei einem SAP HANA MDC-System mit mehreren Mandanten müssen Sie die Schritte 20 bis 29 für jeden Mandanten wiederholen.
+
+
+
+link:saphana-br-scs-advanced-configuration-and-tuning.html["Weiter: Erweiterte Konfiguration und Optimierung."]

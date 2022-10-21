@@ -1,0 +1,23 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-version-history.html 
+keywords:  
+summary:  
+---
+= Versionsverlauf
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-backup-anf-additional-information.html["Zurück: Zusätzliche Informationen."]
+
+|===
+| Version | Datum | Versionsverlauf des Dokuments 
+
+
+| Version 1.0 | Oktober 2021 | Erste Version. 
+|===

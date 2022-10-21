@@ -1,0 +1,33 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-backup-anf-overview.html 
+keywords: overview, introduction, tr-4905, 4905, tr4905, snapcenter service, anf, azure netapp files 
+summary: Dieser technische Bericht enthält die Best Practices für die Datensicherung von SAP HANA mit NetApp SnapCenter Service und Azure NetApp Files. Er behandelt SnapCenter-Servicekonzepte, Konfigurationsempfehlungen und Betriebs-Workflows, einschließlich Backup-/Restore- sowie Recovery-Vorgänge. 
+---
+= TR-4905: SAP HANA Backup und Recovery auf Azure NetApp Files mit SnapCenter Service
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+Nils Bauer, NetApp
+
+Dieser technische Bericht enthält die Best Practices für die Datensicherung von SAP HANA mit NetApp SnapCenter Service und Azure NetApp Files. Er behandelt SnapCenter-Servicekonzepte, Konfigurationsempfehlungen und Betriebs-Workflows, einschließlich Backup-/Restore- sowie Recovery-Vorgänge.
+
+Unternehmen benötigen heutzutage eine kontinuierliche, unterbrechungsfreie Verfügbarkeit ihrer SAP-Applikationen. Sie erwarten konsistente Performance angesichts stetig wachsender Datenvolumen und bei routinemäßigen Wartungsaufgaben wie System-Backups. Das Durchführen von Backups von SAP-Datenbanken ist eine wichtige Aufgabe, die erhebliche Performance-Auswirkungen auf das SAP-Produktionssystem haben kann.
+
+Die Backup-Fenster schrumpfen, während die zu sichernden Daten immer größer werden. Somit ist es schwierig, mit minimalen Auswirkungen auf Geschäftsprozesse einen Zeitpunkt zu finden, in dem Backups durchgeführt werden können. Die Zeit, die zum Wiederherstellen und Wiederherstellen von SAP-Systemen benötigt wird, ist besorgt, da Ausfallzeiten bei SAP-Produktions- und nicht produktiven Systemen minimiert werden müssen, um Datenverlusten und Kosten für das Unternehmen zu reduzieren.
+
+Folgende Punkte fassen die Herausforderungen zusammen, die mit SAP-Backup und -Recovery zu tun haben:
+
+* *Performance-Auswirkungen auf SAP-Produktionssysteme.* herkömmliche Copy-basierte Backups führen in der Regel aufgrund der hohen Belastungen auf den Datenbankserver, das Storage-System und das Speichernetzwerk zu einer erheblichen Performance-Belastung für SAP-Produktionssysteme.
+* *Schrumpfende Backup-Fenster.* herkömmliche Backups können nur vorgenommen werden, wenn nur wenige Dialoge oder Batch-Aktivitäten im SAP-System ausgeführt werden. Wenn SAP Systeme rund um die Uhr im Einsatz sind, gestaltet sich die Planung von Backups schwieriger.
+* *Schnelles Datenwachstum.* für ein schnelles Datenwachstum und immer kleiner werdende Backup-Fenster sind laufende Investitionen in die Backup-Infrastruktur erforderlich. Anders ausgedrückt: Sie müssen zusätzlichen Speicherplatz für Backups und schnellere Backup-Netzwerke beschaffen. Außerdem müssen Sie die laufenden Kosten für das Speichern und Managen dieser Backup-Ressourcen abdecken. Inkrementelle oder differenzielle Backups können diese Probleme beheben. Allerdings führt diese Anordnung zu einem sehr langsamen, umständlichen und komplexen Restore-Prozess, der sich schwieriger überprüfen lässt. Derartige Systeme verkürzen in der Regel die Zeiten der Recovery-Zeit (Recovery Time Objective, RTO) und des Recovery-Zeitpunkts (RPO) und sind für das Unternehmen nicht akzeptabel.
+* *Steigende Kosten von Ausfallzeiten.* ungeplante Ausfallzeiten eines SAP-Systems haben typischerweise Auswirkungen auf die Geschäftsfinanzen. Die Notwendigkeit der Wiederherstellung des SAP Systems erfordert einen Großteil aller ungeplanten Ausfallzeiten. Daher bestimmt die gewünschte RTO das Design der Backup- und Recovery-Architektur.
+* *Backup- und Wiederherstellungszeit für SAP-Upgrade-Projekte.* der Projektplan für ein SAP-Upgrade beinhaltet mindestens drei Backups der SAP-Datenbank. Diese Backups reduzieren die für den Upgrade-Prozess verfügbare Zeit erheblich. Die Entscheidung zum Fortfahren hängt im Allgemeinen von der Zeit ab, die zur Wiederherstellung der Datenbank aus dem zuvor erstellten Backup benötigt wird. Statt ein System in den vorherigen Zustand wiederherzustellen, bietet eine schnelle Wiederherstellung mehr Zeit zur Behebung von Problemen, die bei einem Upgrade auftreten können.
+
+
+link:saphana-backup-anf-the-netapp-solution.html["Als Nächstes: Die NetApp Lösung."]

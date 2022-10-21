@@ -1,0 +1,34 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-sr-scs-where-to-find-additional-information_overview.html 
+keywords: additional information, version history 
+summary:  
+---
+= Wo finden Sie weitere Informationen und Versionsverlauf
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-sr-scs-restore-and-recovery-from-a-backup-created-at-the-other-host.html["Früher: Wiederherstellung und Recovery nach einem Backup, das auf dem anderen Host erstellt wurde."]
+
+Weitere Informationen zu den in diesem Dokument beschriebenen Daten finden Sie in den folgenden Dokumenten:
+
+* Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter
++
+https://www.netapp.com/us/media/tr-4614.pdf["https://www.netapp.com/us/media/tr-4614.pdf"^]
+
+* Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter
++
+https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html"^]
+
+* Technischer Bericht: SAP HANA Disaster Recovery with Storage Replication
++
+https://www.netapp.com/us/media/tr-4646.pdf["https://www.netapp.com/us/media/tr-4646.pdf"^]
+
+
+
+link:saphana-sr-scs-version-history.html["Weiter: Versionsverlauf."]

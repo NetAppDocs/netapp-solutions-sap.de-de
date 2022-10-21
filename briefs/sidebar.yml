@@ -1,0 +1,10 @@
+---
+section: briefs
+title: Lösungen Im Überblick
+entries:
+- title: SAP HANA Lifecycle Management
+  url: "/briefs/saphana-lm-sb_pdf_link.html"
+- title: SAP HANA Backup und Recovery
+  url: https://www.netapp.com/us/media/sb-3965.pdf
+- title: SAP HANA Disaster Recovery
+  url: https://www.netapp.com/us/media/sb-3968.pdf

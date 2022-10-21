@@ -1,0 +1,261 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-br-scs-snapcenter-initial-configuration.html 
+keywords: configuration, storage system, plug-in, hdbsql client 
+summary: In diesem Abschnitt wird die ursprüngliche SnapCenter-Konfiguration beschrieben, einschließlich dem Storage-System, den Anmeldeinformationen, Hosts, dem hdbsql-Client und den Richtlinien. 
+---
+= Erstkonfiguration von SnapCenter
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-br-scs-snapcenter-configuration.html["Früher: SnapCenter-Konfiguration."]
+
+Die Erstkonfiguration umfasst die folgenden Schritte:
+
+. Konfiguration des Storage-Systems
+. Konfiguration von Anmeldeinformationen für die Plug-in-Installation
+. Für einen zentralen HANA-Plug-in-Host:
++
+.. Host-Konfiguration und SAP HANA Plug-in-Implementierung
+.. Installation und Konfiguration der SAP HANA hdbsql Client-Software
+
+
+. Konfiguration von Richtlinien
+
+
+In den folgenden Abschnitten werden die ersten Konfigurationsschritte beschrieben.
+
+
+
+== Konfiguration des Storage-Systems
+
+. Melden Sie sich bei der SnapCenter-ServerGUI an.
++
+image:saphana-br-scs-image23.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie Storage Systems Aus.
++
+
+NOTE: Im Bildschirm können Sie den Storage-System-Typ auswählen, der ONTAP SVMs oder ONTAP Cluster sein kann. Wenn Sie die Storage-Systeme auf SVM-Ebene konfigurieren, müssen Sie für jede SVM eine Management-LIF konfiguriert haben. Alternativ können Sie einen SnapCenter-Managementzugriff auf Cluster-Ebene verwenden. Das SVM-Management wird im folgenden Beispiel verwendet.
+
++
+image:saphana-br-scs-image24.png["Fehler: Fehlendes Grafikbild"]
+
+. Klicken Sie auf Neu, um ein Speichersystem hinzuzufügen und den erforderlichen Hostnamen und die erforderlichen Anmeldeinformationen anzugeben.
++
+
+NOTE: Der SVM-Benutzer muss nicht der vsadmin-Benutzer sein, wie in dem Screenshot dargestellt. In der Regel wird ein Benutzer für die SVM konfiguriert und den erforderlichen Berechtigungen zum Ausführen von Backup- und Restore-Vorgängen zugewiesen. Einzelheiten zu den erforderlichen Berechtigungen finden Sie im http://docs.netapp.com/ocsc-43/index.jsp?topic=%2Fcom.netapp.doc.ocsc-isg%2Fhome.html["SnapCenter Installationshandbuch"^] Im Abschnitt „Minimale ONTAP-Berechtigungen erforderlich“.
+
++
+image:saphana-br-scs-image25.png["Fehler: Fehlendes Grafikbild"]
+
+. Klicken Sie auf Mehr Optionen, um die Storage-Plattform zu konfigurieren.
++
+Als Storage-Plattform können FAS, AFF, ONTAP Select oder Cloud Volumes ONTAP verwendet werden.
+
++
+
+NOTE: Wählen Sie bei einem System, das als SnapVault- oder SnapMirror-Ziel verwendet wird, das sekundäre Symbol aus.
+
++
+image:saphana-br-scs-image26.png["Fehler: Fehlendes Grafikbild"]
+
+. Fügen Sie bei Bedarf zusätzliche Storage-Systeme hinzu. Beispielsweise wurde ein zusätzlicher externer Backup-Storage und eine Disaster Recovery-Storage hinzugefügt.
++
+image:saphana-br-scs-image27.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+
+
+== Konfiguration von Anmeldeinformationen
+
+. Gehen Sie zu Einstellungen, wählen Sie Anmeldeinformationen aus, und klicken Sie auf Neu.
++
+image:saphana-br-scs-image28.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie die Anmeldeinformationen für den Benutzer an, der für Plug-in-Installationen auf Linux-Systemen verwendet wird.
++
+image:saphana-br-scs-image29.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie die Anmeldeinformationen für den Benutzer an, der für Plug-in-Installationen auf Windows-Systemen verwendet wird.
++
+image:saphana-br-scs-image30.png["Fehler: Fehlendes Grafikbild"]
+
++
+Die folgende Abbildung zeigt die konfigurierten Anmeldedaten.
+
+
+
+image:saphana-br-scs-image31.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+== SAP HANA Plug-in-Installation auf einem zentralen Plug-in-Host
+
+Bei der Lab-Einrichtung wird der SnapCenter-Server auch als zentraler HANA-Plug-in-Host verwendet. Der Windows-Host, auf dem SnapCenter Server ausgeführt wird, wird als Host hinzugefügt, und das SAP HANA-Plug-in ist auf dem Windows-Host installiert.
+
+
+NOTE: Für das SAP HANA Plug-in ist Java 64-Bit Version 1.8 erforderlich. Vor der Bereitstellung des SAP HANA Plug-ins muss Java auf dem Host installiert sein.
+
+. Gehen Sie zu Hosts und klicken Sie auf Hinzufügen.
++
+image:saphana-br-scs-image32.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie die erforderlichen Hostinformationen ein. Klicken Sie Auf Senden.
++
+image:saphana-br-scs-image33.png["Fehler: Fehlendes Grafikbild"]
+
++
+Die folgende Abbildung zeigt alle konfigurierten Hosts, die nach der Implementierung des HANA-Plug-ins konfiguriert wurden.
+
++
+image:saphana-br-scs-image34.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+
+
+=== Installation und Konfiguration der SAP HANA hdbsql Client-Software
+
+Die SAP HANA hdbsql-Client-Software muss auf dem gleichen Host installiert sein, auf dem das SAP HANA-Plug-in installiert ist. Die Software kann von heruntergeladen werden https://support.sap.com/en/index.html["SAP-Supportportal"^].
+
+Der während der Ressourcenkonfiguration konfigurierte HDBSQL OS-Benutzer muss in der Lage sein, die ausführbare Datei hdbsql auszuführen. Der Pfad zur ausführbaren Datei hdbsql muss im konfiguriert werden `hana.properties` Datei:
+
+* Windows:
+
+
+....
+C:\More C:\Program Files\NetApp\SnapCenter\Snapcenter Plug-in Creator\etc\hana.properties
+HANA_HDBSQL_CMD=C:\\Program Files\\sap\\hdbclient\\hdbsql.exe
+....
+* Linux
+
+
+....
+cat /opt/NetApp/snapcenter/scc/etc/hana.properties
+HANA_HDBSQL_CMD=/usr/sap/hdbclient/hdbsql
+....
+
+
+== Konfiguration von Richtlinien
+
+Wie im Abschnitt beschrieben link:saphana-br-scs-snapcenter-concepts-and-best-practices.html#data-protection-strategy["„Datensicherungsstrategie“,"] Richtlinien werden normalerweise unabhängig von der Ressource konfiguriert und können von mehreren SAP HANA Datenbanken verwendet werden.
+
+Eine typische Minimalkonfiguration umfasst folgende Richtlinien:
+
+* Richtlinie für stündliche Backups ohne Replikation: `LocalSnap`
+* Richtlinie für tägliche Backups mit SnapVault-Replikation: `LocalSnapAndSnapVault`
+* Richtlinie für wöchentliche Blockintegritätsprüfung über ein dateibasiertes Backup: `BlockIntegrityCheck`
+
+
+In den folgenden Abschnitten wird die Konfiguration dieser drei Richtlinien beschrieben.
+
+
+
+=== Richtlinie für stündliche Snapshot Backups
+
+. Gehen Sie zu Einstellungen > Richtlinien, und klicken Sie auf Neu.
++
+image:saphana-br-scs-image35.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie den Namen und die Beschreibung der Richtlinie ein. Klicken Sie Auf Weiter.
++
+image:saphana-br-scs-image36.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie den Backup-Typ als Snapshot-basiert aus und wählen Sie stündlich für die Zeitplanfrequenz aus.
++
+image:saphana-br-scs-image37.png["Fehler: Fehlendes Grafikbild"]
+
+. Konfigurieren Sie die Aufbewahrungseinstellungen für On-Demand-Backups.
++
+image:saphana-br-scs-image38.png["Fehler: Fehlendes Grafikbild"]
+
+. Konfigurieren Sie die Aufbewahrungseinstellungen für geplante Backups.
++
+image:saphana-br-scs-image39.png["Fehler: Fehlendes Grafikbild"]
+
+. Konfigurieren der Replikationsoptionen. In diesem Fall ist kein SnapVault oder SnapMirror Update ausgewählt.
++
+image:saphana-br-scs-image40.png["Fehler: Fehlendes Grafikbild"]
+
+. Klicken Sie auf der Seite Zusammenfassung auf Fertig stellen.
++
+image:saphana-br-scs-image41.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+
+
+=== Richtlinie für tägliche Snapshot Backups mit SnapVault Replizierung
+
+. Gehen Sie zu Einstellungen > Richtlinien, und klicken Sie auf Neu.
+. Geben Sie den Namen und die Beschreibung der Richtlinie ein. Klicken Sie Auf Weiter.
++
+image:saphana-br-scs-image42.png["Fehler: Fehlendes Grafikbild"]
+
+. Legen Sie den Backup-Typ auf Snapshot-basiert und die Zeitplanfrequenz auf täglich fest.
++
+image:saphana-br-scs-image43.png["Fehler: Fehlendes Grafikbild"]
+
+. Konfigurieren Sie die Aufbewahrungseinstellungen für On-Demand-Backups.
++
+image:saphana-br-scs-image44.png["Fehler: Fehlendes Grafikbild"]
+
+. Konfigurieren Sie die Aufbewahrungseinstellungen für geplante Backups.
++
+image:saphana-br-scs-image45.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie SnapVault aktualisieren aus, nachdem Sie eine lokale Snapshot-Kopie erstellt haben.
++
+
+NOTE: Das sekundäre Richtlinienetikett muss mit dem SnapMirror Etikett in der Datensicherungskonfiguration auf der Storage-Ebene identisch sein. Siehe Abschnitt link:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html#configuration-of-data-protection-to-off-site-backup-storage["„Konfiguration von Datenschutz auf externen Backup-Speicher“."]
+
++
+image:saphana-br-scs-image46.png["Fehler: Fehlendes Grafikbild"]
+
+. Klicken Sie auf der Seite Zusammenfassung auf Fertig stellen.
++
+image:saphana-br-scs-image47.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+
+
+=== Richtlinie für die wöchentliche Blockintegritätsprüfung
+
+. Gehen Sie zu Einstellungen > Richtlinien, und klicken Sie auf Neu.
+. Geben Sie den Namen und die Beschreibung der Richtlinie ein. Klicken Sie Auf Weiter.
++
+image:saphana-br-scs-image48.png["Fehler: Fehlendes Grafikbild"]
+
+. Legen Sie den Sicherungstyp auf „File-based“ und „Schedule Frequency“ auf „Weekly“ fest.
++
+image:saphana-br-scs-image49.png["Fehler: Fehlendes Grafikbild"]
+
+. Konfigurieren Sie die Aufbewahrungseinstellungen für On-Demand-Backups.
++
+image:saphana-br-scs-image50.png["Fehler: Fehlendes Grafikbild"]
+
+. Konfigurieren Sie die Aufbewahrungseinstellungen für geplante Backups.
++
+image:saphana-br-scs-image50.png["Fehler: Fehlendes Grafikbild"]
+
+. Klicken Sie auf der Seite Zusammenfassung auf Fertig stellen.
++
+image:saphana-br-scs-image51.png["Fehler: Fehlendes Grafikbild"]
+
++
+Die folgende Abbildung zeigt eine Zusammenfassung der konfigurierten Richtlinien.
+
++
+image:saphana-br-scs-image52.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+link:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html["Next-Generation-Backup: SnapCenter ressourcenspezifische Konfiguration für SAP HANA Datenbank-Backups"]

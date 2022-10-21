@@ -1,0 +1,33 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/sc-copy-clone-sap-system-copy,-refresh,-and-clone-scenarios.html 
+keywords: sap system refresh, system copy, system clone, 
+summary: 'Der Begriff SAP Systemkopie wird oft als Synonym für drei verschiedene Prozesse verwendet: SAP Systemaktualisierung, SAP Systemkopie oder SAP Systemklonvorgänge. Es ist wichtig, zwischen den verschiedenen Vorgängen zu unterscheiden, da sich Workflows und Anwendungsfälle für jedes einzelne unterscheiden.' 
+---
+= SAP Szenarien für Systemkopie, Aktualisierung und Klonen
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:sc-copy-clone-introduction.html["Zurück: Einführung."]
+
+Der Begriff SAP Systemkopie wird oft als Synonym für drei verschiedene Prozesse verwendet: SAP Systemaktualisierung, SAP Systemkopie oder SAP Systemklonvorgänge. Es ist wichtig, zwischen den verschiedenen Vorgängen zu unterscheiden, da sich Workflows und Anwendungsfälle für jedes einzelne unterscheiden.
+
+* *SAP-Systemaktualisierung.* ein SAP-Systemaktualisierung ist eine Aktualisierung eines bestehenden SAP-Zielsystems mit Daten aus einem SAP-Quellsystem. Das Zielsystem ist in der Regel Teil einer SAP-Transportlandschaft, beispielsweise ein Qualitätssicherungssystem, das mit den Daten des Produktionssystems aktualisiert wird. Hostname, Instanznummer und SID unterscheiden sich für die Quell- und Zielsysteme.
+* *SAP-Systemkopie.* eine SAP-Systemkopie ist ein Setup eines neuen SAP-Zielsystems mit Daten aus einem SAP-Quellsystem. Dabei könnte das neue Zielsystem beispielsweise ein zusätzliches Testsystem mit den Daten aus dem Produktionssystem sein. Hostname, Instanznummer und SID unterscheiden sich für die Quell- und Zielsysteme.
+* *SAP-Systemklon.* ein SAP-Systemklon ist ein identischer Klon eines Quell-SAP-Systems. SAP Systemklone werden typischerweise zur Beseitigung logischer Beschädigungen oder zum Testen von Disaster-Recovery-Szenarien eingesetzt. Bei einem Systemklonvorgang bleiben der Hostname, die Instanznummer und die SID unverändert. Daher ist es wichtig, für das Zielsystem ein ordnungsgemäßes Netzwerkfechten einzurichten, um sicherzustellen, dass keine Kommunikation mit der Produktionsumgebung besteht.
+
+
+Die folgende Abbildung zeigt die wichtigsten Schritte, die während einer Systemaktualisierung, einer Systemkopie oder eines Systemklonens ausgeführt werden müssen. Die blauen Felder zeigen die Schritte an, die mit SnapCenter automatisiert werden können, während die grünen Felder die Schritte anzeigen, die außerhalb von SnapCenter ausgeführt werden müssen, entweder manuell oder mit Tools von Drittanbietern.
+
+Alle drei Operationen lassen sich mithilfe von SAP Lama und dem NetApp Storage Services Connector vollständig automatisieren. Weitere Informationen finden Sie unter https://www.netapp.com/us/media/tr-4018.pdf["Integration von NetApp ONTAP-Systemen in SAP Landscape Management"^].
+
+NetApp arbeitet auch mit Libelle zusammen https://www.libelle.com["www.libelle.com"^] Integration von SnapCenter Cloning in Libelle SystemCopy zur Automatisierung der SAP-vor- und Nachbearbeitung Eine detaillierte Beschreibung der Lösung finden Sie unter link:https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/libelle-sc-overview.html["Automatisierung von SAP System Copy Operations mit Libelle SystemCopy"^].
+
+image:sc-copy-clone-image2.png["Fehler: Fehlendes Grafikbild"]
+
+link:sc-copy-clone-use-cases-for-system-refresh-and-cloning.html["Weiter: Anwendungsfälle für Systemaktualisierung und Klonen."]

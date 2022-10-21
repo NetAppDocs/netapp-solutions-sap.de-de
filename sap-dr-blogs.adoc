@@ -1,0 +1,22 @@
+---
+sidebar: sidebar 
+permalink: sap-dr-blogs.html 
+summary: Eine Reihe von Blogs zu den Themen SAP Backup, Restore und Disaster Recovery 
+keywords: netapp, solutions, SAP, backuop, restore, dr, disaster recovery, blogs 
+---
+= SAP Blogs für Backup, Restore und Disaster Recovery
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:table-stripes: odd
+:imagesdir: ./media/
+
+
+[role="lead"]
+Diese Blogs zeigen einen Überblick über die Highlights zum Thema SAP Backup, Restore und Disaster Recovery.
+
+
+
+=== SAP Blogs für Backup, Restore und Disaster Recovery

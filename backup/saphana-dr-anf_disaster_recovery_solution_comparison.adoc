@@ -1,0 +1,142 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-dr-anf_disaster_recovery_solution_comparison.html 
+keywords: sap, hana, system, replication, data, memory, disaster, recovery, solutions, azure 
+summary: Eine umfassende Disaster Recovery-Lösung muss Kunden nach einem vollständigen Ausfall des primären Standorts die Wiederherstellung ermöglichen. 
+---
+= Disaster-Recovery-Lösungsvergleich
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-dr-anf_data_protection_overview_overview.html["Früher: Übersicht über SAP HANA Disaster-Recovery mit Azure NetApp Files"]
+
+Eine umfassende Disaster Recovery-Lösung muss Kunden nach einem vollständigen Ausfall des primären Standorts die Wiederherstellung ermöglichen. Daher müssen die Daten an einen sekundären Standort übertragen werden und eine komplette Infrastruktur ist erforderlich, um bei einem Standortausfall die erforderlichen SAP HANA Produktionssysteme auszuführen. Abhängig von den Verfügbarkeitsanforderungen der Applikation und der Art des zu schützenden Disaster ist eine Disaster Recovery-Lösung mit zwei oder drei Standorten zu berücksichtigen.
+
+Die folgende Abbildung zeigt eine typische Konfiguration, bei der die Daten innerhalb derselben Azure-Region synchron in eine zweite Verfügbarkeitszone repliziert werden. Durch die kurze Entfernung können Sie die Daten synchron replizieren und ein RPO von null (normalerweise HA-Bereitstellung) erreichen.
+
+Darüber hinaus werden Daten asynchron in eine sekundäre Region repliziert, um sie vor Ausfällen zu schützen, wenn die primäre Region betroffen ist. Der erzielbare MindestRPO hängt von der Datenreplizierungsfrequenz ab, die durch die verfügbare Bandbreite zwischen dem primären und dem sekundären Bereich begrenzt ist. Ein typischer minimaler RPO liegt im Bereich von 20 Minuten bis mehreren Stunden.
+
+Dieses Dokument erläutert verschiedene Implementierungsoptionen für eine Disaster Recovery-Lösung für zwei Regionen.
+
+image:saphana-dr-anf_image3.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+== SAP HANA System Replication
+
+SAP HANA System Replication arbeitet auf Datenbankebene. Die Lösung basiert auf einem zusätzlichen SAP HANA-System am Disaster-Recovery-Standort, das die Änderungen vom Primärsystem empfängt. Dieses sekundäre System muss mit dem Primärsystem identisch sein.
+
+SAP HANA System Replication kann in einem von zwei Modi betrieben werden:
+
+* Mit vorab in den Arbeitsspeicher geladenen Daten und einem dedizierten Server am Disaster-Recovery-Standort:
++
+** Der Server wird ausschließlich als sekundärer SAP HANA System Replication Host verwendet.
+** Sehr geringe RTO-Werte können erzielt werden, weil die Daten bereits in den Speicher geladen sind und bei einem Failover kein Datenbankstart erforderlich ist.
+
+
+* Ohne Daten, die vorab in den Arbeitsspeicher geladen sind und einen gemeinsam genutzten Server am Disaster Recovery-Standort nutzen:
++
+** Der Server wird als sekundäres SAP HANA System Replication und als Entwicklungs-/Testsystem gemeinsam genutzt.
+** RTO hängt hauptsächlich von der Zeit ab, die zum Starten der Datenbank und Laden der Daten in den Arbeitsspeicher benötigt wird.
+
+
+
+
+Eine vollständige Beschreibung aller Konfigurationsoptionen und Replikationsszenarien finden Sie im https://help.sap.com/saphelp_hanaplatform/helpdata/en/67/6844172c2442f0bf6c8b080db05ae7/content.htm?frameset=/en/52/08b5071e3f45d5aa3bcbb7fde10cec/frameset.htm&current_toc=/en/00/0ca1e3486640ef8b884cdf1a050fbb/plain.htm&node_id=527&show_children=f["SAP HANA Administration Guide"^].
+
+Die folgende Abbildung zeigt das Setup einer Disaster-Recovery-Lösung für zwei Regionen mit SAP HANA System Replication. Die synchrone Replizierung mit vorab in den Speicher geladenen Daten wird für lokale HA in derselben Azure-Region verwendet, allerdings in verschiedenen Verfügbarkeitszonen. Die asynchrone Replizierung ohne vorab geladene Daten wird für die Remote Disaster-Recovery-Region konfiguriert.
+
+Die folgende Abbildung zeigt die SAP HANA System Replication.
+
+image:saphana-dr-anf_image4.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+=== SAP HANA System Replication mit vorab in den Speicher geladenen Daten
+
+Sehr geringe RTO-Werte mit SAP HANA können nur mit SAP HANA System Replication erreicht werden, wobei Daten vorab in den Speicher geladen sind. Der Betrieb von SAP HANA System Replication mit einem dedizierten sekundären Server am Disaster-Recovery-Standort ermöglicht einen RTO-Wert von maximal einer Minute. Die replizierten Daten werden empfangen und im sekundären System vorgeladen. Aus diesem Grund wird SAP HANA System Replication häufig auch für Wartungsvorgänge ohne Ausfallzeiten eingesetzt, beispielsweise für HANA-Software-Upgrades.
+
+In der Regel ist SAP HANA System Replication so konfiguriert, dass sie synchron repliziert wird, wenn eine vorab-Datenlast ausgewählt wird. Die maximal unterstützte Entfernung bei synchroner Replizierung liegt im Bereich von 100 km.
+
+
+
+=== SAP System Replication ohne vorab in den Speicher geladene Daten
+
+Für weniger strenge RTO-Anforderungen kann SAP HANA System Replication ohne vorab geladene Daten verwendet werden. In diesem Betriebsmodus werden die Daten der Disaster-Recovery-Region nicht in den Arbeitsspeicher geladen. Der Server in der DR-Region wird weiterhin zur Verarbeitung von SAP HANA System Replication verwendet, auf dem alle erforderlichen SAP HANA-Prozesse ausgeführt werden. Der Großteil des Serverspeichers ist jedoch für andere Dienste verfügbar, wie zum Beispiel SAP HANA Entwicklungs-/Testsysteme.
+
+Bei einem Notfall muss das Entwicklungs-/Testsystem heruntergefahren, der Failover initiiert und die Daten in den Arbeitsspeicher geladen werden. Das RTO dieses Cold-Standby-Ansatzes hängt von der Größe der Datenbank und dem Lesedurchsatz während der Last des Zeilen- und Spaltenspeichers ab. Mit der Annahme, dass die Daten mit einem Durchsatz von 1000 MBit/s gelesen werden, dass das Laden von 1 TB Daten ungefähr 18 Minuten dauert.
+
+
+
+== Technischer Bericht: SAP HANA Disaster Recovery with ANF Cross-Region Replication
+
+ANF Cross-Region Replication ist in ANF als Disaster-Recovery-Lösung mit asynchroner Datenreplizierung integriert. ANF regionsübergreifende Replizierung wird über eine Datensicherungsbeziehung zwischen zwei ANF-Volumes in einer primären und einer sekundären Azure-Region konfiguriert. ANF-Cross-Region Replication aktualisiert das sekundäre Volume mithilfe effizienter Block-Delta-Replikationen. Update-Zeitpläne können während der Replikationskonfiguration definiert werden.
+
+Die folgende Abbildung zeigt ein Beispiel für eine Disaster-Recovery-Lösung für zwei Regionen mithilfe von ANF-bereichsübergreifender Replizierung. In diesem Beispiel ist das HANA-System mit HANA System Replication innerhalb der primären Region geschützt, wie im vorherigen Kapitel erläutert. Die Replikation in eine sekundäre Region wird mittels ANF-bereichsübergreifender Replikation durchgeführt. Der RPO-Wert wird durch den Replizierungszeitplan und die Replizierungsoptionen definiert.
+
+Das RTO hängt hauptsächlich von der Zeit ab, die zum Starten der HANA-Datenbank am Disaster-Recovery-Standort und zum Laden der Daten in den Arbeitsspeicher benötigt wird. Mit der Annahme, dass die Daten mit einem Durchsatz von 1000 MB/s gelesen werden, dass das Laden von 1 TB Daten ungefähr 18 Minuten dauert. Je nach Replizierungskonfiguration ist auch Recovery-Prozesse erforderlich und wird der RTO-Gesamtwert steigern.
+
+Weitere Details zu den verschiedenen Konfigurationsoptionen finden Sie in Kapitel link:ent-apps-db/saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html["Konfigurationsoptionen für regionsübergreifende Replizierung mit SAP HANA"].
+
+Die Server an den Disaster-Recovery-Standorten können als Entwicklungs-/Testsysteme im normalen Betrieb eingesetzt werden. Bei einem Notfall müssen die Entwicklungs-/Testsysteme heruntergefahren und als DR-Produktionsserver gestartet werden.
+
+Mit der standortübergreifenden ANF Replizierung können Sie den DR-Workflow testen, ohne dass RPO und RTO beeinträchtigt werden. Dazu werden Volume-Klone erstellt und an den DR-Testserver angeschlossen.
+
+image:saphana-dr-anf_image5.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+== Zusammenfassung der Disaster Recovery-Lösungen
+
+In der folgenden Tabelle werden die in diesem Abschnitt beschriebenen Disaster-Recovery-Lösungen verglichen und die wichtigsten Kennzahlen hervorgehoben.
+
+Die wichtigsten Ergebnisse:
+
+* Ist ein sehr niedriges RTO erforderlich, ist SAP HANA System Replication mit vorab-Load in den Speicher die einzige Option.
++
+** Am DR-Standort ist ein dedizierter Server erforderlich, um die replizierten Daten zu erhalten und die Daten in den Arbeitsspeicher zu laden.
+
+
+* Darüber hinaus ist eine Storage-Replizierung für die Daten erforderlich, die sich außerhalb der Datenbank befinden (z. B. gemeinsam genutzte Dateien, Schnittstellen usw.).
+* Bei einer geringeren RTO/RPO-Anforderung kann auch eine regionale ANF-Replizierung verwendet werden, um:
++
+** Kombinieren Sie Datenreplizierung außerhalb von Datenbanken.
+** Behandeln Sie zusätzliche Anwendungsfälle wie Disaster-Recovery-Tests und Aktualisierungen von Entwicklung/Tests.
+** Bei der Storage-Replizierung kann der Server am DR-Standort im normalen Betrieb als QA- oder Testsystem verwendet werden.
+
+
+* Eine Kombination aus SAP HANA System Replication als HA-Lösung mit RPO=0 mit Storage-Replizierung für große Entfernungen ist sinnvoll, um die unterschiedlichen Anforderungen zu erfüllen.
+
+
+In der folgenden Tabelle werden die Disaster-Recovery-Lösungen verglichen.
+
+|===
+|  | Storage-Replizierung 2+| SAP HANA Systemreplizierung 
+
+
+|  | *Regionenübergreifende Replikation* | * Mit Datenvorladung* | *Ohne Datenvorladung* 
+
+
+| RTO | Gering bis mittel; abhängig von der Startzeit der Datenbank und der Vorwärtswiederherstellung | Sehr niedrig | Gering bis mittel; abhängig von der Datenbank-Startzeit 
+
+
+| RPO | RPO > 20 Min. Asynchrone Replizierung | RPO > 20 Min. Asynchrone Replikation RPO = 0 synchrone Replizierung | RPO > 20 Min. Asynchrone Replikation RPO = 0 synchrone Replizierung 
+
+
+| Server am DR-Standort können für Entwicklung/Test genutzt werden | Ja. | Nein | Ja. 
+
+
+| Replizierung von nicht aus Datenbanken stammenden Daten | Ja. | Nein | Nein 
+
+
+| DR-Daten können zur Aktualisierung von Entwicklungs-/Testsystemen genutzt werden | Ja. | Nein | Nein 
+
+
+| DR-Tests ohne Auswirkungen auf RTO und RPO | Ja. | Nein | Nein 
+|===
+link:saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html["Nächste: Regionale ANF-Replizierung mit SAP HANA"]

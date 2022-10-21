@@ -1,0 +1,26 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-sr-scs-version-history.html 
+keywords:  
+summary:  
+---
+= Versionsverlauf
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-sr-scs-where-to-find-additional-information_overview.html["Früher: Wo zusätzliche Informationen zu finden."]
+
+|===
+| Version | Datum | Versionsverlauf Des Dokuments 
+
+
+| Version 1.0 | Oktober 2018 | Ausgangsversion 
+
+
+| Version 2.0 | Januar 2022 | Update zur Unterstützung von SnapCenter 4.6 HANA System Replication 
+|===

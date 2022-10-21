@@ -1,0 +1,119 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-br-scs-database-backups.html 
+keywords: sap hana studio, on-demand backup, replication 
+summary: In SnapCenter werden Datenbank-Backups normalerweise mithilfe der Zeitpläne ausgeführt, die in der Ressourcenschutzkonfiguration der einzelnen HANA-Datenbanken definiert sind. Ein On-Demand-Datenbank-Backup kann entweder über die SnapCenter GUI, eine PowerShell Befehlszeile oder REST-APIs durchgeführt werden. 
+---
+= Datenbank-Backups
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-br-scs-snapcenter-resource-specific-configuration-for-non-data-volume-backups.html["Früher: Ressourcenspezifische SnapCenter Konfiguration für Backups außerhalb von Datenvolumen."]
+
+In SnapCenter werden Datenbank-Backups normalerweise mithilfe der Zeitpläne ausgeführt, die in der Ressourcenschutzkonfiguration der einzelnen HANA-Datenbanken definiert sind.
+
+Ein On-Demand-Datenbank-Backup kann entweder über die SnapCenter GUI, eine PowerShell Befehlszeile oder REST-APIs durchgeführt werden.
+
+
+
+== Identifizierung von SnapCenter Backups in SAP HANA Studio
+
+In der Topologie der SnapCenter Ressourcen wird eine Liste der mit SnapCenter erstellten Backups angezeigt. Die folgende Abbildung zeigt die auf dem primären Storage verfügbaren Backups und hebt das neueste Backup hervor.
+
+image:saphana-br-scs-image82.png["Fehler: Fehlendes Grafikbild"]
+
+Bei einem Backup mit Storage Snapshot Kopien für ein SAP HANA MDC System wird eine Snapshot Kopie des Daten-Volumes erstellt. Dieses Daten-Volume enthält die Daten der Systemdatenbank sowie die Daten aller Mandantendatenbanken. Zur Berücksichtigung dieser physischen Architektur führt SAP HANA intern ein kombiniertes Backup der Systemdatenbank sowie aller Mandantendatenbanken durch, wenn SnapCenter ein Snapshot Backup auslöst. Das führt zu mehreren separaten Backup-Einträgen im SAP HANA Backup-Katalog: Einer für die Systemdatenbank und einer für jede Mandantendatenbank.
+
+
+NOTE: Bei SAP HANA Single-Container-Systemen enthält das Datenbank-Volume nur die einzige Datenbank, und es gibt nur einen Eintrag im SAP HANA Backup-Katalog.
+
+Im SAP HANA Backup-Katalog wird der SnapCenter-Backup-Name als A gespeichert `Comment` Außerdem Feld `External Backup ID (EBID)`. Dies wird im folgenden Screenshot für die Systemdatenbank und in dem Screenshot danach für die Mandanten-Datenbank SS1 dargestellt. Beide Abbildungen zeigen den im Kommentarfeld gespeicherten SnapCenter Backup-Namen und EBID.
+
+
+NOTE: Die HANA 2.0 SPS4 Version (Revision 40 und 41) zeigt für Snapshot-basierte Backups immer eine Sicherungsgröße von null. Das wurde mit Revision 42 behoben. Weitere Informationen finden Sie im SAP-Hinweis https://launchpad.support.sap.com/["https://launchpad.support.sap.com/#/notes/2795010"^].
+
+image:saphana-br-scs-image83.png["Fehler: Fehlendes Grafikbild"]
+
+image:saphana-br-scs-image84.png["Fehler: Fehlendes Grafikbild"]
+
+
+NOTE: SnapCenter ist nur sich seiner eigenen Backups bewusst. Zusätzliche Backups, die beispielsweise mit SAP HANA Studio erstellt wurden, sind im SAP HANA Katalog sichtbar, jedoch nicht im SnapCenter.
+
+
+
+== Ermitteln von SnapCenter Backups auf den Storage-Systemen
+
+Verwenden Sie NetApp OnCommand System Manager, um die Backups auf Storage-Ebene anzuzeigen, und wählen Sie das Datenbank-Volume in der Ansicht „SVM – Volume“ aus. Auf der unteren Registerkarte Snapshot Kopien werden die Snapshot Kopien des Volume angezeigt. Der folgende Screenshot zeigt die verfügbaren Backups für das Datenbank-Volume `SS1_data_mnt00001` Auf dem primären Storage. Das hervorgehobene Backup ist der in den vorherigen Bildern in SnapCenter und SAP HANA Studio angezeigte Backup mit derselben Namenskonvention.
+
+image:saphana-br-scs-image85.png["Fehler: Fehlendes Grafikbild"]
+
+Der folgende Screenshot zeigt die verfügbaren Backups für das Replikationsziel-Volume `hana_SA1_data_mnt00001_dest` Auf dem sekundären Storage-System.
+
+image:saphana-br-scs-image86.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+== On-Demand-Datenbank-Backup auf dem Primärspeicher
+
+. Wählen Sie in der Ressourcenansicht die Ressource aus, und doppelklicken Sie auf die Linie, um zur Topologieansicht zu wechseln.
++
+Die Ansicht „Ressourcentopologie“ bietet einen Überblick über alle verfügbaren Backups, die mit SnapCenter erstellt wurden. Im oberen Bereich dieser Ansicht wird die Backup-Topologie angezeigt, die Backups im primären Storage (lokale Kopien) und, sofern verfügbar, im externen Backup-Storage (Vault-Kopien) angezeigt.
+
++
+image:saphana-br-scs-image86.5.png["Fehler: Fehlendes Grafikbild"]
+
+. Klicken Sie in der oberen Zeile auf das Symbol Jetzt sichern, um ein On-Demand-Backup zu starten. Wählen Sie aus der Dropdown-Liste die Backup-Richtlinie aus `LocalSnap` Anschließend auf Backup klicken, um das On-Demand-Backup zu starten.
++
+image:saphana-br-scs-image87.png["Fehler: Fehlendes Grafikbild"]
+
++
+Dies startet den Sicherungsauftrag. Ein Protokoll der vorherigen fünf Jobs wird im Aktivitätsbereich unterhalb der Topologieansicht angezeigt. Nach Abschluss des Backups wird in der Topologieansicht ein neuer Eintrag angezeigt. Die Backup-Namen folgen derselben Namenskonvention wie der Snapshot-Name, der im Abschnitt definiert wurde link:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html#resource-protection-configuration["„Konfiguration des Ressourcenschutzes“."]
+
++
+
+NOTE: Sie müssen die Topologieansicht schließen und erneut öffnen, um die aktualisierte Backup-Liste anzuzeigen.
+
++
+image:saphana-br-scs-image88.png["Fehler: Fehlendes Grafikbild"]
+
+. Die Jobdetails werden angezeigt, wenn Sie im Aktivitätsbereich auf die Vorgangszeile des Jobs klicken. Sie können ein detailliertes Jobprotokoll öffnen, indem Sie auf Protokolle anzeigen klicken.
++
+image:saphana-br-scs-image89.png["Fehler: Fehlendes Grafikbild"]
+
+. Im SAP HANA Studio ist das neue Backup im Backup-Katalog sichtbar. Derselbe Backup-Name in SnapCenter wird auch im Kommentar und im EBID-Feld im Backup-Katalog verwendet.
+
+
+
+
+== On-Demand-Datenbank-Backups mit SnapVault Replizierung
+
+. Wählen Sie in der Ressourcenansicht die Ressource aus, und doppelklicken Sie auf die Linie, um zur Topologieansicht zu wechseln.
+. Klicken Sie in der oberen Zeile auf das Symbol Jetzt sichern, um ein On-Demand-Backup zu starten. Wählen Sie aus der Dropdown-Liste die Backup-Richtlinie aus `LocalSnapAndSnapVault`, Dann klicken Sie auf Backup, um das On-Demand-Backup zu starten.
++
+image:saphana-br-scs-image90.png["Fehler: Fehlendes Grafikbild"]
+
+. Die Jobdetails werden angezeigt, wenn Sie im Aktivitätsbereich auf die Vorgangszeile des Jobs klicken.
++
+image:saphana-br-scs-image91.png["Fehler: Fehlendes Grafikbild"]
+
+. Nach Abschluss des Backups wird in der Topologieansicht ein neuer Eintrag angezeigt. Die Backup-Namen folgen derselben Namenskonvention wie der Snapshot-Name, der im Abschnitt definiert wurde link:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html#resource-protection-configuration["„Konfiguration des Ressourcenschutzes“."]
++
+
+NOTE: Sie müssen die Topologieansicht schließen und erneut öffnen, um die aktualisierte Backup-Liste anzuzeigen.
+
++
+image:saphana-br-scs-image92.png["Fehler: Fehlendes Grafikbild"]
+
+. Durch Auswahl von Vault Kopien werden Backups im sekundären Storage angezeigt. Der Name des replizierten Backups entspricht dem Backup-Namen im primären Storage.
++
+image:saphana-br-scs-image93.png["Fehler: Fehlendes Grafikbild"]
+
+. Im SAP HANA Studio ist das neue Backup im Backup-Katalog sichtbar. Derselbe Backup-Name in SnapCenter wird auch im Kommentar und im EBID-Feld im Backup-Katalog verwendet.
+
+
+link:saphana-br-scs-block-integrity-check.html["Als Nächstes: Block-Integritätsprüfung"]

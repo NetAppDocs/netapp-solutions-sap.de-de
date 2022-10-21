@@ -1,0 +1,95 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-dr-anf_configuration_steps_for_anf_cross-region_replication.html 
+keywords: configuration, steps, anf, cross, region, replication, preparation, 
+summary: Am Disaster Recovery-Standort sind einige Vorbereitungsschritte durchzuführen, bevor die Volume-Replizierung konfiguriert werden kann. 
+---
+= Konfigurationsschritte für ANF-bereichsübergreifende Replikation
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-dr-anf_lab_setup.html["Früher: Laboreinrichtung."]
+
+Am Disaster Recovery-Standort sind einige Vorbereitungsschritte durchzuführen, bevor die Volume-Replizierung konfiguriert werden kann.
+
+* Ein NetApp Konto muss verfügbar und mit demselben Azure Abonnement wie die Quelle konfiguriert sein.
+* Ein Kapazitäts-Pool muss über das oben genannte NetApp Konto verfügbar und konfiguriert sein.
+* Ein virtuelles Netzwerk muss verfügbar und konfiguriert sein.
+* Innerhalb des virtuellen Netzwerks muss ein delegiertes Subnetz zur Verwendung mit ANF verfügbar und konfiguriert sein.
+
+
+Protection Volumes können nun für HANA-Daten, HANA Shared IT und das HANA-Log-Backup-Volume erstellt werden. Die folgende Tabelle zeigt die konfigurierten Ziel-Volumes in unserer Laboreinrichtung.
+
+
+NOTE: Um eine optimale Latenz zu erzielen, müssen die Volumes in der Nähe der VMs platziert werden, die im Falle eines Disaster-Failover den SAP HANA ausführen. Daher ist für die DR-Volumes derselbe Pinning-Prozess wie für jedes andere SAP HANA-Produktionssystem erforderlich.
+
+|===
+| HANA Volume | Quelle | Ziel | Replizierungsplan 
+
+
+| HANA-Datenvolumen | PR1-Data-mnt00001 | PR1-Data-mnt00001-SM-dest | Täglich 
+
+
+| HANA Shared Volume | PR1 freigegeben | PR1-shared-SM-dest | Stündlich 
+
+
+| HANA-Protokoll-/Katalogbackup-Volume | Hanabackup | Hanabackup-SM-dest | Stündlich 
+|===
+Für jedes Volume müssen folgende Schritte durchgeführt werden:
+
+. Erstellen eines neuen Sicherungs-Volumes am DR-Standort:
++
+.. Stellen Sie Volume-Namen, den Kapazitäts-Pool, die Quota- und Netzwerkinformationen bereit.
+.. Bereitstellen der Zugriffsinformationen für Protokolle und Volumes
+.. Geben Sie die Quell-Volume-ID und einen Replizierungsplan an.
+.. Erstellen eines Ziel-Volumes
+
+
+. Autorisieren Sie die Replikation auf dem Quell-Volume.
++
+** Geben Sie die ID des Zielvolumens an.
+
+
+
+
+Die folgenden Screenshots zeigen die Konfigurationsschritte im Detail.
+
+Am Disaster Recovery-Standort wird ein neues Datensicherungs-Volume erstellt, indem Sie Volumes auswählen und auf Datenreplizierung hinzufügen klicken. Auf der Registerkarte „Grundlagen“ müssen Sie den Namen des Volumes, den Kapazitäts-Pool und die Netzwerkinformationen angeben.
+
+
+NOTE: Das Kontingent kann auf Basis der Kapazitätsanforderungen festgelegt werden, da die Volume-Performance sich nicht auf den Replizierungsprozess auswirkt. Bei einem Disaster Recovery-Failover muss die Quote an die tatsächlichen Performance-Anforderungen angepasst werden.
+
+
+NOTE: Wenn der Kapazitäts-Pool mit manueller QoS konfiguriert wurde, können Sie den Durchsatz zusätzlich zu den Kapazitätsanforderungen konfigurieren. Wie oben angegeben können Sie den Durchsatz auch im normalen Betrieb mit niedrigem Wert konfigurieren und im Falle eines Disaster Recovery Failover diesen erhöhen.
+
+image:saphana-dr-anf_image10.png["Fehler: Fehlendes Grafikbild"]
+
+Auf der Registerkarte Protokoll müssen Sie das Netzwerkprotokoll, den Netzwerkpfad und die Exportrichtlinie angeben.
+
+
+NOTE: Das Protokoll muss dasselbe sein wie das für das Quell-Volume verwendete Protokoll.
+
+image:saphana-dr-anf_image11.png["Fehler: Fehlendes Grafikbild"]
+
+Auf der Registerkarte „Replikation“ müssen Sie die Quell-Volume-ID und den Replizierungsplan konfigurieren. Für die Datenreplizierung mit Daten-Volumes haben wir einen täglichen Replizierungszeitplan für unsere Einrichtung im Labor konfiguriert.
+
+
+NOTE: Die Quell-Volume-ID kann vom Bildschirm Eigenschaften des Quell-Volumes kopiert werden.
+
+image:saphana-dr-anf_image12.png["Fehler: Fehlendes Grafikbild"]
+
+Als letzter Schritt müssen Sie die Replikation am Quell-Volume durch Angabe der ID des Ziel-Volume autorisieren.
+
+
+NOTE: Sie können die Ziel-Volume-ID vom Bildschirm Eigenschaften des Ziel-Volumes kopieren.
+
+image:saphana-dr-anf_image13.png["Fehler: Fehlendes Grafikbild"]
+
+Für das freigegebene HANA und das Protokoll-Backup-Volume müssen dieselben Schritte durchgeführt werden.
+
+link:saphana-dr-anf_monitoring_anf_cross-region_replication.html["Weiter: Überwachung der standortübergreifenden ANF-Replikation."]

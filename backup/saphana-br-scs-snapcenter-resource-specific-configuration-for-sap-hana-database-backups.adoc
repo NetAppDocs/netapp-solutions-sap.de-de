@@ -1,0 +1,402 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html 
+keywords: resource-specific, backup user, hdbuserstore, off-site backup storage, automatic discovery, fibre channel SAN 
+summary: In diesem Abschnitt werden die Konfigurationsschritte für zwei Beispielkonfigurationen SS2 und SS1 beschrieben. 
+---
+= Ressourcenspezifische SnapCenter Konfiguration für SAP HANA Datenbank-Backups
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-br-scs-snapcenter-initial-configuration.html["Früher: SnapCenter Erstkonfiguration"]
+
+In diesem Abschnitt werden die Konfigurationsschritte für zwei Beispielkonfigurationen beschrieben.
+
+* *SS2.*
++
+** SAP HANA MDC, ein mandantenfähiges Single-Host-System mit NFS für Storage-Zugriff
+** Die Ressource wird manuell in SnapCenter konfiguriert.
+** Die Ressource ist so konfiguriert, lokale Snapshot Backups zu erstellen und mithilfe eines wöchentlichen dateibasierten Backups die Blockintegritätsprüfungen für die SAP HANA Datenbank durchzuführen.
+
+
+* *SS1.*
++
+** SAP HANA MDC, ein mandantenfähiges Single-Host-System mit NFS für Storage-Zugriff
+** Die Ressource wird mit SnapCenter automatisch erkannt.
+** Die Ressource ist so konfiguriert, dass sie lokale Snapshot Backups erstellt, mithilfe von SnapVault auf einen externen Backup-Storage repliziert und mithilfe eines wöchentlichen dateibasierten Backups die Blockintegritätsprüfungen für die SAP HANA Datenbank durchführt.
+
+
+
+
+Die Unterschiede zwischen einem SAN-Attached Storage, einem Single-Container oder einem System mit mehreren Hosts werden in den entsprechenden Konfigurations- oder Workflow-Schritten wiedergegeben.
+
+
+
+== SAP HANA Backup-Benutzer und hdbuserstore-Konfiguration
+
+NetApp empfiehlt, einen dedizierten Datenbankbenutzer in der HANA Datenbank zu konfigurieren, um Backup-Vorgänge mit SnapCenter auszuführen. Im zweiten Schritt wird für diesen Backup-Benutzer ein SAP HANA User Store Key konfiguriert und dieser User Store Key wird bei der Konfiguration des SnapCenter SAP HANA Plug-ins verwendet.
+
+Die folgende Abbildung zeigt das SAP HANA Studio, über das der Backup-Benutzer erstellt werden kann.
+
+
+NOTE: Die erforderlichen Berechtigungen wurden mit HANA 2.0 SPS5 Version geändert: Backup-Admin, Lesevorgang für den Katalog, Datenbank-Backup-Administrator und Datenbank-Recovery-Operator. Für ältere Versionen reichen der Backup-Administrator und der Lesevorgang des Katalogs aus.
+
+
+NOTE: Bei einem SAP HANA MDC-System muss der Benutzer in der Systemdatenbank erstellt werden, da alle Backup-Befehle für das System und die Mandantendatenbanken über die Systemdatenbank ausgeführt werden.
+
+image:saphana-br-scs-image53.png["Fehler: Fehlendes Grafikbild"]
+
+Beim HANA-Plug-in-Host, auf dem das SAP HANA-Plug-in und der SAP-hdbsql-Client installiert sind, muss ein Benutzerspeicherschlüssel konfiguriert werden.
+
+
+
+=== Userstore-Konfiguration auf dem SnapCenter-Server, der als zentraler HANA-Plug-in-Host verwendet wird
+
+Wenn das SAP HANA-Plug-in und der SAP-hdbsql-Client unter Windows installiert sind, führt der lokale Systembenutzer die hdbsql-Befehle aus und wird standardmäßig in der Ressourcenkonfiguration konfiguriert. Da es sich bei dem Systembenutzer nicht um einen Anmeldesbenutzer handelt, muss die Konfiguration des Benutzerspeichers mit einem anderen Benutzer und mit der ausgeführt werden `-u <User>` Option.
+
+....
+hdbuserstore.exe -u SYSTEM set <key> <host>:<port> <database user> <password>
+....
+
+NOTE: Die SAP HANA hdbclient-Software muss zuerst auf dem Windows-Host installiert sein.
+
+
+
+=== Konfiguration des Benutzerspeichers auf einem separaten Linux-Host, der als zentraler HANA-Plug-in-Host verwendet wird
+
+Wenn das SAP HANA-Plug-in und der SAP-hdbsql-Client auf einem separaten Linux-Host installiert sind, wird der folgende Befehl für die User-Store-Konfiguration verwendet, wobei der Benutzer in der Ressourcenkonfiguration definiert ist:
+
+....
+hdbuserstore set <key> <host>:<port> <database user> <password>
+....
+
+NOTE: Die SAP HANA hdbclient-Software muss zuerst auf dem Linux-Host installiert sein.
+
+
+
+=== UserStore-Konfiguration auf dem HANA-Datenbank-Host
+
+Wenn das SAP HANA-Plug-in auf dem HANA-Datenbank-Host bereitgestellt wird, wird der folgende Befehl für die User Store-Konfiguration mit dem verwendet `<sid>adm` Benutzer:
+
+....
+hdbuserstore set <key> <host>:<port> <database user> <password>
+....
+
+NOTE: SnapCenter verwendet das `<sid>adm` Benutzer zur Kommunikation mit der HANA-Datenbank. Daher muss der User Store Key mit dem <`sid>adm` Benutzer auf dem Datenbank-Host konfiguriert werden.
+
+
+NOTE: In der Regel wird die SAP HANA hdbsql-Client-Software zusammen mit der Datenbank-Server-Installation installiert. Wenn dies nicht der Fall ist, muss der hdbclient zuerst installiert werden.
+
+
+
+=== Konfiguration des Benutzerspeichers abhängig von der HANA Systemarchitektur
+
+In einer SAP HANA MDC-Einzelmandant-Einrichtung, Port `3<instanceNo>13` Ist der Standard-Port für den SQL-Zugriff auf die Systemdatenbank und muss in der hdbuserstore-Konfiguration verwendet werden.
+
+Für eine SAP HANA-Installation mit einem Container ist Port erforderlich `3<instanceNo>15` Ist der Standard-Port für den SQL-Zugriff auf den Indexserver und muss in der hdbuserstore-Konfiguration verwendet werden.
+
+Für eine SAP HANA Einrichtung mit mehreren Hosts müssen die Benutzerspeicherschlüssel für alle Hosts konfiguriert werden. SnapCenter versucht mit jedem der angegebenen Schlüssel eine Verbindung zur Datenbank herzustellen und kann somit unabhängig vom Failover eines SAP HANA Service zu einem anderen Host funktionieren.
+
+
+
+=== Anwendungskonfigurationsbeispiele
+
+Im Lab-Setup wird eine gemischte SAP HANA Plug-in-Implementierung verwendet. Das HANA-Plug-in wird für einige HANA-Systeme auf dem SnapCenter-Server installiert und für andere Systeme auf den einzelnen HANA-Datenbankservern implementiert.
+
+*SAP HANA System SS1, MDC Einzelmieter, Instanz 00*
+
+Das HANA-Plug-in wurde auf dem Datenbank-Host implementiert. Daher muss der Schlüssel auf dem Datenbank-Host mit dem Benutzer ss1adm konfiguriert werden.
+
+....
+hana-1:/ # su - ss1adm
+ss1adm@hana-1:/usr/sap/SS1/HDB00>
+ss1adm@hana-1:/usr/sap/SS1/HDB00>
+ss1adm@hana-1:/usr/sap/SS1/HDB00> hdbuserstore set SS1KEY hana-1:30013 SnapCenter password
+ss1adm@hana-1:/usr/sap/SS1/HDB00> hdbuserstore list
+DATA FILE       : /usr/sap/SS1/home/.hdb/hana-1/SSFS_HDB.DAT
+KEY FILE        : /usr/sap/SS1/home/.hdb/hana-1/SSFS_HDB.KEY
+KEY SS1KEY
+  ENV : hana-1:30013
+  USER: SnapCenter
+KEY SS1SAPDBCTRLSS1
+  ENV : hana-1:30015
+  USER: SAPDBCTRL
+ss1adm@hana-1:/usr/sap/SS1/HDB00>
+....
+* SAP HANA System MS1, Multihost MDC Einzelmandant, Instanz 00*
+
+Für HANA sind mehrere Hostsysteme ein zentraler Plug-in-Host erforderlich, in unserem Setup haben wir den SnapCenter Server verwendet. Daher muss die Konfiguration des Benutzerspeichers auf dem SnapCenter-Server ausgeführt werden.
+
+....
+hdbuserstore.exe -u SYSTEM set MS1KEYHOST1 hana-4:30013 SNAPCENTER password
+hdbuserstore.exe -u SYSTEM set MS1KEYHOST2 hana-5:30013 SNAPCENTER password
+hdbuserstore.exe -u SYSTEM set MS1KEYHOST3 hana-6:30013 SNAPCENTER password
+C:\Program Files\sap\hdbclient>hdbuserstore.exe -u SYSTEM list
+DATA FILE       : C:\ProgramData\.hdb\SNAPCENTER-43\S-1-5-18\SSFS_HDB.DAT
+KEY FILE        : C:\ProgramData\.hdb\SNAPCENTER-43\S-1-5-18\SSFS_HDB.KEY
+KEY MS1KEYHOST1
+  ENV : hana-4:30013
+  USER: SNAPCENTER
+KEY MS1KEYHOST2
+  ENV : hana-5:30013
+  USER: SNAPCENTER
+KEY MS1KEYHOST3
+  ENV : hana-6:30013
+  USER: SNAPCENTER
+KEY SS2KEY
+  ENV : hana-3:30013
+  USER: SNAPCENTER
+C:\Program Files\sap\hdbclient>
+....
+
+
+== Konfiguration der Datensicherung auf externen Backup-Storage
+
+Die Konfiguration der Datensicherungsbeziehung sowie der anfängliche Datentransfer müssen ausgeführt werden, bevor Replizierungs-Updates von SnapCenter gemanagt werden können.
+
+Die folgende Abbildung zeigt die konfigurierte Sicherungsbeziehung für das SAP HANA-System SS1. Mit unserem Beispiel das Quellvolumen `SS1_data_mnt00001` Bei der SVM `hana-primary` Wird auf die SVM repliziert `hana-backup` Und das Ziel-Volume `SS1_data_mnt00001_dest`.
+
+
+NOTE: Der Zeitplan für die Beziehung muss auf „Keine“ gesetzt werden, da SnapCenter das SnapVault Update auslöst.
+
+image:saphana-br-scs-image54.png["Fehler: Fehlendes Grafikbild"]
+
+Die folgende Abbildung zeigt die Sicherungsrichtlinie. Die Sicherungsrichtlinie, die für die Schutzbeziehung verwendet wird, definiert das SnapMirror-Label und die Aufbewahrung von Backups im sekundären Storage. In unserem Beispiel ist das verwendete Etikett `Daily`, Und die Aufbewahrung ist auf 5 eingestellt.
+
+
+NOTE: Das SnapMirror-Label in der erstellten Richtlinie muss mit der in der Konfiguration der SnapCenter-Richtlinie definierten Beschriftung übereinstimmen. Weitere Informationen finden Sie unter „ for daily Snapshot backups with SnapVault replication.“
+
+
+NOTE: Die Aufbewahrung für Backups im externen Backup-Storage wird in der Richtlinie definiert und durch ONTAP gesteuert.
+
+image:saphana-br-scs-image55.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+== Manuelle Konfiguration der HANA-Ressourcen
+
+In diesem Abschnitt wird die manuelle Konfiguration der SAP HANA-Ressourcen SS2 und MS1 beschrieben.
+
+* SS2 ist ein MDC-Einzelmandant-System mit einem Host
+* MS1 ist ein MDC-Einzelmandant-System mit mehreren Hosts.
++
+.. Wählen Sie auf der Registerkarte Ressourcen SAP HANA aus, und klicken Sie auf Add SAP HANA Database.
+.. Geben Sie die Informationen zum Konfigurieren der SAP HANA-Datenbank ein, und klicken Sie auf Weiter.
++
+Wählen Sie in unserem Beispiel den Ressourcentyp Multitenant Database Container aus.
+
++
+
+NOTE: Für ein HANA-System mit einem einzelnen Container muss der Ressourcentyp Single Container ausgewählt werden. Alle anderen Konfigurationsschritte sind identisch.
+
++
+Für unser SAP HANA System ist SID SS2.
+
++
+Der HANA-Plug-in-Host in unserem Beispiel ist der SnapCenter-Server.
+
++
+Der hdbuserstore-Schlüssel muss mit dem Schlüssel übereinstimmen, der für die HANA-Datenbank SS2 konfiguriert wurde. In unserem Beispiel ist es SS2KEY.
+
++
+image:saphana-br-scs-image56.png["Fehler: Fehlendes Grafikbild"]
+
++
+
+NOTE: Bei einem SAP HANA-System mit mehreren Hosts müssen die hdbuserstore-Schlüssel für alle Hosts enthalten sein, wie in der folgenden Abbildung dargestellt. SnapCenter versucht, eine Verbindung mit der ersten Taste in der Liste herzustellen, und setzt den anderen Fall fort, falls der erste Schlüssel nicht funktioniert. Dies ist zur Unterstützung von HANA Failover in einem System mit mehreren Hosts mit Worker und Standby-Hosts erforderlich.
+
++
+image:saphana-br-scs-image57.png["Fehler: Fehlendes Grafikbild"]
+
+.. Wählen Sie die erforderlichen Daten für das Storage-System (SVM) und den Volume-Namen aus.
++
+image:saphana-br-scs-image58.png["Fehler: Fehlendes Grafikbild"]
+
++
+
+NOTE: Für eine Fibre-Channel-SAN-Konfiguration muss auch die LUN ausgewählt werden.
+
++
+
+NOTE: Bei einem SAP HANA-System mit mehreren Hosts müssen alle Datenvolumen des SAP HANA Systems ausgewählt werden, wie in der folgenden Abbildung dargestellt.
+
++
+image:saphana-br-scs-image59.png["Fehler: Fehlendes Grafikbild"]
+
++
+Der Übersichtsbildschirm der Ressourcenkonfiguration wird angezeigt.
+
+.. Klicken Sie auf Fertig stellen, um die SAP HANA-Datenbank hinzuzufügen.
++
+image:saphana-br-scs-image60.png["Fehler: Fehlendes Grafikbild"]
+
+.. Wenn die Ressourcenkonfiguration abgeschlossen ist, führen Sie die Konfiguration des Ressourcenschutzes durch, wie im Abschnitt „ beschrieben protection configuration.“
+
+
+
+
+
+
+== Automatische Erkennung von HANA-Datenbanken
+
+In diesem Abschnitt wird die automatische Erkennung der SAP HANA-Ressource SS1 (Single-Host-MDC-Einzelmandant-System mit NFS) beschrieben. Alle beschriebenen Schritte sind identisch mit einem HANA-Einzelcontainer, HANA-MDC-Systemen mehrerer Mandanten und einem HANA-System, das Fibre Channel-SAN verwendet.
+
+
+NOTE: Für das SAP HANA Plug-in ist Java 64-Bit Version 1.8 erforderlich. Java muss auf dem Host installiert sein, bevor das SAP HANA Plug-in bereitgestellt wird.
+
+. Klicken Sie auf der Registerkarte Host auf Hinzufügen.
+. Geben Sie Host-Informationen an, und wählen Sie das zu installierende SAP HANA-Plug-in aus. Klicken Sie Auf Senden.
++
+image:saphana-br-scs-image61.png["Fehler: Fehlendes Grafikbild"]
+
+. Bestätigen Sie den Fingerabdruck.
++
+image:saphana-br-scs-image62.png["Fehler: Fehlendes Grafikbild"]
+
++
+Die Installation des HANA-Plug-ins und des Linux-Plug-ins wird automatisch gestartet. Nach Abschluss der Installation wird in der Statusspalte des Hosts die Ausführung angezeigt. Der Bildschirm zeigt auch, dass das Linux-Plug-in zusammen mit dem HANA-Plug-in installiert wird.
+
++
+image:saphana-br-scs-image63.png["Fehler: Fehlendes Grafikbild"]
+
++
+Nach der Plug-in-Installation startet der automatische Erkennungsvorgang der HANA-Ressource automatisch. Im Bildschirm Ressourcen wird eine neue Ressource erstellt, die mit dem roten Vorhängeschloss-Symbol als gesperrt markiert ist.
+
+. Wählen Sie und klicken Sie auf die Ressource, um mit der Konfiguration fortzufahren.
++
+
+NOTE: Sie können den automatischen Erkennungsvorgang auch manuell im Bildschirm Ressourcen auslösen, indem Sie auf Ressourcen aktualisieren klicken.
+
++
+image:saphana-br-scs-image64.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie den UserStore-Schlüssel für die HANA-Datenbank an.
++
+image:saphana-br-scs-image65.png["Fehler: Fehlendes Grafikbild"]
+
++
+Der zweite Ebene-Prozess der automatischen Bestandsaufnahme beginnt, bei dem Mandantendaten und Storage-Platzbedarf erfasst werden.
+
+. Klicken Sie auf Details, um die Konfigurationsinformationen der HANA-Ressource in der Ansicht der Ressourcentopologie anzuzeigen.
++
+image:saphana-br-scs-image66.png["Fehler: Fehlendes Grafikbild"]
+
++
+image:saphana-br-scs-image67.png["Fehler: Fehlendes Grafikbild"]
+
++
+Wenn die Ressourcenkonfiguration abgeschlossen ist, muss die Konfiguration des Ressourcenschutzes wie im folgenden Abschnitt beschrieben ausgeführt werden.
+
+
+
+
+
+== Konfiguration für Ressourcenschutz
+
+In diesem Abschnitt wird die Konfiguration für den Ressourcenschutz beschrieben. Die Ressourcenschutzkonfiguration ist dieselbe, unabhängig davon, ob die Ressource automatisch erkannt oder manuell konfiguriert wurde. Und ist für alle HANA-Architekturen, einzelne oder mehrere Hosts, einzelnen Container oder MDC-Systeme identisch.
+
+. Doppelklicken Sie auf der Registerkarte Ressourcen auf die Ressource.
+. Konfigurieren Sie ein benutzerdefiniertes Namensformat für die Snapshot Kopie.
++
+
+NOTE: NetApp empfiehlt den Einsatz einer benutzerdefinierten Snapshot Kopie, um schnell ermitteln zu können, mit welcher Richtlinie und welche Zeitplantypen Backups erstellt wurden. Durch Hinzufügen des Zeitplantyps zum Namen der Snapshot Kopie können Sie zwischen geplanten und On-Demand-Backups unterscheiden. Der `schedule name` String für On-Demand-Backups ist leer, während geplante Backups den String enthalten `Hourly`,  `Daily`, `or Weekly`.
+
++
+In der Konfiguration der folgenden Abbildung haben die Namen von Backup- und Snapshot-Kopien das folgende Format:
+
++
+** Stündliches Backup geplant:  `SnapCenter_LocalSnap_Hourly_<time_stamp>`
+** Täglich geplantes Backup:  `SnapCenter_LocalSnapAndSnapVault_Daily_<time_stamp>`
+** Stündliches On-Demand-Backup:  `SnapCenter_LocalSnap_<time_stamp>`
+** Tägliches On-Demand Backup:  `SnapCenter_LocalSnapAndSnapVault_<time_stamp>`
++
+
+NOTE: Obwohl eine Aufbewahrung für On-Demand-Backups in der Richtlinienkonfiguration definiert wird, wird die allgemeine Ordnung und Sauberkeit nur dann ausgeführt, wenn ein weiteres On-Demand-Backup ausgeführt wird. Daher müssen On-Demand-Backups in der Regel manuell in SnapCenter gelöscht werden, um sicherzustellen, dass diese Backups auch im SAP HANA Backup-Katalog gelöscht werden und dass die allgemeine Ordnung der Protokollsicherung nicht auf einem alten On-Demand-Backup basiert.
+
++
+image:saphana-br-scs-image68.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+. Auf der Seite „Anwendungseinstellungen“ müssen keine spezifischen Einstellungen vorgenommen werden. Klicken Sie Auf Weiter.
++
+image:saphana-br-scs-image69.png["Fehler: Fehlendes Grafikbild"]
+
+. Wählen Sie die Richtlinien aus, die der Ressource hinzugefügt werden sollen.
++
+image:saphana-br-scs-image70.png["Fehler: Fehlendes Grafikbild"]
+
+. Legen Sie den Zeitplan für die LocalSnap-Richtlinie fest (in diesem Beispiel alle vier Stunden).
++
+image:saphana-br-scs-image71.png["Fehler: Fehlendes Grafikbild"]
+
+. Legen Sie den Zeitplan für die LocalSnapAndSnapVault-Richtlinie fest (in diesem Beispiel einmal pro Tag).
++
+image:saphana-br-scs-image72.png["Fehler: Fehlendes Grafikbild"]
+
+. Legen Sie den Zeitplan für die Richtlinie zur Integritätsprüfung der Blöcke fest (in diesem Beispiel einmal pro Woche).
++
+image:saphana-br-scs-image73.png["Fehler: Fehlendes Grafikbild"]
+
+. Geben Sie Informationen zur E-Mail-Benachrichtigung an.
++
+image:saphana-br-scs-image74.png["Fehler: Fehlendes Grafikbild"]
+
+. Klicken Sie auf der Seite Zusammenfassung auf Fertig stellen.
++
+image:saphana-br-scs-image75.png["Fehler: Fehlendes Grafikbild"]
+
+. On-Demand-Backups können jetzt auf der Topologieseite erstellt werden. Die geplanten Backups werden basierend auf den Konfigurationseinstellungen ausgeführt.
++
+image:saphana-br-scs-image76.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+
+
+== Zusätzliche Konfigurationsschritte für Fibre Channel SAN-Umgebungen
+
+Je nach HANA-Version und HANA-Plug-in-Implementierung sind für Umgebungen, in denen die SAP HANA-Systeme Fibre Channel und das XFS-Dateisystem nutzen, zusätzliche Konfigurationsschritte erforderlich.
+
+
+NOTE: Diese zusätzlichen Konfigurationsschritte sind nur für HANA-Ressourcen erforderlich, die in SnapCenter manuell konfiguriert werden. Außerdem wird es nur für HANA 1.0 und HANA 2.0-Versionen bis SPS2 benötigt.
+
+Wenn der Speicherpunkt für ein HANA Backup von SnapCenter in SAP HANA ausgelöst wird, schreibt SAP HANA als letzter Schritt Snapshot-ID-Dateien für jeden Mandanten und Datenbankservice (z. B. `/hana/data/SID/mnt00001/hdb00001/snapshot_databackup_0_1`). Diese Dateien sind Teil des Daten-Volumes im Storage und sind daher Teil der Storage-Snapshot-Kopie. Diese Datei ist bei der Durchführung einer Recovery in einer Situation, in der das Backup wiederhergestellt wird, obligatorisch. Durch Metadaten-Caching mit dem XFS-Dateisystem auf dem Linux-Host wird die Datei auf der Speicherebene nicht sofort sichtbar. Die standardmäßige XFS-Konfiguration für das Metadaten-Caching beträgt 30 Sekunden.
+
+
+NOTE: Mit HANA 2.0 SPS3 änderte SAP den Schreibvorgang dieser Snapshot ID-Dateien in synchron, sodass es kein Problem ist, Metadaten-Caching zu verwenden.
+
+
+NOTE: Wird bei SnapCenter 4.3 das HANA Plug-in auf dem Datenbank-Host bereitgestellt, führt das Linux Plug-in vor dem Auslösen des Storage-Snapshots einen Dateisystemputz-Vorgang auf dem Host durch. In diesem Fall stellt das Metadaten-Caching keine Probleme dar.
+
+In SnapCenter müssen Sie ein konfigurieren `postquiesce` Befehl, der wartet, bis der XFS-Metadatencache auf die Festplattenebene gespeichert wird.
+
+Die tatsächliche Konfiguration des Metadaten-Caching kann mit folgendem Befehl überprüft werden:
+
+....
+stlrx300s8-2:/ # sysctl -A | grep xfssyncd_centisecs
+fs.xfs.xfssyncd_centisecs = 3000
+....
+NetApp empfiehlt, die Wartezeit auf eine doppelt so hohe Wartezeit von zu verwenden `fs.xfs.xfssyncd_centisecs` Parameter. Da der Standardwert 30 Sekunden beträgt, setzen Sie den Befehl „Sleep“ auf 60 Sekunden.
+
+Wird der SnapCenter-Server als zentraler HANA-Plug-in-Host genutzt, kann eine Batch-Datei verwendet werden. Die Batch-Datei muss folgenden Inhalt haben:
+
+....
+@echo off
+waitfor AnyThing /t 60 2>NUL
+Exit /b 0
+....
+Die Batch-Datei kann z.B. als gespeichert werden `C:\Program Files\NetApp\Wait60Sec.bat`. In der Ressourcenschutzkonfiguration muss die Batch-Datei als Post Quiesce-Befehl hinzugefügt werden.
+
+Wenn ein separater Linux-Host als zentraler HANA-Plug-in-Host verwendet wird, müssen Sie den Befehl konfigurieren `/bin/sleep 60` Als Post-Quiesce-Befehl in der SnapCenter-UI.
+
+Die folgende Abbildung zeigt den Befehl Post Quiesce im Konfigurationsbildschirm für Ressourcenschutz.
+
+image:saphana-br-scs-image77.png["Fehler: Fehlendes Grafikbild"]
+
+link:saphana-br-scs-snapcenter-resource-specific-configuration-for-non-data-volume-backups.html["Als Nächstes: SnapCenter ressourcenspezifische Konfiguration für Backups außerhalb von Datenvolumen."]

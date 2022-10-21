@@ -1,0 +1,65 @@
+---
+sidebar: sidebar 
+permalink: backup/saphana-br-scs-lab-setup-used-for-this-report.html 
+keywords: lab, setup, configuration, 
+summary: Die für diesen technischen Bericht verwendete Lab-Einrichtung umfasst fünf verschiedene SAP HANA-Konfigurationen. 
+---
+= Lab-Einrichtung für diesen Bericht
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana-br-scs-snapcenter-concepts-and-best-practices.html["Früher: SnapCenter Konzepte und Best Practices."]
+
+Die für diesen technischen Bericht verwendete Lab-Einrichtung umfasst fünf verschiedene SAP HANA-Konfigurationen:
+
+* *MS1.*
++
+** SAP HANA MDC-Einzelmandant-System mit mehreren Hosts
+** Management über einen zentralen Plug-in-Host (SnapCenter Server)
+** Verwendet NFS als Storage-Protokoll
+
+
+* *SS1.*
++
+** SAP HANA Single-Host-MDC-Einzelmandant-System
+** Automatisch erkannt mit installiertem HANA-Plug-in auf HANA-Datenbank-Host
+** Verwendet NFS als Storage-Protokoll
+
+
+* *SM1.*
++
+** SAP HANA MDC-Mandantensystem mit einem Host
+** Automatisch erkannt mit installiertem HANA-Plug-in auf HANA-Datenbank-Host
+** Verwendet NFS als Storage-Protokoll
+
+
+* *SS2.*
++
+** SAP HANA Single-Host-MDC-Einzelmandant-System
+** Management über einen zentralen Plug-in-Host (SnapCenter-Server)
+** Verwendet NFS als Storage-Protokoll
+
+
+* *SS3.*
++
+** SAP HANA Single-Host-MDC-Einzelmandant-System
+** Automatisch erkannt mit installiertem HANA-Plug-in auf HANA-Datenbank-Host
+** Verwendet Fibre Channel SAN als Storage-Protokoll
+
+
+
+
+In den folgenden Abschnitten werden die vollständige Konfiguration sowie die Workflows für Backup, Wiederherstellung und Recovery beschrieben. Die Beschreibung behandelt lokale Snapshot Backups sowie die Replizierung auf Backup Storage mit SnapVault. Die Storage Virtual Machines (SVMs) sind `hana-primary` Für den primären Storage und `hana-backup` Für die externe Backup-Speicherung.
+
+Der SnapCenter-Server wird als zentraler HANA-Plug-in-Host für die HANA-Systeme MS1 und SS2 verwendet.
+
+Die folgende Abbildung zeigt die Laboreinrichtung.
+
+image:saphana-br-scs-image21.png["Fehler: Fehlendes Grafikbild"]
+
+link:saphana-br-scs-snapcenter-configuration.html["Als Nächstes: SnapCenter-Konfiguration."]

@@ -1,0 +1,100 @@
+---
+sidebar: sidebar 
+permalink: bp/saphana_aff_fc_architecture.html 
+keywords: FCP, fibre channel, fiber channel, configuration, 
+summary:  
+---
+= Der Netapp Architektur Sind
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana_aff_fc_introduction.html["Früher: TR-4436 - SAP HANA on NetApp AFF Systems with Fibre Channel Protocol."]
+
+SAP HANA Hosts sind über eine redundante FCP-Infrastruktur und Multipathing-Software mit Storage Controllern verbunden. Eine redundante FCP Switch-Infrastruktur ist erforderlich, um eine fehlertolerante SAP HANA Host-zu-Storage-Konnektivität bei Ausfall von Switch oder Host Bus Adapter (HBA) bereitzustellen. Ein entsprechendes Zoning muss am Switch konfiguriert werden, damit alle HANA Hosts die erforderlichen LUNs auf den Storage Controllern erreichen können.
+
+Verschiedene Modelle der AFF Produktfamilie können auf der Storage-Ebene miteinander kombiniert werden, um Wachstum und unterschiedliche Anforderungen an Performance und Kapazität zu ermöglichen. Die maximale Anzahl an SAP HANA-Hosts, die an das Storage-System angeschlossen werden können, sind durch die SAP HANA-Performance-Anforderungen und das Modell des verwendeten NetApp Controllers definiert. Die Anzahl der benötigten Festplatten-Shelfs wird nur von den Kapazitäts- und Performance-Anforderungen der SAP HANA Systeme bestimmt.
+
+Die folgende Abbildung zeigt eine Beispielkonfiguration mit acht SAP HANA-Hosts, die an ein Storage HA-Paar angeschlossen sind.
+
+image:saphana_aff_fc_image2.png["Fehler: Fehlendes Grafikbild"]
+
+Diese Architektur lässt sich in zwei Dimensionen skalieren:
+
+* Indem zusätzliche SAP HANA-Hosts und Storage-Kapazität an den vorhandenen Storage angeschlossen werden, können die Storage-Controller genügend Performance bieten, um die aktuellen SAP HANA-KPIs zu erfüllen
+* Durch Hinzufügen weiterer Storage-Systeme mit zusätzlicher Storage-Kapazität für die zusätzlichen SAP HANA-Hosts
+
+
+Die folgende Abbildung zeigt ein Konfigurationsbeispiel, in dem mehr SAP HANA-Hosts mit den Storage-Controllern verbunden sind. In diesem Beispiel sind mehr Platten-Shelves erforderlich, um die Kapazitäts- und Performance-Anforderungen der 16 SAP HANA-Hosts zu erfüllen. Abhängig von den Anforderungen an den Gesamtdurchsatz müssen die Storage Controller um zusätzliche FC-Verbindungen erweitert werden.
+
+image:saphana_aff_fc_image3.png["Fehler: Fehlendes Grafikbild"]
+
+Unabhängig vom implementierten AFF System lässt sich die SAP HANA Landschaft auch skalieren, indem beliebige zertifizierte Storage-Controller hinzugefügt werden, um die gewünschte Node-Dichte zu erfüllen, wie in der folgenden Abbildung dargestellt.
+
+image:saphana_aff_fc_image4.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+== SAP HANA Backup
+
+Die auf allen NetApp Storage-Controllern vorhandene ONTAP Software bietet einen integrierten Mechanismus zur Sicherung von SAP HANA Datenbanken, ohne die Performance zu beeinträchtigen. Storage-basierte NetApp Snapshot-Backups sind eine vollständig unterstützte und integrierte Backup-Lösung, die für einzelne SAP HANA Container sowie für SAP HANA MDC-Systeme mit einem einzelnen Mandanten oder mehreren Mandanten verfügbar ist.
+
+Storage-basierte Snapshot Backups werden über das NetApp SnapCenter Plug-in für SAP HANA implementiert. Benutzer können auf diese Weise konsistente Storage-basierte Snapshot Backups mithilfe der Schnittstellen erstellen, die nativ von SAP HANA Datenbanken bereitgestellt werden. SnapCenter registriert jedes der Snapshot-Backups im SAP HANA-Backup-Katalog. Backups von SnapCenter sind somit innerhalb von SAP HANA Studio oder im Cockpit sichtbar, wo sie direkt für Restore- und Recovery-Vorgänge selektiert werden können.
+
+Mit der NetApp SnapMirror Technologie können Snapshot Kopien, die auf einem Storage-System erstellt wurden, in ein sekundäres Backup-Storage-System repliziert werden, das über SnapCenter gesteuert wird. Für jedes der Backup-Sätze auf dem primären Storage und auch für die Backup-Sets auf den sekundären Storage-Systemen können somit unterschiedliche Backup-Aufbewahrungsrichtlinien definiert werden. Das SnapCenter Plug-in für SAP HANA managt automatisch die Aufbewahrung von auf Snapshot Kopien basierenden Daten-Backups und Log-Backups, einschließlich der allgemeinen Ordnung des Backup-Katalogs. Das SnapCenter Plug-in für SAP HANA ermöglicht darüber hinaus die Ausführung einer Blockintegritätsprüfung der SAP HANA-Datenbank durch Ausführen eines dateibasierten Backups.
+
+Die Datenbankprotokolle können mithilfe eines NFS-Mount-Speichers direkt auf dem sekundären Storage gesichert werden, wie in der folgenden Abbildung dargestellt.
+
+image:saphana_aff_fc_image5.jpg["Fehler: Fehlendes Grafikbild"]
+
+Storage-basierte Snapshot Backups bieten im Vergleich zu herkömmlichen dateibasierten Backups deutliche Vorteile. Zu diesen Vorteilen zählen unter anderem:
+
+* Schnelleres Backup (einige Minuten)
+* Reduzierte RTO aufgrund einer wesentlich schnelleren Restore-Zeit auf der Storage-Ebene (wenige Minuten) und häufigerer Backups
+* Kein Performance-Abfall des SAP HANA-Datenbankhosts, -Netzwerks oder -Storage während Backup- und Recovery-Vorgängen
+* Platzsparende und bandbreiteneffiziente Replizierung auf Basis von Blockänderungen auf sekundärem Storage
+
+
+Detaillierte Informationen zur Backup- und Recovery-Lösung für SAP HANA finden Sie unter https://www.netapp.com/us/media/tr-4614.pdf["TR-4614: SAP HANA Backup and Recovery with SnapCenter"^].
+
+
+
+== Disaster Recovery für SAP HANA
+
+Das Disaster Recovery für SAP HANA ist entweder auf der Datenbankebene mithilfe von SAP HANA-Systemreplizierung oder auf der Storage-Ebene mithilfe von Storage-Replizierungstechnologien möglich. Der folgende Abschnitt bietet einen Überblick über Disaster-Recovery-Lösungen basierend auf der Storage-Replizierung.
+
+Detaillierte Informationen zu den Disaster-Recovery-Lösungen für SAP HANA finden Sie unter https://www.netapp.com/pdf.html?item=/media/8584-tr4646pdf.pdf["TR-4646: SAP HANA Disaster Recovery with Storage Replication"^].
+
+
+
+=== Storage-Replizierung basierend auf SnapMirror
+
+Die folgende Abbildung zeigt eine Disaster Recovery-Lösung für drei Standorte mit synchroner SnapMirror Replizierung am lokalen DR-Datacenter und asynchroner SnapMirror Replizierung der Daten in das Remote-DR-Datacenter.
+
+Die Datenreplizierung mit synchronem SnapMirror sorgt für einen RPO von null. Die Entfernung zwischen dem primären und dem lokalen DR-Datacenter ist auf etwa 100 km beschränkt.
+
+Der Schutz vor Ausfällen des primären und lokalen DR-Standorts wird durch Replizieren der Daten zu einem dritten Remote-DR-Datacenter mithilfe von asynchronem SnapMirror durchgeführt. Der RPO hängt von der Häufigkeit der Replizierungs-Updates und der Übertragungsgeschwindigkeit ab. Theoretisch ist die Entfernung unbegrenzt, aber die Obergrenze hängt von der zu übertragenden Datenmenge und der zwischen den Rechenzentren verfügbaren Verbindung ab. Typische RPO-Werte liegen im Bereich von 30 Minuten bis mehreren Stunden.
+
+Das RTO für beide Replizierungsmethoden hängt in erster Linie von der Zeit ab, die zum Starten der HANA-Datenbank am DR-Standort und zum Laden der Daten in den Speicher erforderlich ist. Mit der Annahme, dass die Daten mit einem Durchsatz von 1000 MBit/s gelesen werden, dass das Laden von 1 TB Daten ungefähr 18 Minuten dauert.
+
+Die Server an den DR-Standorten können im normalen Betrieb als Entwicklungs- und Testsysteme genutzt werden. Bei einem Ausfall müssten die Entwicklungs- und Testsysteme heruntergefahren und als DR-Produktionsserver gestartet werden.
+
+Beide Replizierungsmethoden ermöglichen die Durchführung von DR-Workflow-Tests ohne Auswirkungen auf RPO und RTO. FlexClone Volumes werden auf dem Storage erstellt und an die DR-Testserver angeschlossen.
+
+image:saphana_aff_fc_image6.png["Fehler: Fehlendes Grafikbild"]
+
+Die synchrone Replizierung bietet den StrictSync-Modus. Wenn der Schreibvorgang auf den sekundären Storage aus irgendeinem Grund nicht abgeschlossen wird, fällt der Applikations-I/O aus. Dadurch wird sichergestellt, dass die primären und sekundären Storage-Systeme identisch sind. Der Applikations-I/O zum primären Volume wird erst wieder fortgesetzt, nachdem die SnapMirror-Beziehung zum InSync-Status zurückkehrt. Falls der Primär-Storage ausfällt, kann der Applikations-I/O nach dem Failover ohne Datenverlust auf dem sekundären Storage fortgesetzt werden. Im StrictSync-Modus ist der RPO immer Null.
+
+
+
+=== Storage-Replizierung basierend auf NetApp MetroCluster
+
+Die folgende Abbildung bietet einen allgemeinen Überblick über die Lösung. Das Storage-Cluster an jedem Standort bietet lokale Hochverfügbarkeit und wird für den Produktions-Workload verwendet. Die Daten aller Standorte werden synchron zum anderen Standort repliziert und sind im Fall eines Disaster Failovers verfügbar.
+
+image:saphana_aff_fc_image7.png["Fehler: Fehlendes Grafikbild"]
+
+link:saphana_aff_fc_storage_sizing.html["Als Nächstes: Storage-Sizing."]

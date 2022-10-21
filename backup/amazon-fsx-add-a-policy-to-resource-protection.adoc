@@ -1,0 +1,26 @@
+---
+sidebar: sidebar 
+permalink: backup/amazon-fsx-add-a-policy-to-resource-protection.html 
+keywords: policy, resource, protection, hana, daily schedule 
+summary: In diesem Abschnitt wird beschrieben, wie eine Richtlinie zum Ressourcenschutz hinzugefügt wird. 
+---
+= Fügen Sie eine Richtlinie zum Ressourcenschutz hinzu
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:amazon-fsx-create-a-new-snapcenter-policy-for-backup-replication.html["Früher: Erstellen Sie eine neue SnapCenter-Richtlinie für Backup-Replikation."]
+
+Sie müssen die neue Richtlinie der HANA-Ressourcenschutzkonfiguration hinzufügen, wie in der folgenden Abbildung dargestellt.
+
+image:amazon-fsx-image86.png["Fehler: Fehlendes Grafikbild"]
+
+Ein täglicher Zeitplan wird in unserem Setup festgelegt.
+
+image:amazon-fsx-image87.png["Fehler: Fehlendes Grafikbild"]
+
+link:amazon-fsx-create-a-backup-with-replication.html["Anschließend: Erstellen Sie ein Backup mit Replikation."]

@@ -1,0 +1,57 @@
+---
+settings:
+  name: NetApp Solutions SAP
+  internal:
+    pdf_enabled: true
+  prod:
+    pdf_enabled: true
+    harmony_enabled: false
+  langs: de-de,us-en,ja-jp,zh-cn,zh-tw,ko-kr,fr-fr
+sidebar:
+  entries:
+  - title: SAP Lösungen
+    url: "/index.html"
+  - section: bp
+  - section: backup
+  - section: lifecycle
+  - section: briefs
+  - title: FlexPod Lösungen für SAP
+    url: https://docs.netapp.com/us-en/flexpod/ent-db/index.html
+  - title: NetApp Lösungen
+    url: https://docs.netapp.com/us-en/netapp-solutions/
+  - title: Rechtliche Hinweise
+    url: "/reference_legal_notices.html"
+homepage:
+  tiles:
+  - title: Best Practices Für Die Konfiguration
+    links:
+    - title: Videos Demos
+      url: sap-bp-videos.html
+    - title: Blogs
+      url: sap-bp-blogs.html
+    - title: Tools
+      url: sap-bp-tools.html
+  - title: Backup, Restore und Disaster Recovery
+    links:
+    - title: Videos Demos
+      url: sap-dr-videos.html
+    - title: Blogs
+      url: sap-dr-blogs.html
+    - title: Tools
+      url: sap-dr-tools.html
+  - title: Lifecycle Management
+    links:
+    - title: Videos Demos
+      url: sap-lcm-videos.html
+    - title: Blogs
+      url: sap-lcm-blogs.html
+    - title: Tools
+      url: sap-lcm-tools.html
+  - title: Alle SAP-Lösungen
+    links:
+    - title: Was ist neu
+      url: sap-whatsnew.html
+    - title: Videos Demos
+      url: sap-videos.html
+    - title: Blogs
+      url: sap-blogs.html

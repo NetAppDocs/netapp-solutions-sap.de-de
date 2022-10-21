@@ -1,0 +1,221 @@
+---
+sidebar: sidebar 
+permalink: bp/saphana_fas_fc_storage_sizing.html 
+keywords: performance, considerations, hard, disk, solid, state, drives, mixed, workloads, capacity, configuration, storage, sizing 
+summary: Der folgende Abschnitt bietet einen Überblick über die Performance- und Kapazitätsüberlegungen für die Dimensionierung eines Storage-Systems für SAP HANA. 
+---
+= Storage-Dimensionierung
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:saphana_fas_fc_architecture.html["Früher: Architektur."]
+
+Der folgende Abschnitt bietet einen Überblick über die Performance- und Kapazitätsüberlegungen für die Dimensionierung eines Storage-Systems für SAP HANA.
+
+
+NOTE: Wenden Sie sich an Ihren Vertriebsmitarbeiter von NetApp oder einen NetApp Partner, um den Prozess der Storage-Größenbemessung zu unterstützen und eine passende Storage-Umgebung zu erstellen.
+
+
+
+== Überlegungen zur Performance
+
+SAP hat eine statische Reihe von Storage-KPIs definiert. Diese KPIs sind für alle produktiven SAP HANA-Umgebungen gültig, unabhängig von der Speichergröße der Datenbank-Hosts und der Anwendungen, die die SAP HANA-Datenbank nutzen. Diese KPIs gelten für Single-Host-, mehrere Hosts-, Business Suite on HANA-, Business Warehouse on HANA-, S/4HANA- und BW/4HANA-Umgebungen. Daher hängt der aktuelle Ansatz zur Performance-Dimensionierung nur von der Anzahl aktiver SAP HANA-Hosts ab, die an das Storage-System angeschlossen sind.
+
+
+NOTE: Storage-Performance-KPIs sind nur für produktive SAP HANA Systeme erforderlich.
+
+SAP liefert ein Performance-Testtool, das zur Validierung der Storage-Performance für an den Storage angeschlossene aktive SAP HANA Hosts verwendet werden muss.
+
+NetApp hat die maximale Anzahl an SAP HANA Hosts getestet und vordefiniert, die an ein bestimmtes Storage-Modell angeschlossen werden können, während gleichzeitig die erforderlichen Storage-KPIs von SAP für produktionsbasierte SAP HANA Systeme erfüllt werden.
+
+
+NOTE: Die Storage Controller der zertifizierten FAS Produktfamilie können auch für SAP HANA mit anderen Festplattentypen oder Back-End-Lösungen verwendet werden, sofern sie von NetApp unterstützt werden und die Performance-KPIs von SAP HANA TDI erfüllen. Beispiele dafür sind NetApp Storage Encryption (NSE) und NetApp FlexArray Technologien.
+
+In diesem Dokument wird die Festplattengröße für SAS-Festplatten und Solid-State-Laufwerke beschrieben.
+
+
+
+=== Festplatten
+
+Um die Storage-Performance-KPIs von SAP zu erfüllen, sind mindestens 10 Datenfestplatten (SAS mit 10.000 U/min) pro SAP HANA-Node erforderlich.
+
+
+NOTE: Diese Berechnung erfolgt unabhängig vom verwendeten Storage Controller und Platten-Shelf.
+
+
+
+=== Solid State Drives
+
+Bei Solid State-Laufwerken (SSDs) wird die Anzahl der Datenfestplatten durch den Durchsatz der SAS-Verbindung von den Storage-Controllern zum SSD-Shelf bestimmt.
+
+Mit dem SAP Performance-Testtool wurde die maximale Anzahl an SAP HANA Hosts ermittelt, die in einem Platten-Shelf ausgeführt werden können und die Mindestanzahl der pro SAP HANA Host benötigten SSDs erforderlich ist.
+
+* Das 12-GB-SAS-Festplatten-Shelf (DS224C) mit 24 SSDs unterstützt bis zu 14 SAP HANA-Hosts, wenn das Festplatten-Shelf mit 12 GB verbunden ist.
+* Das 6 Gbit SAS-Platten-Shelf (DS2246) mit 24 SSDs unterstützt bis zu 4 SAP HANA Hosts.
+
+
+Die SSDs und SAP HANA-Hosts müssen auf beide Storage-Controller verteilt sein.
+
+In der folgenden Tabelle ist die unterstützte Anzahl von SAP HANA-Hosts pro Festplatten-Shelf zusammengefasst.
+
+|===
+|  | 6-Gbit-SAS-Shelfs (DS2246) mit voller Betriebslast 24 SSDs | 12-GB-SAS-Shelfs (DS224C) mit 24 SSDs sind voll beladen 
+
+
+| Maximale Anzahl von SAP HANA-Hosts pro Festplatten-Shelf | 4 | 14 
+|===
+
+NOTE: Diese Berechnung erfolgt unabhängig vom eingesetzten Storage Controller. Durch das Hinzufügen weiterer Platten-Shelves wird nicht die maximale Anzahl von SAP HANA-Hosts erhöht, die ein Storage-Controller unterstützen kann.
+
+
+
+== Heterogenen Workloads
+
+SAP HANA und andere Applikations-Workloads werden auf demselben Storage Controller oder im selben Storage-Aggregat unterstützt. Es ist jedoch eine NetApp Best Practice, SAP HANA-Workloads von allen anderen Applikations-Workloads zu trennen.
+
+SAP HANA-Workloads und andere Applikations-Workloads können entweder auf demselben Storage-Controller oder demselben Aggregat implementiert werden. Ist dies der Fall, müssen Sie sicherstellen, dass für SAP HANA in der Umgebung mit heterogenen Workloads immer genug Performance verfügbar ist. NetApp empfiehlt zudem, Parameter der Quality of Service (QoS) zu verwenden, um die Auswirkungen anderer Applikationen auf SAP HANA Applikationen zu regulieren.
+
+Mit dem SAP HCMT-Testtool muss überprüft werden, ob weitere SAP HANA Hosts auf einem Storage Controller ausgeführt werden können, der bereits für andere Workloads verwendet wird. SAP Applikations-Server können jedoch sicher auf demselben Storage-Controller platziert und aggregiert werden wie die SAP HANA Datenbanken.
+
+
+
+== Überlegungen zur Kapazität
+
+Eine detaillierte Beschreibung der Kapazitätsanforderungen für SAP HANA ist im https://launchpad.support.sap.com/#/notes/1900823["SAP-Hinweis 1900823"^] Whitepaper:
+
+
+NOTE: Das Kapazitätsdimensionieren der gesamten SAP Landschaft mit mehreren SAP HANA Systemen muss mithilfe von SAP HANA Storage-Größenanpassungs-Tools von NetApp ermittelt werden. Wenden Sie sich an NetApp oder Ihren Ansprechpartner bei NetApp Partnern, um den Prozess der Storage-Größenbemessung für eine ausreichend dimensionierte Storage-Umgebung zu validieren.
+
+
+
+== Konfiguration des Performance-Testtool
+
+Ab SAP HANA 1.0 SPS10 führte SAP Parameter ein, um das I/O-Verhalten anzupassen und die Datenbank für das verwendete Datei- und Speichersystem zu optimieren. Diese Parameter müssen auch für das Performance-Test-Tool aus SAP (fsperf) gesetzt werden, wenn die Speicherleistung mit dem SAP-Testwerkzeug getestet wird.
+
+Die Performance-Tests wurden von NetApp durchgeführt, um die optimalen Werte zu definieren. In der folgenden Tabelle sind die Parameter aufgeführt, die in der Konfigurationsdatei des SAP-Testwerkzeugs festgelegt werden müssen.
+
+|===
+| Parameter | Wert 
+
+
+| max_parallel_io_Requests | 128 
+
+
+| Async_read_Submit | Ein 
+
+
+| Async_write_submit_Active | Ein 
+
+
+| Async_Write_Submit_Blocks | Alle 
+|===
+Weitere Informationen zur Konfiguration von SAP-Testtool finden Sie unter https://service.sap.com/sap/support/notes/1943937["SAP-Hinweis 1943937"^] Für HWCCT (SAP HANA 1.0) und https://launchpad.support.sap.com/["SAP-Hinweis 2493172"^] FÜR HCMT/HCOT (SAP HANA 2.0).
+
+Das folgende Beispiel zeigt, wie Variablen für den HCMT/HCOT-Ausführungsplan festgelegt werden können.
+
+....
+…{
+         "Comment": "Log Volume: Controls whether read requests are submitted asynchronously, default is 'on'",
+         "Name": "LogAsyncReadSubmit",
+         "Value": "on",
+         "Request": "false"
+      },
+      {
+         "Comment": "Data Volume: Controls whether read requests are submitted asynchronously, default is 'on'",
+         "Name": "DataAsyncReadSubmit",
+         "Value": "on",
+         "Request": "false"
+      },
+      {
+         "Comment": "Log Volume: Controls whether write requests can be submitted asynchronously",
+         "Name": "LogAsyncWriteSubmitActive",
+         "Value": "on",
+         "Request": "false"
+      },
+      {
+         "Comment": "Data Volume: Controls whether write requests can be submitted asynchronously",
+         "Name": "DataAsyncWriteSubmitActive",
+         "Value": "on",
+         "Request": "false"
+      },
+      {
+         "Comment": "Log Volume: Controls which blocks are written asynchronously. Only relevant if AsyncWriteSubmitActive is 'on' or 'auto' and file system is flagged as requiring asynchronous write submits",
+         "Name": "LogAsyncWriteSubmitBlocks",
+         "Value": "all",
+         "Request": "false"
+      },
+      {
+         "Comment": "Data Volume: Controls which blocks are written asynchronously. Only relevant if AsyncWriteSubmitActive is 'on' or 'auto' and file system is flagged as requiring asynchronous write submits",
+         "Name": "DataAsyncWriteSubmitBlocks",
+         "Value": "all",
+         "Request": "false"
+      },
+      {
+         "Comment": "Log Volume: Maximum number of parallel I/O requests per completion queue",
+         "Name": "LogExtMaxParallelIoRequests",
+         "Value": "128",
+         "Request": "false"
+      },
+      {
+         "Comment": "Data Volume: Maximum number of parallel I/O requests per completion queue",
+         "Name": "DataExtMaxParallelIoRequests",
+         "Value": "128",
+         "Request": "false"
+      }, …
+....
+Diese Variablen müssen für die Testkonfiguration verwendet werden. Dies ist in der Regel bei den vordefinierten Testsuiten der Fall, die SAP mit dem HCMT/HCOT-Tool liefert. Das folgende Beispiel für einen 4k-Protokollschreibtest stammt aus einer Testsuite.
+
+....
+…
+      {
+         "ID": "D664D001-933D-41DE-A904F304AEB67906",
+         "Note": "File System Write Test",
+         "ExecutionVariants": [
+            {
+               "ScaleOut": {
+                  "Port": "${RemotePort}",
+                  "Hosts": "${Hosts}",
+                  "ConcurrentExecution": "${FSConcurrentExecution}"
+               },
+               "RepeatCount": "${TestRepeatCount}",
+               "Description": "4K Block, Log Volume 5GB, Overwrite",
+               "Hint": "Log",
+               "InputVector": {
+                  "BlockSize": 4096,
+                  "DirectoryName": "${LogVolume}",
+                  "FileOverwrite": true,
+                  "FileSize": 5368709120,
+                  "RandomAccess": false,
+                  "RandomData": true,
+                  "AsyncReadSubmit": "${LogAsyncReadSubmit}",
+                  "AsyncWriteSubmitActive": "${LogAsyncWriteSubmitActive}",
+                  "AsyncWriteSubmitBlocks": "${LogAsyncWriteSubmitBlocks}",
+                  "ExtMaxParallelIoRequests": "${LogExtMaxParallelIoRequests}",
+                  "ExtMaxSubmitBatchSize": "${LogExtMaxSubmitBatchSize}",
+                  "ExtMinSubmitBatchSize": "${LogExtMinSubmitBatchSize}",
+                  "ExtNumCompletionQueues": "${LogExtNumCompletionQueues}",
+                  "ExtNumSubmitQueues": "${LogExtNumSubmitQueues}",
+                  "ExtSizeKernelIoQueue": "${ExtSizeKernelIoQueue}"
+               }
+            }, …
+....
+
+
+== Übersicht über den Prozess zur Storage-Größenbemessung
+
+Die Anzahl der Festplatten pro HANA Host und die Host-Dichte von SAP HANA für jedes Storage-Modell wurden mit dem Test-Tool SAP HANA ermittelt.
+
+Der Dimensionierungsprozess erfordert Einzelheiten, z. B. die Anzahl der SAP HANA-Hosts in der Produktion und für die Produktion nichtproduktive Umgebung, die RAM-Größe jedes Hosts und die Aufbewahrungsdauer von Storage-basierten Snapshot Kopien für Backups. Die Anzahl der SAP HANA-Hosts bestimmt den Storage Controller und die Anzahl der benötigten Festplatten.
+
+Die Größe des RAM, die Netto-Datengröße auf der Festplatte jedes SAP HANA-Hosts und der Aufbewahrungszeitraum für Snapshot-Backups werden als Inputs bei der Kapazitätsdimensionierung verwendet.
+
+Die folgende Abbildung fasst den Dimensionierungsprozess zusammen.
+
+image:saphana_fas_fc_image8.jpg["Fehler: Fehlendes Grafikbild"]
+
+link:saphana_fas_fc_infrastructure_setup_and_configuration_overview.html["Als Nächstes: Einrichtung und Konfiguration der Infrastruktur."]
