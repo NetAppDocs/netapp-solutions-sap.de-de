@@ -239,7 +239,7 @@ Wenn für das ausgewählte Backup mehrere sekundäre Speicherorte vorhanden sind
 
 image:sc-copy-clone-image26.png["Fehler: Fehlendes Grafikbild"]
 
-Alle nachfolgenden Schritte sind identisch mit dem Workflow zum Klonen aus dem primären Speicher, wie im Abschnitt „ beschrieben from primary storage with tenant name equal to SID.“
+Alle nachfolgenden Schritte sind identisch mit dem Workflow zum Klonen aus dem primären Speicher, wie im Abschnitt „ beschrieben<<Klonen vom primären Storage mit dem Mandantennamen SID>>.“
 
 
 
@@ -249,7 +249,7 @@ Dieser Abschnitt beschreibt den Workflow zur HANA-Systemaktualisierung, in dem d
 
 image:sc-copy-clone-image27.png["Fehler: Fehlendes Grafikbild"]
 
-Die erforderlichen Schritte in SnapCenter sind identisch mit dem, was im Abschnitt “ beschrieben wurde from primary storage with tenant name equal to SID.“] Der Unterschied liegt im Recovery-Vorgang des Mandanten innerhalb des Skripts `sc-system-refresh.sh`.
+Die erforderlichen Schritte in SnapCenter sind identisch mit dem, was im Abschnitt “ beschrieben wurde<<Klonen vom primären Storage mit dem Mandantennamen SID>>.“] Der Unterschied liegt im Recovery-Vorgang des Mandanten innerhalb des Skripts `sc-system-refresh.sh`.
 
 Wenn das Skript erkennt, dass sich der Mandantenname des Quellsystems von der SID des Quellsystems unterscheidet, wird die Mandantenwiederherstellung am Zielsystem mit demselben Mandantennamen wie der Quellmandant ausgeführt. Wenn der Name des Zielmandanten einen anderen Namen haben soll, muss der Mandant anschließend manuell umbenannt werden.
 

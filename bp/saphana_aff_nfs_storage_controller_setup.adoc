@@ -60,14 +60,14 @@ FabricPool ist eine gute Option, um Log-Backups auf eine andere Storage Tier zu 
 
 In der folgenden Übersicht sind die erforderlichen Schritte zur Storage-Konfiguration zusammengefasst. Jeder Schritt wird in den nachfolgenden Abschnitten näher beschrieben. In diesem Abschnitt wird die Storage-Hardware eingerichtet und die ONTAP Software bereits installiert. Außerdem müssen bereits die Verbindungen zwischen den Storage-Ports (10 GbE oder schneller) und dem Netzwerk vorhanden sein.
 
-. Überprüfen Sie die richtige Festplatten-Shelf-Konfiguration, wie unter „ “ beschrieben. shelf connection.“
-. Erstellen und Konfigurieren der erforderlichen Aggregate wie unter „ “ beschrieben configuration.“
-. Erstellen einer Storage Virtual Machine (SVM) wie unter „ configuration.“
-. Erstellen Sie LIFs wie in „ “ beschrieben. configuration.“
-. Erstellen von Volumes in den Aggregaten wie unter „“ beschrieben configuration for SAP HANA single host systems" Und " configuration for SAP HANA multiple host systems.“
-. Legen Sie die erforderlichen Volume-Optionen fest, wie unter „ “ beschrieben. options.“
-. Legen Sie die erforderlichen Optionen für NFSv3 fest, wie in „ “ beschrieben. configuration for NFSv3„ Oder für NFSv4 wie in „ “ beschrieben configuration for NFSv4.“
-. Mounten Sie die Volumes in Namespace und legen Sie die Richtlinien für den Export wie in „ “ beschrieben fest. volumes to namespace and set export policies.“
+. Überprüfen Sie die richtige Festplatten-Shelf-Konfiguration, wie unter „ “ beschrieben.<<Festplatten-Shelf-Verbindung>>.“
+. Erstellen und Konfigurieren der erforderlichen Aggregate wie unter „ “ beschrieben<<Konfiguration von Aggregaten>>.“
+. Erstellen einer Storage Virtual Machine (SVM) wie unter „<<SVM-Konfiguration>>.“
+. Erstellen Sie LIFs wie in „ “ beschrieben.<<LIF-Konfiguration>>.“
+. Erstellen von Volumes in den Aggregaten wie unter „“ beschrieben<<Volume configuration for SAP HANA single host systems>>" Und "<<Volume configuration for SAP HANA multiple host systems>>.“
+. Legen Sie die erforderlichen Volume-Optionen fest, wie unter „ “ beschrieben.<<Volume-Optionen>>.“
+. Legen Sie die erforderlichen Optionen für NFSv3 fest, wie in „ “ beschrieben.<<NFS-Konfiguration für NFSv3>>„ Oder für NFSv4 wie in „ “ beschrieben<<NFS-Konfiguration für NFSv4>>.“
+. Mounten Sie die Volumes in Namespace und legen Sie die Richtlinien für den Export wie in „ “ beschrieben fest.<<Volumes werden in Namespace mounten und Richtlinien für den Export festlegen>>.“
 
 
 

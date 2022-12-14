@@ -228,7 +228,7 @@ hana-1:/mnt/sapcc-share/SAP-System-Refresh #
 
 == Klonen zusätzlicher SAP Applikationsservices
 
-Zusätzliche SAP-Anwendungsservices werden auf die gleiche Weise wie das gemeinsam genutzte SAP HANA-Volume geklont, wie im Abschnitt „ beschrieben the HANA shared volume.“ Selbstverständlich müssen auch die benötigten Speichervolumen(en) der SAP-Applikationsserver durch SnapCenter geschützt werden.
+Zusätzliche SAP-Anwendungsservices werden auf die gleiche Weise wie das gemeinsam genutzte SAP HANA-Volume geklont, wie im Abschnitt „ beschrieben<<Klonen des gemeinsamen HANA Volumes>>.“ Selbstverständlich müssen auch die benötigten Speichervolumen(en) der SAP-Applikationsserver durch SnapCenter geschützt werden.
 
 Sie müssen die erforderlichen Diensteinträge zu hinzufügen `/usr/sap/sapservices`, Und die Ports, Benutzer und die Dateisysteme-Mount-Punkte (z. B. `/usr/sap/SID`) Muss vorbereitet werden.
 

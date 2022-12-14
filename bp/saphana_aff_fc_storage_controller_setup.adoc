@@ -60,12 +60,12 @@ FabricPool ist eine gute Option, um Log-Backups auf eine andere Storage Tier zu 
 
 In der folgenden Übersicht sind die erforderlichen Schritte zur Storage-Konfiguration zusammengefasst. Jeder Schritt wird in den nachfolgenden Abschnitten näher beschrieben. In diesem Abschnitt wird die Storage-Hardware eingerichtet und die ONTAP Software bereits installiert. Außerdem muss die Verbindung der Storage FCP-Ports zur SAN-Fabric bereits vorhanden sein.
 
-. Überprüfen Sie die richtige Festplatten-Shelf-Konfiguration, wie unter „ “ beschrieben. shelf connection.“
-. Erstellen und Konfigurieren der erforderlichen Aggregate, wie unter „ “ beschrieben configuration.“
-. Erstellen einer Storage Virtual Machine (SVM), wie unter „ virtual machine configuration.“
-. Logische Schnittstellen (LIFs) erstellen, wie in „ “ beschrieben interface configuration.“
-. Erstellen Sie einen Portsatz, wie unter „ “ beschrieben. port sets.“
-. Erstellen von Initiatorgruppen, Volumes und LUNs in den Aggregaten, wie unter Erstellen von „ “ beschrieben and volumes and mapping LUNs to initiator groups.“
+. Überprüfen Sie die richtige Festplatten-Shelf-Konfiguration, wie unter „ “ beschrieben.<<Festplatten-Shelf-Verbindung>>.“
+. Erstellen und Konfigurieren der erforderlichen Aggregate, wie unter „ “ beschrieben<<Konfiguration von Aggregaten>>.“
+. Erstellen einer Storage Virtual Machine (SVM), wie unter „<<Konfiguration von Storage Virtual Machines>>.“
+. Logische Schnittstellen (LIFs) erstellen, wie in „ “ beschrieben<<Konfiguration der logischen Schnittstelle>>.“
+. Erstellen Sie einen Portsatz, wie unter „ “ beschrieben.<<FCP-Port-Sätze>>.“
+. Erstellen von Initiatorgruppen, Volumes und LUNs in den Aggregaten, wie unter Erstellen von „ “ beschrieben<<LUNs and volumes and mapping LUNs to initiator groups>>.“
 
 
 

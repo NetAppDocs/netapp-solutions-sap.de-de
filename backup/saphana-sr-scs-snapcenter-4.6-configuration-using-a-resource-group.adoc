@@ -148,7 +148,7 @@ image:saphana-sr-scs-image25.png["Fehler: Fehlendes Grafikbild"]
 
 SnapCenter 4.6 verwaltet Aufbewahrung für Snapshot-Backups, Block-Integrität-Check Operationen, HANA Backup-Katalog Einträge, und Log-Backups (wenn nicht deaktiviert) über beide HANA-Hosts, so ist es egal, welcher Host derzeit primär oder sekundär ist. Backups (Daten und Protokoll) und Einträge im HANA-Katalog werden basierend auf der definierten Aufbewahrung gelöscht, unabhängig davon, ob ein Löschvorgang auf dem aktuellen primären oder sekundären Host erforderlich ist. Das bedeutet, dass keine manuelle Interaktion erforderlich ist, wenn ein Übernahmemodus durchgeführt wird und/oder die Replizierung in andere Richtung konfiguriert wird.
 
-Wenn SnapVault Replizierung Teil der Datensicherungsstrategie ist, ist für spezifische Szenarien eine manuelle Interaktion erforderlich, wie im Abschnitt beschrieben  Replication.
+Wenn SnapVault Replizierung Teil der Datensicherungsstrategie ist, ist für spezifische Szenarien eine manuelle Interaktion erforderlich, wie im Abschnitt beschrieben <<SnapVault Replication>>.
 
 
 

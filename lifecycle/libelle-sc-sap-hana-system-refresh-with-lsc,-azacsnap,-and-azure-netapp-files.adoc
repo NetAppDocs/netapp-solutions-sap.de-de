@@ -76,7 +76,7 @@ Für die SAP-Systeme sollten Sie außerdem eine passende Standardaufgabenliste k
 
 Die hier beschriebene Integration von AzAcSnap und LSC funktioniert nur für SAP HANA Single-Host-Datenbanken. Auch SAP HANA Implementierungen mit mehreren Hosts (oder Scale-out) können unterstützt werden, aber für solche Implementierungen sind einige Anpassungen oder Verbesserungen der benutzerdefinierten LSC-Aufgaben für die Kopiephase und die Underlaying-Skripte erforderlich. Derartige Verbesserungen werden in diesem Dokument nicht behandelt.
 
-Die Integration von SAP Systemaktualisierungen setzt immer die neueste erfolgreiche Snapshot Kopie des Quellsystems ein, um die Aktualisierung des Zielsystems durchzuführen. Wenn Sie andere ältere Snapshot Kopien verwenden möchten, wird die entsprechende Logik im verwendet  Benutzerdefinierte Aufgabe muss angepasst werden. Dieser Prozess ist für dieses Dokument nicht im Umfang enthalten.
+Die Integration von SAP Systemaktualisierungen setzt immer die neueste erfolgreiche Snapshot Kopie des Quellsystems ein, um die Aktualisierung des Zielsystems durchzuführen. Wenn Sie andere ältere Snapshot Kopien verwenden möchten, wird die entsprechende Logik im verwendet <<ZAZACSNAPRESTORE>> Benutzerdefinierte Aufgabe muss angepasst werden. Dieser Prozess ist für dieses Dokument nicht im Umfang enthalten.
 
 
 

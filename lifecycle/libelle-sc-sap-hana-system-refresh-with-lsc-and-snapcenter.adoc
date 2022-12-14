@@ -84,7 +84,7 @@ Das Backup für die Quelldatenbank muss in SnapCenter ordnungsgemäß konfigurie
 
 image:libelle-sc-image6.png["Fehler: Fehlendes Grafikbild"]
 
-Der LSC-Master und der LSC-Worker müssen in der SAP-Umgebung installiert sein. In dieser Bereitstellung haben wir außerdem den LSC-Master auf dem SnapCenter-Server und den LSC-Worker auf dem Ziel-SAP-Datenbankserver installiert, der aktualisiert werden sollte. Weitere Einzelheiten finden Sie im folgenden Abschnitt „ setup.“
+Der LSC-Master und der LSC-Worker müssen in der SAP-Umgebung installiert sein. In dieser Bereitstellung haben wir außerdem den LSC-Master auf dem SnapCenter-Server und den LSC-Worker auf dem Ziel-SAP-Datenbankserver installiert, der aktualisiert werden sollte. Weitere Einzelheiten finden Sie im folgenden Abschnitt „<<Laboreinrichtung>>.“
 
 Dokumentationsressourcen:
 

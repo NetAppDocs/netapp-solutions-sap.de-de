@@ -169,7 +169,7 @@ image:saphana-br-scs-image54.png["Fehler: Fehlendes Grafikbild"]
 Die folgende Abbildung zeigt die Sicherungsrichtlinie. Die Sicherungsrichtlinie, die für die Schutzbeziehung verwendet wird, definiert das SnapMirror-Label und die Aufbewahrung von Backups im sekundären Storage. In unserem Beispiel ist das verwendete Etikett `Daily`, Und die Aufbewahrung ist auf 5 eingestellt.
 
 
-NOTE: Das SnapMirror-Label in der erstellten Richtlinie muss mit der in der Konfiguration der SnapCenter-Richtlinie definierten Beschriftung übereinstimmen. Weitere Informationen finden Sie unter „ for daily Snapshot backups with SnapVault replication.“
+NOTE: Das SnapMirror-Label in der erstellten Richtlinie muss mit der in der Konfiguration der SnapCenter-Richtlinie definierten Beschriftung übereinstimmen. Weitere Informationen finden Sie unter „<<Richtlinie für tägliche Snapshot Backups mit SnapVault Replizierung>>.“
 
 
 NOTE: Die Aufbewahrung für Backups im externen Backup-Storage wird in der Richtlinie definiert und durch ONTAP gesteuert.
@@ -235,7 +235,7 @@ Der Übersichtsbildschirm der Ressourcenkonfiguration wird angezeigt.
 +
 image:saphana-br-scs-image60.png["Fehler: Fehlendes Grafikbild"]
 
-.. Wenn die Ressourcenkonfiguration abgeschlossen ist, führen Sie die Konfiguration des Ressourcenschutzes durch, wie im Abschnitt „ beschrieben protection configuration.“
+.. Wenn die Ressourcenkonfiguration abgeschlossen ist, führen Sie die Konfiguration des Ressourcenschutzes durch, wie im Abschnitt „ beschrieben<<Konfiguration für Ressourcenschutz>>.“
 
 
 
