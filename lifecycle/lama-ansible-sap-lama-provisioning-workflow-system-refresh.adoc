@@ -1,0 +1,35 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/lama-ansible-sap-lama-provisioning-workflow-system-refresh.html 
+keywords: refresh, workflow, storage clone 
+summary: Während des Aktualisierungs-Workflows muss der Storage-Klon gelöscht werden. Sie können dasselbe Ansible-Playbook wie für den Workflow zum Zerstören des Systems verwenden. Der Custom Hook wird jedoch in einem anderen Schritt definiert, sodass das Playbook entsprechend benannt wird. Der Prozessschritt für den Klon unterscheidet sich nicht. 
+---
+= SAP Lama-Bereitstellungs-Workflow – Systemaktualisierung
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:lama-ansible-sap-lama-provisioning-workflow-copy-system.html["Früher: SAP Lama Provisioning-Workflow - Kopiesystem."]
+
+[role="lead"]
+Die folgende Abbildung zeigt die wichtigsten Schritte, die bei der Systemaktualisierung ausgeführt werden.
+
+image:lama-ansible-image49.png["Dieses Bild zeigt eine Zeitleiste der Schritte im Workflow zur Systemaktualisierung. Es umfasst die Exportkonfiguration, Stopp des Systems, Vorbereiten des Systems, Löschen des Speicherklonens, Storage-Klonen, System vorbereiten, Isolation aktivieren, System umbenennen, System starten, Konfiguration importieren, Automatisierung nach der Kopie und Deaktivierung der Isolation"]
+
+Während des Aktualisierungs-Workflows muss der Storage-Klon gelöscht werden. Sie können dasselbe Ansible-Playbook wie für den Workflow zum Zerstören des Systems verwenden. Der Custom Hook wird jedoch in einem anderen Schritt definiert, sodass das Playbook entsprechend benannt wird. Der Prozessschrittn´t Klons unterscheidet sich nicht.
+
+image:lama-ansible-image50.png["Dieses Bild zeigt ein Architekturdiagramm mit den in diesem Workflow enthaltenen Schritten."]
+
+Der Aktualisierungs-Workflow kann über den Bereitstellungsbildschirm für ein kopiertes System ausgelöst werden.
+
+image:lama-ansible-image51.png["In diesem Screenshot wird die Ansicht des Provisioning-Systems angezeigt, wobei das Dropdown-Menü „Refresh System“ hervorgehoben ist."]
+
+Auch hier unterscheidet sich nichts von den Eingabemasken vom Standard, und die Workflow-Ausführung kann über den Übersichtsbildschirm gestartet werden.
+
+image:lama-ansible-image52.png["In diesem Screenshot wird der Bildschirm „System aktualisieren“ angezeigt, einschließlich der Basisdaten des zu aktualisierenden Systems und der Host-Auswahl des Zielsystems."]
+
+link:lama-ansible-appendix-provider-script-configuration-and-ansible-playbooks.html["Next: Provider-Skriptkonfiguration und Ansible Playbooks"]
