@@ -1,0 +1,212 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-restore-and-recovery-from-snapshot-backup.html 
+keywords: restore, recovery, operation, system database 
+summary: In diesen Abschnitten wird die Durchführung von Wiederherstellungen und Wiederherstellungen von einem Snapshot-Backup beschrieben. 
+---
+= Wiederherstellung aus Snapshot-Backup
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-snapshot-based-backup-operations-of-global-non-data-volumes.html["Früher: Snapshot-basierte Backup-Vorgänge von globalen nicht-Daten-Volumes."]
+
+[role="lead"]
+Im folgenden Abschnitt werden die Wiederherstellungs- und Recovery-Workflows für ein HANA MDC-System mit einem Host und einem Mandanten beschrieben. Die Unterschiede für ein System mit mehreren Hosts werden hervorgehoben. Die Beispiele zeigen, dass SAP HANA Studio als Tool zur manuellen Wiederherstellung dient. Außerdem können Sie SAP HANA Cockpit oder HANA SQL-Anweisungen für die Recovery-Vorgänge verwenden.
+
+Gehen Sie wie folgt vor, um ein Einzelmandanten-System für SAP HANA MDC mithilfe von SAP HANA Studio und Cloud Backup for Applications wiederherzustellen:
+
+. Vorbereitung des Restore- und Recovery-Prozesses mit SAP HANA Studio:
++
+.. Wählen Sie *Recover System Database* und bestätigen Sie das Herunterfahren des SAP HANA-Systems.
+.. Wählen Sie den Wiederherstellungstyp und den Speicherort für die Protokollsicherung aus.
++
+Die Liste der Daten-Backups wird angezeigt.
+
+.. Wählen Sie das entsprechende Backup aus, um die externe Backup-ID anzuzeigen.
+
+
+. HANA Daten-Volumes aufheben
+. Führen Sie die Wiederherstellung mit Cloud Backup für Applikationen durch:
++
+.. Wählen Sie in der Ansicht Backup das Backup aus, das mit der externen Backup-ID oder dem Kommentarfeld von SAP HANA Studio übereinstimmt.
+.. Um den Wiederherstellungsvorgang zu starten, wählen Sie im Kontextmenü *Wiederherstellen*.
+
+
+. Mounten Sie die HANA Daten-Volumes.
+. Führen Sie den Recovery-Prozess für die Systemdatenbank mit SAP HANA Studio aus:
++
+.. Klicken Sie in der Sicherungsliste auf *Aktualisieren* und wählen Sie die verfügbare Sicherung für die Wiederherstellung aus (mit einem grünen Symbol gekennzeichnet).
+.. Starten Sie den Wiederherstellungsvorgang.
++
+Nach Abschluss des Wiederherstellungsvorgangs wird die Systemdatenbank gestartet.
+
+
+
+. Führen Sie den Recovery-Prozess für die Mandantendatenbank mit SAP HANA Studio aus:
++
+.. Wählen Sie *Recover Tenant Database* und wählen Sie den wiederherzustellenden Mandanten aus.
+.. Wählen Sie den Wiederherstellungstyp und den Speicherort für die Protokollsicherung aus.
+
+
+. Es wird eine Liste der Daten-Backups angezeigt. Da das Daten-Volume bereits wiederhergestellt ist, zeigt das Mandanten-Backup (in Grün) als verfügbar an.
++
+.. Wählen Sie das Backup aus, und starten Sie den Wiederherstellungsprozess. Nach Abschluss des Recovery-Prozesses wird die Mandantendatenbank automatisch gestartet.
+
+
+
+
+Es wird eine Liste der Daten-Backups angezeigt. Da das Daten-Volume bereits wiederhergestellt ist, zeigt das Mandanten-Backup (in Grün) als verfügbar an. Wählen Sie das Backup aus, und starten Sie den Wiederherstellungsprozess. Nach Abschluss des Recovery-Prozesses wird die Mandantendatenbank automatisch gestartet.
+
+Die folgenden Schritte beschreiben die Wiederherstellungs- und Wiederherstellungsvorgänge des HANA-Systems PR1.
+
+
+
+== Wiederherstellung vorbereiten
+
+. Um die Wiederherstellung der Systemdatenbank in SAP HANA Studio zu starten, gehen Sie zu *Backup und Recovery* > *Recover System Database*.
++
+image:anf-cba-image79.png["Screenshot des abgeschlossenen Schritts."]
+
++
+image:anf-cba-image80.png["Screenshot des abgeschlossenen Schritts."]
+
+. Wählen Sie den Wiederherstellungstyp aus und klicken Sie auf *Weiter*.
++
+image:anf-cba-image81.png["Screenshot des abgeschlossenen Schritts."]
+
+. Geben Sie den Speicherort des Backup-Katalogs an und klicken Sie auf *Weiter*.
++
+image:anf-cba-image82.png["Screenshot des abgeschlossenen Schritts."]
+
+. Eine Liste der verfügbaren Backups wird basierend auf dem Inhalt des HANA-Backup-Katalogs angezeigt. Wählen Sie das gewünschte Backup aus und notieren Sie sich die externe Backup-ID: Das aktuellste Backup, zum Beispiel.
++
+image:anf-cba-image83.png["Screenshot des abgeschlossenen Schritts."]
+
+. Heben Sie die Bereitstellung aller Daten-Volumes auf.
++
+....
+umount /hana/data/PR1/mnt00001
+....
++
+
+NOTE: Bei einem SAP HANA System mit mehreren Hosts müssen Sie alle Daten-Volumes auf jedem Host unmounten.
+
+
+
+
+
+== Wiederherstellung der HANA-Datenbank
+
+. Um den Wiederherstellungsvorgang zu starten, wählen Sie in der Backup-Ansicht das Backup aus, das auch in HANA Studio angezeigt wird, und wählen Sie im Kontextmenü die Option Wiederherstellen.
++
+image:anf-cba-image84.png["Screenshot des abgeschlossenen Schritts."]
+
+. Im nächsten Schritt können Sie Pre- und Post-Skripte für den Wiederherstellungsvorgang bereitstellen.
++
+image:anf-cba-image85.png["Screenshot des abgeschlossenen Schritts."]
+
++
+Das Jobprotokoll „Cloud Backup für Applikationen“ zeigt den Fortschritt des Wiederherstellungsvorgangs an.
+
++
+image:anf-cba-image86.png["Screenshot des abgeschlossenen Schritts."]
+
+. Warten Sie, bis der Wiederherstellungsvorgang abgeschlossen ist, und mounten Sie das Daten-Volume.
++
+....
+mount /hana/data/SP1/mnt00001
+....
++
+
+NOTE: Bei einem SAP HANA-System mit mehreren Hosts müssen Sie alle Daten-Volumes auf jedem Host mounten.
+
+
+
+
+
+== Systemdatenbank wiederherstellen
+
+. Um die Liste der verfügbaren Backups zu aktualisieren, gehen Sie zu SAP HANA Studio und klicken Sie auf Aktualisieren. Das mit Cloud Backup for Applications wiederhergestellte Backup wird mit einem grünen Symbol in der Liste der Backups angezeigt. Wählen Sie das Backup aus, und klicken Sie auf Weiter.
++
+image:anf-cba-image87.png["Screenshot des abgeschlossenen Schritts."]
+
+. Stellen Sie den Speicherort der Protokoll-Backups bereit. Klicken Sie Auf *Weiter*.
++
+image:anf-cba-image88.png["Screenshot des abgeschlossenen Schritts."]
+
+. Wählen Sie je nach Bedarf andere Einstellungen aus. Stellen Sie sicher, dass Delta-Backups verwenden nicht ausgewählt ist. Klicken Sie Auf *Weiter*.
++
+image:anf-cba-image89.png["Screenshot des abgeschlossenen Schritts."]
+
+. Überprüfen Sie die Wiederherstellungseinstellungen und klicken Sie auf *Fertig stellen*.
++
+image:anf-cba-image90.png["Screenshot des abgeschlossenen Schritts."]
+
+. Der Wiederherstellungsprozess wird gestartet. Warten Sie, bis die Wiederherstellung der Systemdatenbank abgeschlossen ist.
++
+image:anf-cba-image91.png["Screenshot des abgeschlossenen Schritts."]
+
+
+
+
+
+== Und stellen Sie die Mandantendatenbank wieder her
+
+. Wählen Sie in SAP HANA Studio den Eintrag für die Systemdatenbank aus und gehen Sie zu *Backup und Recovery* > *Recover Tenant Database*.
++
+image:anf-cba-image92.png["Screenshot des abgeschlossenen Schritts."]
+
+. Wählen Sie den Mieter, der wiederhergestellt werden soll, und klicken Sie auf *Weiter*.
++
+image:anf-cba-image93.png["Screenshot des abgeschlossenen Schritts."]
+
+. Geben Sie den Wiederherstellungstyp an, und klicken Sie auf Weiter.
++
+image:anf-cba-image94.png["Screenshot des abgeschlossenen Schritts."]
+
+. Bestätigen Sie den Speicherort des Backup-Katalogs und klicken Sie auf *Weiter*.
++
+image:anf-cba-image95.png["Screenshot des abgeschlossenen Schritts."]
+
+. Vergewissern Sie sich, dass die Mandantendatenbank offline ist. Klicken Sie auf OK, um fortzufahren.
++
+image:anf-cba-image96.png["Screenshot des abgeschlossenen Schritts."]
+
++
+Da die Wiederherstellung des Daten-Volumes vor der Wiederherstellung der Systemdatenbank erfolgt ist, ist das Mandanten-Backup sofort verfügbar.
+
+. Wählen Sie das grün markierte Backup aus und klicken Sie auf *Weiter*.
++
+image:anf-cba-image97.png["Screenshot des abgeschlossenen Schritts."]
+
+. Bestätigen Sie den Speicherort der Protokollsicherung und klicken Sie auf *Weiter*.
++
+image:anf-cba-image98.png["Screenshot des abgeschlossenen Schritts."]
+
+. Wählen Sie je nach Bedarf andere Einstellungen aus. Stellen Sie sicher, dass *Delta Backups verwenden* nicht ausgewählt ist. Klicken Sie Auf *Weiter*.
++
+image:anf-cba-image99.png["Screenshot des abgeschlossenen Schritts."]
+
+. Überprüfen Sie die Wiederherstellungseinstellungen und starten Sie den Wiederherstellungsprozess der Mandantendatenbank, indem Sie auf *Fertig stellen* klicken.
++
+image:anf-cba-image100.png["Screenshot des abgeschlossenen Schritts."]
+
+. Warten Sie, bis die Wiederherstellung abgeschlossen ist und die Mandantendatenbank gestartet wird.
++
+image:anf-cba-image101.png["Screenshot des abgeschlossenen Schritts."]
+
++
+Das SAP HANA System ist betriebsbereit.
+
++
+
+NOTE: Bei einem SAP HANA MDC-System mit mehreren Mandanten müssen Sie für jeden Mandanten die Schritte 16 bis 25 wiederholen.
+
+
+
+link:anf-cba-backup-operations-with-hana-system-replication.html["Nächste Schritte: Backup-Vorgänge mit HANA System Replication."]

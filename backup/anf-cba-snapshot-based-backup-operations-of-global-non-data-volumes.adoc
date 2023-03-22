@@ -1,0 +1,120 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-snapshot-based-backup-operations-of-global-non-data-volumes.html 
+keywords: global non-data, configuration, assign policy, azure portal 
+summary: In diesem Abschnitt wird das Erstellen Snapshot-basierter Backup-Vorgänge von globalen nicht-Daten-Volumes beschrieben. 
+---
+= Snapshot-basierte Backup-Vorgänge von globalen nicht-Daten-Volumes
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-snapshot-based-backup-operations-of-non-data-volumes.html["Zurück: Snapshot-basierte Backup-Operationen von nicht-Daten-Volumes."]
+
+[role="lead"]
+In CBA sind globale nicht-Daten-Volumes Volumes, die keinem bestimmten HANA-System zugewiesen sind. Beispiele hierfür waren das SAP-Transportverzeichnis `/usr/sap/trans` Oder ein Software-Repository.
+
+
+
+== Konfiguration
+
+Führen Sie die folgenden Schritte aus, um den Datenschutz für ein Volume ohne Daten zu konfigurieren.
+
+. Klicken Sie auf *HANA-System hinzufügen* und wählen Sie *Global Non-Data Volumes* als *Systemtyp* aus.
++
+image:anf-cba-image66.png["Screenshot des abgeschlossenen Schritts."]
+
+. Geben Sie einen Namen und eine SID oder eine Liste von SIDs für Informationszwecke an. Sie müssen auch einen Plug-in-Host auswählen. Dabei kann es sich um einen beliebigen Plug-in-Host in Ihrer Umgebung handelt.
++
+image:anf-cba-image67.png["Screenshot des abgeschlossenen Schritts."]
+
+. Klicken Sie auf *Add Storage*, um den Speicherplatzbedarf des globalen Volumes ohne Daten zu konfigurieren.
++
+image:anf-cba-image68.png["Screenshot des abgeschlossenen Schritts."]
+
+. Geben Sie die Informationen für die globalen nicht-Datenvolumen ein.
++
+image:anf-cba-image69.png["Screenshot des abgeschlossenen Schritts."]
+
+. Globale nicht-Datenvolumes werden auf die gleiche Weise wie ein HANA-System im CBA-Dashboard aufgelistet.
++
+image:anf-cba-image70.png["Screenshot des abgeschlossenen Schritts."]
+
+
+
+
+
+== Weisen Sie eine Richtlinie zu
+
+Um geplante Backups zu aktivieren, muss die Backup-Richtlinie zugewiesen werden.
+
+. Gehen Sie zu *Richtlinie zuweisen*.
++
+image:anf-cba-image71.png["Screenshot des abgeschlossenen Schritts."]
+
+. Klicken Sie Auf *Zuweisen*.
++
+image:anf-cba-image72.png["Screenshot des abgeschlossenen Schritts."]
+
+. Die Richtlinie ist nun dem nicht-Daten-Volume zugewiesen.
++
+image:anf-cba-image73.png["Screenshot des abgeschlossenen Schritts."]
+
+
+
+
+
+== Erstellen Sie On-Demand-Backups globaler, nicht datenfremder Volumes
+
+Führen Sie die folgenden Schritte aus, um ein On-Demand-Datenbank-Backup zu erstellen:
+
+. Wählen Sie in der CBA-Dashboard-Ansicht im Kontextmenü *On-Demand Backup* aus.
++
+image:anf-cba-image74.png["Screenshot des abgeschlossenen Schritts."]
+
+. Wählen Sie im Dialogfeld *On-Demand Backup* entweder *Policy-based* oder *one time* aus.
++
+** Mit *Policy-based* wird das On-Demand Backup in Bezug auf die Aufbewahrung und die Konfiguration vor und nach dem Skript genauso behandelt wie geplante Backups.
+** Mit *One Time* können Sie eine spezifische Aufbewahrung, einen spezifischen Backup-Namen und spezifische Pre- und Post-Skripte definieren.
++
+In unserem Beispiel haben wir Policy-based ausgewählt und müssen daher im nächsten Schritt die Policy und Retention auswählen.
+
++
+image:anf-cba-image75.png["Screenshot des abgeschlossenen Schritts."]
+
++
+In der Ansicht *Job Monitoring* sehen Sie die verschiedenen Workflow-Schritte, die Laufzeit der Schritte und die gesamte Betriebslaufzeit. In unserem Beispiel dauerte der Backup-Vorgang 41 Sekunden.
+
++
+image:anf-cba-image76.png["Screenshot des abgeschlossenen Schritts."]
+
+
+
+
+
+
+
+== Überprüfen Sie die Snapshot-Backup-Informationen in der CBA-Topologieansicht
+
+Wählen Sie im Kontextmenü der CBA-Dashboard-Ansicht *Topologie anzeigen*, um die Backup-Übersicht zu öffnen.
+
+Die Backup-Übersicht zeigt die Liste der Backups, die mit CBA erstellt wurden.
+
+
+NOTE: Der Name des Backups verwendet das Format, das in der Backup-Richtlinie definiert wurde. Für den Snapshot-Namen auf dem ANF-Volume wird dieselbe Namenskonvention verwendet.
+
+image:anf-cba-image77.png["Screenshot des abgeschlossenen Schritts."]
+
+
+
+== Überprüfen Sie die Snapshot Backup-Informationen im Azure Portal
+
+Der gleiche Name, der in CBA als Backup-Name verwendet wurde, wird auch als Snapshot-Backup-Name auf dem ANF-Volume verwendet. Die folgende Abbildung zeigt das Azure-Portal und die Snapshot-Backups für das globale nicht-Daten-Volume `software`.
+
+image:anf-cba-image78.png["Screenshot des abgeschlossenen Schritts."]
+
+link:anf-cba-restore-and-recovery-from-snapshot-backup.html["Weiter: Wiederherstellung aus Snapshot-Backup."]

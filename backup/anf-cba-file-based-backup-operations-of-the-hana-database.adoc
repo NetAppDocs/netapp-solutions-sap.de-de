@@ -1,0 +1,112 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-file-based-backup-operations-of-the-hana-database.html 
+keywords: assign policy, file-based backup, cba topology, sap hana studio 
+summary: In diesem Abschnitt wird beschrieben, wie dateibasierte Backup-Vorgänge der HANA-Datenbank durchgeführt werden. 
+---
+= Dateibasierte Backup-Vorgänge der HANA Datenbank
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-snapshot-based-backup-operations-of-the-hana-database.html["Zurück: Snapshot-basierte Backup-Operationen der HANA-Datenbank."]
+
+[role="lead"]
+SAP empfiehlt, Storage-basierte Snapshot-Backups mit einem wöchentlichen dateibasierten Backup zu kombinieren, um eine Integritätsprüfung für Blöcke durchzuführen. Cloud Backup für Applikationen unterstützt die Ausführung einer Block-Integritätsprüfung mithilfe einer Richtlinie, bei der dateibasiertes Backup als Backup-Typ ausgewählt wird.
+
+Auf Datei basierende Backups verfügen zusätzlich zu den Snapshot Backups auf dem HANA Daten-Volume über sekundäre Backup-Kopien. Diese dateibasierten Backups können Sie zur Wiederherstellung und Recovery verwenden, falls das primäre Daten-Volume komplett verloren geht.
+
+Bei der Planung von Backups mithilfe dieser Richtlinie erstellt Cloud Backup für Applikationen ein standardmäßiges SAP HANA-Datei-Backup für das System und alle Mandantendatenbanken.
+
+
+
+== Weisen Sie die Richtlinie dem HANA-System zu
+
+Um geplante Backups zu aktivieren, muss die Backup Policy dem HANA-System zugewiesen werden.
+
+. Gehen Sie zu *Richtlinie zuweisen* > *Datenvolumen*.
++
+image:anf-cba-image48.png["Screenshot des abgeschlossenen Schritts."]
+
+. Wählen Sie die Policy für dateibasierte Backups aus und klicken Sie auf *Assign*.
++
+image:anf-cba-image49.png["Screenshot des abgeschlossenen Schritts."]
+
+. Die Richtlinie wird nun dem HANA-System zugewiesen und dateibasierte Backups werden basierend auf der Plandefinition ausgeführt.
+
+
+
+
+== Dateibasiertes On-Demand-Backup erstellen
+
+Führen Sie die folgenden Schritte aus, um ein On-Demand-Datenbank-Backup zu erstellen:
+
+. Wählen Sie in der CBA-Dashboard-Ansicht im Kontextmenü On-Demand Backup – Data Volume aus.
++
+image:anf-cba-image50.png["Screenshot des abgeschlossenen Schritts."]
+
+. Wählen Sie im Dialogfeld On-Demand Backup entweder *Policy-based* oder *one time* aus.
++
+** Mit *Policy-based* wird das On-Demand Backup in Bezug auf die Aufbewahrung und die Konfiguration vor und nach dem Skript genauso behandelt wie geplante Backups.
+** Mit *One Time* können Sie eine spezifische Aufbewahrung, einen spezifischen Backup-Namen und spezifische Pre- und Post-Skripte definieren.
+
+
+. In unserem Beispiel haben wir Policy-based ausgewählt und die Policy und Retention als nächsten Schritt ausgewählt.
++
+image:anf-cba-image51.png["Screenshot des abgeschlossenen Schritts."]
+
+. In der Ansicht Jobüberwachung können Sie die verschiedenen Workflow-Schritte, die Laufzeit der Schritte und die gesamte Betriebslaufzeit sehen.
++
+image:anf-cba-image52.png["Screenshot des abgeschlossenen Schritts."]
+
++
+image:anf-cba-image53.png["Screenshot des abgeschlossenen Schritts."]
+
+
+
+
+
+== Prüfen Sie dateibasierte Backup-Informationen in der CBA-Topologieansicht
+
+Cloud Backup für Applikationen zeigt die dateibasierten Backups nicht in derselben Weise an wie Backups mit Snapshot Kopien. Stattdessen wird nur das letzte dateibasierte Backup aufgelistet. Erfolg oder Ausfall von dateibasierten Backups sind in der Job Monitor Ansicht sichtbar.
+
+image:anf-cba-image54.png["Screenshot des abgeschlossenen Schritts."]
+
+
+
+== Prüfen Sie dateibasierte Backup-Informationen auf dem Dateisystem
+
+Eine erfolgreiche Überprüfung der Blockintegrität erstellt standardisierte SAP HANA Daten-Backup-Dateien. CBA verwendet den in der HANA-Datenbank konfigurierten Backup-Pfad für dateibasierte Daten-Backups. Die Namenskonvention folgt der Konfiguration in der Backup-Richtlinie für das dateibasierte Backup.
+
+....
+vm-pr1:/hanabackup/PR1/file # ls -al *
+DB_PR1:
+total 3355880
+drwxr-xr-- 2 pr1adm sapsys       4096 Jan  3 10:12 .
+drwxr-x--- 4 pr1adm sapsys       4096 Dec 19 13:53 ..
+-rw-r----- 1 pr1adm sapsys     155648 Jan  3 10:10 SnapCenter_SnapCenter_PR1_WeeklyBlockIntegrityCheck_Weekly_2023_01_03_10_10_19_databackup_0_1
+-rw-r----- 1 pr1adm sapsys   83894272 Jan  3 10:11 SnapCenter_SnapCenter_PR1_WeeklyBlockIntegrityCheck_Weekly_2023_01_03_10_10_19_databackup_2_1
+-rw-r----- 1 pr1adm sapsys 1627398144 Jan  3 10:12 SnapCenter_SnapCenter_PR1_WeeklyBlockIntegrityCheck_Weekly_2023_01_03_10_10_19_databackup_3_1
+SYSTEMDB:
+total 3092672
+drwxr-xr-- 2 pr1adm sapsys       4096 Jan  3 10:12 .
+drwxr-x--- 4 pr1adm sapsys       4096 Dec 19 13:53 ..
+-rw-r----- 1 pr1adm sapsys     159744 Jan  3 10:10 SnapCenter_SnapCenter_PR1_WeeklyBlockIntegrityCheck_Weekly_2023_01_03_10_10_19_databackup_0_1
+-rw-r----- 1 pr1adm sapsys 1577066496 Jan  3 10:12 SnapCenter_SnapCenter_PR1_WeeklyBlockIntegrityCheck_Weekly_2023_01_03_10_10_19_databackup_1_1
+vm-pr1:/hanabackup/PR1/file #
+....
+
+
+== Prüfen dateibasierter Backup-Informationen in SAP HANA Studio
+
+Der SAP HANA-Backup-Katalog zeigt Einträge sowohl für das System als auch für die Mandanten-Datenbanken an. Die folgenden Abbildungen zeigen das dateibasierte CBA-Backup im Backup-Katalog der Systemdatenbank und der Mandantendatenbank.
+
+image:anf-cba-image55.png["Die folgenden Abbildungen zeigen das dateibasierte CBA-Backup im Backup-Katalog der Systemdatenbank."]
+
+image:anf-cba-image56.png["Die folgenden Abbildungen zeigen das dateibasierte CBA-Backup im Backup-Katalog der Mandantendatenbank."]
+
+link:anf-cba-snapshot-based-backup-operations-of-non-data-volumes.html["Weiter: Snapshot-basierte Backup-Vorgänge von nicht-Daten-Volumes."]
