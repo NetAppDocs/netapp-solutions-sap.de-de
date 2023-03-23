@@ -15,10 +15,6 @@ summary: In diesem Abschnitt wird die Durchführung von Backup-Vorgängen mit HA
 
 link:anf-cba-backup-operations-with-hana-system-replication.html["Zurück: Backup-Vorgänge mit HANA System Replication."]
 
-
-
-= Backup-Vorgänge mit HANA Systemen mit mehreren Hosts
-
 Die HANA Datenbank führt Snapshot Backups auf dieselbe Weise wie für Systeme mit einem Host aus. Die SQL-Befehle für die Backup-Operation müssen in der Systemdatenbank ausgelöst werden. Der HANA-Backup-Savepoint wird für alle HANA-Worker-Nodes erstellt, damit alle Datenvolumes jedes Node konsistent sind. Im nächsten Schritt müssen die Snapshot Storage-Vorgänge für jedes Daten-Volume ausgeführt werden.
 
 
