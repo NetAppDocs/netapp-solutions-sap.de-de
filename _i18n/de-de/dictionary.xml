@@ -4922,8 +4922,6 @@
   <block id="0435a2de9b6c71fb28e3ba4071b531de" category="sidebar">Übersicht über regionsübergreifende Replizierung mit SAP HANA</block>
   <block id="6c45d41e933130a1d4e3729dad7439f3" category="sidebar">Disaster-Recovery-Tests – Übersicht</block>
   <block id="6db8771af1e20f8b4493135fb9b2465f" category="sidebar">Disaster-Recovery-Failover – Überblick</block>
-  <block id="6abf73ac39531a37ff136074cc08335d" category="sidebar">Technischer Bericht: SAP HANA Backup and Recovery on Azure NetApp Files with SnapCenter Service</block>
-  <block id="0f68b904e33d9ac04605aecc958bcf52" category="sidebar">Weitere Informationen</block>
   <block id="fceb9e9a7a8e75da09a45b74960f3ce3" category="sidebar">Technischer Bericht: SAP HANA Backup and Recovery by Using Snap Creator</block>
   <block id="0f1df2d5d1f6e9db4283f9e9814fa12a" category="sidebar">SAP HANA Backup und Recovery mit NetApp Storage und CommVault Software</block>
   <block id="eeb338bfcd3ad35ad6983ecfa31efba2" category="sidebar">SAP HANA auf dem NetApp All-SAN-Array: Modernes SAN, Datensicherung und Disaster Recovery</block>
@@ -5290,8 +5288,6 @@
   <block id="17f31b52b49dfe7dec5229f7caf638c6" category="list-text">AFF A150, AFF A220, AFF A250, AFF A300, AFF A320, AFF A400, AFF A700s, AFF A700, AFF A800, AFF A900</block>
   <block id="e6c434a39cbdd99e996e35ba917a1f79" category="summary">Cloud Backup für Applikationen ist eine SaaS-Lösung mit Datensicherungsfunktionen für Applikationen, die auf NetApp Cloud-Storage ausgeführt werden. Cloud Backup für Applikationen, die in NetApp BlueXP möglich sind, bietet effizienten, applikationskonsistenten und richtlinienbasierten Schutz von SAP HANA auf Azure NetApp Files. Cloud Backup für Applikationen bietet zentrale Kontrolle und Überwachung und delegiert gleichzeitig die Fähigkeit von Benutzern, applikationsspezifische Backup- und Restore-Vorgänge zu managen.</block>
   <block id="68b2531582c9405379a246e2f5612632" category="doc">Architektur von Cloud Backup für Applikationen</block>
-  <block id="1e418ab89f193c74121a07ce83abaed4" category="inline-link-macro">Früher: Architekturübersicht über Cloud Backup für Applikationen</block>
-  <block id="d9d3ce81752bc06ac7427df8f9d0dd8d" category="paragraph"><block ref="d9d3ce81752bc06ac7427df8f9d0dd8d" category="inline-link-macro-rx"></block></block>
   <block id="f6fcca3f3d3bfd44d0aa729b3d893d98" category="paragraph">Cloud Backup für Applikationen wird in NetApp BlueXP als SaaS ausgeführt und nutzt das Framework und die UI. Das BlueXP Arbeitsumgebungs-Framework wird verwendet, um die Zugangsdaten für Azure NetApp Files zu konfigurieren und zu managen.</block>
   <block id="b56d64743b38fb4b0973d9110fb21c20" category="paragraph">Ein BlueXP Connector muss innerhalb des vnet des Kunden implementiert werden. Die Kommunikation zwischen den NetApp SaaS Komponenten und der Kundenumgebung wird ausschließlich über den Connector durchgeführt. Der Connector führt die ANF-Storage-Vorgänge mithilfe der ANF-Management-APIs aus.</block>
   <block id="9e9b9e3d6624aa7bef29265a2780a193" category="paragraph">Das HANA-Plug-in bietet die für die HANA-Datenbank spezifische Logik und muss auf jedem HANA-Host implementiert werden. Das HANA-Plug-in kommuniziert mit der HANA-Datenbank über den HANA-hdbsql-Client und einen User Store-Schlüssel. Alle Datenbankvorgänge werden vom BlueXP Connector ausgelöst.</block>
@@ -5465,7 +5461,6 @@
   <block id="8fb6836a6a4f22c7090d031fb31467d8" category="inline-link-macro">Weiter: Snapshot-basierte Backup-Vorgänge von nicht-Daten-Volumes.</block>
   <block id="052102618f8c4535a292e7e8eda937ce" category="paragraph"><block ref="052102618f8c4535a292e7e8eda937ce" category="inline-link-macro-rx"></block></block>
   <block id="731c91555406019fb4ca7b621105abba" category="summary">Die Ausführung von Backups ist ein wichtiger Bestandteil jeder Datensicherungsstrategie. Backups werden regelmäßig geplant, um sicherzustellen, dass nach Systemausfällen eine Wiederherstellung möglich ist. Dies ist der offensichtlichste Anwendungsfall, aber es gibt auch andere SAP-Lifecycle-Management-Aufgaben, für die ein Beschleunigen von Backup- und Recovery-Vorgängen von entscheidender Bedeutung ist.</block>
-  <block id="51f47ae99b1d73a12860cadd58026d0c" category="doc">Überblick über Anwendungsfälle und den Nutzen von beschleunigten Backup- und Klonvorgängen</block>
   <block id="e97a05d9d17313a2f8bcb989f95b853d" category="inline-link-macro">Zurück: Backup und Recovery mit Azure NetApp Files.</block>
   <block id="ec02aabec7c977a0d1479d4c3756ea39" category="paragraph"><block ref="ec02aabec7c977a0d1479d4c3756ea39" category="inline-link-macro-rx"></block></block>
   <block id="9a8fc8d0db2b6ce4ad7546eec3a993b7" category="paragraph">Ein SAP HANA System-Upgrade ist ein Beispiel dafür, wie ein On-Demand-Backup vor dem Upgrade und eine mögliche Wiederherstellung bei einem Upgrade erhebliche Auswirkungen auf die geplante Ausfallzeit insgesamt hat. Am Beispiel einer 4-TB-Datenbank kann die geplante Ausfallzeit durch die Verwendung von Snapshot-basierten Backup- und Restore-Vorgängen um 8 Stunden reduziert werden.</block>
@@ -5853,4 +5848,15 @@
   <block id="fb4d860c1938626a4cb9b8f66c6eb6f2" category="cell">März 2023</block>
   <block id="8e44a3ecd2d34ebd0399052b6ee88e12" category="sidebar">SAP HANA auf ANF – Backup und Recovery mit Cloud-Backup für Applikationen</block>
   <block id="a412c94443f5ac6c0322b71de9e01398" category="sidebar">Anwendungsfälle und die Bedeutung beschleunigter Backup- und Klonvorgänge</block>
+  <block id="0c955f27cc01753f6caba6b35f81c22b" category="inline-link-macro">Früher: Konzepte und Best Practices für Cloud Backup für Applikationen</block>
+  <block id="1d6e2b0c5c8f5ecf276b1c1ae033b52c" category="paragraph"><block ref="1d6e2b0c5c8f5ecf276b1c1ae033b52c" category="inline-link-macro-rx"></block></block>
+  <block id="caf742ad86750136d207a022f2424f96" category="summary">Bevor Sie Cloud Backup für Applikationen konfigurieren, müssen Sie die Datensicherungsstrategie auf Basis der RTO- und RPO-Anforderungen der verschiedenen SAP-Systeme definieren. Es üblich, Systemtypen zu definieren, wie z. B. Systeme für Produktion, Entwicklung, Tests oder Sandboxing. Alle SAP-Systeme des gleichen Systemtyps haben typischerweise die gleichen Datenschutzparameter.</block>
+  <block id="f28f5248fad899e39a597fa4869c8b78" category="inline-link-macro">Früher: Cloud Backup für Applikationen für SAP HANA auf ANF.</block>
+  <block id="158768d66bdd83e626f048a6dff08419" category="paragraph"><block ref="158768d66bdd83e626f048a6dff08419" category="inline-link-macro-rx"></block></block>
+  <block id="1833b1326ace61b7d0db9c7322a816f1" category="inline-link-macro">Weiter: Konzepte und Best Practices für Cloud-Backup für Applikationen</block>
+  <block id="94e31554b8b3f5e3703d90f6ca54b3ad" category="paragraph"><block ref="94e31554b8b3f5e3703d90f6ca54b3ad" category="inline-link-macro-rx"></block></block>
+  <block id="709e94314858df04c7357462a0792849" category="inline-link-macro">Früher: Anwendungsfälle und Mehrwert beschleunigter Backup- und Klonvorgänge</block>
+  <block id="7d0603f1cd927eedf5cdee93312e268b" category="paragraph"><block ref="7d0603f1cd927eedf5cdee93312e268b" category="inline-link-macro-rx"></block></block>
+  <block id="0f8328591822cd94c86e0d9fa42a479e" category="inline-link-macro">Nächste Generation: Cloud Backup für Applikationen für SAP HANA auf ANF.</block>
+  <block id="2aa507441d0bdacbf0b3c44eb914612f" category="paragraph"><block ref="2aa507441d0bdacbf0b3c44eb914612f" category="inline-link-macro-rx"></block></block>
 </blocks>

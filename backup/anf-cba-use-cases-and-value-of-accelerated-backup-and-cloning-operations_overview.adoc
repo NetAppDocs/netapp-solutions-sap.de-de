@@ -4,7 +4,7 @@ permalink: backup/anf-cba-use-cases-and-value-of-accelerated-backup-and-cloning-
 keywords: system upgrade, backups, restore 
 summary: Die Ausführung von Backups ist ein wichtiger Bestandteil jeder Datensicherungsstrategie. Backups werden regelmäßig geplant, um sicherzustellen, dass nach Systemausfällen eine Wiederherstellung möglich ist. Dies ist der offensichtlichste Anwendungsfall, aber es gibt auch andere SAP-Lifecycle-Management-Aufgaben, für die ein Beschleunigen von Backup- und Recovery-Vorgängen von entscheidender Bedeutung ist. 
 ---
-= Überblick über Anwendungsfälle und den Nutzen von beschleunigten Backup- und Klonvorgängen
+= Anwendungsfälle und die Bedeutung beschleunigter Backup- und Klonvorgänge
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 

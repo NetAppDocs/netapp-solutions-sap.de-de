@@ -1,0 +1,94 @@
+---
+sidebar: sidebar 
+permalink: backup/anf-cba-cloud-backup-for-applications-for-sap-hana-on-anf.html 
+keywords: sap hana releases, configurations, operations 
+summary: Dateibasierte SAP HANA Backups werden für Integritätsprüfungen der Datenbankblöcke verwendet und können entweder On-Demand oder als geplanter Backup-Vorgänge ausgeführt werden. Das richtlinienbasierte Aufbewahrungsmanagement wird auf Filesystem-Ebene und im HANA-Backup-Katalog durchgeführt. 
+---
+= Cloud Backup für Applikationen für SAP HANA auf ANF
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+link:anf-cba-cloud-backup-for-applications-architecture.html["Früher: Architektur von Cloud Backup für Applikationen."]
+
+
+
+== Lösungsüberblick
+
+Cloud Backup für die Applikation unterstützt Snapshot-basierte Backup-Vorgänge für die folgenden Komponenten:
+
+. *SAP HANA System* Datenvolumen.
+. *Nicht-Datenvolumen* einer SAP HANA-Datenbank. Beispiel: Der `/hana/shared` Volume- und/oder SAP Applikations-Server-Daten übertragen.
+. *Global non-Data Volume(s)*, die nicht zu einem bestimmten HANA-System gehören. Zum Beispiel das SAP-Transportverzeichnis `/usr/sap/trans`.
+
+
+Die Backup-Vorgänge dieser Komponenten umfassen Folgendes:
+
+* Geplante oder On-Demand-Backups
+* Optionale Pre- und Post-Skripte
+* Richtlinienbasiertes Aufbewahrungsmanagement
++
+** Für Snapshots auf ANF-Volume-Ebene
+** Innerhalb des SAP HANA-Backup-Katalogs (für HANA-Daten-Volume-Backups)
+
+
+
+
+Dateibasierte SAP HANA Backups werden für Integritätsprüfungen der Datenbankblöcke verwendet und können entweder On-Demand oder als geplanter Backup-Vorgänge ausgeführt werden. Das richtlinienbasierte Aufbewahrungsmanagement wird auf Filesystem-Ebene und im HANA-Backup-Katalog durchgeführt.
+
+Das Aufbewahrungsmanagement von HANA-Datenbank-Log-Backups wird auf Basis der definierten Aufbewahrung von HANA-Datenbank-Daten-Backups (Snapshot- oder dateibasiert) durchgeführt.
+
+CBA unterstützt Wiederherstellungsvorgänge für alle Snapshot-basierten Backups. Dateibasierte Backups können nur mit nativen HANA Tools wiederhergestellt werden.
+
+image:anf-cba-image6.png["Dieses Bild zeigt Backup und Restore für einen mandantenfähigen Datenbank-Container des HANA-Systems und globale nicht-Daten-Volumes."]
+
+
+
+== Lösungsbetrieb
+
+Backups der Snapshot Daten werden mit Cloud Backup für Applikationen ausgeführt. Dazu wird der Savepoint für das Backup der SAP HANA Datenbank getriggert, sodass die Snapshot Kopie, die auf der Storage-Ebene erstellt wird, auf einem konsistenten Image der SAP HANA Datenbank basiert. Siehe https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/b41a2823576f4726be649bc98e61d62c.html?q=sap%20hana%20snapshot%20backup["SAP-Administrationshandbuch"^] Finden Sie weitere Informationen.
+
+Um ein vollständiges Backup aller im Zusammenhang mit SAP HANA stehenden Ressourcen zu ermöglichen, ermöglicht Cloud Backup for Applications außerdem das Backup aller nicht datenbezogenen Volumes mit Storage-basierten Snapshot Kopien. Sie können nicht-Daten-Volumes unabhängig vom Datenbank-Daten-Backup planen, um individuelle Aufbewahrungs- und Sicherungsrichtlinien zu aktivieren.
+
+SAP empfiehlt, Storage-basierte Snapshot-Backups mit einem wöchentlichen dateibasierten Backup zu kombinieren, um eine Integritätsprüfung für Blöcke durchzuführen. Sie können die Blockintegritätsprüfung innerhalb von CBA ausführen. Block-Integritätsprüfung (dateibasierte) Backups werden auch verwendet, um Backups in einen zweiten Storage-Standort zu verlagern.
+
+Cloud Backup für Applikationen basiert auf Ihren konfigurierbaren Aufbewahrungsrichtlinien und managt die Organisation von Daten-Backups, Protokollierung von Backups und den SAP HANA Backup-Katalog.
+
+Die folgende Abbildung fasst die Backup-Lösung zusammen.
+
+image:anf-cba-image7.png["Diese Abbildung fasst die Backup-Lösung zusammen."]
+
+Beim Ausführen eines Storage-basierten Snapshot-Backups von nicht-Daten-Volumes führt Cloud Backup für Applikationen die folgenden Aufgaben aus:
+
+. Erstellt eine Storage-Snapshot-Kopie des nicht-Daten-Volumes
+. Löscht Storage-Snapshot-Kopien auf der Grundlage der definierten Aufbewahrungsrichtlinie.
+
+
+Bei der Ausführung eines Storage-basierten Snapshot-Backups der SAP HANA-Datenbank führt Cloud Backup for Applications die folgenden Aufgaben aus:
+
+. Erstellung eines SAP HANA-Backup-Speicherpunktes, um ein konsistentes Image auf der Persistenzschicht zu erstellen.
+. Erstellt eine Storage-Snapshot-Kopie des/der Daten-Volumes.
+. Registriert das Storage Snapshot-Backup im SAP HANA Backup-Katalog.
+. Gibt den Speicherpunkt für SAP HANA-Backup frei.
+. Löscht Storage-Snapshot-Kopien auf der Grundlage der definierten Aufbewahrungsrichtlinie.
+. Löscht die Einträge des SAP HANA-Backup-Katalogs basierend auf der festgelegten Aufbewahrungsrichtlinie.
+. Immer wenn ein Daten-Backup manuell oder basierend auf der Aufbewahrungsrichtlinie gelöscht wurde, löscht Cloud Backup für Applikationen alle Log-Backups, die älter als das älteste Daten-Backup sind. Log-Backups werden im Dateisystem und im SAP HANA Backup-Katalog gelöscht.
+
+
+
+
+== Unterstützte SAP HANA-Versionen und -Konfigurationen
+
+Cloud Backup für Applikationen unterstützt HANA MDC-Systeme mit einer einzelnen oder mehreren Mandanten und folgenden Konfigurationsoptionen:
+
+* SAP HANA 2.0 SPS4 und höher
+* Systeme mit einem einzelnen Host für SAP HANA
+* SAP HANA Systeme mit mehreren Hosts, wie im Abschnitt beschrieben link:anf-cba-backup-operations-with-hana-system-replication.html#backup-operations-with-hana-multiple-host-systems["„Backup Operations with HANA Multiple-Host Systems“"]
+* Das SAP HANA-System ist wie im Abschnitt beschrieben mit HANA System Replication (HSR) konfiguriert link:anf-cba-backup-operations-with-hana-system-replication.html["„Backup-Vorgänge mit HANA System Replication“"]
+
+
+link:anf-cba-cloud-backup-for-applications-concepts-and-best-practices.html["Weiter: Konzepte und Best Practices für Cloud-Backup für Applikationen"]

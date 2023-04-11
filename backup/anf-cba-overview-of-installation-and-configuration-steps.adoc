@@ -13,7 +13,7 @@ summary: In diesem Abschnitt werden die Installation und Konfiguration aller Kom
 :imagesdir: ./../media/
 
 
-link:anf-cba-cloud-backup-for-applications-architecture.html["Früher: Architektur von Cloud Backup für Applikationen."]
+link:anf-cba-cloud-backup-for-applications-concepts-and-best-practices.html["Früher: Konzepte und Best Practices für Cloud Backup für Applikationen"]
 
 [role="lead"]
 Die erforderlichen Installations- und Konfigurationsschritte lassen sich in drei Bereiche aufteilen.

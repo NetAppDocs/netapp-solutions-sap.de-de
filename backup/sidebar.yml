@@ -10,11 +10,13 @@ entries:
   - title: Backup und Recovery mit Azure NetApp Files
     url: "/backup/anf-cba-backup-and-recovery-using-azure-netapp-files.html"
   - title: Anwendungsfälle und die Bedeutung beschleunigter Backup- und Klonvorgänge
-    entries:
-    - title: Überblick
-      url: "/backup/anf-cba-use-cases-and-value-of-accelerated-backup-and-cloning-operations_overview.html"
-    - title: Architektur von Cloud Backup für Applikationen
-      url: "/backup/anf-cba-cloud-backup-for-applications-architecture.html"
+    url: "/backup/anf-cba-use-cases-and-value-of-accelerated-backup-and-cloning-operations_overview.html"
+  - title: Architektur von Cloud Backup für Applikationen
+    url: "/backup/anf-cba-cloud-backup-for-applications-architecture.html"
+  - title: Cloud Backup für Applikationen für SAP HANA auf ANF
+    url: "/backup/anf-cba-cloud-backup-for-applications-for-sap-hana-on-anf.html"
+  - title: Konzepte und Best Practices für Cloud Backup für Applikationen
+    url: "/backup/anf-cba-cloud-backup-for-applications-concepts-and-best-practices.html"
   - title: Überblick über die Installations- und Konfigurationsschritte
     url: "/backup/anf-cba-overview-of-installation-and-configuration-steps.html"
   - title: Backup-Richtlinien erstellen
