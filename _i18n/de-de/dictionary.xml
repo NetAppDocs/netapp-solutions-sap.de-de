@@ -730,8 +730,6 @@
   <block id="0614a261ce2e53d5987e97a60496a434" category="cell">NFS-Übertragungsgröße mit ONTAP 9</block>
   <block id="54b941646e65c3622af659cd9d965169" category="cell">NFS-Übertragungsgröße mit ONTAP 8</block>
   <block id="d8ad267f2c46ff97a15a2d97678f0e5d" category="cell">rw, bg, Hard, timeso=600, noatim</block>
-  <block id="d52686ae129e1d4bbe8cb75712e98f22" category="cell">Vers=3, Nolock</block>
-  <block id="5ce2764cf9f6ed7aadfe7ba01b6b29a4" category="cell">Vers=4,minorversion=1,Sperre</block>
   <block id="c16b7b6c06ec01825313e31feb82c6d2" category="cell">Rsize=1048576,wsize=262144</block>
   <block id="9fdcbaccc733453d8e7687d8e14a4e06" category="cell">Rsize=65536,wsize=65536</block>
   <block id="a6b3bab4792cb8cb5eda6f38e11a69e7" category="admonition">Um die Lese-Performance mit NFSv3 zu verbessern, empfiehlt NetApp, den zu verwenden<block ref="a3861384ad585829b3114e04e40e55be" prefix=" " category="inline-code"></block> Mount-Option, die mit SUSE Linux Enterprise Server 12 SP4 oder höher und RedHat Enterprise Linux (RHEL) 8.3 oder höher verfügbar ist.</block>
@@ -884,7 +882,6 @@
   <block id="b79b53eefbb492c96c4e5c552596db5a" category="admonition">Für SAP Lama muss das Verzeichnis /usr/sap/SID lokal sein. Mounten Sie daher kein NFS Volume für /usr/sap/SID, wenn Sie SAP Lama verwenden.</block>
   <block id="cd5a202e71fd003517be23ed41f89f8d" category="paragraph">Bei NFSv3 müssen Sie die NFS-Sperre deaktivieren, um NFS-Sperrungsvorgänge bei einem Software- oder Serverausfall zu vermeiden.</block>
   <block id="1017e4c4798ba77b88c85f3b8c6fdf03" category="cell">rw, bg, hart, timeso=600, noatim,</block>
-  <block id="7f4fbd9239422e6cbff6a5c40524adb3" category="cell">Vers=3,nolock,</block>
   <block id="4a09ae73b23148acb0508b47589e3623" category="cell">Rsize=1048576,wsize=262144,</block>
   <block id="7d7894f31c9b83146d2bc22185ed5db0" category="cell">Rsize=65536,wsize=65536,</block>
   <block id="d1805ea655a389bcd86b519f65f01560" category="admonition">Performance-Tests zeigen das<block ref="0a2568fff5870b65dc2e4e19de677378" prefix=" " category="inline-code"></block> Bietet gute Leseergebnisse speziell für das Datenvolumen. Protokollschreibvorgänge können von einer geringeren Anzahl von Sitzungen profitieren, z. B.<block ref="b3e16d81f1f84d087c55c1815a58a64c" prefix=" " category="inline-code"></block>. Für gemeinsam genutzte Volumes bietet sich die Option „nconnect“ möglicherweise ebenfalls an. Beachten Sie, dass der erste Mount von einem NFS-Server (IP-Adresse) die Anzahl der verwendeten Sitzungen definiert. Weitere Halterungen an dieselbe IP-Adresse ändern dies nicht, auch wenn für nconnect ein anderer Wert verwendet wird.</block>
@@ -5859,4 +5856,7 @@
   <block id="7d0603f1cd927eedf5cdee93312e268b" category="paragraph"><block ref="7d0603f1cd927eedf5cdee93312e268b" category="inline-link-macro-rx"></block></block>
   <block id="0f8328591822cd94c86e0d9fa42a479e" category="inline-link-macro">Nächste Generation: Cloud Backup für Applikationen für SAP HANA auf ANF.</block>
   <block id="2aa507441d0bdacbf0b3c44eb914612f" category="paragraph"><block ref="2aa507441d0bdacbf0b3c44eb914612f" category="inline-link-macro-rx"></block></block>
+  <block id="e2aad9960e8d21643cd0c96d6d0231cc" category="cell">Nfsvers=3,nolock,</block>
+  <block id="9bb4ef49da8c49be50e8756f6e99e5fa" category="cell">Nfsvers=4.1,sperren</block>
+  <block id="dae81ce43b95196ee53c797d1ddda090" category="cell">Nfsvers=3,nolock</block>
 </blocks>
