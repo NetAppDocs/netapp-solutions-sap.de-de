@@ -335,6 +335,9 @@ Für einige Befehle in dieser Tabelle müssen Sie in den erweiterten Berechtigun
 | Deaktivieren Sie die numerischen nfsv4-ids | nfs modify -vServer <vServer_Name> -v4-numeric-ids deaktiviert 
 |===
 
+NOTE: Bitte beachten Sie, dass die Deaktivierung numerischer ids eine Benutzerverwaltung erfordert, wie im Abschnitt beschrieben link:saphana_aff_nfs_sap_hana_installation_preparations_for_nfsv4.html["„SAP HANA Installationsvorbereitungen für NFSv4“."]
+
+
 NOTE: Die NFSv4-Domänen-ID muss auf allen Linux-Servern auf denselben Wert festgelegt sein (`/etc/idmapd.conf`) Und SVMs, wie im Abschnitt beschrieben link:saphana_aff_nfs_sap_hana_installation_preparations_for_nfsv4.html["„SAP HANA Installationsvorbereitungen für NFSv4“."]
 
 
