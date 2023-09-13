@@ -25,9 +25,9 @@ In einer SSD-Konfiguration werden Inline-Deduplizierung, Inline-Deduplizierung, 
 
 
 
-== NetApp Volume Encryption
+== NetApp Volume- und Aggregatverschlüsselung
 
-NetApp Volume Encryption (NVE) wird mit SAP HANA unterstützt.
+Die Verwendung von NetApp Volume Encryption (NVE) und NetApp Aggregate Encryption (NAE) wird bei SAP HANA unterstützt.
 
 
 

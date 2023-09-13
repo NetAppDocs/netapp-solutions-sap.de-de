@@ -27,9 +27,9 @@ Die Aktivierung von Storage-Effizienzfunktionen in einer HDD-Konfiguration wird 
 
 
 
-== NetApp Volume Encryption
+== NetApp Volume- und Aggregatverschlüsselung
 
-Bei SAP HANA wird NetApp Volume Encryption (NVE) unterstützt.
+Die Verwendung von NetApp Volume Encryption (NVE) und NetApp Aggregate Encryption (NAE) wird bei SAP HANA unterstützt.
 
 
 
