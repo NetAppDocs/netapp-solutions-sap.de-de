@@ -1291,7 +1291,6 @@
   <block id="3cdfc8a41029c02db2f75000bec7b96d" category="paragraph"><block ref="3cdfc8a41029c02db2f75000bec7b96d" category="inline-link-macro-rx"></block></block>
   <block id="0f41d05d80faf4e3a75a6b4e2292f1c0" category="summary">Die NetApp AFF Produktfamilie ist für die Verwendung mit SAP HANA in TDI Projekten zertifiziert. Die zertifizierte Enterprise Storage-Plattform zeichnet sich durch die NetApp ONTAP Software aus.</block>
   <block id="0db6b81db5bd35e1eef1e83e154c3cb5" category="doc">TR-4436: SAP HANA on NetApp AFF Systems with Fibre Channel Protocol</block>
-  <block id="eb08d46fa92fc78a1fd6730ec46042b6" category="list-text">ASA AFF A220, ASA AFF A250, ASA AFF A400, ASA AFF A700, ASA AFF A800, ASA AFF A900</block>
   <block id="97bfb54320c9268725cfbb374a5168fb" category="paragraph">Eine vollständige Liste der zertifizierten NetApp Storage-Lösungen für SAP HANA finden Sie unter<block ref="a3976abaebe3520fd66c465c4d7747d7" category="inline-link-rx"></block>.</block>
   <block id="171ad4663cdfb492651e0357292fbe82" category="paragraph">In diesem Dokument werden die AFF-Konfigurationen beschrieben, die das Fibre Channel Protocol (FCP) verwenden.</block>
   <block id="9ba59bf1b64e9d129b41dbb49f3c385f" category="paragraph">Die Konfigurationsleitfäden für AFF Systeme mit NFS und NetApp FAS Systemen können über die folgenden Links gefunden werden:</block>
@@ -5285,4 +5284,8 @@
   <block id="2976619a79e897d24427ec6796aa4a70" category="paragraph">Bei Einsatz von SAP HANA Systemen mit mehreren Hosts und automatischem Host-Failover müssen die Failover-Parameter innerhalb angepasst werden<block ref="46649585ec21482ae2e5fcac30c7dcae" prefix=" " category="inline-code"></block> Wie in der folgenden Tabelle dargestellt.
 Behalten Sie das standardmäßige Wiederholungsintervall von 10 Sekunden in diesen Abschnitten bei.</block>
   <block id="73d4ace7e434b8709f5a930ad845d6d6" category="paragraph">Bei Einsatz von SAP HANA Systemen mit mehreren Hosts und automatischem Host-Failover müssen die Failover-Parameter innerhalb angepasst werden<block ref="46649585ec21482ae2e5fcac30c7dcae" prefix=" " category="inline-code"></block> Wie in der folgenden Tabelle dargestellt. Halten Sie das Standard-Wiederholungsintervall von 10 Sekunden in diesen Abschnitten ein.</block>
+  <block id="724e5b34aefa3c5cafe7d5d30b9a4beb" category="list-text">AFF A150, AFF A250, AFF A400, AFF A800, AFF A900</block>
+  <block id="f24901db79bd7adbcfdc97deb6526be7" category="list-text">ASA A250, ASA A400, ASA A800, ASA A900</block>
+  <block id="7165d8e624155bf7a4889b98927f605c" category="list-text">ASA C250, ASA C400, ASA C800</block>
+  <block id="ba7dc8a883957fda819c429f468dc4d0" category="admonition">NetApp AFF und ASA C-Serie erfordern NetApp ONTAP 9.13.1 oder höher</block>
 </blocks>
