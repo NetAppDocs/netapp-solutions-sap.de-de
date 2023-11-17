@@ -13,8 +13,7 @@ summary:
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-snapcenter-service-policy-configuration.html["Früher: Konfiguration der SnapCenter-Dienstrichtlinien."]
-
+[role="lead"]
 SnapCenter Service unterstützt zwei verschiedene Snapshot Backup-Typen:
 
 * SAP HANA Daten-Backups mithilfe von Snapshot Operationen
@@ -40,5 +39,3 @@ In den folgenden Abschnitten wird die Konfiguration der drei verschiedenen Backu
 
 
 
-
-link:saphana-backup-anf-backup-configuration-of-sap-hana-database-backups.html["Nächste Lösung: Backup-Konfiguration von SAP HANA Datenbank-Backups"]

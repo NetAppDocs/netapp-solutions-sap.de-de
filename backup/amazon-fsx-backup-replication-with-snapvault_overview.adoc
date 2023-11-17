@@ -13,8 +13,7 @@ summary: Im Lab-Setup verwenden wir ein zweites FSX für ONTAP-Filesystem in ein
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-backup-of-non-data-volumes.html["Früher: Backup von nicht-Daten-Volumes."]
-
+[role="lead"]
 Im Lab-Setup verwenden wir ein zweites FSX für ONTAP-Filesystem in einer zweiten AWS-Verfügbarkeitszone, um die Backup-Replizierung für das HANA-Datenvolumen zu präsentieren.
 
 Wie in Kapitel erläutert link:amazon-fsx-snapcenter-architecture.html#data-protection-strategy["„Datensicherungsstrategie“"], Das Replikationsziel muss ein zweites FSX für ONTAP-Dateisystem in einer anderen Verfügbarkeitszone sein, um vor einem Ausfall des primären FSX für ONTAP-Dateisystem geschützt zu werden. Außerdem sollte das gemeinsame HANA-Volume auf das sekundäre FSX für das ONTAP-Dateisystem repliziert werden.
@@ -48,5 +47,3 @@ Wenn die Konfiguration der Volume-Replikation abgeschlossen ist, müssen Sie die
 
 
 In den folgenden Kapiteln werden die einzelnen Schritte detaillierter beschrieben.
-
-link:amazon-fsx-configure-replication-relationships-on-fsx-for-ontap-file-systems.html["Als Nächstes: Replikationsbeziehungen auf FSX für ONTAP-Dateisysteme konfigurieren."]

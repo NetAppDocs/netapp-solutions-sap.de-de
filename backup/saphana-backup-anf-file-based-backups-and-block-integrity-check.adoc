@@ -13,8 +13,7 @@ summary: SAP empfiehlt, Storage-basierte Snapshot-Backups mit einem wöchentlich
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-sap-hana-database-snapshot-backups.html["Früher: SAP HANA Datenbank-Snapshot-Backups"]
-
+[role="lead"]
 SAP empfiehlt, Storage-basierte Snapshot-Backups mit einem wöchentlichen dateibasierten Backup zu kombinieren, um eine Integritätsprüfung für Datenblöcke durchzuführen. SnapCenter Service unterstützt die Ausführung einer Block-Integritätsprüfung mithilfe einer Richtlinie, in der dateibasiertes Backup als Backup-Typ ausgewählt wird.
 
 Neben den Snapshot-Backups auf dem HANA-Datenvolumen werden auch dateibasierte Backups verwendet, damit zusätzlich zu sekundären Backup-Kopien erstellt werden können. Diese dateibasierten Backups können Sie zur Wiederherstellung und Recovery verwenden, falls das primäre Daten-Volume komplett verloren geht.
@@ -52,5 +51,3 @@ drwxr-x--- 4 pr1adm sapsys       4096 Jan 31 18:59 ..
 == Wiederherstellung und Recovery mithilfe von dateibasierten Backups
 
 Ein Restore- und Recovery-Vorgang eines dateibasierten Backups außerhalb von SnapCenter muss mithilfe von HANA Recovery-Standardoperationen mit HANA Studio oder HANA Cockpit durchgeführt werden.
-
-link:saphana-backup-anf-restore-and-recovery.html["Weiter: Restore und Recovery."]

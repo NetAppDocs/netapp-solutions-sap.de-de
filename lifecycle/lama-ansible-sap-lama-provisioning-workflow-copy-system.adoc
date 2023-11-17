@@ -13,8 +13,6 @@ summary: In diesem Kapitel besprechen wir kurz die Unterschiede zwischen dem Wor
 :imagesdir: ./../media/
 
 
-link:lama-ansible-sap-lama-deprovisioning-workflow-system-destroy.html["Früher: Workflow zur Deprovisionierung von SAP Lama – Systemzerstöre"]
-
 [role="lead"]
 Die folgende Abbildung zeigt die primären Schritte, die mit dem Workflow für Systemkopien ausgeführt werden.
 
@@ -57,5 +55,3 @@ image:lama-ansible-image47.png["Dieser Screenshot zeigt den Bildschirm Lama Syst
 Es muss manuell angenommen werden, um den Pre-Hook-Schritt während des System Destroy-Prozesses auszuführen, weil eine Bedingung festgelegt ist und die Ausführung verhindert.
 
 image:lama-ansible-image48.png["In diesem Screenshot wird der Bildschirm Lama Systems zusammen mit Systemdetails angezeigt, und das Kontrollkästchen Benutzerdefinierte Verarbeitung verwenden ist aktiviert."]
-
-link:lama-ansible-sap-lama-provisioning-workflow-system-refresh.html["Als Nächstes: SAP Lama-Provisioning-Workflow – Systemaktualisierung"]

@@ -13,8 +13,7 @@ summary: In diesem Abschnitt wird beschrieben, wie Sie FSX für ONTAP-Filesystem
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-backup-replication-with-snapvault_overview.html["Zurück: Übersicht - Backup Replikation mit SnapVault."]
-
+[role="lead"]
 Weitere Informationen zur SnapMirror Konfigurationsoptionen finden Sie in der ONTAP-Dokumentation unter https://docs.netapp.com/us-en/ontap/data-protection/snapmirror-replication-workflow-concept.html["SnapMirror Replizierungs-Workflow (netapp.com)"^].
 
 * Quell-FSX für ONTAP Dateisystem: `FsxId00fa9e3c784b6abbb`
@@ -170,4 +169,3 @@ sapcc-hana-svm:PFX_data_mnt00001
                               Snapmirrored
                                       Idle           -         true    -
 ....
-link:amazon-fsx-add-a-backup-svm-to-snapcenter.html["Dann: Fügen Sie eine Backup-SVM zu SnapCenter hinzu."]

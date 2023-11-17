@@ -46,5 +46,3 @@ Die Systemreplizierung kann mit asynchroner Replizierung konfiguriert werden, oh
 Hinsichtlich der Backup-Anforderungen müssen Sie in der Lage sein, Backups während des normalen Betriebs in Datacenter 1 und bei Disaster Recovery in Datacenter 2 zu erstellen. In Datacentern 1 und 2 ist eine separate Backup-Infrastruktur verfügbar, Backup-Vorgänge werden als Teil des Disaster Failover aktiviert. Die Backup-Infrastruktur ist in der Regel nicht gemeinsam genutzt und ein Restore eines Backups, das auf dem anderen Datacenter erstellt wurde, ist nicht möglich.
 
 image:saphana-sr-scs-image2.png["Fehler: Fehlendes Grafikbild"]
-
-link:saphana-sr-scs-storage-snapshot-backups-and-sap-system-replication.html["Weiter: Storage Snapshot Backups und SAP System Replication."]

@@ -13,7 +13,8 @@ summary: Im Folgenden sind Anforderungen für die Softwareinstallation für SAP 
 :imagesdir: ./../media/
 
 
-link:saphana-fas-nfs_sap_hana_data_volume_size.html["Früher: Größe des SAP HANA Datenvolumens."]
+[role="lead"]
+Im Folgenden sind Anforderungen für die Softwareinstallation für SAP HANA aufgeführt.
 
 
 
@@ -83,5 +84,3 @@ Enter Installation Path [/hana/shared]:
 ....
 . Vergewissern Sie sich, dass das Installationstool alle ausgewählten Komponenten bei allen Worker- und Standby-Hosts installiert hat.
 
-
-link:saphana-fas-nfs_adding_additional_data_volume_partitions.html["Weiter: Zusätzliche Daten-Volume-Partitionen."]

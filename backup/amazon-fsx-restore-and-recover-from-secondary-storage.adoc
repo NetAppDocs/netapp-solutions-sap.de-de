@@ -13,8 +13,7 @@ summary: In diesem Abschnitt wird beschrieben, wie Sie Daten aus dem sekundären
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-create-a-backup-with-replication.html["Früher: Erstellen Sie ein Backup mit Replikation."]
-
+[role="lead"]
 Führen Sie die folgenden Schritte aus, um im Sekundärspeicher wiederherzustellen und eine Wiederherstellung durchzuführen:
 
 Um die Liste aller Backups auf dem sekundären Storage abzurufen, klicken Sie in der Ansicht SnapCenter Topology auf Vault Kopien, wählen Sie dann ein Backup aus und klicken Sie auf Wiederherstellen.
@@ -26,5 +25,3 @@ Das Dialogfeld Wiederherstellen zeigt die sekundären Speicherorte an.
 image:amazon-fsx-image93.png["Fehler: Fehlendes Grafikbild"]
 
 Weitere Restore- und Recovery-Schritte sind mit denen identisch, die bei einem Snapshot Backup im Primärspeicher besprochen wurden.
-
-link:amazon-fsx-where-to-find-additional-information.html["Weiter: Wo finden Sie zusätzliche Informationen und Versionsverlauf."]

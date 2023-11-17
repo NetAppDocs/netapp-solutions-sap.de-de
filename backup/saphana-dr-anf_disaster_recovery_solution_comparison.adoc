@@ -13,8 +13,7 @@ summary: Eine umfassende Disaster Recovery-Lösung muss Kunden nach einem vollst
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_data_protection_overview_overview.html["Früher: Übersicht über SAP HANA Disaster-Recovery mit Azure NetApp Files"]
-
+[role="lead"]
 Eine umfassende Disaster Recovery-Lösung muss Kunden nach einem vollständigen Ausfall des primären Standorts die Wiederherstellung ermöglichen. Daher müssen die Daten an einen sekundären Standort übertragen werden und eine komplette Infrastruktur ist erforderlich, um bei einem Standortausfall die erforderlichen SAP HANA Produktionssysteme auszuführen. Abhängig von den Verfügbarkeitsanforderungen der Applikation und der Art des zu schützenden Disaster ist eine Disaster Recovery-Lösung mit zwei oder drei Standorten zu berücksichtigen.
 
 Die folgende Abbildung zeigt eine typische Konfiguration, bei der die Daten innerhalb derselben Azure-Region synchron in eine zweite Verfügbarkeitszone repliziert werden. Durch die kurze Entfernung können Sie die Daten synchron replizieren und ein RPO von null (normalerweise HA-Bereitstellung) erreichen.
@@ -139,4 +138,3 @@ In der folgenden Tabelle werden die Disaster-Recovery-Lösungen verglichen.
 
 | DR-Tests ohne Auswirkungen auf RTO und RPO | Ja. | Nein | Nein 
 |===
-link:saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html["Nächste: Regionale ANF-Replizierung mit SAP HANA"]

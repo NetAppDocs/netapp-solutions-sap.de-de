@@ -13,8 +13,7 @@ summary: Auf dieser Seite werden verschiedene Vorgänge beschrieben, die zum Abs
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-restore-and-recovery.html["Früher: Restore und Wiederherstellung."]
-
+[role="lead"]
 In diesem Abschnitt werden Konfigurations- und Tuning-Optionen beschrieben, mit denen Kunden das SnapCenter Setup an ihre spezifischen Anforderungen anpassen können. Möglicherweise gelten nicht alle Einstellungen für alle Kundenszenarien.
 
 
@@ -217,5 +216,3 @@ PS C:\Users\scadmin> Check the configuration using the Windows Task Scheduler.
 image:saphana-br-scs-image158.png["Fehler: Fehlendes Grafikbild"]
 
 
-
-link:saphana-br-scs-where-to-find-additional-information.html["Weiter: Wo finden Sie zusätzliche Informationen."]

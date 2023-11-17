@@ -13,8 +13,5 @@ summary: Sie müssen die Zeit zwischen den Storage-Controllern und den SAP HANA 
 :imagesdir: ./../media/
 
 
-link:saphana_fas_fc_san_fabric_setup.html["Früher: SAN Fabric Einrichtung."]
-
+[role="lead"]
 Sie müssen die Zeit zwischen den Storage-Controllern und den SAP HANA Datenbank-Hosts synchronisieren. Es muss der gleiche Zeitserver für alle Storage Controller und alle SAP HANA-Hosts festgelegt sein.
-
-link:saphana_fas_fc_storage_controller_setup.html["Weiter: Einrichtung von Storage Controller."]

@@ -13,8 +13,6 @@ summary: In diesem Abschnitt wird der gesamte Workflow zum Klonen von SAP Lama-S
 :imagesdir: ./../media/
 
 
-link:lama-ansible-example-implementation.html["Früher: Beispielimplementierung."]
-
 [role="lead"]
 Die folgende Abbildung zeigt die Hauptschritte, die beim Systemklonworkflow ausgeführt werden.
 
@@ -84,5 +82,3 @@ image:lama-ansible-image31.png["Weitere Protokollinformationen"]
 
 
 Nach Abschluss des Workflows ist das geklonte SAP-System vorbereitet, gestartet und betriebsbereit.
-
-link:lama-ansible-sap-lama-deprovisioning-workflow-system-destroy.html["Weiter: SAP Lama-Deprovisionierung-Workflow - Systemzerstöre."]

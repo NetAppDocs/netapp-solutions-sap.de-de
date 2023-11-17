@@ -13,8 +13,7 @@ summary: In SnapCenter werden Datenbank-Backups normalerweise mithilfe der Zeitp
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-snapcenter-resource-specific-configuration-for-non-data-volume-backups.html["Früher: Ressourcenspezifische SnapCenter Konfiguration für Backups außerhalb von Datenvolumen."]
-
+[role="lead"]
 In SnapCenter werden Datenbank-Backups normalerweise mithilfe der Zeitpläne ausgeführt, die in der Ressourcenschutzkonfiguration der einzelnen HANA-Datenbanken definiert sind.
 
 Ein On-Demand-Datenbank-Backup kann entweder über die SnapCenter GUI, eine PowerShell Befehlszeile oder REST-APIs durchgeführt werden.
@@ -115,5 +114,3 @@ image:saphana-br-scs-image93.png["Fehler: Fehlendes Grafikbild"]
 
 . Im SAP HANA Studio ist das neue Backup im Backup-Katalog sichtbar. Derselbe Backup-Name in SnapCenter wird auch im Kommentar und im EBID-Feld im Backup-Katalog verwendet.
 
-
-link:saphana-br-scs-block-integrity-check.html["Als Nächstes: Block-Integritätsprüfung"]

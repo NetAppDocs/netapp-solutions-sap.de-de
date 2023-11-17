@@ -13,8 +13,7 @@ summary: In diesem Abschnitt wird die Konfiguration einer Richtlinie für die Ba
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-add-a-backup-svm-to-snapcenter.html["Früher: Fügen Sie eine Backup-SVM zu SnapCenter hinzu."]
-
+[role="lead"]
 Sie müssen eine Richtlinie für die Backup-Replikation wie folgt konfigurieren:
 
 . Geben Sie einen Namen für die Richtlinie ein.
@@ -50,5 +49,3 @@ image:amazon-fsx-image84.png["Fehler: Fehlendes Grafikbild"]
 Die neue SnapCenter-Richtlinie ist jetzt konfiguriert.
 
 image:amazon-fsx-image85.png["Fehler: Fehlendes Grafikbild"]
-
-link:amazon-fsx-add-a-policy-to-resource-protection.html["Weiter: Fügen Sie eine Richtlinie zu Ressourcenschutz hinzu."]

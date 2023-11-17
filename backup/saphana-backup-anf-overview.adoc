@@ -29,5 +29,3 @@ Folgende Punkte fassen die Herausforderungen zusammen, die mit SAP-Backup und -R
 * *Steigende Kosten von Ausfallzeiten.* ungeplante Ausfallzeiten eines SAP-Systems haben typischerweise Auswirkungen auf die Geschäftsfinanzen. Die Notwendigkeit der Wiederherstellung des SAP Systems erfordert einen Großteil aller ungeplanten Ausfallzeiten. Daher bestimmt die gewünschte RTO das Design der Backup- und Recovery-Architektur.
 * *Backup- und Wiederherstellungszeit für SAP-Upgrade-Projekte.* der Projektplan für ein SAP-Upgrade beinhaltet mindestens drei Backups der SAP-Datenbank. Diese Backups reduzieren die für den Upgrade-Prozess verfügbare Zeit erheblich. Die Entscheidung zum Fortfahren hängt im Allgemeinen von der Zeit ab, die zur Wiederherstellung der Datenbank aus dem zuvor erstellten Backup benötigt wird. Statt ein System in den vorherigen Zustand wiederherzustellen, bietet eine schnelle Wiederherstellung mehr Zeit zur Behebung von Problemen, die bei einem Upgrade auftreten können.
 
-
-link:saphana-backup-anf-the-netapp-solution.html["Als Nächstes: Die NetApp Lösung."]

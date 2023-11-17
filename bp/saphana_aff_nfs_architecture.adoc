@@ -13,8 +13,7 @@ summary: 'SAP HANA-Hosts sind über eine redundante 10-GbE- oder schnellere Netz
 :imagesdir: ./../media/
 
 
-link:saphana_aff_nfs_introduction.html["Früher: SAP HANA on NetApp All Flash FAS Systems with NFS Configuration Guide."]
-
+[role="lead"]
 SAP HANA-Hosts sind über eine redundante 10-GbE- oder schnellere Netzwerkinfrastruktur mit Storage Controllern verbunden. Die Kommunikation zwischen SAP HANA-Hosts und Storage-Controllern basiert auf dem NFS-Protokoll. Für eine fehlertolerante SAP HANA Host-to-Storage-Konnektivität ist eine redundante Switching-Infrastruktur erforderlich, die bei Switch- oder NIC-Ausfällen (Network Interface Card) eingesetzt werden kann.
 
 Die Switches können die Leistung einzelner Ports mit Port-Kanälen aggregieren, um als einzelne logische Einheit auf Hostebene angezeigt zu werden.
@@ -103,5 +102,3 @@ Die synchrone Replizierung bietet den StrictSync-Modus. Wenn der Schreibvorgang 
 Die folgende Abbildung bietet einen allgemeinen Überblick über die Lösung. Das Storage-Cluster an jedem Standort bietet lokale Hochverfügbarkeit und wird für den Produktions-Workload verwendet. Die Daten aller Standorte werden synchron zum anderen Standort repliziert und sind im Fall eines Disaster Failovers verfügbar.
 
 image:saphana_aff_nfs_image8.png["Fehler: Fehlendes Grafikbild"]
-
-link:saphana_aff_nfs_storage_sizing.html["Als Nächstes: Storage-Sizing."]

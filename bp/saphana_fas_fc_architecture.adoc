@@ -13,8 +13,7 @@ summary: SAP HANA-Hosts sind über eine redundante FCP-Infrastruktur und Multipa
 :imagesdir: ./../media/
 
 
-link:saphana_fas_fc_introduction.html["Früher: SAP HANA on FAS Systems with FCP Configuration Guide."]
-
+[role="lead"]
 SAP HANA-Hosts sind über eine redundante FCP-Infrastruktur und Multipathing-Software mit den Storage Controllern verbunden. Eine redundante FCP Switch-Infrastruktur ist erforderlich, um eine fehlertolerante SAP HANA Host-zu-Storage-Konnektivität bei Ausfall von Switch oder Host Bus Adapter (HBA) bereitzustellen. Ein entsprechendes Zoning muss am Switch konfiguriert werden, damit alle HANA Hosts die erforderlichen LUNs auf den Storage Controllern erreichen können.
 
 Auf der Storage-Ebene können verschiedene Modelle der FAS Produktfamilie verwendet werden. Die maximale Anzahl an an mit dem Storage verbundenen SAP HANA-Hosts wird durch die Performance-Anforderungen von SAP HANA definiert. Die Anzahl der benötigten Platten-Shelves richtet sich nach den Kapazitäts- und Performance-Anforderungen der SAP HANA-Systeme.
@@ -96,5 +95,3 @@ Die synchrone Replizierung bietet den StrictSync-Modus. Wenn der Schreibvorgang 
 Die folgende Abbildung bietet einen allgemeinen Überblick über die Lösung. Der Storage Cluster an jedem Standort sorgt für lokale Hochverfügbarkeit und wird für Produktions-Workloads verwendet. Die Daten an jedem Standort werden synchron zum anderen Standort repliziert und sind im Fall eines Disaster Failovers verfügbar.
 
 image:saphana_fas_fc_image7.png["Fehler: Fehlendes Grafikbild"]
-
-link:saphana_fas_fc_storage_sizing.html["Als Nächstes: Storage-Sizing."]

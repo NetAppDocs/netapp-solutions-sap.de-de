@@ -13,11 +13,8 @@ summary:
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-restore-and-recovery.html["Früher: Restore und Wiederherstellung."]
-
+[role="lead"]
 Sehen Sie sich die folgenden Dokumente und/oder Websites an, um mehr über die in diesem Dokument beschriebenen Informationen zu erfahren:
 
 * link:https://review.docs.netapp.com/us-en/netapp-solutions-sap_main/backup/saphana-dr-anf_data_protection_overview_overview.html["TR-4891: SAP HANA Disaster Recovery mit Azure NetApp Files"]
 
-
-link:saphana-backup-anf-version-history.html["Weiter: Versionsverlauf."]

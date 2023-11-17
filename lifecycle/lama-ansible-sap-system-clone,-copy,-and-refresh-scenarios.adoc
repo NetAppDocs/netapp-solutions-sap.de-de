@@ -13,8 +13,6 @@ summary:
 :imagesdir: ./../media/
 
 
-link:lama-ansible-introduction.html["Zurück: Einführung."]
-
 [role="lead"]
 Der Begriff SAP Systemkopie wird oft als Synonym für drei verschiedene Prozesse verwendet: SAP Systemklon, SAP Systemkopie oder SAP Systemaktualisierung. Es ist wichtig, zwischen den verschiedenen Vorgängen zu unterscheiden, da sich Workflows und Anwendungsfälle für jedes einzelne unterscheiden.
 
@@ -26,5 +24,3 @@ Der Begriff SAP Systemkopie wird oft als Synonym für drei verschiedene Prozesse
 Die folgende Abbildung zeigt die wichtigsten Schritte, die während eines Systemklonens, einer Systemkopie oder einer Systemaktualisierung ausgeführt werden müssen. Die violetten Felder zeigen die Schritte an, in die NetApp Storage-Funktionen integriert werden können. Alle drei Operationen lassen sich mithilfe von SAP Lama vollständig automatisieren.
 
 image:lama-ansible-image1.png["Diese Abbildung zeigt drei Zeitpläne für System Clone, System Copy und Systemaktualisierung."]
-
-link:lama-ansible-use-cases-for-system-refresh,-copy,-and-cloning.html["Weiter: Anwendungsfälle für Systemaktualisierung, Kopie und Klonen."]

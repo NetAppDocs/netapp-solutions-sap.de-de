@@ -13,7 +13,8 @@ summary: Ab SAP HANA 2.0 SPS4 können Sie zusätzliche Daten-Volume-Partitionen 
 :imagesdir: ./../media/
 
 
-link:saphana-fas-nfs_sap_hana_software_installation.html["Früher: Installation der SAP HANA Software."]Ab SAP HANA 2.0 SPS4 können Sie zusätzliche Daten-Volume-Partitionen konfigurieren, mit denen Sie zwei oder mehr Volumes für das Datenvolumen einer SAP HANA-Mandantendatenbank konfigurieren können. Ein einzelnes Volume kann auch jenseits der Größe und Performance-Grenzen skaliert werden.
+[role="lead"]
+Ab SAP HANA 2.0 SPS4 können Sie zusätzliche Daten-Volume-Partitionen konfigurieren, mit denen Sie zwei oder mehr Volumes für das Datenvolumen einer SAP HANA-Mandantendatenbank konfigurieren können. Ein einzelnes Volume kann auch jenseits der Größe und Performance-Grenzen skaliert werden.
 
 
 NOTE: Für SAP HANA sind zwei oder mehr einzelne Volumes für das Daten-Volume verfügbar, ein- und mehrere Host-Systeme. Sie können jederzeit weitere Volume-Partitionen hinzufügen, jedoch ist hierfür möglicherweise ein Neustart der SAP HANA Datenbank erforderlich.
@@ -212,5 +213,3 @@ Führen Sie die folgende SQL-Anweisung für die Mandantendatenbank aus, um Ihrer
 ALTER SYSTEM ALTER DATAVOLUME ADD PARTITION PATH '/hana/data2/SID/';
 ....
 image:saphana-fas-nfs_image19.jpg["Fehler: Fehlendes Grafikbild"]
-
-link:saphana-fas-nfs_where_to_find_additional_information.html["Weiter: Wo finden Sie zusätzliche Informationen."]

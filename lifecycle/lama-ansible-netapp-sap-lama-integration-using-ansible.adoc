@@ -13,8 +13,6 @@ summary: Bei dem Integrationsansatz werden individuelle Provisionierungs- und Ho
 :imagesdir: ./../media/
 
 
-link:lama-ansible-use-cases-for-system-refresh,-copy,-and-cloning.html["Zurück – Anwendungsfälle für Systemaktualisierung, Kopie und Klonen."]
-
 [role="lead"]
 Bei dem Integrationsansatz werden individuelle Provisionierungs- und Hooks von SAP Lama in Kombination mit Ansible-Playbooks für das NetApp Storage-Management verwendet. Die folgende Abbildung zeigt einen allgemeinen Überblick über die Konfiguration auf Lama-Seite sowie die entsprechenden Komponenten der Beispielimplementierung.
 
@@ -31,5 +29,3 @@ Weitere Informationen zu NetApp Ansible-Modulen und den Lama-Provider-Definition
 * https://www.ansible.com/integrations/infrastructure/netapp["NetApp Ansible Module"^]
 * https://help.sap.com/doc/700f9a7e52c7497cad37f7c46023b7ff/3.0.11.0/en-US/bf6b3e43340a4cbcb0c0f3089715c068.html["Dokumentation zu SAP Lama – Anbieterdefinitionen"^]
 
-
-link:lama-ansible-example-implementation.html["Weiter: Beispielimplementierung."]

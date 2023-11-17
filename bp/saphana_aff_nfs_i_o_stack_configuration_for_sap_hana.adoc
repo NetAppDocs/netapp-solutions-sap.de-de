@@ -13,8 +13,7 @@ summary: Ab SAP HANA 1.0 SPS10 führte SAP Parameter ein, um das I/O-Verhalten a
 :imagesdir: ./../media/
 
 
-link:saphana_aff_nfs_sap_hana_installation_preparations_for_nfsv4.html["Früher: Vorbereitungen für die Installation von SAP HANA auf NFSv4"]
-
+[role="lead"]
 Ab SAP HANA 1.0 SPS10 führte SAP Parameter ein, um das I/O-Verhalten anzupassen und die Datenbank für die verwendeten Datei- und Speichersysteme zu optimieren.
 
 NetApp hat Performance-Tests durchgeführt, um die idealen Werte zu definieren. In der folgenden Tabelle sind die optimalen Werte aufgeführt, die aus den Leistungstests abgeleitet wurden.
@@ -65,4 +64,3 @@ python setParameter.py -set=SYSTEM/global.ini/fileio/async_read_submit=on
 python setParameter.py -set=SYSTEM/global.ini/fileio/async_write_submit_active=on
 python setParameter.py -set=SYSTEM/global.ini/fileio/async_write_submit_blocks=all
 ....
-link:saphana_aff_nfs_sap_hana_data_volume_size.html["Next-Generation-Volume von SAP HANA"]

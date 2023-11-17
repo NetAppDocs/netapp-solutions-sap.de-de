@@ -13,7 +13,8 @@ summary: In diesem Abschnitt werden die Komponenten, unterstützte SAP HANA-Vers
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-snapcenter-architecture.html["Früher: SnapCenter Architektur."]
+[role="lead"]
+In diesem Abschnitt werden die Komponenten, unterstützte SAP HANA-Versionen und -Konfigurationen sowie in dieser Lösung verwendete Verbesserungen von SnapCenter 4.6 aufgeführt.
 
 
 
@@ -121,5 +122,3 @@ SnapCenter unterstützt die folgenden SAP HANA-Architekturen und -Releases:
 Ab Version 4.6 unterstützt SnapCenter die automatische Erkennung von HANA-Systemen, die in einer HANA-System-Replizierungsbeziehung konfiguriert sind. Jeder Host wird mit seiner physischen IP-Adresse (Host-Name) und seinem individuellen Daten-Volume auf der Storage-Ebene konfiguriert. Die beiden SnapCenter Ressourcen werden in einer Ressourcengruppe kombiniert, SnapCenter erkennt automatisch, welcher Host sich auf einem primären oder sekundären Server befindet, und führt dann die erforderlichen Backup-Vorgänge entsprechend aus. Das Aufbewahrungsmanagement für Snapshot und dateibasierte Backups, die mit SnapCenter erstellt wurden, erfolgt über beide Hosts hinweg, sodass sichergestellt ist, dass alte Backups auch am aktuellen sekundären Host gelöscht werden. Die folgende Abbildung bietet einen allgemeinen Überblick. Eine detaillierte Beschreibung der Konfiguration und des Betriebs von HANA System Replication fähigen HANA-Systemen in SnapCenter finden Sie unter https://www.netapp.com/us/media/tr-4719.pdf["TR-4719 SAP HANA System Replication, Backup und Recovery mit SnapCenter"^].
 
 image:saphana-br-scs-image8.png["Fehler: Fehlendes Grafikbild"]
-
-link:saphana-br-scs-snapcenter-concepts-and-best-practices.html["Als Nächstes: SnapCenter-Konzepte und Best Practices."]

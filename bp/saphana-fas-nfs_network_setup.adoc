@@ -13,8 +13,7 @@ summary: Verwenden Sie die folgenden Richtlinien, um das Netzwerk zu konfigurier
 :imagesdir: ./../media/
 
 
-link:saphana-fas-nfs_infrastructure_setup_and_configuration_overview.html["Früher: Einrichtung und Konfiguration der Infrastruktur."]
-
+[role="lead"]
 Beachten Sie bei der Konfiguration des Netzwerks die folgenden Richtlinien:
 
 * Um die SAP HANA-Hosts mit den Storage-Controllern über ein 10-GbE- oder schnelleres Netzwerk zu verbinden, muss ein dediziertes Storage-Netzwerk verwendet werden.
@@ -55,5 +54,3 @@ Jeder SAP HANA Node verwendet eine dedizierte Portgruppe auf dem VMware Distribu
 NOTE: LRO (Large Receive Offload) muss für Schnittstellen deaktiviert werden, die für NFS Traffic verwendet werden. Alle anderen Richtlinien zur Netzwerkkonfiguration finden Sie im entsprechenden VMware Best Practices Guide für SAP HANA.
 
 image:saphana-fas-nfs_image12.png["Fehler: Fehlendes Grafikbild"]
-
-link:saphana-fas-nfs_time_synchronization.html["Weiter: Zeitsynchronisierung."]

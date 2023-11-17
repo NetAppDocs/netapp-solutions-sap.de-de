@@ -13,8 +13,7 @@ summary: In diesem Abschnitt werden die Wiederherstellungs- und Recovery-Workflo
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-file-based-backups-and-block-integrity-check.html["Früher: Dateibasierte Backups und Prüfung der Block-Integrität."]
-
+[role="lead"]
 Im folgenden Abschnitt werden die Wiederherstellungs- und Recovery-Workflows für ein HANA MDC-System mit einem einzelnen Host und einem einzelnen Mandanten beschrieben. Die Unterschiede für ein System mit mehreren Hosts werden beschrieben.
 
 Die Beispiele zeigen, dass SAP HANA Studio als Tool zur manuellen Wiederherstellung dient. Außerdem können Sie SAP HANA Cockpit oder HANA SQL-Anweisungen für die Recovery-Vorgänge verwenden.
@@ -178,5 +177,3 @@ Das SAP HANA System ist betriebsbereit.
 
 
 Bei einem SAP HANA MDC-System mit mehreren Mandanten müssen Sie die Schritte 15 bis 24 für jeden Mandanten wiederholen.
-
-link:saphana-backup-anf-additional-information.html["Weiter: Wo finden Sie zusätzliche Informationen."]

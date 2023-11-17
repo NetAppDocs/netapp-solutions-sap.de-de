@@ -13,8 +13,7 @@ summary: Das Backup von nicht-Daten-Volumes ist ein integrierter Teil des SAP HA
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html["Früher: Ressourcenspezifische SnapCenter Konfiguration für SAP HANA Datenbank-Backups"]
-
+[role="lead"]
 Das Backup von nicht-Daten-Volumes ist ein integrierter Teil des SAP HANA Plug-ins. Der Schutz des Datenbankdatenvolumens reicht aus, um die SAP HANA Datenbank zu einem bestimmten Zeitpunkt wiederherzustellen, vorausgesetzt, die Ressourcen zur Datenbankinstallation und die erforderlichen Protokolle sind weiterhin verfügbar.
 
 Um das Recovery von Situationen durchzuführen, in denen andere nicht-Datendateien wiederhergestellt werden müssen, empfiehlt NetApp, eine zusätzliche Backup-Strategie für nicht-Daten-Volumes zu entwickeln, um das SAP HANA Datenbank-Backup zu erweitern. Je nach Ihren spezifischen Anforderungen kann sich das Backup von nicht-Daten-Volumes in den Einstellungen für die Planungsfrequenz und -Aufbewahrung unterscheiden, und Sie sollten bedenken, wie oft nicht-Datendateien geändert werden. Zum Beispiel das HANA Volume `/hana/shared` Enthält ausführbare Dateien, aber auch SAP HANA Trace-Dateien. Zwar ändern sich ausführbare Dateien nur beim Upgrade der SAP HANA Datenbank, doch benötigen die SAP HANA Trace-Dateien möglicherweise eine höhere Backup-Häufigkeit, um Problemsituationen mit SAP HANA zu analysieren.
@@ -87,5 +86,3 @@ NetApp SSC und SAP Lama können On-Demand Snapshot-Kopien direkt mit NetApp SSC 
 NOTE: Bei normalen Backup-Vorgängen empfiehlt NetApp nicht, das Protokoll-Volume einzubeziehen. Wenn Sie das Protokoll-Volume aus einem Backup wiederherstellen, werden die letzten aktiven Redo-Protokolle überschrieben und die Wiederherstellung der Datenbank in den letzten letzten Status verhindert.
 
 SnapCenter Ressourcengruppen erfüllen alle diese Anforderungen. In SnapCenter werden drei Ressourcen konfiguriert: Je eine Ressource für das Daten-Volume, das Protokoll-Volume und das gemeinsam genutzte Volume. Die Ressourcen werden einer Ressourcengruppe zugeordnet, und der Schutz wird dann auf Ressourcengruppenebene definiert. Im Ressourcengruppenschutz muss der benutzerdefinierte Snapshot-Name zu Beginn mit VCM definiert werden.
-
-link:saphana-br-scs-database-backups.html["Im nächsten Schritt: Datenbank-Backups."]

@@ -13,8 +13,7 @@ summary: In den folgenden Abschnitten werden die Wiederherstellungs- und Recover
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-block-integrity-check.html["Zurück: Block-Integritätsprüfung."]
-
+[role="lead"]
 In den folgenden Abschnitten werden die Wiederherstellungs- und Recovery-Workflows von drei verschiedenen Szenarien und Beispielkonfigurationen beschrieben.
 
 * Automatisierte Wiederherstellung und Wiederherstellung:
@@ -534,5 +533,3 @@ Das SAP HANA System ist betriebsbereit.
 NOTE: Bei einem SAP HANA MDC-System mit mehreren Mandanten müssen Sie die Schritte 20 bis 29 für jeden Mandanten wiederholen.
 
 
-
-link:saphana-br-scs-advanced-configuration-and-tuning.html["Weiter: Erweiterte Konfiguration und Optimierung."]

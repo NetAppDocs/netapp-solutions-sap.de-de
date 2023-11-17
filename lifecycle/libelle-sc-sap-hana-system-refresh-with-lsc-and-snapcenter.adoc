@@ -13,8 +13,7 @@ summary: Dieser Abschnitt beschreibt die Integration von LSC in NetApp SnapCente
 :imagesdir: ./../media/
 
 
-link:libelle-sc-overview.html["Zurück: Übersicht."]
-
+[role="lead"]
 Dieser Abschnitt beschreibt die Integration von LSC in NetApp SnapCenter. Die Integration von LSC und SnapCenter unterstützt alle von SAP unterstützten Datenbanken. Dennoch müssen wir zwischen SAP AnyDBs und SAP HANA unterscheiden, da SAP HANA einen zentralen Kommunikations-Host bietet, der für SAP AnyDBs nicht verfügbar ist.
 
 Die Standard-SnapCenter-Agent- und Datenbank-Plug-in-Installation für SAP AnyDBs ist neben dem entsprechenden Datenbank-Plug-in eine lokale Installation vom SnapCenter-Agent.
@@ -246,5 +245,3 @@ image:libelle-sc-image21.png["Fehler: Fehlendes Grafikbild"]
 In der folgenden Abbildung werden die beiden Aufgaben dargestellt `NTAP_SYSTEM_CLONE_CP` Und `NTAP_MNT_RECOVERY_CP` Bei Verwendung eines zentralen Kommunikations-Hosts. Wie Sie sehen, dauerte das Erstellen einer Snapshot Kopie, ein Klon, das Klon-Volume auf dem Zieldatenbankserver und das Wiederherstellen und Wiederherstellen der Zieldatenbank etwa 12 Minuten. Dies ist mehr oder weniger die gleiche Zeit, um diese Schritte bei der Verwendung einer Standardinstallation durchzuführen. Wie bereits erwähnt, ermöglicht die Snapshot und NetApp FlexClone Technologie diese Aufgaben unabhängig von der Größe der Quelldatenbank konsistent und schnell zu erledigen.
 
 image:libelle-sc-image22.png["Fehler: Fehlendes Grafikbild"]
-
-link:libelle-sc-sap-hana-system-refresh-with-lsc,-azacsnap,-and-azure-netapp-files.html["Nächste: Systemaktualisierung für SAP HANA mit LSC, AzACSnap und Azure NetApp Files"]

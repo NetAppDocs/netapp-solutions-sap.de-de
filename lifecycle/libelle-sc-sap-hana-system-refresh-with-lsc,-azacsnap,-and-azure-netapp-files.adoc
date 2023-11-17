@@ -13,8 +13,7 @@ summary: Mithilfe von Azure NetApp Files für SAP HANA, Oracle und DB2 auf Azure
 :imagesdir: ./../media/
 
 
-link:libelle-sc-sap-hana-system-refresh-with-lsc-and-snapcenter.html["Früher: Aktualisierung des SAP HANA-Systems mit LSC und SnapCenter."]
-
+[role="lead"]
 Wird Verwendet https://docs.microsoft.com/en-us/azure/azure-netapp-files/azure-netapp-files-solution-architectures["Azure NetApp Files für SAP HANA"^], Oracle und DB2 auf Azure bieten den Kunden die erweiterten Datenmanagement- und Datensicherungsfunktionen von NetApp ONTAP mit dem nativen Microsoft Azure NetApp Files Service. https://docs.microsoft.com/en-us/azure/azure-netapp-files/azacsnap-introduction["AzacSnap"^] Ist die Grundlage für sehr schnelle SAP Systemaktualisierungen zur Erstellung applikationskonsistenter NetApp Snapshot-Kopien von SAP HANA und Oracle Systemen (DB2 wird derzeit nicht von AzAcSnap unterstützt).
 
 Snapshot Kopien-Backups, die im Rahmen der Backup-Strategie entweder nach Bedarf oder regelmäßig erstellt werden, können dann effizient auf neuen Volumes geklont und zur schnellen Aktualisierung von Zielsystemen genutzt werden. AzAcSnap liefert die notwendigen Workflows für die Erstellung von Backups und das Klonen auf neuen Volumes. Libelle SystemCopy führt die Vorverarbeitungsschritte sowie die Nachbearbeitungsschritte durch, die für eine vollständige Systemaktualisierung erforderlich sind.
@@ -241,5 +240,3 @@ image:libelle-sc-image38.jpg["Fehler: Fehlendes Grafikbild"]
 Nach der Kopiephase wird der LSC mit allen definierten Schritten der Post-Phase fortgesetzt. Wenn die Systemaktualisierung vollständig abgeschlossen ist, ist das Zielsystem wieder betriebsbereit und kann voll genutzt werden. Mit diesem Lab-System betrug die Gesamtlaufzeit für die Aktualisierung des SAP-Systems etwa 25 Minuten, wovon die Kopiephase knapp 5 Minuten in Anspruch genommen hat.
 
 image:libelle-sc-image39.jpg["Fehler: Fehlendes Grafikbild"]
-
-link:libelle-sc-where-to-find-additional-information.html["Weiter: Wo finden Sie weitere Informationen und Versionsverlauf."]

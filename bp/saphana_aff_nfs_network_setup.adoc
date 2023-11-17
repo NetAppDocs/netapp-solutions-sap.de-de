@@ -13,7 +13,8 @@ summary: In diesem Abschnitt wird das dedizierte Setup des Storage-Netzwerks fü
 :imagesdir: ./../media/
 
 
-link:saphana_aff_nfs_infrastructure_setup_and_configuration_overview.html["Früher: Einrichtung und Konfiguration der Infrastruktur."]
+[role="lead"]
+In diesem Abschnitt wird das dedizierte Setup des Storage-Netzwerks für SAP HANA-Hosts beschrieben.
 
 Beachten Sie bei der Konfiguration des Netzwerks die folgenden Richtlinien:
 
@@ -53,5 +54,3 @@ Wie in der obigen Abbildung gezeigt, verwendet jeder SAP HANA Node auf dem VMwar
 NOTE: LRO (Large Receive Offload) muss für Schnittstellen deaktiviert werden, die für NFS Traffic verwendet werden. Alle anderen Richtlinien zur Netzwerkkonfiguration finden Sie im entsprechenden VMware Best Practices Guide für SAP HANA.
 
 image:saphana_aff_nfs_image12.png["Fehler: Fehlendes Grafikbild"]
-
-link:saphana_aff_nfs_time_synchronization.html["Weiter: Zeitsynchronisierung."]

@@ -13,8 +13,7 @@ summary: Dieser Abschnitt beschreibt die erforderlichen Vorbereitungsschritte au
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_disaster_recovery_testing_overview.html["Früher: Disaster-Recovery-Tests."]
-
+[role="lead"]
 Dieser Abschnitt beschreibt die auf dem Server erforderlichen Vorbereitungsschritte für das Disaster-Recovery-Failover-Testen.
 
 Im normalen Betrieb wird der Zielhost normalerweise für andere Zwecke verwendet, beispielsweise als HANA QA- oder Testsystem. Daher müssen die meisten dieser Schritte ausgeführt werden, wenn Disaster Failover-Tests durchgeführt werden. Zum anderen die relevanten Konfigurationsdateien, wie `/etc/fstab` Und `/usr/sap/sapservices`, Kann vorbereitet und dann in die Produktion durch einfaches Kopieren der Konfigurationsdatei gesetzt werden. Das Testverfahren für die Disaster Recovery stellt sicher, dass die relevanten, vorbereiteten Konfigurationsdateien korrekt konfiguriert sind.
@@ -111,4 +110,3 @@ vm-pr1:~ # cat /etc/fstab
 # HANA file and log backup destination
 10.0.2.4:/hanabackup-sm-dest-clone    /hanabackup nfs   rw,vers=3,hard,timeo=600,rsize=262144,wsize=262144,nconnect=8,bg,noatime,nolock 0 0
 ....
-link:saphana-dr-anf_create_new_volumes_based_on_snapshot_backups_at_the_disaster_recovery_site.html["Dann: Erstellen Sie neue Volumes auf Basis von Snapshot-Backups am Disaster-Recovery-Standort."]

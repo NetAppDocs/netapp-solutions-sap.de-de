@@ -13,8 +13,7 @@ summary: In diesem Abschnitt wird die Erstellung eines Backups mit Replikation b
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-add-a-policy-to-resource-protection.html["Zurück: Fügen Sie eine Richtlinie zum Ressourcenschutz hinzu."]
-
+[role="lead"]
 Ein Backup wird auf dieselbe Weise wie eine lokale Snapshot Kopie erstellt.
 
 Um ein Backup mit Replikation zu erstellen, wählen Sie die Richtlinie aus, die die Backup-Replikation enthält, und klicken Sie auf Backup.
@@ -58,5 +57,3 @@ image:amazon-fsx-image90.png["Fehler: Fehlendes Grafikbild"]
 In SnapCenter können Sie die replizierten Backups auflisten, indem Sie in der Topologieansicht auf Vault Kopien klicken.
 
 image:amazon-fsx-image91.png["Fehler: Fehlendes Grafikbild"]
-
-link:amazon-fsx-restore-and-recover-from-secondary-storage.html["Weiter: Wiederherstellung aus sekundärem Storage."]

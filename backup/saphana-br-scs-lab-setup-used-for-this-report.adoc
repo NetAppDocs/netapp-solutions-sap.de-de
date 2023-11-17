@@ -13,8 +13,7 @@ summary: Die für diesen technischen Bericht verwendete Lab-Einrichtung umfasst 
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-snapcenter-concepts-and-best-practices.html["Früher: SnapCenter Konzepte und Best Practices."]
-
+[role="lead"]
 Die für diesen technischen Bericht verwendete Lab-Einrichtung umfasst fünf verschiedene SAP HANA-Konfigurationen:
 
 * *MS1.*
@@ -61,5 +60,3 @@ Der SnapCenter-Server wird als zentraler HANA-Plug-in-Host für die HANA-Systeme
 Die folgende Abbildung zeigt die Laboreinrichtung.
 
 image:saphana-br-scs-image21.png["Fehler: Fehlendes Grafikbild"]
-
-link:saphana-br-scs-snapcenter-configuration.html["Als Nächstes: SnapCenter-Konfiguration."]

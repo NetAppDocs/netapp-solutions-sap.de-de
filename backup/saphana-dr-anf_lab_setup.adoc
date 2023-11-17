@@ -13,8 +13,7 @@ summary: Die Lösungsvalidierung wurde mit einem Single-Host-System für SAP HAN
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_requirements_and_best_practices.html["Früher: Anforderungen und Best Practices."]
-
+[role="lead"]
 Die Lösungsvalidierung wurde mit einem Single-Host-System für SAP HANA durchgeführt. Das Microsoft AzAcSnap Snapshot Backup-Tool für ANF wurde verwendet, um applikationskonsistente HANA Snapshot Backups zu konfigurieren. Es wurden ein tägliches Datenvolumen, ein stündliches Log Backup und die gemeinsame Volume-Replizierung konfiguriert. Disaster Recovery-Tests und Failover wurden mit einem Speicherpunkt sowie bei vorwärts gerichteten Recovery-Vorgängen validiert.
 
 Die folgenden Softwareversionen wurden für die Laboreinrichtung verwendet:
@@ -45,5 +44,3 @@ image:saphana-dr-anf_image8.png["Fehler: Fehlendes Grafikbild"]
 Die folgende Abbildung zeigt den SAP HANA-Backup-Katalog.
 
 image:saphana-dr-anf_image9.png["Fehler: Fehlendes Grafikbild"]
-
-link:saphana-dr-anf_configuration_steps_for_anf_cross-region_replication.html["Weiter: Konfigurationsschritte für ANF-Replikation über Regionen hinweg."]

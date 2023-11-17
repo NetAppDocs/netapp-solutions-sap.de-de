@@ -13,7 +13,8 @@ summary: Sie müssen die in diesem Abschnitt aufgeführten Schritte zur Basiskon
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-snapcenter-architecture.html["Früher: SnapCenter Architektur."]
+[role="lead"]
+Sie müssen die in diesem Abschnitt aufgeführten Schritte zur Basiskonfiguration von SnapCenter und zum Schutz der HANA-Ressource ausführen.
 
 
 
@@ -349,5 +350,3 @@ image:amazon-fsx-image46.png["Fehler: Fehlendes Grafikbild"]
 Die Konfiguration der HANA-Ressourcen ist jetzt abgeschlossen, und Sie können Backups ausführen.
 
 image:amazon-fsx-image47.png["Fehler: Fehlendes Grafikbild"]
-
-link:amazon-fsx-snapcenter-backup-operations.html["Weiter: Backup-Vorgänge bei SnapCenter."]

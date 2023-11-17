@@ -88,5 +88,3 @@ Weitere Informationen zur Verwendung von vSphere mit SAP HANA finden Sie unter d
 * http://www.vmware.com/files/pdf/sap-hana-scale-out-deployments-on-vsphere.pdf["Best Practices und Empfehlungen für Scale-out-Implementierungen von SAP HANA auf VMware vSphere"^]
 * https://launchpad.support.sap.com/["2161991 - Konfigurationsrichtlinien für VMware vSphere - SAP ONE Support Launchpad (Anmeldung erforderlich)"^]
 
-
-link:saphana-fas-nfs_architecture.html["Als Nächstes: Architektur."]

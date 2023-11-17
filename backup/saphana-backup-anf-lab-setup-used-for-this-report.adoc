@@ -13,10 +13,7 @@ summary: Die für diesen Bericht verwendete Lab-Einrichtung umfasst das SAP HANA
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-snapcenter-service-concepts-and-best-practices.html["Früher: SnapCenter-Servicekonzepte und Best Practices."]
-
+[role="lead"]
 Die für diesen Bericht verwendete Lab-Einrichtung umfasst das SAP HANA-System PR1-SAP HANA Single-Host-MDC-Einzelmandant-System und die SnapCenter-Servicekomponenten, wie in der folgenden Abbildung dargestellt.
 
 image:saphana-backup-anf-image13.jpg["Fehler: Fehlendes Grafikbild"]
-
-link:saphana-backup-anf-snapcenter-service-policy-configuration.html["Als Nächstes: Konfiguration der Richtlinie für den SnapCenter-Dienst."]

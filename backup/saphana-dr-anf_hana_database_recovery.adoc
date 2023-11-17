@@ -13,7 +13,8 @@ summary: Im Folgenden werden die Schritte für das HANA-Datenbank-Recovery aufge
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_mount_the_new_volumes_at_the_target_host.html["Früher: Mounten Sie die Volumes am Ziel-Host."]
+[role="lead"]
+Im Folgenden werden die Schritte für das HANA-Datenbank-Recovery aufgeführt
 
 Starten Sie die erforderlichen SAP-Dienste.
 
@@ -196,5 +197,3 @@ Backup '/mnt/log-backup/SYSTEMDB/log_backup_0_0_0_0.1589289811148' successfully 
 Die Prüfung muss für die aktuellen Log-Backup-Dateien des Systems und der Mandanten-Datenbank ausgeführt werden.
 
 Wenn der `hdbbackupcheck` Tool meldet Fehler bei den letzten Protokollsicherungen muss der neueste Satz von Protokollsicherungen entfernt oder gelöscht werden.
-
-link:saphana-dr-anf_disaster_recovery_failover_overview.html["Weiter: Disaster-Recovery-Failover."]

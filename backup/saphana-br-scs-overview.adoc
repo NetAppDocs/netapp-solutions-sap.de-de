@@ -106,5 +106,3 @@ NOTE: Das Diagramm zeigt die RAM-Größe des HANA-Servers. Die Größe der Daten
 
 
 NOTE: Die Restore- und Recovery-Zeit wird anhand folgender Annahmen berechnet. Die Datenbank kann mit 250 MBit/s wiederhergestellt werden. Die Anzahl der Log-Dateien pro Tag beträgt 50 % der Datenbankgröße. Beispielsweise erstellt eine Datenbank mit 1 TB 500MB an Log-Dateien pro Tag. Eine Wiederherstellung kann mit 100 Mbit/s durchgeführt werden.
-
-link:saphana-br-scs-snapcenter-architecture.html["Als Nächstes: SnapCenter Architektur"]

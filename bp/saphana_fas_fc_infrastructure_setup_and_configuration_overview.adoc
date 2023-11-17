@@ -13,8 +13,7 @@ summary: Die folgenden Abschnitte enthalten Installations- und Konfigurationsric
 :imagesdir: ./../media/
 
 
-link:saphana_fas_fc_storage_sizing.html["Früher: Storage-Größenbemessung."]
-
+[role="lead"]
 Die folgenden Abschnitte enthalten Installations- und Konfigurationsrichtlinien für die SAP HANA-Infrastruktur. Alle Schritte zur Einrichtung von SAP HANA sind enthalten. Eine SVM wird zum Hosten der Daten erstellt. In diesen Abschnitten werden die folgenden Beispielkonfigurationen verwendet:
 
 * HANA-System mit SID=SS3 und ONTAP 9.7 oder früher
@@ -29,5 +28,3 @@ Die folgenden Abschnitte enthalten Installations- und Konfigurationsrichtlinien 
 
 
 
-
-link:saphana_fas_fc_san_fabric_setup.html["Dann: San Fabric Setup."]

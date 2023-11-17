@@ -13,8 +13,7 @@ summary:
 :imagesdir: ./../media/
 
 
-link:saphana_aff_nfs_adding_additional_data_volume_partitions.html["Früher: Zusätzliche Daten-Volume-Partitionen hinzufügen."]
-
+[role="lead"]
 Weitere Informationen zu den in diesem Dokument beschriebenen Daten finden Sie in den folgenden Dokumenten bzw. auf den folgenden Websites:
 
 * Best Practices und Empfehlungen für Scale-up-Implementierungen von SAP HANA auf VMware vSpherehttp://www.vmware.com/files/pdf/SAP_HANA_on_vmware_vSphere_best_practices_guide.pdf["www.vmware.com/files/pdf/SAP_HANA_on_vmware_vSphere_best_practices_guide.pdf"^]
@@ -30,5 +29,3 @@ Weitere Informationen zu den in diesem Dokument beschriebenen Daten finden Sie i
 * NetApp FAS Storage-Systemressourcenhttps://mysupport.netapp.com/info/web/ECMLP2676498.html["https://mysupport.netapp.com/info/web/ECMLP2676498.html"^]
 * SAP HANA Softwarelösungenhttp://www.netapp.com/us/solutions/applications/sap/index.aspx["www.netapp.com/us/solutions/applications/sap/index.aspx#sap-hana"^]
 
-
-link:saphana_aff_nfs_update_history.html["Weiter: Aktualisierungsverlauf."]

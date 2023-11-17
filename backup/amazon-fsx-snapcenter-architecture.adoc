@@ -13,13 +13,10 @@ summary: SnapCenter ist eine einheitliche, skalierbare Plattform für applikatio
 :imagesdir: ./../media/
 
 
-link:amazon-fsx-backup-and-recovery-using-amazon-fsx-for-ontap.html["Früher: Backup und Recovery mit Amazon FSX für ONTAP."]
+[role="lead"]
+SnapCenter ist eine einheitliche, skalierbare Plattform für applikationskonsistente Datensicherung. SnapCenter bietet zentrale Kontrolle und Überwachung und delegiert die Möglichkeit, dass Benutzer applikationsspezifische Backup-, Restore- und Klonaufgaben managen können. Mit SnapCenter erhalten Datenbank- und Storage-Administratoren ein Tool, mit dem sie Backup-, Wiederherstellungs- und Klonvorgänge für verschiedene Applikationen und Datenbanken managen können.
 
-
-
-== Übersicht über SnapCenter
-
-SnapCenter ist eine einheitliche, skalierbare Plattform für applikationskonsistente Datensicherung. SnapCenter bietet zentrale Kontrolle und Überwachung und delegiert die Möglichkeit, dass Benutzer applikationsspezifische Backup-, Restore- und Klonaufgaben managen können. Mit SnapCenter erhalten Datenbank- und Storage-Administratoren ein Tool, mit dem sie Backup-, Wiederherstellungs- und Klonvorgänge für verschiedene Applikationen und Datenbanken managen können. SnapCenter managt Daten über Endpunkte in der Data-Fabric-Architektur von NetApp hinweg. Daten können mit SnapCenter zwischen lokalen Umgebungen, zwischen On-Premises-Umgebungen und der Cloud sowie zwischen Private, Hybrid oder Public Clouds repliziert werden.
+SnapCenter managt Daten über Endpunkte in der Data-Fabric-Architektur von NetApp hinweg. Daten können mit SnapCenter zwischen lokalen Umgebungen, zwischen lokalen Umgebungen und der Cloud sowie zwischen Private, Hybrid oder Public Clouds repliziert werden.
 
 
 
@@ -205,5 +202,3 @@ FSX für ONTAP-Dateisysteme:
 
 
 image:amazon-fsx-image8.png["Fehler: Fehlendes Grafikbild"]
-
-link:amazon-fsx-snapcenter-configuration.html["Als Nächstes: SnapCenter-Konfiguration."]

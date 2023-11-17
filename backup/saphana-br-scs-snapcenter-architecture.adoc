@@ -13,13 +13,10 @@ summary: SnapCenter ist eine einheitliche, skalierbare Plattform für applikatio
 :imagesdir: ./../media/
 
 
-link:saphana-br-scs-overview.html["Zurück: Übersicht."]
+[role="lead"]
+SnapCenter ist eine einheitliche, skalierbare Plattform für applikationskonsistente Datensicherung. SnapCenter bietet zentrale Kontrolle und Überwachung und delegiert die Möglichkeit, dass Benutzer applikationsspezifische Backup-, Restore- und Klonaufgaben managen können. Mit SnapCenter erhalten Datenbank- und Storage-Administratoren ein Tool, mit dem sie Backup-, Wiederherstellungs- und Klonvorgänge für verschiedene Applikationen und Datenbanken managen können.
 
-
-
-== Übersicht über SnapCenter
-
-SnapCenter ist eine einheitliche, skalierbare Plattform für applikationskonsistente Datensicherung. SnapCenter bietet zentrale Kontrolle und Überwachung und delegiert die Möglichkeit, dass Benutzer applikationsspezifische Backup-, Restore- und Klonaufgaben managen können. Mit SnapCenter erhalten Datenbank- und Storage-Administratoren ein Tool, mit dem sie Backup-, Wiederherstellungs- und Klonvorgänge für verschiedene Applikationen und Datenbanken managen können. SnapCenter managt Daten über Endpunkte in der Data-Fabric-Architektur von NetApp hinweg. Daten können mit SnapCenter zwischen lokalen Umgebungen, zwischen On-Premises-Umgebungen und der Cloud sowie zwischen Private, Hybrid oder Public Clouds repliziert werden.
+SnapCenter managt Daten über Endpunkte in der Data-Fabric-Architektur von NetApp hinweg. Daten können mit SnapCenter zwischen lokalen Umgebungen, zwischen On-Premises-Umgebungen und der Cloud sowie zwischen Private, Hybrid oder Public Clouds repliziert werden.
 
 
 
@@ -32,5 +29,3 @@ Mit den benutzerdefinierten SnapCenter Plug-ins können Sie Ihre eigenen Plug-in
 In der folgenden Abbildung sind die SnapCenter Komponenten dargestellt.
 
 image:saphana-br-scs-image6.png["Fehler: Fehlendes Grafikbild"]
-
-link:saphana-br-scs-snapcenter-sap-hana-backup-solution.html["Im nächsten Schritt: SnapCenter Backup-Lösung für SAP HANA."]

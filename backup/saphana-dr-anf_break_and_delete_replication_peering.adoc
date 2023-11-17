@@ -13,8 +13,7 @@ summary: Im Falle eines Disaster-Failovers müssen die Ziel-Volumes unterbrochen
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_prepare_the_target_host_01.html["Zurück: Bereiten Sie den Zielhost vor."]
-
+[role="lead"]
 Im Falle eines Disaster-Failovers müssen die Ziel-Volumes unterbrochen werden, damit der Zielhost die Volumes für Lese- und Schreibvorgänge mounten kann.
 
 
@@ -36,5 +35,3 @@ Nach der Wiederherstellung des Volumes basiert das Daten-Volume auf einem konsis
 
 
 NOTE: Wenn ein Kapazitäts-Pool mit einer Tier mit niedriger Performance verwendet wurde, müssen die Volumes nun in einen Kapazitäts-Pool verschoben werden, der die erforderliche Performance bietet.
-
-link:saphana-dr-anf_mount_the_volumes_at_the_target_host.html["Als Nächstes: Mounten Sie die Volumes am Ziel-Host."]

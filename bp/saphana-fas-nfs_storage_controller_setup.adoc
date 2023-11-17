@@ -13,8 +13,7 @@ summary: In diesem Abschnitt wird die Konfiguration des NetApp Storage-Systems b
 :imagesdir: ./../media/
 
 
-link:saphana-fas-nfs_time_synchronization.html["Zurück: Zeitsynchronisierung."]
-
+[role="lead"]
 In diesem Abschnitt wird die Konfiguration des NetApp Storage-Systems beschrieben. Sie müssen die primäre Installation und Einrichtung gemäß den entsprechenden ONTAP Setup- und Konfigurationsleitfäden abschließen.
 
 
@@ -375,5 +374,3 @@ Bei Einsatz von SAP HANA Systemen mit mehreren Hosts und automatischem Host-Fail
 == Volumes werden in Namespace mounten und Richtlinien für den Export festlegen
 
 Wenn ein Volume erstellt wird, muss das Volume im Namespace gemountet werden. In diesem Dokument gehen wir davon aus, dass der Name des Verbindungspfads dem Namen des Volumes entspricht. Standardmäßig wird das Volume mit der Standardrichtlinie exportiert. Die Exportpolitik kann bei Bedarf angepasst werden.
-
-link:saphana-fas-nfs_host_setup.html["Weiter: Host-Einrichtung."]

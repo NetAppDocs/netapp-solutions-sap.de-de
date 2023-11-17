@@ -13,8 +13,7 @@ summary: Die folgende Abbildung zeigt die Volume-Replizierungsbeziehungen für e
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html["Früher: ANF-übergreifende Replizierung mit SAP HANA"]
-
+[role="lead"]
 Die folgende Abbildung zeigt die Volume-Replizierungsbeziehungen für ein SAP HANA-System mit ANF-bereichsübergreifender Replizierung. Bei ANF-Cross-Region Replication müssen die HANA-Daten und das gemeinsame HANA-Volume repliziert werden. Wenn nur das HANA-Daten-Volume repliziert wird, liegen die typischen RPO-Werte im Bereich von einem Tag. Wenn niedrigere RPO-Werte erforderlich sind, müssen die HANA-Protokoll-Backups auch für die zukünftige Recovery repliziert werden.
 
 
@@ -51,4 +50,3 @@ Mit der aktuellen Version der Cross-Region-Replikation können nur feste Zeitpl�
 
 | Wiederherstellung vorwärts | NA | +Logs der letzten 24 Stunden + Snapshot Zeitplan (z.B. 6 Stunden)+ | +Logs der letzten 24 Stunden + Snapshot Zeitplan (z.B. 6 Stunden)+ 
 |===
-link:saphana-dr-anf_requirements_and_best_practices.html["Weiter: Anforderungen und Best Practices."]

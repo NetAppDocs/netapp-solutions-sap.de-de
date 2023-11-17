@@ -13,10 +13,7 @@ summary: Ein Storage Connector ist nur in Umgebungen mit mehreren Hosts mit Fail
 :imagesdir: ./../media/
 
 
-link:saphana_fas_fc_storage_controller_setup.html["Früher: Einrichtung von Storage Controller."]
-
+[role="lead"]
 Ein Storage Connector ist nur in Umgebungen mit mehreren Hosts mit Failover-Funktionen erforderlich. SAP HANA bietet bei der Einrichtung mehrerer Hosts eine Hochverfügbarkeitsfunktionen, mit der ein Failover eines SAP HANA-Datenbankhosts auf einen Standby-Host möglich ist. In diesem Fall wird auf die LUNs des ausgefallenen Hosts zugegriffen und vom Standby-Host verwendet. Der Speicher-Connector wird verwendet, um sicherzustellen, dass eine Speicherpartition von jeweils nur einem Datenbank-Host aktiv zugegriffen werden kann.
 
 In SAP HANA Konfigurationen mit mehreren Hosts und NetApp Storage kommt der von SAP bereitgestellte Standard-Storage Connector zum Einsatz. Der „SAP HANA FC Storage Connector Admin Guide“ kann als Anhang zu gefunden werden https://service.sap.com/sap/support/notes/1900823["SAP-Hinweis 1900823"^].
-
-link:saphana_fas_fc_host_setup.html["Weiter: Host-Einrichtung."]

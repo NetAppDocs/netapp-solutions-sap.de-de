@@ -13,9 +13,10 @@ summary: Mit der Azure NetApp Files NetApp Snapshot Technologie können Datenban
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-overview.html["Zurück: Übersicht."]
+[role="lead"]
+Mit der Azure NetApp Files NetApp Snapshot Technologie können Datenbank-Backups in Sekunden erstellt werden. Wie lange es dauert, eine Snapshot Kopie zu erstellen, ist unabhängig von der Größe der Datenbank, da bei Snapshot Kopien keine physischen Datenblöcke auf der Storage-Plattform verschoben werden.
 
-Mit der Azure NetApp Files NetApp Snapshot Technologie können Datenbank-Backups in Sekunden erstellt werden. Wie lange es dauert, eine Snapshot Kopie zu erstellen, ist unabhängig von der Größe der Datenbank, da bei Snapshot Kopien keine physischen Datenblöcke auf der Storage-Plattform verschoben werden. Darüber hinaus wirkt sich der Einsatz der Snapshot-Technologie auf das laufende SAP-System nicht auf die Performance aus. Daher können Sie die Erstellung von Snapshot Kopien so planen, dass die Zeiten für Spitzenzeiten oder Batch-Aktivitäten nicht berücksichtigt werden. SAP auf Azure NetApp Files Kunden planen normalerweise mehrere Online Snapshot Backups pro Tag, so dass beispielsweise alle vier Stunden üblich sind. Diese Snapshot Backups werden in der Regel drei bis fünf Tage auf dem primären Storage-System gespeichert, bevor sie entfernt werden.
+Darüber hinaus wirkt sich der Einsatz der Snapshot-Technologie auf das laufende SAP-System nicht auf die Performance aus. Daher können Sie die Erstellung von Snapshot Kopien so planen, dass die Zeiten für Spitzenzeiten oder Batch-Aktivitäten nicht berücksichtigt werden. SAP auf Azure NetApp Files Kunden planen normalerweise mehrere Online Snapshot Backups pro Tag, so dass beispielsweise alle vier Stunden üblich sind. Diese Snapshot Backups werden in der Regel drei bis fünf Tage auf dem primären Storage-System gespeichert, bevor sie entfernt werden.
 
 Snapshot Kopien bieten auch wichtige Vorteile für Wiederherstellung und Recovery. Ein Vorgang zur Wiederherstellung des Volumes ermöglicht die Wiederherstellung einer vollständigen Datenbank auf Basis der verfügbaren Snapshot Kopien zu einem beliebigen Zeitpunkt. Solche Wiederherstellungen sind innerhalb von wenigen Sekunden abgeschlossen, unabhängig von der Größe der Datenbank. Da mehrere Online Snapshot Backups tagsüber erstellt werden, verringert sich die für den Recovery-Prozess erforderliche Zeit im Vergleich zu einem herkömmlichen Backup-Ansatz deutlich. Da ein Restore-Vorgang mit einer Snapshot-Kopie durchgeführt werden kann, die nur wenige Stunden alt ist (und nicht bis zu 24 Stunden), müssen weniger Transaktions-Logs angewendet werden. Somit reduziert sich die RTO auf mehrere Minuten anstatt auf mehrere Stunden für herkömmliche Single-Cycle Backups.
 
@@ -88,5 +89,3 @@ image:saphana-backup-anf-image5.jpg["Fehler: Fehlendes Grafikbild"]
 Dieses Diagramm zeigt die RAM-Größe des HANA-Servers. Die Größe der Datenbank im Arbeitsspeicher wird auf die Hälfte des Server-RAM-Größen berechnet.
 
 Die Restore- und Recovery-Zeit wird anhand folgender Annahmen berechnet: Die Datenbank kann mit 250MPS wiederhergestellt werden; die Anzahl der Log-Dateien pro Tag beträgt 50 % der Datenbankgröße (beispielsweise erzeugt eine 1-TB-Datenbank 500 MB Log-Dateien pro Tag); Und eine Wiederherstellung kann mit 100 MBit/s durchgeführt werden.
-
-link:saphana-backup-anf-snapcenter-service-architecture.html["Als Nächstes: SnapCenter-Servicearchitektur"]

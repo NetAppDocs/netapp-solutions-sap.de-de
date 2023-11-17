@@ -13,8 +13,7 @@ summary: SnapCenter bietet Workflows, mit denen Klone von Datensätzen von jedem
 :imagesdir: ./../media/
 
 
-link:sc-copy-clone-use-cases-for-system-refresh-and-cloning.html["Zurück: Anwendungsfälle für Systemaktualisierung und Klonen."]
-
+[role="lead"]
 SnapCenter bietet Workflows, mit denen Klone von Datensätzen von jedem vorhandenen Snapshot Backup gemanagt werden können. Mit diesem geklonten Datensatz, einem FlexClone Volume, kann ein HANA Daten-Volume schnell von einem Quellsystem bereitgestellt und an ein Zielsystem angehängt werden. Die Software eignet sich daher ideal zur Ausführung von Systemaktualisierungen für QA-, Test-, Sandbox- oder Trainingssysteme.
 
 Die Klon-Workflows von SnapCenter bearbeiten alle erforderlichen Operationen auf der Storage-Ebene und können mithilfe von Skripten erweitert werden, um hostspezifische und HANA datenbankspezifische Vorgänge auszuführen. In diesem Dokument verwenden wir ein Skript, um Mount- und Unmount-Vorgänge auf dem Ziel-Host sowie die Wiederherstellung der HANA-Datenbank und das Herunterfahren auszuführen. SnapCenter-Workflows mit weiterer Automatisierung mithilfe des Skripts bearbeiten alle erforderlichen HANA-Datenbankvorgänge, decken aber keine erforderlichen SAP-Nachbearbeitungsschritte ab. Die SAP-Nachbearbeitung muss manuell oder mit Tools von Drittanbietern durchgeführt werden.
@@ -56,5 +55,3 @@ Die folgende Abbildung bietet einen Überblick über den SAP Workflow zur System
 image:sc-copy-clone-image8.png["Fehler: Fehlendes Grafikbild"]
 
 Den Abschnitt link:sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html["„SAP HANA Systemaktualisierung mit SnapCenter“"] Zeigt eine detaillierte Schritt-für-Schritt-Beschreibung der beiden System-Refresh-Workflows an.
-
-link:sc-copy-clone-overview-of-sap-system-copy-workflow-with-snapcenter.html["Weiter: Überblick über den Workflow zur Erstellung von SAP Systemkopien mit SnapCenter"]

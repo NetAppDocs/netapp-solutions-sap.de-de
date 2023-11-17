@@ -13,8 +13,5 @@ summary: Sie müssen die Zeit zwischen den Storage-Controllern und den SAP HANA 
 :imagesdir: ./../media/
 
 
-link:saphana-fas-nfs_network_setup.html["Zurück: Netzwerk-Setup."]
-
+[role="lead"]
 Sie müssen die Zeit zwischen den Storage-Controllern und den SAP HANA Datenbank-Hosts synchronisieren. Legen Sie dazu denselben Zeitserver für alle Storage Controller und alle SAP HANA-Hosts fest.
-
-link:saphana-fas-nfs_storage_controller_setup.html["Weiter: Einrichtung von Storage Controller."]

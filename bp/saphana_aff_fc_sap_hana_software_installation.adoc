@@ -13,7 +13,8 @@ summary: In diesem Abschnitt wird die Vorbereitung für die Installation von SAP
 :imagesdir: ./../media/
 
 
-link:saphana_aff_nfs_i_o_stack_configuration_for_sap_hana.html["Früher: I/O-Stack-Konfiguration für SAP HANA"]
+[role="lead"]
+In diesem Abschnitt wird die Vorbereitung für die Installation von SAP HANA auf Single-Host- und Multiple-Host-Systemen beschrieben.
 
 
 
@@ -146,5 +147,3 @@ Enter Local Host Name [sapcc-hana-tst-03]:
 ....
 . Vergewissern Sie sich, dass das Installationstool alle ausgewählten Komponenten bei allen Worker- und Standby-Hosts installiert hat.
 
-
-link:saphana_aff_fc_adding_additional_data_volume_partitions_for_sap_hana_single-host_systems.html["Als Nächstes: Zusätzliche Daten-Volume-Partitionen für SAP HANA Single-Host-Systeme hinzufügen."]

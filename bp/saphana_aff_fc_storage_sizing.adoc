@@ -13,8 +13,7 @@ summary:
 :imagesdir: ./../media/
 
 
-link:saphana_aff_fc_architecture.html["Früher: Architektur."]
-
+[role="lead"]
 Der folgende Abschnitt bietet einen Überblick über die Performance- und Kapazitätsüberlegungen, die für die Dimensionierung eines Storage-Systems für SAP HANA erforderlich sind.
 
 
@@ -217,5 +216,3 @@ Die Größe des RAM, die Netto-Datengröße auf der Festplatte jedes SAP HANA-Ho
 Die folgende Abbildung fasst den Dimensionierungsprozess zusammen.
 
 image:saphana_aff_fc_image8.jpg["Fehler: Fehlendes Grafikbild"]
-
-link:saphana_aff_fc_infrastructure_setup_and_configuration_overview.html["Als Nächstes: Einrichtung und Konfiguration der Infrastruktur."]

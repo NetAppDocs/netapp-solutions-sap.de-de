@@ -80,5 +80,3 @@ Wenn ein größerer RPO-Wert akzeptabel ist, kann die asynchrone Replizierung ü
 Die Startzeit einer SAP HANA-Datenbank ist wesentlich länger als die von herkömmlichen Datenbanken, da eine große Datenmenge in den Arbeitsspeicher geladen werden muss, bevor die Datenbank die erwartete Performance liefern kann. Daher ist ein großer Teil der RTO die Zeit, die zum Starten der Datenbank benötigt wird. Mit jeder Storage-basierten Replizierung sowie mit HANA System Replication ohne vorab geladen werden, muss die SAP HANA-Datenbank für den Failover zum Disaster-Recovery-Standort gestartet werden.
 
 Die SAP HANA Systemreplizierung bietet einen Betriebsmodus, in dem die Daten vorgeladen und kontinuierlich am sekundären Host aktualisiert werden. Dieser Modus ermöglicht sehr niedrige RTO-Werte, benötigt aber auch einen dedizierten Server, der nur für den Empfang der Replizierungsdaten vom Quellsystem verwendet wird.
-
-link:saphana-dr-anf_disaster_recovery_solution_comparison.html["Weiter: Disaster-Recovery-Lösungen im Vergleich."]

@@ -13,8 +13,7 @@ summary: In diesem Abschnitt werden die Schritte aufgeführt, die für die Backu
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-backup-configuration-of-sap-hana-non-data-volumes.html["Früher: Backup-Konfiguration von SAP HANA ohne Datenvolumen"]
-
+[role="lead"]
 Gehen Sie wie folgt vor, um die Backup-Konfiguration globaler, nicht-Daten-Volumes, festzulegen:
 
 . Gehen Sie zu SAP HANA Systems und klicken Sie auf Add.
@@ -47,5 +46,3 @@ image:saphana-backup-anf-image44.png["Fehler: Fehlendes Grafikbild"]
 image:saphana-backup-anf-image45.png["Fehler: Fehlendes Grafikbild"]
 
 
-
-link:saphana-backup-anf-sap-hana-database-snapshot-backups.html["Demnächst: Snapshot-Backups für SAP HANA Datenbanken"]

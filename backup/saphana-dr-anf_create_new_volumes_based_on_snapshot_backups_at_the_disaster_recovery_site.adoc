@@ -13,9 +13,10 @@ summary: 'Abhängig vom Disaster Recovery Setup (mit oder ohne Log-Backup-Replik
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_prepare_the_target_host.html["Zurück: Bereiten Sie den Zielhost vor."]
+[role="lead"]
+Abhängig vom Disaster Recovery Setup (mit oder ohne Log-Backup-Replikation) müssen zwei oder drei neue Volumes auf der Basis von Snapshot-Backups erstellt werden. In beiden Fällen muss ein neues Volume der Daten und das gemeinsame HANA Volume erstellt werden.
 
-Abhängig vom Disaster Recovery Setup (mit oder ohne Log-Backup-Replikation) müssen zwei oder drei neue Volumes auf der Basis von Snapshot-Backups erstellt werden. In beiden Fällen muss ein neues Volume der Daten und das gemeinsame HANA Volume erstellt werden. Wenn auch die Backup-Daten für das Protokoll repliziert werden, muss ein neues Volume des Backup-Volumes erstellt werden. In unserem Beispiel wurden die Daten und das Protokoll-Backup-Volume an den Disaster Recovery-Standort repliziert. In den folgenden Schritten wird das Azure-Portal verwendet.
+Wenn auch die Backup-Daten für das Protokoll repliziert werden, muss ein neues Volume des Backup-Volumes erstellt werden. In unserem Beispiel wurden die Daten und das Protokoll-Backup-Volume an den Disaster Recovery-Standort repliziert. In den folgenden Schritten wird das Azure-Portal verwendet.
 
 . Eines der applikationskonsistenten Snapshot-Backups wird als Quelle für das neue Volume des HANA-Daten-Volumes ausgewählt. Restore to New Volume ist ausgewählt, um ein neues Volume basierend auf der Snapshot-Sicherung zu erstellen.
 +
@@ -51,5 +52,3 @@ image:saphana-dr-anf_image25.png["Fehler: Fehlendes Grafikbild"]
 NOTE: Wenn ein Kapazitäts-Pool mit einer Tier mit niedriger Performance verwendet wurde, müssen die Volumes nun in einen Kapazitäts-Pool verschoben werden, der die erforderliche Performance bietet.
 
 Alle drei neuen Volumes sind jetzt verfügbar und können auf dem Zielhost eingebunden werden.
-
-link:saphana-dr-anf_mount_the_new_volumes_at_the_target_host.html["Als Nächstes: Mounten Sie die neuen Volumes am Ziel-Host."]

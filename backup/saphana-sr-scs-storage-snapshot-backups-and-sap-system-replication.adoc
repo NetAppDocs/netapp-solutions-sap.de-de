@@ -13,8 +13,7 @@ summary: Backup-Vorgänge werden immer auf dem primären SAP HANA-Host durchgef�
 :imagesdir: ./../media/
 
 
-link:saphana-sr-scs-sap-hana-system-replication-overview.html["Früher: Überblick über SAP HANA System Replication."]
-
+[role="lead"]
 Backup-Vorgänge werden immer auf dem primären SAP HANA-Host durchgeführt. Die erforderlichen SQL-Befehle für den Backup-Vorgang können nicht auf dem sekundären SAP HANA-Host ausgeführt werden.
 
 Für SAP HANA-Backup-Vorgänge sind die primären und sekundären SAP HANA-Hosts eine Einheit. Sie verwenden denselben SAP HANA Backup-Katalog und nutzen die Backups für die Wiederherstellung und das Recovery, unabhängig davon, ob das Backup auf dem primären oder sekundären SAP HANA-Host erstellt wurde.
@@ -30,5 +29,3 @@ Wenn ein Failover zu Host 2 durchgeführt wird, wird Host 2 zum primären Host, 
 Das auf Host 2 erstellte Backup kann direkt auf der Speicherebene wiederhergestellt werden. Wenn Sie ein Backup verwenden müssen, das auf Host 1 erstellt wurde, muss das Backup vom Host-1-Speicher-Volume auf das Host-2-Speicher-Volume kopiert werden. Die vorwärts-Wiederherstellung verwendet die Protokoll-Backups von beiden Hosts.
 
 image:saphana-sr-scs-image4.png["Fehler: Fehlendes Grafikbild"]
-
-link:saphana-sr-scs-snapcenter-configuration-options-for-sap-system-replication.html["Als Nächstes: SnapCenter Konfigurationsoptionen für SAP System Replication."]

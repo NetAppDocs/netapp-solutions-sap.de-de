@@ -13,8 +13,7 @@ summary: Ab SAP HANA 2.0 SPS4 können weitere Daten-Volume-Partitionen konfiguri
 :imagesdir: ./../media/
 
 
-link:saphana_fas_fc_sap_hana_software_installation.html["Früher: Installation der SAP HANA Software."]
-
+[role="lead"]
 Ab SAP HANA 2.0 SPS4 können weitere Daten-Volume-Partitionen konfiguriert werden. Mit dieser Funktion können Sie zwei oder mehr LUNs für das Daten-Volume einer SAP HANA-Mandantendatenbank konfigurieren und eine Skalierung über die Größe und Performance-Grenzen einer einzelnen LUN hinaus vornehmen.
 
 
@@ -120,5 +119,3 @@ ALTER SYSTEM ALTER DATAVOLUME ADD PARTITION PATH '/hana/data2/SID/';
 image:saphana_fas_fc_image28.jpg["Fehler: Fehlendes Grafikbild"]
 
 
-
-link:saphana_fas_fc_where_to_find_additional_information.html["Weiter: Wo finden Sie zusätzliche Informationen."]

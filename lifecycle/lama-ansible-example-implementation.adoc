@@ -13,8 +13,6 @@ summary: Aufgrund der großen Anzahl an Optionen für System- und Speichereinric
 :imagesdir: ./../media/
 
 
-link:lama-ansible-netapp-sap-lama-integration-using-ansible.html["Zurück: Integration von NetApp SAP Lama mithilfe von Ansible"]
-
 Aufgrund der großen Anzahl an Optionen für System- und Speichereinrichtung sollte die Beispielimplementierung als Vorlage für Ihre individuellen System-Setup- und Konfigurationsanforderungen verwendet werden.
 
 
@@ -119,5 +117,3 @@ Weitere Informationen zur Verwendung von benutzerdefinierten Haken finden Sie im
 Er muss in der Konfiguration angepasst werden, um den individuellen Bereitstellungs-Workflow für das Quellsystem zu ermöglichen. Das Kontrollkästchen *Benutzerdefinierte Provisioning-Prozess verwenden* mit der entsprechenden benutzerdefinierten Bereitstellungsdefinition muss ausgewählt werden.
 
 image:lama-ansible-image16.png["Screenshot des Bildschirms SAP Lama Configuration > Systems> Systemdetails Kontrollkästchen Prozess „Benutzerdefinierte Bereitstellung verwenden“ ist hervorgehoben."]
-
-link:lama-ansible-sap-lama-provisioning-workflow-clone-system.html["Weiter: SAP Lama-Provisioning-Workflow - Clone-System."]

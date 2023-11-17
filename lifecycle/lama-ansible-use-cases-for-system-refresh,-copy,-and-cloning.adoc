@@ -13,13 +13,10 @@ summary: Es gibt verschiedene Szenarien, in denen Daten aus einem Quellsystem zu
 :imagesdir: ./../media/
 
 
-link:lama-ansible-sap-system-clone,-copy,-and-refresh-scenarios.html["Früher: Szenarien zum Klonen, Kopieren und Aktualisieren von SAP Systemen"]
+[role="lead"]
+Es gibt verschiedene Szenarien, in denen Daten aus einem Quellsystem zu Test- oder Schulungszwecken einem Zielsystem zur Verfügung gestellt werden müssen. Diese Test- und Trainingssysteme müssen regelmäßig mit Daten des Quellsystems aktualisiert werden, um sicherzustellen, dass die Test- und Schulungsmaßnahmen mit dem aktuellen Datensatz durchgeführt werden.
 
-
-
-== Datenaktualisierung von QA-, Test-, Sandboxsystemen- und Trainingssystemen
-
-Es gibt verschiedene Szenarien, in denen Daten aus einem Quellsystem zu Test- oder Schulungszwecken einem Zielsystem zur Verfügung gestellt werden müssen. Diese Test- und Trainingssysteme müssen regelmäßig mit Daten des Quellsystems aktualisiert werden, um sicherzustellen, dass die Test- und Schulungsmaßnahmen mit dem aktuellen Datensatz durchgeführt werden. Diese Systemaktualisierungen bestehen aus mehreren Aufgaben auf Infrastruktur-, Datenbank- und Applikationsebene und können je nach Automatisierungsgrad mehrere Tage dauern.
+Diese Systemaktualisierungen bestehen aus mehreren Aufgaben auf Infrastruktur-, Datenbank- und Applikationsebene und können je nach Automatisierungsgrad mehrere Tage dauern.
 
 image:lama-ansible-image2.png["Dieses Bild zeigt den Umgebungs-Workflow von der Hauptentwicklungslandschaft bis hin zu temporären Projekt-Splits, Reparatur-Systemen, Schulungssystemen und sanbox-Systemen. Hier wird angezeigt, wo Systemaktualisierung, Systemkopie und Systemklonen für diese verschiedenen Zwecke verwendet werden."]
 
@@ -52,5 +49,3 @@ Die Storage-Replizierung mit SnapMirror ermöglicht die Ausführung von Disaster
 SAP Lama kann für die Orchestrierung des gesamten Testvorgangs verwendet werden, aber auch für Netzwerkfencing, Ziel-Host-Wartung usw.
 
 image:lama-ansible-image5.png["Dieses Bild zeigt die Beziehung zwischen NetApp Storage-Systemen im primären Datacenter, dem lokalen DR-Datacenter und dem Remote-DR-Datacenter. Sie sind sowohl durch synchrone SnapMirror als auch durch asynchrone SnapMirror Beziehungen verbunden."]
-
-link:lama-ansible-netapp-sap-lama-integration-using-ansible.html["Nächster Schritt: Integration von NetApp SAP Lama mithilfe von Ansible"]

@@ -2,7 +2,7 @@
 sidebar: sidebar 
 permalink: backup/saphana-backup-anf-snapcenter-service-concepts-and-best-practices.html 
 keywords:  
-summary:  
+summary: Sie sollten die Servicekonzepte und Best Practices von SnapCenter kennen. Es gibt beispielsweise verschiedene Richtlinien, die für Backup-Vorgänge konfiguriert werden müssen. 
 ---
 = SnapCenter-Servicekonzepte und Best Practices
 :hardbreaks:
@@ -13,7 +13,8 @@ summary:
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-snapcenter-service-sap-hana-backup-solution.html["Früher: SnapCenter Service SAP HANA Backup-Lösung."]
+[role="lead"]
+Sie sollten die Servicekonzepte und Best Practices von SnapCenter kennen. Es gibt beispielsweise verschiedene Richtlinien, die für Backup-Vorgänge konfiguriert werden müssen.
 
 
 
@@ -220,5 +221,3 @@ NOTE: Sie können das Backup-Aufbewahrungsmanagement für Protokolle nicht mit d
 == Kapazitätsanforderungen für Snapshot Backups
 
 Dabei müssen Sie die höhere Blockänderungsrate auf Storage-Ebene in Relation zur Änderungsrate bei herkömmlichen Datenbanken berücksichtigen. Aufgrund des HANA-Tabellen-Zusammenführungsprozesses des Spaltenspeichers wird die komplette Tabelle auf die Festplatte geschrieben, nicht nur die geänderten Blöcke. Die Daten unseres Kundenstamms zeigen eine tägliche Änderungsrate zwischen 20 % und 50 %, wenn mehrere Snapshot-Backups während des Tages erstellt werden.
-
-link:saphana-backup-anf-lab-setup-used-for-this-report.html["Weiter: Einrichtung des Labors, das für diesen Bericht verwendet wird."]

@@ -13,8 +13,7 @@ summary: Bei SnapCenter Service werden Datenbank-Backups in der Regel mithilfe d
 :imagesdir: ./../media/
 
 
-link:saphana-backup-anf-backup-configuration-of-global-non-data-volumes.html["Früher: Backup-Konfiguration von globalen nicht-Daten-Volumes."]
-
+[role="lead"]
 Bei SnapCenter Service werden Datenbank-Backups in der Regel mithilfe der in den Richtlinien definierten Zeitpläne ausgeführt. Sie können auch On-Demand-Datenbank-Backups mithilfe der SnapCenter Service-UI oder DER REST-APIs durchführen.
 
 
@@ -101,5 +100,3 @@ Job Monitor zeigt die verschiedenen Workflow-Schritte, die Laufzeit der Schritte
 image:saphana-backup-anf-image57.png["Fehler: Fehlendes Grafikbild"]
 
 
-
-link:saphana-backup-anf-file-based-backups-and-block-integrity-check.html["Im nächsten Schritt: Dateibasierte Backups und Prüfung der Block-Integrität."]

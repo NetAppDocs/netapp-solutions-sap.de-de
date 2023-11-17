@@ -13,7 +13,8 @@ summary: In diesem Abschnitt wird die Konfiguration eines Systems für die Insta
 :imagesdir: ./../media/
 
 
-link:saphana_aff_nfs_sap_hana_data_volume_size.html["Früher: Größe des SAP HANA Datenvolumens."]
+[role="lead"]
+In diesem Abschnitt wird die Konfiguration eines Systems für die Installation der SAP HANA-Software auf Systemen mit einem oder mehreren Hosts beschrieben.
 
 
 
@@ -83,5 +84,3 @@ Enter Installation Path [/hana/shared]:
 ....
 . Vergewissern Sie sich, dass das Installationstool alle ausgewählten Komponenten bei allen Worker- und Standby-Hosts installiert hat.
 
-
-link:saphana_aff_nfs_adding_additional_data_volume_partitions.html["Weiter: Zusätzliche Daten-Volume-Partitionen."]

@@ -13,8 +13,6 @@ summary: Um ein geklontes System außer Betrieb zu nehmen, muss es vorab angehal
 :imagesdir: ./../media/
 
 
-link:lama-ansible-sap-lama-provisioning-workflow-clone-system.html["Früher: SAP Lama-Provisioning-Workflow - Clone-System."]
-
 [role="lead"]
 Die folgende Abbildung zeigt die wichtigsten Schritte, die mit dem Workflow zum Löschen des Systems ausgeführt werden.
 
@@ -54,5 +52,3 @@ image:lama-ansible-image38.png["In diesem Screenshot wird der Fortschritt des Ar
 image:lama-ansible-image39.png["Dieser Screenshot zeigt die Protokollseite für den Workflow zum Löschen des Systems."]
 
 
-
-link:lama-ansible-sap-lama-provisioning-workflow-copy-system.html["Weiter: SAP Lama-Provisioning-Workflow - Kopiesystem."]

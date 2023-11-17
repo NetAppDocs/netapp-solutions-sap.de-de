@@ -13,12 +13,7 @@ summary: Die folgenden drei Screenshots zeigen den Replikationsstatus für die D
 :imagesdir: ./../media/
 
 
-link:saphana-dr-anf_configuration_steps_for_anf_cross-region_replication.html["Zurück: Konfigurationsschritte für ANF-bereichsübergreifende Replikation."]
-
-
-
-== Replikationsstatus
-
+[role="lead"]
 Die folgenden drei Screenshots zeigen den Replikationsstatus für die Daten, Backup-Protokollierung und gemeinsam genutzte Volumes.
 
 Die Verzögerung bei der Volume-Replizierung ist ein nützlicher Wert, um die RPO-Erwartungen zu verstehen. Beispielsweise zeigt die Replizierung des Backup-Volumes für das Protokoll eine maximale Verzögerungszeit von 58 Minuten, das heißt, dass der maximale RPO den gleichen Wert hat.
@@ -47,5 +42,3 @@ Bei jedem Replizierungs-Update vom Quell- zum Ziel-Volume werden alle Blockände
 NOTE: Innerhalb des Quell- und Ziel-Volume werden auch SnapMirror Snapshot Kopien erstellt, die für Resynchronisierung und Replizierungs-Updates verwendet werden. Diese Snapshot-Kopien sind aus Sicht der HANA-Datenbank nicht applikationskonsistent. Bei HANA-Recovery-Vorgängen können nur die über AzaCSnap erstellten applikationskonsistenten Snapshots verwendet werden.
 
 image:saphana-dr-anf_image17.png["Fehler: Fehlendes Grafikbild"]
-
-link:saphana-dr-anf_disaster_recovery_testing_overview.html["Kommen wir nun zu Disaster-Recovery-Tests."]
