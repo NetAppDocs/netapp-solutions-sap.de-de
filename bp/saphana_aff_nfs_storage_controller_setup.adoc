@@ -332,6 +332,12 @@ Für einige Befehle in dieser Tabelle müssen Sie in den erweiterten Berechtigun
 
 
 | Deaktivieren Sie die numerischen nfsv4-ids | nfs modify -vServer <vServer_Name> -v4-numeric-ids deaktiviert 
+
+
+| Ändern Sie die Anzahl der NFSv4.x-Sitzungsplätze
+  Optional | Erweiterte Einstellungen
+nfs modify -vserver hana -v4.x-Session-num-slots <value>
+Legen Sie „Admin“ fest 
 |===
 
 NOTE: Bitte beachten Sie, dass die Deaktivierung numerischer ids eine Benutzerverwaltung erfordert, wie im Abschnitt beschrieben link:saphana_aff_nfs_sap_hana_installation_preparations_for_nfsv4.html["„SAP HANA Installationsvorbereitungen für NFSv4“."]
