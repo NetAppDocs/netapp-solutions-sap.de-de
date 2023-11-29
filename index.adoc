@@ -1,5 +1,5 @@
 ---
-layout: astra 
+layout: landing-page 
 sidebar: sidebar 
 permalink: index.html 
 summary: NetApp verfügt über eine umfangreiche Sammlung technischer Berichte, validierter Designs, Videos, Blogs und Lösungsübersichten für SAP und SAP HANA. 
