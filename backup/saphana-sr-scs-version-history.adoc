@@ -13,8 +13,6 @@ summary:
 :imagesdir: ./../media/
 
 
-link:saphana-sr-scs-where-to-find-additional-information_overview.html["Früher: Wo zusätzliche Informationen zu finden."]
-
 |===
 | Version | Datum | Versionsverlauf Des Dokuments 
 

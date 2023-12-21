@@ -34,6 +34,8 @@ entries:
       url: "/bp/saphana_aff_fc_adding_additional_data_volume_partitions_for_sap_hana_single-host_systems.html"
   - title: Wo Sie weitere Informationen finden
     url: "/bp/saphana_aff_fc_where_to_find_additional_information.html"
+  - title: Aktualisierungsverlauf
+    url: "/bp/saphana_aff_fc_update_history.html"
 - title: Konfigurationsleitfaden für SAP HANA auf NetApp AFF-Systemen mit NFS
   type: solutions
   entries:
@@ -65,6 +67,8 @@ entries:
       url: "/bp/saphana_aff_nfs_adding_additional_data_volume_partitions.html"
   - title: Wo Sie weitere Informationen finden
     url: "/bp/saphana_aff_nfs_where_to_find_additional_information.html"
+  - title: Aktualisierungsverlauf
+    url: "/bp/saphana_aff_nfs_update_history.html"
 - title: Konfigurationsleitfaden für SAP HANA auf NetApp FAS-Systemen mit NFS
   type: solutions
   entries:
@@ -96,6 +100,8 @@ entries:
       url: "/bp/saphana-fas-nfs_adding_additional_data_volume_partitions.html"
   - title: Wo Sie weitere Informationen finden
     url: "/bp/saphana-fas-nfs_where_to_find_additional_information.html"
+  - title: Aktualisierungsverlauf
+    url: "/bp/saphana-fas-nfs_update_history.html"
 - title: Konfigurationsleitfaden für SAP HANA auf FAS-Systemen mit FCP
   type: solutions
   entries:
@@ -127,6 +133,8 @@ entries:
       url: "/bp/saphana_fas_fc_adding_additional_data_volume_partitions_for_sap_hana_single-host_systems.html"
   - title: Wo Sie weitere Informationen finden
     url: "/bp/saphana_fas_fc_where_to_find_additional_information.html"
+  - title: Aktualisierungsverlauf
+    url: "/bp/saphana_fas_fc_update_history.html"
 - title: 'Technischer Bericht: SAP HANA on IBM Power Systems and NetApp AFF Systems
     with NFS'
   url: "/bp/saphana-ibm-aff-nfs_pdf_link.html"

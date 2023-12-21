@@ -1,7 +1,7 @@
 ---
 sidebar: sidebar 
 permalink: lifecycle/lama-ansible-conclusion.html 
-keywords: conclusion, additional information 
+keywords: conclusion, additional information, version history 
 summary: Die Integration eines modernen Automatisierungs-Frameworks wie Ansible in SAP Lama-Bereitstellungs-Workflows bietet Kunden eine flexible Lösung, die Standardanforderungen und komplexere Infrastrukturanforderungen erfüllt. 
 ---
 = Schlussfolgerung
@@ -67,3 +67,14 @@ https://help.sap.com/doc/700f9a7e52c7497cad37f7c46023b7ff/3.0.11.0/en-US/737a99e
 https://www.netapp.com/support-and-training/documentation/["https://www.netapp.com/support-and-training/documentation/"^]
 
 
+
+
+
+== Versionsverlauf
+
+|===
+| Version | Datum | Versionsverlauf des Dokuments 
+
+
+| Version 1.0 | Januar 2023 | Erste Version 
+|===

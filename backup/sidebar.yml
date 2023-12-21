@@ -65,7 +65,7 @@ entries:
     url: "/backup/saphana-br-scs-restore-and-recovery.html"
   - title: Erweiterte Konfiguration und Optimierung
     url: "/backup/saphana-br-scs-advanced-configuration-and-tuning.html"
-  - title: Wo Sie weitere Informationen finden
+  - title: Wo finden Sie weitere Informationen und Versionsverlauf
     url: "/backup/saphana-br-scs-where-to-find-additional-information.html"
 - title: SAP HANA System Replication Backup und Recovery mit SnapCenter
   type: solutions
@@ -85,6 +85,8 @@ entries:
     url: "/backup/saphana-sr-scs-restore-and-recovery-from-a-backup-created-at-the-other-host.html"
   - title: Wo Sie weitere Informationen finden
     url: "/backup/saphana-sr-scs-where-to-find-additional-information_overview.html"
+  - title: Versionsverlauf
+    url: "/backup/saphana-sr-scs-version-history.html"
 - title: 'Technischer Bericht: SAP HANA Disaster Recovery with Azure NetApp Files'
   type: solutions
   entries:
@@ -130,6 +132,8 @@ entries:
       url: "/backup/saphana-dr-anf_mount_the_volumes_at_the_target_host.html"
     - title: HANA Datenbank-Recovery
       url: "/backup/saphana-dr-anf_hana_database_recovery_01.html"
+    - title: Aktualisierungsverlauf
+      url: "/backup/saphana-dr-anf_update_history.html"
 - title: 'Technischer Bericht: SAP HANA Disaster Recovery with Storage Replication'
   url: "/backup/saphana-dr-sr_pdf_link.html"
 - title: 'Technischer Bericht: SAP HANA Backup and Recovery by Using Snap Creator'
