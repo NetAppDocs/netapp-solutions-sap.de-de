@@ -17,7 +17,7 @@ summary: In diesem Abschnitt wird beschrieben, wie Sie die Arbeitsumgebung einri
 
 == Arbeitsumgebung für BlueXP erstellen
 
-Fügen Sie das lokale Storage-System zu Ihrer Arbeitsumgebung hinzu.
+Fügen Sie das lokale Storage-System zur Arbeitsumgebung hinzu.
 
 . Wählen Sie im linken Menü *Storage* -> *Canvas* -> *My Working* Umgebung.
 . Drücken Sie *+ Arbeitsumgebung Hinzufügen*. +
@@ -36,7 +36,7 @@ image:hana-hycl-back-image6.jpeg["Ein Bild, das Diagramm enthält. Automatisch g
 
 == Erstellen einer Beziehung zwischen dem lokalen Storage-System und einem Objekt-Storage-Bucket
 
-Die Beziehung zwischen dem On-Premises-Storage und dem S3-Bucket wird entweder ein Backup für ein Volume oder ein Backup einer Applikation erstellt. Soll ein vorhandenes Standort-zu-Standort-VPN für die Übertragung der Daten von On-Premises zu S3 verwendet werden, muss ein Volume-Backup zum Erstellen der Beziehung zwischen dem lokalen Storage und dem S3-Bucket verwendet werden, während VPC-Endpunkte verwendet werden müssen. +
+Die Beziehung zwischen dem On-Premises-Storage und dem S3-Bucket wird entweder ein Backup für ein Volume oder ein Backup einer Applikation erstellt. Bei der Übertragung der Daten von On-Premises-Storage zu S3 muss ein Volume-Backup für die Erstellung der Beziehung zwischen On-Premises-Storage und S3 Bucket verwendet werden, wenn VPC-Endpunkte verwendet werden müssen. +
 Bei Erstellung dieser Dokumentation bietet der Applikations-Backup-Workflow keine VPC-Endpunkte für den Zugriff auf S3 Buckets. +
 Siehe https://docs.aws.amazon.com/vpc/latest/privatelink/vpc-endpoints-s3.html["Gateway-Endpunkte für Amazon S3 – Amazon Virtual Private Cloud"] Einrichten von VPC-Endpunkten für S3 innerhalb der VPC
 

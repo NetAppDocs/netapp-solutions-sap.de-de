@@ -21,9 +21,9 @@ Eine Wiederherstellung aus dem Backup kann nur mit einem On-Premises-NetApp ONTA
 . Klicken Sie auf *View Details* für die Datenbank, die Sie wiederherstellen möchten. +
 image:hana-hycl-back-image38.jpeg["hana-hycl-back-image38,width=624,height=305"]
 . Wählen Sie das gewünschte Backup aus, und wählen Sie Storage Export. +
-image:hana-hycl-back-image39.jpeg["Ein Bild, das Text, Screenshot, Software, Computersymbol enthält. Automatisch generierte Beschreibung,width=624,height=308"]
+image:hana-hycl-back-image39.jpeg["Breite=624, Höhe=308"]
 . Geben Sie die gewünschten Optionen an: +
-image:hana-hycl-back-image40.jpeg["Ein Bild, das Text, Screenshot, Software, Computersymbol enthält. Automatisch generierte Beschreibung,width=624,height=308"]
+image:hana-hycl-back-image40.jpeg["Breite=624, Höhe=308"]
 +
 .. Geben Sie in der NAS-Umgebung den FQDN oder die IP-Adresse des Hosts an, auf den die aus dem Objektspeicher wiederhergestellten Volumes exportiert werden sollen.
 .. Geben Sie in der SAN-Umgebung die Initiatoren des Hosts an, dem die LUNs der aus dem Objektspeicher wiederhergestellten Volumes zugeordnet werden sollen.
