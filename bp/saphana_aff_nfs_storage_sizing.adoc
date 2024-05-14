@@ -64,7 +64,8 @@ NOTE: Diese Berechnung erfolgt unabhängig vom eingesetzten Storage Controller. 
 
 === NS224 NVMe-Shelf
 
-Die Mindestanzahl von 12 NVMe-SSDs für das erste Shelf unterstützt bis zu 18 SAP HANA-Hosts. Ein vollständig bestücktes Shelf (24 SSDs) unterstützt bis zu 48 SAP HANA-Hosts. Das gleiche gilt für die internen Festplatten eines AFF A800 Systems.
+Eine NVMe-SSD (Daten) unterstützt bis zu 5 SAP HANA-Hosts. Die SSDs und SAP HANA-Hosts müssen auf beide Storage-Controller verteilt sein.
+Gleiches gilt für die internen NVMe-Festplatten von Systemen der Serien AFF A800, AFF A70 und AFF A90.
 
 
 NOTE: Das Hinzufügen weiterer Platten-Shelves erhöht nicht die maximale Anzahl von SAP HANA Hosts, die ein Storage-Controller unterstützen kann.
