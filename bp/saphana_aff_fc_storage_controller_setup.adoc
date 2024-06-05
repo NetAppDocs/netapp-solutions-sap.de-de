@@ -24,6 +24,12 @@ In einer SSD-Konfiguration werden Inline-Deduplizierung, Inline-Deduplizierung, 
 
 
 
+== NetApp FlexGroup Volumes
+
+Die Verwendung von NetApp FlexGroup Volumes wird für SAP HANA nicht unterstützt. Aufgrund der Architektur von SAP HANA bietet die Verwendung von FlexGroup Volumes keinen Vorteil und kann zu Performance-Problemen führen.
+
+
+
 == NetApp Volume- und Aggregatverschlüsselung
 
 Die Verwendung von NetApp Volume Encryption (NVE) und NetApp Aggregate Encryption (NAE) wird bei SAP HANA unterstützt.
@@ -42,7 +48,7 @@ Ein großer I/O-Schreibvorgang wirkt sich am stärksten auf die Performance des 
 
 
 
-=== NetApp FabricPool
+== NetApp FabricPool
 
 NetApp FabricPool darf nicht für aktive primäre Filesysteme in SAP HANA Systemen verwendet werden. Dazu gehören die Dateisysteme für den Daten- und Protokollbereich sowie die `/hana/shared` File-System. Dies führt zu unvorhersehbarer Performance, insbesondere beim Start eines SAP HANA Systems.
 
