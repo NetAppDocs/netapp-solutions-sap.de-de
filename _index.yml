@@ -1,0 +1,41 @@
+---
+indexpage:
+  title: SAP Business Application und SAP HANA Database Lösungen
+  summary: NetApp verfügt über eine umfangreiche Sammlung technischer Berichte, validierter
+    Designs, Videos, Blogs und Lösungsübersichten für SAP und SAP HANA.
+  keywords: netapp, solutions, sap, hana
+  lead: NetApp verfügt über eine umfangreiche Sammlung technischer Berichte, validierter
+    Designs, Videos, Blogs und Lösungsübersichten für SAP und SAP HANA.
+  tiles:
+  - title: Best Practices Für Die Konfiguration
+    links:
+    - title: Videos Und Demos
+      url: sap-bp-videos.html
+    - title: Blogs
+      url: sap-bp-blogs.html
+    - title: Tools
+      url: sap-bp-tools.html
+  - title: Backup, Restore und Disaster Recovery
+    links:
+    - title: Videos Und Demos
+      url: sap-dr-videos.html
+    - title: Blogs
+      url: sap-dr-blogs.html
+    - title: Tools
+      url: sap-dr-tools.html
+  - title: Lifecycle Management
+    links:
+    - title: Videos Und Demos
+      url: sap-lcm-videos.html
+    - title: Blogs
+      url: sap-lcm-blogs.html
+    - title: Tools
+      url: sap-lcm-tools.html
+  - title: Alle SAP-Lösungen
+    links:
+    - title: Was ist neu
+      url: sap-whatsnew.html
+    - title: Videos Und Demos
+      url: sap-videos.html
+    - title: Blogs
+      url: sap-blogs.html
