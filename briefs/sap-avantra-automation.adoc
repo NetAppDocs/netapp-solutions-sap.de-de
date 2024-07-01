@@ -1,0 +1,140 @@
+---
+sidebar: sidebar 
+permalink: briefs/sap-avantra-automation.html 
+keywords: sb-4294, sap, avantra, provisioning, lifecycle, management, automation, landscape 
+summary: In diesem Dokument wird beschrieben, wie Avantra mit der NetApp SnapCenter® Plattform integriert wird. 
+---
+= SB-4294: Automatisieren von Kopieren, Aktualisieren und Klonen von SAP Systemen mit Avantra und NetApp SnapCenter
+:allow-uri-read: 
+
+
+[role="lead"]
+In diesem Dokument wird beschrieben, wie Avantra mit der NetApp SnapCenter® Plattform integriert wird.
+
+
+
+== Lösungsüberblick
+
+Der Betrieb von SAP Systemen und Lösungen ist sehr komplex. Für Unternehmen, die SAP einsetzen, sind diese Systeme und Services jedoch zentral für ihre Geschäftsprozesse. Durch die Automatisierung wiederkehrender täglicher Betriebsaufgaben, wie zum Beispiel beim Kopieren und Aktualisieren von Systemen, können SAP-Systemadministratoren mehr Systeme mit weniger Aufwand managen, wiederholbare Ergebnisse liefern und menschliche Fehler reduzieren.
+
+Dieses Dokument konzentriert sich auf die Integration von NetApp® Snapshot™ und FlexClone® Technologien in Avantra Automatisierungs-Workflows. Avantra ist eine IT Management-Plattform, deren Schwerpunkt auf dem automatisierten Management von IT-Abläufen und -Services liegt. Es bietet Lösungen zur Überwachung, Automatisierung und Verwaltung von IT-Infrastrukturen, um die Effizienz und Zuverlässigkeit von IT-Systemen zu verbessern. Avantra ermöglicht Unternehmen, ihre IT-Umgebungen proaktiv zu überwachen, Probleme frühzeitig zu erkennen und automatisierte Aktionen zur Fehlerbehebung oder Optimierung der Systemperformance durchzuführen. Die Plattform lässt sich in der Regel in andere IT-Managementtools integrieren und kann in verschiedenen Umgebungen wie Cloud-, On-Premises- und hybriden Infrastrukturen implementiert werden.
+
+In diesem Dokument wird beschrieben, wie Avantra mit der NetApp SnapCenter® Plattform integriert wird. NetApp SnapCenter ist das Tool zur Orchestrierung von Snapshot-basierten Backups, zur Durchführung von Wiederherstellungen und zur Erstellung von FlexClone Volumes. Dank dieser Integration können SAP-Administratoren mit NetApp-Techniken die täglichen Betriebsaufgaben für SAP-Systeme deutlich beschleunigen. Snapshot, FlexClone und NetApp SnapRestore ® Software beschleunigen Backup-, Wiederherstellungs- und Klonvorgänge, da die NetApp Storage-Technologie Pointer-basiert ist. Dieser Ansatz ist schnell. Außerdem wird der Storage-Overhead während des Klonvorgangs reduziert, da nur neue und geänderte Daten auf das Storage-Medium geschrieben werden, unabhängig davon, ob es sich um ein lokales NetApp Storage-System oder eine NetApp Storage-Lösung bei einem der drei großen Cloud-Provider handelt.
+
+
+
+=== Zielgruppe
+
+Dieses Dokument richtet sich an SAP-Systemadministratoren, die zuvor SAP-Systemkopien manuell durchgeführt haben und diese Aktivität mit Avantra automatisieren möchten. Das beabsichtigte Ziel, die Technologie von NetApp Snapshot und FlexClone, orchestriert durch NetApp SnapCenter, mit Avantra Workflows zu kombinieren, ist es, SAP Systemkopien durch vollständige Automatisierung zu beschleunigen.
+
+
+
+=== SAP Szenarien für Klonen, Kopieren und Aktualisieren von Systemen
+
+Der Begriff SAP Systemkopie wird häufig als Oberbegriff für drei verschiedene Prozesse verwendet: SAP-Systemklon, SAP-Systemkopie und SAP-Systemaktualisierung. Es ist wichtig, zwischen den verschiedenen Vorgängen zu unterscheiden, da sich Workflows und Anwendungsfälle unterscheiden.
+
+* *SAP-Systemklon*. Ein SAP-Systemklon ist ein identischer Klon eines SAP-Quellsystems. SAP Systemklone werden typischerweise zur Beseitigung logischer Beschädigungen oder zum Testen von Disaster-Recovery-Szenarien eingesetzt. Bei einem Klonvorgang des Systems bleiben der Host-Name, die Instanz-Nummer und die sichere Kennung (SID) identisch. Daher ist es wichtig, für das Zielsystem ein ordnungsgemäßes Netzwerkfechten einzurichten, um sicherzustellen, dass keine Kommunikation mit der Produktionsumgebung besteht.
+
+
+image:sap-avantra-image1.png["Abbildung zeigt den SAP-Systemklon"]
+
+* *SAP-Systemkopie*. Eine SAP Systemkopie ist die Einrichtung eines neuen SAP Zielsystems mit Daten aus einem SAP-Quellsystem. Das Zielsystem könnte beispielsweise ein zusätzliches Testsystem mit Daten aus dem Produktionssystem sein. Der Hostname, die Instanznummer und die SID sind für die Quell- und Zielsysteme unterschiedlich. Das neue System ist nicht vom Quellsystem isoliert.
+
+
+image:sap-avantra-image2.png["Abbildung mit SAP-Systemkopie"]
+
+* *Aktualisierung des SAP-Systems.* Eine SAP-Systemaktualisierung ist eine Aktualisierung eines bestehenden SAP-Zielsystems mit Daten aus einem SAP-Quellsystem. Das Zielsystem ist typischerweise Teil einer SAP-Transportlandschaft – beispielsweise eines Sandbox-Systems –, das mit Daten aus dem Produktionssystem aktualisiert wird. Der Hostname, die Instanznummer und die SID sind für das Quell- und Zielsystem unterschiedlich.
+
+
+image:sap-avantra-image3.png["Abbildung zeigt die Aktualisierung des SAP-Systems"]
+
+Obwohl wir drei verschiedene Anwendungsfälle kennen, bleibt der Datenmanagementprozess gleich. Alle drei Anwendungsfälle nutzen dieselbe zugrunde liegende Datenmanagement-Technologie: NetApp Snapshot und FlexClone.
+
+
+
+=== Lösungstechnologie
+
+Die Gesamtlösung besteht aus den folgenden Hauptkomponenten:
+
+* SAP-Quellsystem mit installiertem SnapCenter Agent und SnapCenter Datenbank-Plug-in
+* SAP-Zielsystem mit installiertem SnapCenter Agent und SnapCenter Datenbank-Plug-in
+* Avantra-System mit konfiguriertem SAP-Quell- und SAP-Zielsystem
+* NetApp SnapCenter-Server
+* NetApp Storage-System:
++
+** Physische Hardware vor Ort: NetApp AFF A-Serie, AFF C-Serie, ASA A-Serie, ASA C-Serie oder FAS Serie
+** Softwaredefinierter Storage vor Ort: NetApp ONTAP® Select
+** NetApp Cloud-Storage:
++
+*** NetApp Cloud Volumes ONTAP in AWS, Google Cloud oder Azure
+*** Azure NetApp Dateien
+*** Amazon FSX für NetApp ONTAP (AWS)
+
+
+
+
+
+
+Die folgende Abbildung zeigt den Avantra Server, den NetApp SnapCenter Server, das NetApp Storage-System, das SAP Quell- und SAP Zielsystem und wie alles integriert wird. Das Ziel war es, die Integration durch Verwendung der SnapCenter REST API so flexibel wie möglich zu gestalten und so Konfigurationsarbeiten, die bereits in den bestehenden Komponenten ausgeführt wurden, maximal wiederzuverwenden.
+
+image:sap-avantra-image4.png["Bild: Avantra Server, NetApp SnapCenter Server, NetApp Storage-System, SAP Quell- und SAP Zielsysteme und wie alles integriert wird"]
+
+
+
+=== Zusammenfassung des Anwendungsfalls
+
+Es gibt mehrere Szenarien, in denen Daten aus einem Quellsystem einem Zielsystem zu Test- oder Schulungszwecken zur Verfügung gestellt werden müssen. Diese Test- und Trainingssysteme müssen regelmäßig mit Daten aus dem Quellsystem aktualisiert werden, um sicherzustellen, dass Tests und Trainings mit dem aktuellen Datensatz durchgeführt werden. Diese Vorgänge für die Systemaktualisierung umfassen mehrere Aufgaben auf der Infrastruktur-, Datenbank- und Applikationsebene und können je nach Grad der Automatisierung mehrere Tage dauern.
+
+Um Zeit zu verkürzen, betriebliche Aufgaben zu automatisieren und menschliche Fehler auf Infrastruktur-, Datenbank- und Applikationsebene zu eliminieren, können Sie Avantra Workflows verwenden. Anstatt ein Backup aus dem Quellsystem, das sehr zeitaufwendig und mit hohem Ressourcenverbrauch verbunden ist, auf das Zielsystem wiederherzustellen, verwendet diese Integration NetApp Snapshots und FlexClone Technologie. Alle Aufgaben, die zum Hochfahren einer Datenbank erforderlich sind, lassen sich in wenigen Minuten statt in mehreren Stunden erledigen. Die für den Klonprozess benötigte Zeit hängt nicht von der Größe der Datenbank ab, daher können selbst sehr große Systeme in wenigen Minuten erstellt werden. Avantra reduziert die Laufzeit weiter, indem Aufgaben auf Betriebssystem- und Datenbankebene sowie auf der SAP-Nachverarbeitungsseite automatisiert werden.
+
+Die folgende Abbildung zeigt mögliche Verbesserungen bei der betrieblichen Effizienz durch den Einsatz von Automatisierung.
+
+image:sap-avantra-image5.png["Abbildung mit möglichen Verbesserungen der betrieblichen Effizienz bei Einsatz von Automatisierung"]
+
+
+
+=== Integration der verschiedenen Technologiekomponenten
+
+Die eigentliche Integration von SnapCenter in einen Avantra Workflow besteht aus dem Zugriff über JavaScript auf die NetApp SnapCenter REST API. Durch diese REST API-basierte Integration wird eine Snapshot Kopie des SAP Quellsystems erstellt, ein FlexClone Volume erstellt und im SAP Zielsystem gemountet.
+
+Storage- und SAP-Administratoren haben Zeit und Know-how in die Entwicklung von Skripten investiert, die von SnapCenter ausgelöst und vom SnapCenter-Agenten ausgeführt werden, um Routineaufgaben für den täglichen Betrieb zu automatisieren. Diese lose gekoppelte Architektur, bei der JavaScript zur Auslöser von SnapCenter-Aufgaben verwendet wird, ermöglicht es ihnen, ihre vorhandenen Automatisierungsverfahren wiederzuverwenden, um schneller die gewünschten Ergebnisse zu erzielen. Dabei wird Avantra als Workflow Engine für die End-to-End-Automatisierung verwendet.
+
+
+
+== Schlussfolgerung
+
+Die Kombination aus Avantra und der NetApp Datenmanagement-Technologie bietet eine leistungsstarke Lösung, die den Zeit- und Arbeitsaufwand für die komplexesten und zeitaufwendigsten Aufgaben im Zusammenhang mit der SAP Systemadministration deutlich reduzieren kann. Diese Kombination kann auch helfen, Konfigurationsabweichungen zu vermeiden, die durch menschliches Versagen zwischen den Systemen verursacht werden können.
+
+Da Systemaktualisierungen, Kopien, Klone und Disaster-Recovery-Tests sehr sensitive Verfahren sind, nimmt die Implementierung einer solchen Lösung wertvolle Administrationszeit frei. Darüber hinaus kann das Vertrauen der Mitarbeiter in SAP-Systemadministratoren gestärkt werden: Sie werden sehen, wie viel Zeit für die Fehlerbehebung eingespart werden kann und wie viel einfacher es ist, Systeme für Tests oder andere Zwecke zu kopieren. Die Lösung bietet diese Vorteile unabhängig davon, wo die Quell- und Zielsysteme betrieben werden – vor Ort, in einer Public Cloud, in einer Hybrid- oder Hybrid-Multi-Cloud-Umgebung.
+
+
+
+== Wo Sie weitere Informationen finden
+
+Sehen Sie sich die folgenden Dokumente und Websites an, um mehr über die in diesem Dokument beschriebenen Daten zu erfahren:
+
+* link:https://www.avantra.com/["Avantra"]
+* link:https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"]
+* link:https://docs.netapp.com/us-en/snapcenter/sc-automation/reference_supported_rest_apis.html["REST-APIs werden für SnapCenter Server und Plug-ins unterstützt"]
+
+
+
+
+== Versionsverlauf
+
+[cols="25,25,50"]
+|===
+| Version | Datum | Zusammenfassung aktualisieren 
+
+
+| Version 0.1 | 03.2024 | Entwurf. 
+
+
+| Version 0.2 | 03.2024 | Integration des Feedbacks von NetApp-Kollegen. 
+
+
+| Version 0.3 | 04.2024 | Integrierte Änderungen wurden angefordert, um NetApp Branding-konform zu sein 
+
+
+| Version 0.4 | 06.2024 | In HTML-Format konvertiert 
+|===

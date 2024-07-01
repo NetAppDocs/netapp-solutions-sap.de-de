@@ -8,3 +8,9 @@ entries:
   url: https://www.netapp.com/us/media/sb-3965.pdf
 - title: SAP HANA Disaster Recovery
   url: https://www.netapp.com/us/media/sb-3968.pdf
+- title: SAP-Automatisierung mit Ansible und NetApp SnapCenter
+  url: "/briefs/sap-lama-ansible.html"
+- title: SAP-Automatisierung mit ALPACA und NetApp SnapCenter
+  url: "/briefs/sap-alpaca-automation.html"
+- title: SAP-Automatisierung mit Avantra und NetApp SnapCenter
+  url: "/briefs/sap-avantra-automation.html"
