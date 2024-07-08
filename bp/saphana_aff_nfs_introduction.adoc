@@ -32,6 +32,9 @@ Eine vollständige Liste der zertifizierten NetApp Storage-Lösungen für SAP HA
 Dieses Dokument beschreibt die ONTAP-Konfigurationsanforderungen für das NFS-Protokoll, Version 3 (NFSv3) oder NFS-Protokoll, Version 4 (NFSv4.1).
 
 
+NOTE: Es werden nur NFS-Versionen 3 oder 4.1 unterstützt. NFS-Versionen 1, 2, 4.0 und 4.2 werden nicht unterstützt.
+
+
 NOTE: Die in diesem Dokument beschriebene Konfiguration ist erforderlich, um die erforderlichen SAP HANA KPIs und die beste Performance für SAP HANA zu erreichen. Wenn Sie Einstellungen oder Funktionen ändern, die nicht in diesem Dokument aufgeführt sind, kann dies zu einer Performance-Verschlechterung oder zu einem unerwarteten Verhalten führen. Diese Einstellungen sollten nur vorgenommen werden, wenn dies durch den NetApp Support empfohlen wird.
 
 Die Konfigurationsleitfäden für NetApp AFF Systeme mit FCP und für FAS Systeme mit NFS oder FCP sind unter folgenden Links verfügbar:
