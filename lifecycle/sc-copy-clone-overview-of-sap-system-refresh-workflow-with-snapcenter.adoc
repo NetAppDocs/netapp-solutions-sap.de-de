@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: lifecycle/sc-copy-clone-overview-of-sap-system-refresh-workflow-with-snapcenter.html 
-keywords: overview, sap system refresh, workflow 
-summary: SnapCenter bietet Workflows, mit denen Klone von Datensätzen von jedem vorhandenen Snapshot Backup gemanagt werden können. Mit diesem geklonten Datensatz, einem FlexClone Volume, kann ein HANA Daten-Volume schnell von einem Quellsystem bereitgestellt und an ein Zielsystem angehängt werden. Die Software eignet sich daher ideal zur Ausführung von Systemaktualisierungen für QA-, Test-, Sandbox- oder Trainingssysteme. 
+keywords: tr4667, 4667, SAP HANA, cloning, system refresh 
+summary: NetApp Lösungen zur Optimierung des SAP Lifecycle Managements sind in SAP HANA Datenbank- und Lifecycle Management-Tools integriert und verbinden effiziente applikationsintegrierte Datensicherung mit der flexiblen Bereitstellung von SAP Testsystemen. 
 ---
 = Überblick über den Workflow zur SAP Systemaktualisierung mit SnapCenter
 :hardbreaks:
@@ -13,45 +13,80 @@ summary: SnapCenter bietet Workflows, mit denen Klone von Datensätzen von jedem
 :imagesdir: ./../media/
 
 
-[role="lead"]
-SnapCenter bietet Workflows, mit denen Klone von Datensätzen von jedem vorhandenen Snapshot Backup gemanagt werden können. Mit diesem geklonten Datensatz, einem FlexClone Volume, kann ein HANA Daten-Volume schnell von einem Quellsystem bereitgestellt und an ein Zielsystem angehängt werden. Die Software eignet sich daher ideal zur Ausführung von Systemaktualisierungen für QA-, Test-, Sandbox- oder Trainingssysteme.
+SnapCenter stellt Workflows bereit, mit denen Sie Klone von Datensätzen von bestehenden Snapshot-Backups managen können. Mit diesem geklonten Datensatz, einem FlexClone Volume, kann ein HANA Daten-Volume schnell von einem Quellsystem bereitgestellt und an ein Zielsystem angehängt werden. Die Software eignet sich daher ideal zur Ausführung von Systemaktualisierungen für QA-, Test-, Sandbox- oder Trainingssysteme.
 
-Die Klon-Workflows von SnapCenter bearbeiten alle erforderlichen Operationen auf der Storage-Ebene und können mithilfe von Skripten erweitert werden, um hostspezifische und HANA datenbankspezifische Vorgänge auszuführen. In diesem Dokument verwenden wir ein Skript, um Mount- und Unmount-Vorgänge auf dem Ziel-Host sowie die Wiederherstellung der HANA-Datenbank und das Herunterfahren auszuführen. SnapCenter-Workflows mit weiterer Automatisierung mithilfe des Skripts bearbeiten alle erforderlichen HANA-Datenbankvorgänge, decken aber keine erforderlichen SAP-Nachbearbeitungsschritte ab. Die SAP-Nachbearbeitung muss manuell oder mit Tools von Drittanbietern durchgeführt werden.
+Die Klon-Workflows von SnapCenter bearbeiten alle erforderlichen Operationen auf der Storage-Ebene und können mithilfe von Skripten erweitert werden, um hostspezifische und HANA datenbankspezifische Vorgänge auszuführen. In diesem Dokument verwenden wir ein Skript, um die Wiederherstellung der HANA-Datenbank durchzuführen und Vorgänge beim Herunterfahren auszuführen. SnapCenter-Workflows mit weiterer Automatisierung mithilfe des Skripts bearbeiten alle erforderlichen HANA-Datenbankvorgänge, decken aber keine erforderlichen SAP-Nachbearbeitungsschritte ab. Die SAP-Nachbearbeitung muss manuell oder mit Tools von Drittanbietern durchgeführt werden.
 
+Der Workflow für die SAP-Systemaktualisierung mit SnapCenter besteht aus fünf Hauptschritten, die in der folgenden Abbildung dargestellt sind.
 
-NOTE: Alle Schritte, die mithilfe der Skripte automatisiert werden, können auch manuell ausgeführt werden. Für den Mount-Vorgang am Ziel-Host müssen Sie jedoch den Verbindungspfad des Storage-Systems des FlexClone Volume kennen. Der Verbindungspfad ist in SnapCenter nicht sichtbar. Sie müssen also entweder den Verbindungspfad direkt am Storage-System nachschlagen oder ein einfaches Skript verwenden, das die SnapCenter Umgebungsvariablen auf dem Ziel-Host bereitstellt. Weitere Informationen finden Sie im Abschnitt link:sc-copy-clone-automation-example-scripts.html["„Beispielskripte für die Automatisierung.“"]
-
-Der Workflow zur SAP Systemaktualisierung mit SnapCenter besteht aus fünf wichtigen Schritten, wie in der folgenden Abbildung dargestellt.
-
-. Einmalige, erstmalige Installation und Vorbereitung des Zielsystems.
-. Workflow zum Erstellen von SnapCenter Klonen
-. SAP-Nachbearbeitung (manuell oder mit einem Drittanbieter-Tool).
-. Das System kann als Test-/QA-System verwendet werden.
-. Sobald eine neue Systemaktualisierung angefordert wird, wird der Workflow zum Löschen von SnapCenter Klonen verwendet, um das FlexClone Volume zu entfernen, und die Aktualisierung wird mit Schritt 2 neu gestartet.
+. Einmalige Erstinstallation und Vorbereitung des Zielsystems
++
+.. Das SnapCenter-HANA-Plugin muss auf dem neuen Zielsystem installiert und das HANA-System in SnapCenter konfiguriert sein
+.. Das Zielsystem muss angehalten und das HANA-Daten-Volume abgehängt werden
 
 
-image:sc-copy-clone-image7.png["Fehler: Fehlendes Grafikbild"]
+. Der Workflow zur Erstellung von SnapCenter Klonen
++
+.. SnapCenter erstellt ein FlexClone Volume des ausgewählten Snapshots des Quellsystems
+.. SnapCenter bindet das FlexClone Volume im Zielsystem ein
+.. Die Recovery der Ziel-HANA-Datenbank kann mit dem Skript als Post-Skript automatisiert `sc-system-refresh` oder manuell ausgeführt werden
 
-In den meisten Fällen werden Zieltests/QA-Systeme für mindestens einige Wochen genutzt, während FlexClone Kapazitätseinsparungen nach einem bis zwei Wochen nicht mehr existieren. Es ist wichtig, dass das Snapshot Backup des Quellsystems aus dem FlexClone Volume heraus freigegeben wird, damit es durch das SnapCenter Aufbewahrungsmanagement gelöscht werden kann. Daher empfiehlt NetApp, das FlexClone Volume entweder sofort oder nach ein paar Tagen aufzuteilen. Der Klon-Split-Vorgang blockiert nicht die Nutzung des geklonten Volume und kann daher jederzeit während des Betriebs der HANA-Datenbank durchgeführt werden.
+
+. SAP-Nachbearbeitung (manuell oder mit einem Drittanbieter-Tool)
+. Das System kann nun als Test-/QS-System eingesetzt werden.
+. Bei Anforderung einer neuen Systemaktualisierung wird das FlexClone Volume mithilfe des Workflows zum Löschen von SnapCenter Klonen entfernt
++
+.. Wenn das HANA-Zielsystem in SnapCenter gesichert wurde, muss der Schutz vor dem Starten des Workflows zum Löschen von Klonen entfernt werden.
+.. Das HANA-System muss manuell angehalten oder automatisch mit dem Skript als SnapCenter-Pre-Script gestoppt werden `sc-system-refresh`
+.. SnapCenter entbindet das HANA-Datenvolumen
+.. SnapCenter löscht das FlexClone Volume
+.. Eine Aktualisierung wird mit Schritt 2 neu gestartet.
+
+
+
+
+image:sc-copy-clone-image7.png[""]
+
+In den meisten Fällen werden Zieltests/QA-Systeme mindestens einige Wochen lang eingesetzt. Da das FlexClone Volume den Snapshot des Quell-System-Volume blockiert, benötigt dieser Snapshot basierend auf der Blockänderungsrate am Quell-System-Volume zusätzliche Kapazität. Bei Produktionsquellsystemen und einer durchschnittlichen Änderungsrate von 20% pro Tag wird der blockierte Snapshot nach 5 Tagen 100% erreichen. Daher empfiehlt NetApp, das FlexClone Volume entweder sofort oder nach ein paar Tagen aufzuteilen, wenn der Klon auf einem Produktions-Quellsystem basiert. Der Klon-Split-Vorgang blockiert nicht die Nutzung des geklonten Volume und kann daher jederzeit während des Betriebs der HANA-Datenbank durchgeführt werden.
 
 
 NOTE: Bei der Aufteilung des FlexClone Volume löscht SnapCenter alle Backups, die auf dem Zielsystem erstellt wurden.
 
-Der Aktualisierungsvorgang einschließlich der Klonteilung besteht aus den folgenden Schritten (die folgende Abbildung).
 
-. Einmalige, erstmalige Installation und Vorbereitung des Zielsystems.
-. Workflow zur Erstellung von SnapCenter Klonen
-. Split-Workflow für SnapCenter-Klone
-. SAP-Nachbearbeitung (manuell oder mit einem Drittanbieter-Tool).
-. Nun kann das System auch als Test-/QA-System genutzt werden.
-. Wenn eine neue Systemaktualisierung angefordert wird, wird der Workflow zur Erstellung von SnapCenter Klonen mit zusätzlichen Schritten zum Herunterfahren und Ablegen verwendet.
+NOTE: Bei SnapCenter und Azure NetApp Files ist der Klonaufteilungsvorgang nicht verfügbar, da Azure NetApp Files den Klon nach der Erstellung immer teilt.
+
+Der Aktualisierungsvorgang einschließlich der Klonaufteilung besteht aus den folgenden Schritten.
+
+. Einmalige Erstinstallation und Vorbereitung des Zielsystems
++
+.. Das SnapCenter-HANA-Plugin muss auf dem neuen Zielsystem installiert und das HANA-System in SnapCenter konfiguriert sein
+.. Das Zielsystem muss angehalten und das HANA-Daten-Volume abgehängt werden
 
 
+. Der Workflow zur Erstellung von SnapCenter Klonen
++
+.. SnapCenter erstellt ein FlexClone Volume des ausgewählten Snapshots des Quellsystems
+.. SnapCenter bindet das FlexClone Volume im Zielsystem ein
+.. Die Recovery der Ziel-HANA-Datenbank kann mit dem Skript als Post-Skript automatisiert `sc-system-refresh` oder manuell ausgeführt werden
+
+
+. Das FlexClone Volume wird mithilfe des SnapCenter Klon-Split-Workflows aufgeteilt.
+. SAP-Nachbearbeitung (manuell oder mit einem Drittanbieter-Tool)
+. Das System kann nun als Test-/QS-System eingesetzt werden.
+. Wenn eine neue Systemaktualisierung angefordert wird, erfolgt die Bereinigung mit den folgenden manuellen Schritten
++
+.. Wenn das Ziel-HANA-System in SnapCenter geschützt wurde, muss der Schutz entfernt werden.
+.. Das HANA-System muss manuell gestoppt werden
+.. Das HANA-Datenvolumen muss abgehängt und der fstab-Eintrag aus SnapCenter entfernt werden (manuelle Aufgabe).
+.. Eine Aktualisierung wird mit Schritt 2 neu gestartet.
++
 
 NOTE: Das alte Daten-Volume, das zuvor gespalten wurde, muss manuell auf dem Storage-System gelöscht werden.
 
-Die folgende Abbildung bietet einen Überblick über den SAP Workflow zur Systemaktualisierung mit SnapCenter und Klontrennung.
 
-image:sc-copy-clone-image8.png["Fehler: Fehlendes Grafikbild"]
+
+
+
+image:sc-copy-clone-image8.png[""]
 
 Den Abschnitt link:sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html["„SAP HANA Systemaktualisierung mit SnapCenter“"] Zeigt eine detaillierte Schritt-für-Schritt-Beschreibung der beiden System-Refresh-Workflows an.

@@ -1,0 +1,131 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/sc-copy-clone-considerations-for-sap-hana-system-refresh-operations-using-snapshot-backups.html 
+keywords: tr4667, 4667, SAP HANA, cloning, system refresh 
+summary: NetApp Lösungen zur Optimierung des SAP Lifecycle Managements sind in SAP HANA Datenbank- und Lifecycle Management-Tools integriert und verbinden effiziente applikationsintegrierte Datensicherung mit der flexiblen Bereitstellung von SAP Testsystemen. 
+---
+= Überlegungen zu Systemaktualisierungen für SAP HANA mit Storage-Snapshot-Backups
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ./../media/
+
+
+
+
+== Mandantenname(n) im Zielsystem
+
+Die zur Aktualisierung des SAP HANA-Systems erforderlichen Schritte hängen von der Mandantenkonfiguration des Quellsystems und dem erforderlichen Mandantennamen auf dem Zielsystem ab, wie in der folgenden Abbildung dargestellt.
+
+Da der Mandantenname in der Systemdatenbank konfiguriert ist, steht nach der Wiederherstellung der Systemdatenbank auch der Mandantenname des Quellsystems auf dem Zielsystem zur Verfügung. Daher kann der Mandant im Zielsystem nur mit dem gleichen Namen wie der Quellmandant wiederhergestellt werden, wie in Option 1 dargestellt. Wenn der Mandantenname im Zielsystem anders sein muss, muss er zuerst mit demselben Namen wie der Quellmandant wiederhergestellt und dann in den erforderlichen Zielmandanten-Namen umbenannt werden. Dies ist Option 2.
+
+Eine Ausnahme von dieser Regel ist ein SAP HANA-System mit einem einzelnen Mandanten, bei dem der Mandantenname mit der System-SID identisch ist. Diese Konfiguration ist nach einer ersten SAP HANA-Installation die Standardeinstellung. Diese spezifische Konfiguration wird von der SAP HANA-Datenbank gekennzeichnet. In diesem Fall kann die Mandantenwiederherstellung am Zielsystem mit dem Mandantennamen des Zielsystems durchgeführt werden, was ebenfalls mit der System-SID des Zielsystems identisch sein muss. Dieser Workflow wird in Option 3 angezeigt.
+
+
+NOTE: Sobald ein Mandant im Quellsystem erstellt, umbenannt oder abgelegt wird, wird dieses Konfigurationskennzeichen von der SAP HANA-Datenbank gelöscht. Somit ist auch dann, wenn die Konfiguration an Mandant = SID zurückgebracht wurde, das Flag nicht mehr verfügbar und die Ausnahme hinsichtlich der Mandantenwiederherstellung mit Workflow 3 ist nicht mehr möglich. In diesem Fall ist Option 2 der erforderliche Workflow.
+
+image:sc-copy-clone-image10.png[""]
+
+image:sc-copy-clone-image11.png[""]
+
+
+
+== Workflow zur Systemaktualisierung mit aktivierter SAP HANA-Verschlüsselung
+
+Wenn die Persistenz-Verschlüsselung von SAP HANA aktiviert ist, sind weitere Schritte erforderlich, bevor Sie die SAP HANA-Datenbank im Zielsystem wiederherstellen können.
+
+Im Quellsystem müssen Sie eine Sicherung der Verschlüsselungsroot-Schlüssel für die Systemdatenbank sowie für alle Mandantendatenbanken erstellen. Die Sicherungsdateien müssen auf das Zielsystem kopiert und die Stammschlüssel müssen aus dem Backup importiert werden, bevor der Wiederherstellungsvorgang ausgeführt wird.
+
+Siehe auch https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/b1e7562e2c704c19bd86f2f9f4feedc4.html["SAP HANA Administration Guide"].
+
+
+
+=== Sicherung von Stammschlüsseln
+
+Wenn Änderungen an den Stammschlüsseln vorgenommen wurden, ist immer eine Sicherung der Stammschlüssel erforderlich. Der Backup-Befehl erfordert den dbid als CLI-Parameter. Die dbid's können mit der unten stehenden SQL-Anweisung identifiziert werden.
+
+image:sc-copy-clone-image12.png[""]
+
+Die SQL-Anweisung und weitere Dokumentation sind im SAP HANA Admin Guide verfügbar. Die https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/b1e7562e2c704c19bd86f2f9f4feedc4.html["Sichern Sie die Stammschlüssel im SAP-Hilfeportal"] folgenden Schritte zeigen die erforderlichen Operationen für ein HANA-System mit einem einzelnen Mandanten SS1 und werden im Quellsystem ausgeführt.
+
+. Legen Sie das Sicherungspasswort für System- und Mandantendatenbanken (SS1) fest (falls noch nicht geschehen).
+
+
+....
+hdbsql SYSTEMDB=> ALTER SYSTEM SET ENCRYPTION ROOT KEYS BACKUP PASSWORD Netapp123;
+0 rows affected (overall time 3658.128 msec; server time 3657.967 msec)
+hdbsql SYSTEMDB=>
+hdbsql SS1=> ALTER SYSTEM SET ENCRYPTION ROOT KEYS BACKUP PASSWORD Netapp123;
+0 rows affected (overall time 2424.236 msec; server time 2424.010 msec)
+hdbsql SS1=>
+....
+. Sicherung von Stammschlüsseln für System- und Mandantendatenbanken (SS1) erstellen.
+
+
+....
+ss1adm@hana-1:/usr/sap/SS1/home> /usr/sap/SS1/HDB00/exe/hdbnsutil -backupRootKeys root-key-backup-SS1-SYSTEMDB.rkb --dbid=1 --type='ALL'
+Exporting root key backup for database SYSTEMDB (DBID: 1) to /usr/sap/SS1/home/root-key-backup-SS1-SYSTEMDB.rkb
+done.
+ss1adm@hana-1:/usr/sap/SS1/home> /usr/sap/SS1/HDB00/exe/hdbnsutil -backupRootKeys root-key-backup-SS1-SS1.rkb --dbid=3 --type='ALL'
+Exporting root key backup for database SS1 (DBID: 3) to /usr/sap/SS1/home/root-key-backup-SS1-SS1.rkb
+done.
+....
+. Validieren von Stammschlüsselsicherungen (optional)
+
+
+....
+ss1adm@hana-1:/usr/sap/SS1/home> ls -al root*
+-rw-r----- 1 ss1adm sapsys 1440 Apr 24 07:00 root-key-backup-SS1-SS1.rkb
+-rw-r----- 1 ss1adm sapsys 1440 Apr 24 06:54 root-key-backup-SS1-SYSTEMDB.rkb
+ss1adm@hana-1:/usr/sap/SS1/home>
+
+ss1adm@hana-1:/usr/sap/SS1/home> /usr/sap/SS1/HDB00/exe/hdbnsutil -validateRootKeysBackup root-key-backup-SS1-SS1.rkb
+Please Enter the password:
+Successfully validated SSFS backup file /usr/sap/SS1/home/root-key-backup-SS1-SS1.rkb
+done.
+
+ss1adm@hana-1:/usr/sap/SS1/home> /usr/sap/SS1/HDB00/exe/hdbnsutil -validateRootKeysBackup root-key-backup-SS1-SYSTEMDB.rkb
+Please Enter the password:
+Successfully validated SSFS backup file /usr/sap/SS1/home/root-key-backup-SS1-SYSTEMDB.rkb
+done.
+....
+
+
+=== Import von Root-Schlüsseln auf dem Zielsystem
+
+Der Import der Stammschlüssel ist zunächst für die erste Systemaktualisierung erforderlich. Wenn die Stammschlüssel im Quellsystem nicht geändert werden, ist kein zusätzlicher Import erforderlich. Der Import-Befehl erfordert den dbid als CLI-Parameter. Die dbid's können in der gleichen Weise identifiziert werden wie für die Root-Key-Backup beschrieben.
+
+. In unserem Setup werden die Root-Schlüssel vom Quellsystem auf eine NFS-Share kopiert
+
+
+....
+hana-1:~ # cp /usr/sap/SS1/home/root-key-backup-SS1-SS1.rkb /mnt/sapcc-share/SAP-System-Refresh/
+hana-1:~ # cp /usr/sap/SS1/home/root-key-backup-SS1-SYSTEMDB.rkb /mnt/sapcc-share/SAP-System-Refresh/
+....
+. Die Stammschlüssel können nun mit hdbnsutil importiert werden. Das dbid für die System- und Mandantendatenbank muss mit dem Befehl bereitgestellt werden. Das Backup-Passwort ist ebenfalls erforderlich.
+
+
+....
+qs1adm@hana-7:/usr/sap/QS1/HDB11> ./exe/hdbnsutil -recoverRootKeys /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SYSTEMDB.rkb --dbid=1 --type=ALL
+Please Enter the password:
+Importing root keys for DBID: 1 from /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SYSTEMDB.rkb
+Successfully imported root keys from /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SYSTEMDB.rkb
+done.
+
+qs1adm@hana-7:/usr/sap/QS1/HDB11> ./exe/hdbnsutil -recoverRootKeys /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SS1.rkb --dbid=3 --type=ALL Please Enter the password:
+Importing root keys for DBID: 3 from /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SS1.rkb
+Successfully imported root keys from /mnt/sapcc-share/SAP-System-Refresh/root-key-backup-SS1-SS1.rkb
+done.
+qs1adm@hana-7:/usr/sap/QS1/HDB11>
+....
+
+
+=== Root-Schlüssel importieren, wenn dbid nicht am Ziel vorhanden ist
+
+Wie im vorherigen Kapitel beschrieben, ist das dbid erforderlich, um den Stammschlüssel für das System und alle Mandantendatenbanken zu importieren. Während die Systemdatenbank immer dbid=0 hat, können die Mandantendatenbanken unterschiedliche dbid's haben.
+
+image:sc-copy-clone-image13.png[""]
+
+Die obige Ausgabe zeigt zwei Mandanten mit dbid=3 und dbid=4. Wenn das Zielsystem noch keinen Mandanten mit dbid=4 gehostet hat, schlägt der Import des Stammschlüssels fehl. In diesem Fall müssen Sie zuerst die Systemdatenbank wiederherstellen und dann den Schlüssel für den Mandanten mit dbid=4 importieren.
