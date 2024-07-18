@@ -16,8 +16,8 @@ summary: In diesem Abschnitt wird beschrieben, wie eine Richtlinie zum Ressource
 [role="lead"]
 Sie müssen die neue Richtlinie der HANA-Ressourcenschutzkonfiguration hinzufügen, wie in der folgenden Abbildung dargestellt.
 
-image:amazon-fsx-image86.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image86.png[Fehler: Fehlendes Grafikbild]
 
 Ein täglicher Zeitplan wird in unserem Setup festgelegt.
 
-image:amazon-fsx-image87.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image87.png[Fehler: Fehlendes Grafikbild]

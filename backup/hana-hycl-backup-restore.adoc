@@ -18,12 +18,9 @@ Eine Wiederherstellung aus dem Backup kann nur mit einem On-Premises-NetApp ONTA
 
 . Klicken Sie in der Benutzeroberfläche von BlueXP auf *Schutz* > *Backup und Recovery* > *Anwendungen* und wählen Sie Hybrid.
 .   Wählen Sie im Feld *Filtern nach* den Filter * Typ* und wählen Sie aus der Dropdown- Liste *HANA* aus.
-. Klicken Sie auf *View Details* für die Datenbank, die Sie wiederherstellen möchten. +
-image:hana-hycl-back-image38.jpeg["hana-hycl-back-image38,width=624,height=305"]
-. Wählen Sie das gewünschte Backup aus, und wählen Sie Storage Export. +
-image:hana-hycl-back-image39.jpeg["Breite=624, Höhe=308"]
-. Geben Sie die gewünschten Optionen an: +
-image:hana-hycl-back-image40.jpeg["Breite=624, Höhe=308"]
+. Klicken Sie auf *View Details* für die Datenbank, die Sie wiederherstellen möchten. + Bild::hana-hycl-back-image38.jpeg[hana-hycl-back-image38,width=624,height=305]
+. Wählen Sie das gewünschte Backup aus, und wählen Sie Storage Export. + Bild::hana-hycl-back-image39.jpeg[width=624,height=308]
+. Geben Sie die gewünschten Optionen an: + Bild::hana-hycl-back-image40.jpeg[width=624,height=308]
 +
 .. Geben Sie in der NAS-Umgebung den FQDN oder die IP-Adresse des Hosts an, auf den die aus dem Objektspeicher wiederhergestellten Volumes exportiert werden sollen.
 .. Geben Sie in der SAN-Umgebung die Initiatoren des Hosts an, dem die LUNs der aus dem Objektspeicher wiederhergestellten Volumes zugeordnet werden sollen.
@@ -33,8 +30,5 @@ image:hana-hycl-back-image40.jpeg["Breite=624, Höhe=308"]
 . Wenn nicht genügend Speicherplatz auf dem Quellspeicher vorhanden ist oder der Quellspeicher nicht verfügbar ist, wählen Sie *Speicherort ändern*.
 . Wenn Sie *Speicherort ändern* auswählen, können Sie ein Suffix an das Ziel-Volume anhängen. Wenn Sie das Kontrollkästchen nicht aktiviert haben,  wird standardmäßig *_restore* an das Zielvolume angehängt. Klicken Sie Auf *Weiter*.
 . Wenn Sie Speicherort ändern ausgewählt haben, geben Sie die Details zum alternativen Speicherort an, in denen die vom Objektspeicher wiederhergestellten Daten auf der Seite Speicherzuordnung gespeichert werden, und klicken Sie auf *Weiter*.
-. Überprüfen Sie die Details und klicken Sie auf * Wiederherstellen*. +
-image:hana-hycl-back-image41.jpeg["hana-hycl-back-image41,width=624,height=309"] +
- +
-Dieser Vorgang führt nur den Speicherexport des wiederhergestellten Backups für den angegebenen Host aus. Sie müssen das Dateisystem manuell am Host mounten und die Datenbank aufrufen. Nach der Nutzung des Volumes kann der Speicheradministrator das Volume aus dem ONTAP-Cluster löschen.
+. Überprüfen Sie die Details und klicken Sie auf * Wiederherstellen*. + Image::hana-hycl-back-image41.jpeg[hana-hycl-back-image41,width=624,height=309] + + dieser Vorgang führt nur den Speicherexport des wiederhergestellten Backups für den angegebenen Host aus. Sie müssen das Dateisystem manuell am Host mounten und die Datenbank aufrufen. Nach der Nutzung des Volumes kann der Speicheradministrator das Volume aus dem ONTAP-Cluster löschen.
 

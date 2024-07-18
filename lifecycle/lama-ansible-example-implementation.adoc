@@ -46,7 +46,7 @@ Der Host `sap-lnx49` Wurde als Ziel für den Klonbetrieb von SAP Lama verwendet 
 
 Verschiedene SAP-Systeme (HNA als Quelle und HN2 als Ziel) wurden für Systemkopierungs- und Aktualisierungsvorgänge verwendet, da dort Post Copy Automation (PCA) aktiviert wurde.
 
-image:lama-ansible-image7.png["Dieses Bild zeigt die verschiedenen SAP Host Agents und wie sie mit NetApp Storage über NFS-Mounts interagieren. Auch die SAP Lama-Instanz ist vertreten."]
+image::lama-ansible-image7.png[Dieses Bild zeigt die verschiedenen SAP Host Agents und wie sie mit NetApp Storage über NFS-Mounts interagieren. Auch die SAP Lama-Instanz ist vertreten.]
 
 Die folgenden Softwareversionen wurden für die Laboreinrichtung verwendet:
 
@@ -70,19 +70,19 @@ Die folgenden Softwareversionen wurden für die Laboreinrichtung verwendet:
 
 Die Provider-Definition wird in Automation Studio von SAP Lama wie im folgenden Screenshot dargestellt ausgeführt. Die Beispielimplementierung verwendet eine Definition eines einzelnen Providers, die wie zuvor erläutert für verschiedene benutzerdefinierte Bereitstellungsschritte und Hooks verwendet wird.
 
-image:lama-ansible-image8.png["Screenshot der SAP Provider-Definitionen in der SAP Lama-GUI"]
+image::lama-ansible-image8.png[Screenshot der SAP Provider-Definitionen in der SAP Lama-GUI]
 
 Dem Provider `netapp_clone` Wird als Skript definiert `netapp_clone.sh` Registriert beim SAP-Host-Agent. Der SAP-Host-Agent wird auf dem zentralen Host ausgeführt `sap-jump`, Die auch als Ansible-Steuerungsknoten fungiert.
 
-image:lama-ansible-image9.png["Screenshot der einzelnen Provider-Definition mit dem Namen netapp_Clone auf der Registerkarte „Allgemein“ Zeigt den Abschnitt „Übersicht“, „verwendet für“ und den Abschnitt „Optionen“ an."]
+image::lama-ansible-image9.png[Screenshot der einzelnen Provider-Definition mit dem Namen netapp_Clone auf der Registerkarte „Allgemein“ Zeigt den Abschnitt „Übersicht“, „verwendet für“ und den Abschnitt „Optionen“ an.]
 
 Auf der Registerkarte *used in* wird angezeigt, für welche benutzerdefinierten Vorgänge der Provider verwendet wird. Die Konfiguration für die benutzerdefinierte Bereitstellung *NetAppClone* und die benutzerdefinierten Hooks *NetAppClone löschen* und *NetAppClone Refresh löschen* werden in den nächsten Kapiteln angezeigt.
 
-image:lama-ansible-image10.png["Screenshot des in-Abschnitt verwendeten Bereichs mit einer Liste benutzerdefinierter Vorgänge, die die Definition verwenden. In diesem Beispiel finden Sie die Informationen „NetApp Clone löschen“, „NetAppClone Refresh löschen“ und „NetAppClone“."]
+image::lama-ansible-image10.png[Screenshot des in-Abschnitt verwendeten Bereichs mit einer Liste benutzerdefinierter Vorgänge, die die Definition verwenden. In diesem Beispiel finden Sie die Informationen „NetApp Clone löschen“, „NetAppClone Refresh löschen“ und „NetAppClone“.]
 
 Die Parameter *ClonePostFix* und *SnapPostFix* werden während der Ausführung des Provisioning Workflows angefordert und für die Snapshot- und FlexClone-Volume-Namen verwendet.
 
-image:lama-ansible-image11.png["Screenshot des Abschnitts Parameter mit einer Liste von zwei Parametern: CLonePostFix und SnapPostFix."]
+image::lama-ansible-image11.png[Screenshot des Abschnitts Parameter mit einer Liste von zwei Parametern: CLonePostFix und SnapPostFix.]
 
 
 
@@ -90,7 +90,7 @@ image:lama-ansible-image11.png["Screenshot des Abschnitts Parameter mit einer Li
 
 In der zuvor beschriebenen benutzerdefinierten SAP Lama-Bereitstellungskonfiguration wird der zuvor beschriebene Kundenanbieter verwendet, um die Bereitstellungsworkflows *Clone Volumes* und *PostCloneVolumes* zu ersetzen.
 
-image:lama-ansible-image12.png["Screenshot des Bildschirms „Konfiguration der benutzerdefinierten Bereitstellung“. Die Prozesse CloneVolumes und FinalizeCloneVolumes sind aufgelistet."]
+image::lama-ansible-image12.png[Screenshot des Bildschirms „Konfiguration der benutzerdefinierten Bereitstellung“. Die Prozesse CloneVolumes und FinalizeCloneVolumes sind aufgelistet.]
 
 
 
@@ -98,15 +98,15 @@ image:lama-ansible-image12.png["Screenshot des Bildschirms „Konfiguration der 
 
 Wenn ein System mit dem Workflow zum Löschen des Systems gelöscht wird, wird der Haken *NetAppClone löschen* verwendet, um die Provider-Definition aufzurufen `netapp_clone`. Der Haken *NetApp Clone Refresh löschen* wird während der Systemaktualisierung verwendet, da die Instanz während der Ausführung erhalten bleibt.
 
-image:lama-ansible-image13.png["Screenshot mit benutzerdefinierten Hooks mit den benutzerdefinierten Hooks NetAppClone Refresh löschen und NetAppClone löschen"]
+image::lama-ansible-image13.png[Screenshot mit benutzerdefinierten Hooks mit den benutzerdefinierten Hooks NetAppClone Refresh löschen und NetAppClone löschen]
 
 Es ist wichtig, *Mount Data XML* für den Custom Hook zu konfigurieren, damit SAP Lama dem Provider die Informationen über die Mount Point-Konfiguration bereitstellt.
 
-image:lama-ansible-image14.png["Screenshot von NetAppClone General Screen löschen mit „Use Mount Data XML yes“ hervorgehoben."]
+image::lama-ansible-image14.png[Screenshot des Bildschirms NetAppClone General löschen mit]
 
 Um sicherzustellen, dass der benutzerdefinierte Haken nur verwendet und ausgeführt wird, wenn das System mit einem benutzerdefinierten Bereitstellungs-Workflow erstellt wurde, wird ihm die folgende Einschränkung hinzugefügt.
 
-image:lama-ansible-image15.png["Screenshot der Seite mit den Einschränkungen von NetAppClone löschen Enthält eine einzelne Bedingung, die als benutzerdefinierter Clone-Prozessname (statisch) bezeichnet wird."]
+image::lama-ansible-image15.png[Screenshot der Seite mit den Einschränkungen von NetAppClone löschen Enthält eine einzelne Bedingung, die als benutzerdefinierter Clone-Prozessname (statisch) bezeichnet wird.]
 
 Weitere Informationen zur Verwendung von benutzerdefinierten Haken finden Sie im https://help.sap.com/doc/700f9a7e52c7497cad37f7c46023b7ff/3.0.11.0/en-US/139eca2f925e48738a20dbf0b56674c5.html["SAP Lama-Dokumentation"^].
 
@@ -116,4 +116,4 @@ Weitere Informationen zur Verwendung von benutzerdefinierten Haken finden Sie im
 
 Er muss in der Konfiguration angepasst werden, um den individuellen Bereitstellungs-Workflow für das Quellsystem zu ermöglichen. Das Kontrollkästchen *Benutzerdefinierte Provisioning-Prozess verwenden* mit der entsprechenden benutzerdefinierten Bereitstellungsdefinition muss ausgewählt werden.
 
-image:lama-ansible-image16.png["Screenshot des Bildschirms SAP Lama Configuration > Systems> Systemdetails Kontrollkästchen Prozess „Benutzerdefinierte Bereitstellung verwenden“ ist hervorgehoben."]
+image::lama-ansible-image16.png[Screenshot des Bildschirms SAP Lama Configuration > Systems> Systemdetails Kontrollkästchen Prozess „Benutzerdefinierte Bereitstellung verwenden“ ist hervorgehoben.]

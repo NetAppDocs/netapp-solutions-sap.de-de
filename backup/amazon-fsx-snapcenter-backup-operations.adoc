@@ -28,21 +28,21 @@ Die Ansicht RessourcTopologie gibt einen Überblick über alle verfügbaren Back
 
 . Klicken Sie in der oberen Zeile auf das Symbol Jetzt sichern, um ein On-Demand-Backup zu starten.
 +
-image:amazon-fsx-image48.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image48.png[Fehler: Fehlendes Grafikbild]
 
 . Wählen Sie aus der Dropdown-Liste die Backup-Richtlinie aus `LocalSnap`, Und klicken Sie dann auf Backup, um das On-Demand-Backup zu starten.
 +
-image:amazon-fsx-image49.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image49.png[Fehler: Fehlendes Grafikbild]
 
 +
-image:amazon-fsx-image50.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image50.png[Fehler: Fehlendes Grafikbild]
 
 +
 Ein Protokoll der vorherigen fünf Jobs wird im Aktivitätsbereich unten in der Topologieansicht angezeigt.
 
 . Die Jobdetails werden angezeigt, wenn Sie im Aktivitätsbereich auf die Vorgangszeile des Jobs klicken. Sie können ein detailliertes Jobprotokoll öffnen, indem Sie auf Protokolle anzeigen klicken
 +
-image:amazon-fsx-image51.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image51.png[Fehler: Fehlendes Grafikbild]
 
 +
 Nach Abschluss des Backups wird in der Topologieansicht ein neuer Eintrag angezeigt. Die Backup-Namen folgen derselben Namenskonvention wie der Snapshot-Name, der im Abschnitt definiert wurde link:amazon-fsx-snapcenter-configuration.html#configure-and-protect-a-hana-resource["„Konfigurieren und Schützen einer HANA-Ressource“."]
@@ -51,16 +51,16 @@ Nach Abschluss des Backups wird in der Topologieansicht ein neuer Eintrag angeze
 Sie müssen die Topologieansicht schließen und erneut öffnen, um die aktualisierte Backup-Liste anzuzeigen.
 
 +
-image:amazon-fsx-image52.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image52.png[Fehler: Fehlendes Grafikbild]
 
 +
 Im SAP HANA Backup-Katalog wird der SnapCenter-Backup-Name als A gespeichert `Comment` Außerdem Feld `External Backup ID (EBID)`. Dies ist in der folgenden Abbildung für die Systemdatenbank und in der nächsten Abbildung für die PFX der Mandanten-Datenbank dargestellt.
 
 +
-image:amazon-fsx-image53.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image53.png[Fehler: Fehlendes Grafikbild]
 
 +
-image:amazon-fsx-image54.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image54.png[Fehler: Fehlendes Grafikbild]
 
 
 
@@ -82,19 +82,19 @@ sapcc-hana-svm::>
 
 Ein on-Demand Block Integrity Check Vorgang wird auf dieselbe Weise wie ein Snapshot Backup Job ausgeführt, indem die Richtlinie BlockIntegrtyCheck ausgewählt wird. Bei der Planung von Backups mithilfe dieser Richtlinie erstellt SnapCenter eine standardmäßige SAP HANA Datei-Backup für das System und die Mandantendatenbanken.
 
-image:amazon-fsx-image55.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image55.png[Fehler: Fehlendes Grafikbild]
 
-image:amazon-fsx-image56.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image56.png[Fehler: Fehlendes Grafikbild]
 
 SnapCenter zeigt die Blockintegritätsprüfung nicht auf dieselbe Weise an wie Backups basierend auf Snapshot-Kopien. Stattdessen zeigt die Übersichtskarte die Anzahl der dateibasierten Backups und den Status des vorherigen Backups an.
 
-image:amazon-fsx-image57.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image57.png[Fehler: Fehlendes Grafikbild]
 
 Der SAP HANA-Backup-Katalog zeigt Einträge sowohl für das System als auch für die Mandanten-Datenbanken an. Die folgenden Abbildungen zeigen die Integritätsprüfung der SnapCenter Blöcke im Backup-Katalog des Systems und der Mandanten-Datenbank.
 
-image:amazon-fsx-image58.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image58.png[Fehler: Fehlendes Grafikbild]
 
-image:amazon-fsx-image59.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image59.png[Fehler: Fehlendes Grafikbild]
 
 Eine erfolgreiche Überprüfung der Blockintegrität erstellt standardisierte SAP HANA Daten-Backup-Dateien. SnapCenter verwendet den Backup-Pfad, der mit der HANA-Datenbank für dateibasierte Daten-Backup-Vorgänge konfiguriert wurde.
 

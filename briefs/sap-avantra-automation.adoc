@@ -36,17 +36,17 @@ Der Begriff SAP Systemkopie wird häufig als Oberbegriff für drei verschiedene 
 * *SAP-Systemklon*. Ein SAP-Systemklon ist ein identischer Klon eines SAP-Quellsystems. SAP Systemklone werden typischerweise zur Beseitigung logischer Beschädigungen oder zum Testen von Disaster-Recovery-Szenarien eingesetzt. Bei einem Klonvorgang des Systems bleiben der Host-Name, die Instanz-Nummer und die sichere Kennung (SID) identisch. Daher ist es wichtig, für das Zielsystem ein ordnungsgemäßes Netzwerkfechten einzurichten, um sicherzustellen, dass keine Kommunikation mit der Produktionsumgebung besteht.
 
 
-image:sap-avantra-image1.png["Abbildung zeigt den SAP-Systemklon"]
+image::sap-avantra-image1.png[Abbildung zeigt den SAP-Systemklon]
 
 * *SAP-Systemkopie*. Eine SAP Systemkopie ist die Einrichtung eines neuen SAP Zielsystems mit Daten aus einem SAP-Quellsystem. Das Zielsystem könnte beispielsweise ein zusätzliches Testsystem mit Daten aus dem Produktionssystem sein. Der Hostname, die Instanznummer und die SID sind für die Quell- und Zielsysteme unterschiedlich. Das neue System ist nicht vom Quellsystem isoliert.
 
 
-image:sap-avantra-image2.png["Abbildung mit SAP-Systemkopie"]
+image::sap-avantra-image2.png[Abbildung mit SAP-Systemkopie]
 
 * *Aktualisierung des SAP-Systems.* Eine SAP-Systemaktualisierung ist eine Aktualisierung eines bestehenden SAP-Zielsystems mit Daten aus einem SAP-Quellsystem. Das Zielsystem ist typischerweise Teil einer SAP-Transportlandschaft – beispielsweise eines Sandbox-Systems –, das mit Daten aus dem Produktionssystem aktualisiert wird. Der Hostname, die Instanznummer und die SID sind für das Quell- und Zielsystem unterschiedlich.
 
 
-image:sap-avantra-image3.png["Abbildung zeigt die Aktualisierung des SAP-Systems"]
+image::sap-avantra-image3.png[Abbildung zeigt die Aktualisierung des SAP-Systems]
 
 Obwohl wir drei verschiedene Anwendungsfälle kennen, bleibt der Datenmanagementprozess gleich. Alle drei Anwendungsfälle nutzen dieselbe zugrunde liegende Datenmanagement-Technologie: NetApp Snapshot und FlexClone.
 
@@ -77,7 +77,7 @@ Die Gesamtlösung besteht aus den folgenden Hauptkomponenten:
 
 Die folgende Abbildung zeigt den Avantra Server, den NetApp SnapCenter Server, das NetApp Storage-System, das SAP Quell- und SAP Zielsystem und wie alles integriert wird. Das Ziel war es, die Integration durch Verwendung der SnapCenter REST API so flexibel wie möglich zu gestalten und so Konfigurationsarbeiten, die bereits in den bestehenden Komponenten ausgeführt wurden, maximal wiederzuverwenden.
 
-image:sap-avantra-image4.png["Bild: Avantra Server, NetApp SnapCenter Server, NetApp Storage-System, SAP Quell- und SAP Zielsysteme und wie alles integriert wird"]
+image::sap-avantra-image4.png[Abbildung mit dem Avantra-Server,the NetApp SnapCenter Server,the NetApp storage system]
 
 
 
@@ -89,7 +89,7 @@ Um Zeit zu verkürzen, betriebliche Aufgaben zu automatisieren und menschliche F
 
 Die folgende Abbildung zeigt mögliche Verbesserungen bei der betrieblichen Effizienz durch den Einsatz von Automatisierung.
 
-image:sap-avantra-image5.png["Abbildung mit möglichen Verbesserungen der betrieblichen Effizienz bei Einsatz von Automatisierung"]
+image::sap-avantra-image5.png[Abbildung mit möglichen Verbesserungen der betrieblichen Effizienz bei Einsatz von Automatisierung]
 
 
 

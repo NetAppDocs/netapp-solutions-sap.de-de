@@ -36,7 +36,7 @@ Das Skript schreibt eine Protokolldatei `sc-system-refresh-SID.log``, in das gle
 
 NOTE: Die aktuelle Version des Skripts unterstützt MDC-Konfigurationen für einzelne Hostsysteme oder MDC für mehrere Mandanten. SAP HANA wird nicht mit Systemen mit mehreren Hosts unterstützt.
 
-image:sc-copy-clone-image14.png[""]
+image::sc-copy-clone-image14.png[sc Kopie Klon image14]
 
 
 
@@ -68,7 +68,7 @@ Das Beispielskript `sc-mount-volume.sh` wird zum Ausführen von Mount und Unmoun
 
 NOTE: Das Skript unterstützt SAP HANA-Systeme mit NFS als Storage-Protokoll.
 
-image:sc-copy-clone-image15.png[""]
+image::sc-copy-clone-image15.png[sc Kopie Klon image15]
 
 
 

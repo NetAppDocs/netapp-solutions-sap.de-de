@@ -33,7 +33,7 @@ Auf der Storage-Ebene sind vier aktive Verbindungen so konfiguriert, dass sie f�
 
 Auf Storage-Ebene wird eine Broadcast-Domäne mit einer MTU-Größe von 9000 konfiguriert und dieser Broadcast-Domäne werden alle erforderlichen physischen Schnittstellen hinzugefügt. Bei diesem Ansatz werden diese physischen Schnittstellen automatisch derselben Failover-Gruppe zugewiesen. Alle logischen Schnittstellen (LIFs), die diesen physischen Schnittstellen zugewiesen sind, werden dieser Failover-Gruppe hinzugefügt.
 
-image:saphana_aff_nfs_image10.png["Fehler: Fehlendes Grafikbild"]
+image::saphana_aff_nfs_image10.png[Fehler: Fehlendes Grafikbild]
 
 Im Allgemeinen ist es auch möglich, HA-Interface-Gruppen auf den Servern (Bonds) und den Storage-Systemen zu verwenden (z. B. Link Aggregation Control Protocol [LACP] und ifgroups). Vergewissern Sie sich bei HA-Schnittstellengruppen, dass die Last gleichmäßig auf alle Schnittstellen innerhalb der Gruppe verteilt ist. Die Lastverteilung hängt von der Funktionalität der Netzwerk-Switch-Infrastruktur ab.
 
@@ -46,11 +46,11 @@ NOTE: Abhängig von der Anzahl der SAP HANA-Hosts und der verwendeten Verbindung
 
 Richtiges Netzwerkdesign und richtige Konfiguration sind entscheidend, da alle Daten für SAP HANA Instanzen, einschließlich Performance-kritischer Daten und Protokoll-Volumes für die Datenbank, in dieser Lösung über NFS bereitgestellt werden. Über ein dediziertes Storage-Netzwerk wird der NFS-Traffic von der Kommunikation und der Datenverkehr mit Benutzerzugriffsrechten zwischen SAP HANA-Knoten getrennt. Jeder SAP HANA Node benötigt eine redundante, dedizierte Netzwerkverbindung mit mindestens 10 GB Bandbreite. Es wird auch eine höhere Bandbreite unterstützt. Dieses Netzwerk muss sich End-to-End von der Storage-Ebene über Netzwerk-Switching und Computing bis hin zum auf VMware vSphere gehosteten Gastbetriebssystem erstrecken. Neben der physischen Switching-Infrastruktur wird ein VMware Distributed Switch (VdS) eingesetzt, um eine ausreichende Performance und Managebarkeit des Netzwerkverkehrs auf der Hypervisor-Ebene zu gewährleisten.
 
-image:saphana_aff_nfs_image11.png["Fehler: Fehlendes Grafikbild"]
+image::saphana_aff_nfs_image11.png[Fehler: Fehlendes Grafikbild]
 
 Wie in der obigen Abbildung gezeigt, verwendet jeder SAP HANA Node auf dem VMware Distributed Switch eine dedizierte Portgruppe. Diese Port-Gruppe ermöglicht eine verbesserte Servicequalität (QoS) und eine dedizierte Zuweisung von physischen Netzwerkkarten (NICs) auf den ESX Hosts. Um dedizierte physische NICs zu verwenden und gleichzeitig HA-Funktionen bei einem NIC-Ausfall zu erhalten, wird die dedizierte physische NIC als aktiver Uplink konfiguriert. Zusätzliche NICs werden in den Teaming- und Failover-Einstellungen der SAP HANA-Portgruppe als Standby-Uplinks konfiguriert. Darüber hinaus müssen Jumbo Frames (MTU 9,000) End-to-End-aktiviert sein, auf physischen und virtuellen Switches. Deaktivieren Sie darüber hinaus die Flusskontrolle bei allen ethernet-Ports, die für den Storage-Datenverkehr bei Servern, Switches und Storage-Systemen verwendet werden. Die folgende Abbildung zeigt ein Beispiel für eine solche Konfiguration.
 
 
 NOTE: LRO (Large Receive Offload) muss für Schnittstellen deaktiviert werden, die für NFS Traffic verwendet werden. Alle anderen Richtlinien zur Netzwerkkonfiguration finden Sie im entsprechenden VMware Best Practices Guide für SAP HANA.
 
-image:saphana_aff_nfs_image12.png["Fehler: Fehlendes Grafikbild"]
+image::saphana_aff_nfs_image12.png[Fehler: Fehlendes Grafikbild]

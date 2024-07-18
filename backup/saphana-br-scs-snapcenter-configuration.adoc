@@ -22,7 +22,7 @@ Die SnapCenter Konfiguration lässt sich in zwei Hauptbereiche trennen:
 
 Die folgende Abbildung bietet einen Überblick über die Konfigurationskomponenten und ihre Abhängigkeiten. Die grünen Felder zeigen Konfigurationsschritte, die außerhalb von SnapCenter ausgeführt werden müssen. Die blauen Felder zeigen die Schritte auf, die über die SnapCenter-Benutzeroberfläche ausgeführt werden.
 
-image:saphana-br-scs-image22.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-br-scs-image22.png[Fehler: Fehlendes Grafikbild]
 
 Bei der Erstkonfiguration werden die folgenden Komponenten installiert und konfiguriert:
 

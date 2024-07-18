@@ -28,4 +28,4 @@ Mit den benutzerdefinierten SnapCenter Plug-ins können Sie Ihre eigenen Plug-in
 
 In der folgenden Abbildung sind die SnapCenter Komponenten dargestellt.
 
-image:saphana-br-scs-image6.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-br-scs-image6.png[Fehler: Fehlendes Grafikbild]

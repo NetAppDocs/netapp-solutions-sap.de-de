@@ -67,7 +67,7 @@ NOTE: Beachten Sie immer die relevanten SAP-Hinweise für Konfigurationsrichtlin
 
 NetApp FAS Storage Controller sind im SAP HANA TDI Programm unter Verwendung von NFS- (NAS) und FC (SAN) Protokollen zertifiziert. Sie können in allen aktuellen SAP HANA-Szenarien wie SAP Business Suite on HANA, S/4HANA, BW/4HANA oder SAP Business Warehouse on HANA in Konfigurationen mit einem Host oder mehreren Hosts implementiert werden. Alle Server, die für den Einsatz mit SAP HANA zertifiziert sind, können mit von NetApp zertifizierten Storage-Lösungen kombiniert werden. In der folgenden Abbildung finden Sie eine Übersicht über die Architektur.
 
-image:saphana-fas-nfs_image1.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-fas-nfs_image1.png[Fehler: Fehlendes Grafikbild]
 
 Weitere Informationen zu den Voraussetzungen und Empfehlungen für SAP HANA-Systeme in der Produktion finden Sie in der folgenden SAP-Ressource:
 

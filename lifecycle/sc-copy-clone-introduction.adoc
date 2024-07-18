@@ -31,7 +31,7 @@ Herkömmliche Ansätze für das SAP Lifecycle Management zur Bereitstellung dies
 
 NetApp Lösungen zur Optimierung des SAP Lifecycle Managements sind in SAP HANA Datenbank- und Lifecycle-Management-Tools integriert und kombinieren effiziente applikationsintegrierte Datensicherung mit der flexiblen Bereitstellung von SAP Testsystemen, wie in der folgenden Abbildung dargestellt. Diese Lösungen sind für SAP HANA verfügbar, die lokal oder in der Cloud ausgeführt werden – On-Premises Azure NetApp Files (ANF) oder Amazon FSX for NetApp ONTAP (FSX for ONTAP).
 
-image:sc-copy-clone-image1.png[""]
+image::sc-copy-clone-image1.png[sc Kopie Klon image1]
 
 
 

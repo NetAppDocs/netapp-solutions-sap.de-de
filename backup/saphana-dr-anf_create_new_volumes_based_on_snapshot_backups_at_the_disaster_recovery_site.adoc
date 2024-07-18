@@ -20,33 +20,33 @@ Wenn auch die Backup-Daten für das Protokoll repliziert werden, muss ein neues 
 
 . Eines der applikationskonsistenten Snapshot-Backups wird als Quelle für das neue Volume des HANA-Daten-Volumes ausgewählt. Restore to New Volume ist ausgewählt, um ein neues Volume basierend auf der Snapshot-Sicherung zu erstellen.
 +
-image:saphana-dr-anf_image19.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-dr-anf_image19.png[Fehler: Fehlendes Grafikbild]
 
 . Der neue Volume-Name und die neue Quote müssen in der Benutzeroberfläche angegeben werden.
 +
-image:saphana-dr-anf_image20.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-dr-anf_image20.png[Fehler: Fehlendes Grafikbild]
 
 . Auf der Registerkarte Protokoll werden der Dateipfad und die Exportrichtlinie konfiguriert.
 +
-image:saphana-dr-anf_image21.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-dr-anf_image21.png[Fehler: Fehlendes Grafikbild]
 
 . Der Bildschirm Erstellen und Prüfen fasst die Konfiguration zusammen.
 +
-image:saphana-dr-anf_image22.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-dr-anf_image22.png[Fehler: Fehlendes Grafikbild]
 
 . Auf Basis des HANA-Snapshot-Backups wurde jetzt ein neues Volume erstellt.
 +
-image:saphana-dr-anf_image23.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-dr-anf_image23.png[Fehler: Fehlendes Grafikbild]
 
 
 
 Die gleichen Schritte müssen nun für das freigegebene HANA und das Protokoll-Backup-Volumen, wie in den folgenden beiden Screenshots dargestellt, durchgeführt werden. Da keine zusätzlichen Snapshots für das HANA Shared-Backup-Volume und das Log-Backup-Volume erstellt wurden, muss die neueste SnapMirror Snapshot Kopie als Quelle für das neue Volume ausgewählt werden. Das sind unstrukturierte Daten, und die SnapMirror Snapshot Kopie kann für diesen Anwendungsfall genutzt werden.
 
-image:saphana-dr-anf_image24.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-dr-anf_image24.png[Fehler: Fehlendes Grafikbild]
 
 Der folgende Screenshot zeigt das HANA Shared Volume, das auf dem neuen Volume wiederhergestellt ist.
 
-image:saphana-dr-anf_image25.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-dr-anf_image25.png[Fehler: Fehlendes Grafikbild]
 
 
 NOTE: Wenn ein Kapazitäts-Pool mit einer Tier mit niedriger Performance verwendet wurde, müssen die Volumes nun in einen Kapazitäts-Pool verschoben werden, der die erforderliche Performance bietet.

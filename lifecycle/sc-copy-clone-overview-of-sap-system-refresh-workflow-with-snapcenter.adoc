@@ -45,7 +45,7 @@ Der Workflow für die SAP-Systemaktualisierung mit SnapCenter besteht aus fünf 
 
 
 
-image:sc-copy-clone-image7.png[""]
+image::sc-copy-clone-image7.png[sc Kopie Klon image7]
 
 In den meisten Fällen werden Zieltests/QA-Systeme mindestens einige Wochen lang eingesetzt. Da das FlexClone Volume den Snapshot des Quell-System-Volume blockiert, benötigt dieser Snapshot basierend auf der Blockänderungsrate am Quell-System-Volume zusätzliche Kapazität. Bei Produktionsquellsystemen und einer durchschnittlichen Änderungsrate von 20% pro Tag wird der blockierte Snapshot nach 5 Tagen 100% erreichen. Daher empfiehlt NetApp, das FlexClone Volume entweder sofort oder nach ein paar Tagen aufzuteilen, wenn der Klon auf einem Produktions-Quellsystem basiert. Der Klon-Split-Vorgang blockiert nicht die Nutzung des geklonten Volume und kann daher jederzeit während des Betriebs der HANA-Datenbank durchgeführt werden.
 
@@ -87,6 +87,6 @@ NOTE: Das alte Daten-Volume, das zuvor gespalten wurde, muss manuell auf dem Sto
 
 
 
-image:sc-copy-clone-image8.png[""]
+image::sc-copy-clone-image8.png[sc Kopie Klon image8]
 
 Den Abschnitt link:sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html["„SAP HANA Systemaktualisierung mit SnapCenter“"] Zeigt eine detaillierte Schritt-für-Schritt-Beschreibung der beiden System-Refresh-Workflows an.

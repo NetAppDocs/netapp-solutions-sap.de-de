@@ -26,9 +26,9 @@ Eine Ausnahme von dieser Regel ist ein SAP HANA-System mit einem einzelnen Manda
 
 NOTE: Sobald ein Mandant im Quellsystem erstellt, umbenannt oder abgelegt wird, wird dieses Konfigurationskennzeichen von der SAP HANA-Datenbank gelöscht. Somit ist auch dann, wenn die Konfiguration an Mandant = SID zurückgebracht wurde, das Flag nicht mehr verfügbar und die Ausnahme hinsichtlich der Mandantenwiederherstellung mit Workflow 3 ist nicht mehr möglich. In diesem Fall ist Option 2 der erforderliche Workflow.
 
-image:sc-copy-clone-image10.png[""]
+image::sc-copy-clone-image10.png[sc Copy Clone image10]
 
-image:sc-copy-clone-image11.png[""]
+image::sc-copy-clone-image11.png[sc Kopie Klon image11]
 
 
 
@@ -46,7 +46,7 @@ Siehe auch https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e
 
 Wenn Änderungen an den Stammschlüsseln vorgenommen wurden, ist immer eine Sicherung der Stammschlüssel erforderlich. Der Backup-Befehl erfordert den dbid als CLI-Parameter. Die dbid's können mit der unten stehenden SQL-Anweisung identifiziert werden.
 
-image:sc-copy-clone-image12.png[""]
+image::sc-copy-clone-image12.png[sc Copy Clone image12]
 
 Die SQL-Anweisung und weitere Dokumentation sind im SAP HANA Admin Guide verfügbar. Die https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/b1e7562e2c704c19bd86f2f9f4feedc4.html["Sichern Sie die Stammschlüssel im SAP-Hilfeportal"] folgenden Schritte zeigen die erforderlichen Operationen für ein HANA-System mit einem einzelnen Mandanten SS1 und werden im Quellsystem ausgeführt.
 
@@ -126,6 +126,6 @@ qs1adm@hana-7:/usr/sap/QS1/HDB11>
 
 Wie im vorherigen Kapitel beschrieben, ist das dbid erforderlich, um den Stammschlüssel für das System und alle Mandantendatenbanken zu importieren. Während die Systemdatenbank immer dbid=0 hat, können die Mandantendatenbanken unterschiedliche dbid's haben.
 
-image:sc-copy-clone-image13.png[""]
+image::sc-copy-clone-image13.png[sc Kopie Klon image13]
 
 Die obige Ausgabe zeigt zwei Mandanten mit dbid=3 und dbid=4. Wenn das Zielsystem noch keinen Mandanten mit dbid=4 gehostet hat, schlägt der Import des Stammschlüssels fehl. In diesem Fall müssen Sie zuerst die Systemdatenbank wiederherstellen und dann den Schlüssel für den Mandanten mit dbid=4 importieren.

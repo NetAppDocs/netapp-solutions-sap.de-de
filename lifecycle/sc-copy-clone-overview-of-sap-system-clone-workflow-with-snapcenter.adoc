@@ -34,6 +34,6 @@ Wenn das System nicht mehr benötigt wird, erfolgt die Bereinigung mit den folge
 
 NOTE: Wenn Sie das System auf ein anderes Snapshot Backup zurücksetzen müssen, reichen die Schritte 6 und Schritt 4 aus. Eine Aktualisierung des gemeinsam genutzten SAP HANA-Volumes ist nicht erforderlich.
 
-image:sc-copy-clone-image9.png[""]
+image::sc-copy-clone-image9.png[sc Kopie Klon image9]
 
 Den Abschnitt link:sc-copy-clone-sap-system-clone-with-snapcenter.html["„SAP Systemklon mit SnapCenter“"] Enthält eine detaillierte Schritt-für-Schritt-Beschreibung des Systemklonworkflows.

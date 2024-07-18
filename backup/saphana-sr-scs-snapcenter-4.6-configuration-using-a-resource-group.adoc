@@ -37,48 +37,48 @@ Aus einer übergeordneten Sicht müssen Sie die folgenden Schritte durchführen,
 . Erstellen Sie eine Ressourcengruppen, einschließlich beider Hosts, und konfigurieren Sie den Schutz.
 
 
-image:saphana-sr-scs-image6.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image6.png[Fehler: Fehlendes Grafikbild]
 
 Nachdem Sie das SnapCenter HANA Plug-in auf beiden HANA-Hosts installiert haben, werden die HANA-Systeme in der Ansicht der SnapCenter-Ressourcen wie andere automatisch erkannte Ressourcen angezeigt. Ab SnapCenter 4.6 wird eine zusätzliche Spalte angezeigt, in der der Status der HANA-Systemreplizierung (aktiviert/deaktiviert, primär/sekundär) angezeigt wird.
 
-image:saphana-sr-scs-image7.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image7.png[Fehler: Fehlendes Grafikbild]
 
 Durch Klicken auf die Ressource fordert SnapCenter den HANA-Benutzerspeicherschlüssel für das HANA-System an.
 
-image:saphana-sr-scs-image8.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image8.png[Fehler: Fehlendes Grafikbild]
 
 Weitere Schritte zur automatischen Ermittlung werden ausgeführt, und SnapCenter zeigen die Ressourcendetails an. In SnapCenter 4.6 werden der Replikationsstatus des Systems und der sekundäre Server in dieser Ansicht aufgelistet.
 
-image:saphana-sr-scs-image9.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image9.png[Fehler: Fehlendes Grafikbild]
 
 Nach Durchführung der gleichen Schritte für die zweite HANA-Ressource ist die automatische Ermittlung abgeschlossen, und beide HANA-Ressourcen werden in SnapCenter konfiguriert.
 
-image:saphana-sr-scs-image10.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image10.png[Fehler: Fehlendes Grafikbild]
 
 Für HANA System Replication-fähige Systeme müssen Sie eine SnapCenter-Ressourcengruppe, einschließlich beider HANA-Ressourcen, konfigurieren.
 
-image:saphana-sr-scs-image11.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image11.png[Fehler: Fehlendes Grafikbild]
 
 NetApp empfiehlt die Verwendung eines benutzerdefinierten Namensformats für den Snapshot-Namen. Dieser sollte den Hostnamen, die Richtlinie und den Zeitplan enthalten.
 
-image:saphana-sr-scs-image12.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image12.png[Fehler: Fehlendes Grafikbild]
 
 Sie müssen der Ressourcengruppe beide HANA-Hosts hinzufügen.
 
-image:saphana-sr-scs-image13.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image13.png[Fehler: Fehlendes Grafikbild]
 
 Die Richtlinien und Zeitpläne für die Ressourcengruppe werden konfiguriert.
 
 
 NOTE: Die in der Richtlinie definierte Aufbewahrung wird für beide HANA-Hosts verwendet. Wenn z. B. eine Aufbewahrung von 10 in der Richtlinie definiert ist, wird die Summe der Backups beider Hosts als Kriterien für das Löschen von Backups verwendet. SnapCenter löscht das älteste Backup unabhängig davon, wenn es auf dem aktuellen primären oder sekundären Host erstellt wurde.
 
-image:saphana-sr-scs-image14.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image14.png[Fehler: Fehlendes Grafikbild]
 
 Die Konfiguration der Ressourcengruppe ist jetzt abgeschlossen und Backups können ausgeführt werden.
 
-image:saphana-sr-scs-image15.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image15.png[Fehler: Fehlendes Grafikbild]
 
-image:saphana-sr-scs-image16.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image16.png[Fehler: Fehlendes Grafikbild]
 
 
 
@@ -86,38 +86,38 @@ image:saphana-sr-scs-image16.png["Fehler: Fehlendes Grafikbild"]
 
 Wenn ein Backup-Vorgang der Ressourcengruppe ausgeführt wird, identifiziert SnapCenter den primären Host und löst nur ein Backup auf dem primären Host aus. Das bedeutet, dass nur das Daten-Volume des primären Hosts mit Snapshots erstellt werden wird. in unserem Beispiel ist hana-3 der aktuelle primäre Host und ein Backup wird auf diesem Host ausgeführt.
 
-image:saphana-sr-scs-image17.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image17.png[Fehler: Fehlendes Grafikbild]
 
 Das SnapCenter-Jobprotokoll zeigt den Identifizierungsvorgang und die Ausführung des Backups auf dem aktuellen primären Host hana-3.
 
-image:saphana-sr-scs-image18.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image18.png[Fehler: Fehlendes Grafikbild]
 
 Ein Snapshot-Backup wurde jetzt auf der primären HANA-Ressource erstellt. Der im Backup-Namen enthaltene Hostname zeigt hana-3.
 
-image:saphana-sr-scs-image19.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image19.png[Fehler: Fehlendes Grafikbild]
 
 Das Snapshot-Backup ist auch im HANA-Backup-Katalog sichtbar.
 
-image:saphana-sr-scs-image20.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image20.png[Fehler: Fehlendes Grafikbild]
 
 Falls ein Übernahmevorgang ausgeführt wird, identifizieren weitere SnapCenter Backups jetzt den früheren sekundären Host (hana-4) als primär und der Backup-Vorgang wird auf hana-4 ausgeführt. Erneut wird nur das Daten-Volume des neuen primären Hosts (hana-4) mit Snapshots erstellt.
 
 
 NOTE: Die SnapCenter-Identifizierungslogik deckt nur Szenarien ab, in denen sich die HANA-Hosts in einer primären/sekundären Beziehung befinden oder wenn einer der HANA-Hosts offline ist.
 
-image:saphana-sr-scs-image21.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image21.png[Fehler: Fehlendes Grafikbild]
 
 Das SnapCenter-Jobprotokoll zeigt den Identifizierungsvorgang und die Ausführung des Backups auf dem aktuellen primären Host hana-4.
 
-image:saphana-sr-scs-image22.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image22.png[Fehler: Fehlendes Grafikbild]
 
 Ein Snapshot-Backup wurde jetzt auf der primären HANA-Ressource erstellt. Der im Backup-Namen enthaltene Hostname zeigt hana-4.
 
-image:saphana-sr-scs-image23.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image23.png[Fehler: Fehlendes Grafikbild]
 
 Das Snapshot-Backup ist auch im HANA-Backup-Katalog sichtbar.
 
-image:saphana-sr-scs-image24.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image24.png[Fehler: Fehlendes Grafikbild]
 
 
 
@@ -139,7 +139,7 @@ Da die Retention Management am SnapVault-Ziel außerhalb von SnapCenter durch ON
 
 NOTE: Eine Bereinigung aller SnapVault Snapshot-Kopien ist nicht möglich, da eine Snapshot-Kopie als Synchronisierungspunkt gesperrt wird. Wenn auch die neueste Snapshot Kopie gelöscht werden muss, muss die SnapVault Replizierungsbeziehung gelöscht werden. In diesem Fall empfiehlt NetApp, die Backups im HANA-Backup-Katalog zu löschen, um das Backup-Aufbewahrungsmanagement für das Protokoll abzulösen.
 
-image:saphana-sr-scs-image25.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image25.png[Fehler: Fehlendes Grafikbild]
 
 
 
@@ -155,7 +155,7 @@ Wenn SnapVault Replizierung Teil der Datensicherungsstrategie ist, ist für spez
 
 Die folgende Abbildung zeigt ein Szenario, in dem mehrere Übernahmen ausgeführt und Snapshot Backups an beiden Standorten erstellt wurden. Mit dem aktuellen Status ist der Host hana-3 der primäre Host und das neueste Backup T4, das auf Host hana-3 erstellt wurde. Wenn Sie einen Restore- und Recovery-Vorgang durchführen müssen, sind die Backups T1 und T4 für die Wiederherstellung im SnapCenter verfügbar. Die Backups, die auf dem Host hana-4 (T2, T3) erstellt wurden, können mit SnapCenter nicht wiederhergestellt werden. Diese Backups müssen zur Wiederherstellung manuell auf das Datenvolumen von hana-3 kopiert werden.
 
-image:saphana-sr-scs-image26.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image26.png[Fehler: Fehlendes Grafikbild]
 
 Die Wiederherstellungs- und Recovery-Vorgänge für eine SnapCenter 4.6-Ressourcengruppe sind identisch mit einer automatisch erkannten Konfiguration, die nicht vom System stammt. Alle Optionen für Restores und automatisiertes Recovery sind verfügbar. Weitere Einzelheiten finden Sie im technischen Bericht https://www.netapp.com/us/media/tr-4614.pdf["TR-4614: SAP HANA Backup and Recovery with SnapCenter"^].
 

@@ -119,7 +119,7 @@ Eine zweite Option zum Konfigurieren dieser Einstellungen ist der SnapCenter Pow
 . Mit dem Befehl `Set- SmConfigSettings -Plugin - HostName <pluginhostname> - PluginCode hana - configSettings @{"LOG_CLEANUP_DISABLE" = "Y"}`, Die Änderungen werden für den SAP HANA Plug-in-Host konfiguriert `<pluginhostname>` Durch den IP- oder Host-Namen angegeben (siehe folgende Abbildung).
 
 
-image:saphana-br-scs-image154.jpeg["Fehler: Fehlendes Grafikbild"]
+image::saphana-br-scs-image154.jpeg[Fehler: Fehlendes Grafikbild]
 
 
 
@@ -127,7 +127,7 @@ image:saphana-br-scs-image154.jpeg["Fehler: Fehlendes Grafikbild"]
 
 SnapCenter erkennt, ob das SAP HANA Plug-in in in einer virtualisierten Umgebung installiert ist. Dabei kann es sich um eine VMware Umgebung oder eine SnapCenter Installation bei einem Public Cloud Provider handelt. In diesem Fall zeigt SnapCenter eine Warnung für die Konfiguration des Hypervisors an, wie in der folgenden Abbildung dargestellt.
 
-image:saphana-br-scs-image34.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-br-scs-image34.png[Fehler: Fehlendes Grafikbild]
 
 Diese Warnung kann global unterdrückt werden. In diesem Fall kennt SnapCenter virtualisierte Umgebungen nicht und weist daher keine derartigen Warnungen auf.
 
@@ -137,7 +137,7 @@ Um SnapCenter zu konfigurieren, um diese Warnung zu unterdrücken, muss die folg
 . Wählen Sie für die Hypervisor-Einstellungen die Option VMs mit iSCSI Direct Attached Disks oder NFS für alle Hosts aus, und aktualisieren Sie die Einstellungen.
 
 
-image:saphana-br-scs-image155.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-br-scs-image155.png[Fehler: Fehlendes Grafikbild]
 
 
 
@@ -162,7 +162,7 @@ In den folgenden Abschnitten werden zwei Möglichkeiten beschrieben, um diese te
 
 In der Topologieansicht einer Ressource zeigt SnapCenter bei der Auswahl der sekundären Backups die Backups auf dem externen Backup-Speicher an, wie im folgenden Screenshot dargestellt. SnapCenter führt eine Bereinigung mit dem Symbol „Aktualisieren“ aus, um die Backups für diese Ressource zu synchronisieren.
 
-image:saphana-br-scs-image156.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-br-scs-image156.png[Fehler: Fehlendes Grafikbild]
 
 
 
@@ -173,7 +173,7 @@ SnapCenter führt den Bereinigungsjob aus `SnapCenter_RemoveSecondaryBackup` Sta
 . Starten Sie ein PowerShell Befehlsfenster auf dem SnapCenter-Server.
 . Öffnen Sie die Verbindung zum SnapCenter-Server, und geben Sie im Anmeldefenster die Anmeldedaten des SnapCenter-Administrators ein.
 +
-image:saphana-br-scs-image157.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-br-scs-image157.png[Fehler: Fehlendes Grafikbild]
 
 . Um den Zeitplan von einer Woche auf eine tägliche Basis zu ändern, verwenden Sie das Cmdlet `Set- SmSchedule`.
 +
@@ -213,6 +213,6 @@ PS C:\Users\scadmin> Check the configuration using the Windows Task Scheduler.
 ....
 . Sie können die Job-Eigenschaften im Windows Task Scheduler überprüfen.
 +
-image:saphana-br-scs-image158.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-br-scs-image158.png[Fehler: Fehlendes Grafikbild]
 
 

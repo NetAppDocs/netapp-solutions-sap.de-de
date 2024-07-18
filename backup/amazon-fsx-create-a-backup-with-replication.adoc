@@ -18,11 +18,11 @@ Ein Backup wird auf dieselbe Weise wie eine lokale Snapshot Kopie erstellt.
 
 Um ein Backup mit Replikation zu erstellen, wählen Sie die Richtlinie aus, die die Backup-Replikation enthält, und klicken Sie auf Backup.
 
-image:amazon-fsx-image88.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image88.png[Fehler: Fehlendes Grafikbild]
 
 Im Jobprotokoll von SnapCenter wird der Schritt sekundäre Aktualisierung angezeigt, der einen SnapVault-Aktualisierungsvorgang initiiert. Replizierung hat geänderte Blöcke vom Quell-Volume auf das Ziel-Volume repliziert.
 
-image:amazon-fsx-image89.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image89.png[Fehler: Fehlendes Grafikbild]
 
 Auf dem FSX für ONTAP Filesystem wird ein Snapshot auf dem Quell-Volume mit dem SnapMirror Label erstellt. `snapcenter`, Wie in der SnapCenter-Richtlinie konfiguriert.
 
@@ -52,8 +52,8 @@ FsxId05f7f00af49dc7a3e::>
 ....
 Auch das neue Snapshot-Backup ist im HANA-Backup-Katalog enthalten.
 
-image:amazon-fsx-image90.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image90.png[Fehler: Fehlendes Grafikbild]
 
 In SnapCenter können Sie die replizierten Backups auflisten, indem Sie in der Topologieansicht auf Vault Kopien klicken.
 
-image:amazon-fsx-image91.png["Fehler: Fehlendes Grafikbild"]
+image::amazon-fsx-image91.png[Fehler: Fehlendes Grafikbild]

@@ -35,7 +35,7 @@ Aus der Perspektive der Backup-Anforderungen müssen Backups erstellt werden kö
 
 Der Rest dieses Dokuments konzentriert sich auf Backup-Vorgänge mit SAP System Replication, konfiguriert als Hochverfügbarkeitslösung.
 
-image:saphana-sr-scs-image1.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image1.png[Fehler: Fehlendes Grafikbild]
 
 
 
@@ -45,4 +45,4 @@ Die Systemreplizierung kann mit asynchroner Replizierung konfiguriert werden, oh
 
 Hinsichtlich der Backup-Anforderungen müssen Sie in der Lage sein, Backups während des normalen Betriebs in Datacenter 1 und bei Disaster Recovery in Datacenter 2 zu erstellen. In Datacentern 1 und 2 ist eine separate Backup-Infrastruktur verfügbar, Backup-Vorgänge werden als Teil des Disaster Failover aktiviert. Die Backup-Infrastruktur ist in der Regel nicht gemeinsam genutzt und ein Restore eines Backups, das auf dem anderen Datacenter erstellt wurde, ist nicht möglich.
 
-image:saphana-sr-scs-image2.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-sr-scs-image2.png[Fehler: Fehlendes Grafikbild]

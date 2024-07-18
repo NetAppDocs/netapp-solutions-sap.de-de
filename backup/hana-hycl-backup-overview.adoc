@@ -36,7 +36,7 @@ Ein BlueXP Connector muss innerhalb des virtuellen Netzwerks des Kunden implemen
 Der Datentransfer zwischen dem lokalen Storage und dem Cloud-Bucket ist vollständig gesichert mit AES-256-Bit-Verschlüsselung im Ruhezustand, TLS/HTTPS-Verschlüsselung bei der Übertragung und CMK-Unterstützung (Customer Managed Key). +
 Die gesicherten Daten können in einem unveränderlichen und nicht löschbaren WORM-Zustand gespeichert werden. Die einzige Möglichkeit, auf die Daten aus dem Objekt-Storage zuzugreifen, besteht darin, sie in NetApp ONTAP-basiertem Storage wiederherzustellen, einschließlich NetApp CVO.
 
-image:hana-hycl-back-image1.png["Ein Bild, das Text, Screenshot, Diagramm, Kreis enthält. Automatisch generierte Beschreibung,width=624,height=450"]
+image::hana-hycl-back-image1.png[Ein Bild,624,450]
 
 
 

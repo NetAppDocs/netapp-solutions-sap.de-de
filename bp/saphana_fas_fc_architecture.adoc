@@ -20,7 +20,7 @@ Auf der Storage-Ebene können verschiedene Modelle der FAS Produktfamilie verwen
 
 Die folgende Abbildung zeigt eine Beispielkonfiguration mit acht SAP HANA-Hosts, die an ein Storage HA-Paar angeschlossen sind.
 
-image:saphana_fas_fc_image2.png["Fehler: Fehlendes Grafikbild"]
+image::saphana_fas_fc_image2.png[Fehler: Fehlendes Grafikbild]
 
 Diese Architektur lässt sich in zwei Dimensionen skalieren:
 
@@ -30,11 +30,11 @@ Diese Architektur lässt sich in zwei Dimensionen skalieren:
 
 Die folgende Abbildung zeigt ein Konfigurationsbeispiel, in dem mehr SAP HANA-Hosts mit den Storage-Controllern verbunden sind. In diesem Beispiel sind mehr Platten-Shelves erforderlich, um die Kapazitäts- und Performance-Anforderungen der 16 SAP HANA-Hosts zu erfüllen. Abhängig von den Anforderungen an den Gesamtdurchsatz müssen die Storage Controller um zusätzliche FC-Verbindungen erweitert werden.
 
-image:saphana_fas_fc_image3.png["Fehler: Fehlendes Grafikbild"]
+image::saphana_fas_fc_image3.png[Fehler: Fehlendes Grafikbild]
 
 Unabhängig vom implementierten FAS Storage-Modell lässt sich die SAP HANA Landschaft auch durch Hinzufügen weiterer Storage-Controller skalieren, wie in der folgenden Abbildung dargestellt.
 
-image:saphana_fas_fc_image4.png["Fehler: Fehlendes Grafikbild"]
+image::saphana_fas_fc_image4.png[Fehler: Fehlendes Grafikbild]
 
 
 
@@ -48,7 +48,7 @@ Mit der NetApp SnapVault Software können die auf dem Primärspeicher erstellten
 
 Die Datenbankprotokolle können mithilfe eines NFS-Mount-Speichers direkt auf dem sekundären Storage gesichert werden, wie in der folgenden Abbildung dargestellt.
 
-image:saphana_fas_fc_image5.jpg["Fehler: Fehlendes Grafikbild"]
+image::saphana_fas_fc_image5.jpg[Fehler: Fehlendes Grafikbild]
 
 Storage-basierte Snapshot Backups bieten im Vergleich zu dateibasierten Backups entscheidende Vorteile. Zu diesen Vorteilen zählen unter anderem:
 
@@ -84,7 +84,7 @@ Die Server an den DR-Standorten können im normalen Betrieb als Entwicklungs- un
 
 Beide Replizierungsmethoden ermöglichen die Durchführung von DR-Workflow-Tests ohne Auswirkungen auf RPO und RTO. FlexClone Volumes werden auf dem Storage erstellt und an die DR-Testserver angeschlossen.
 
-image:saphana_fas_fc_image6.png["Fehler: Fehlendes Grafikbild"]
+image::saphana_fas_fc_image6.png[Fehler: Fehlendes Grafikbild]
 
 Die synchrone Replizierung bietet den StrictSync-Modus. Wenn der Schreibvorgang auf den sekundären Storage aus irgendeinem Grund nicht abgeschlossen wird, fällt der Applikations-I/O aus. Dadurch wird sichergestellt, dass die primären und sekundären Storage-Systeme identisch sind. Der Applikations-I/O zum primären Volume wird erst wieder fortgesetzt, nachdem die SnapMirror-Beziehung zum InSync-Status zurückkehrt. Falls der Primär-Storage ausfällt, kann der Applikations-I/O nach dem Failover ohne Datenverlust auf dem sekundären Storage fortgesetzt werden. Im StrictSync-Modus ist der RPO immer Null.
 
@@ -94,4 +94,4 @@ Die synchrone Replizierung bietet den StrictSync-Modus. Wenn der Schreibvorgang 
 
 Die folgende Abbildung bietet einen allgemeinen Überblick über die Lösung. Der Storage Cluster an jedem Standort sorgt für lokale Hochverfügbarkeit und wird für Produktions-Workloads verwendet. Die Daten an jedem Standort werden synchron zum anderen Standort repliziert und sind im Fall eines Disaster Failovers verfügbar.
 
-image:saphana_fas_fc_image7.png["Fehler: Fehlendes Grafikbild"]
+image::saphana_fas_fc_image7.png[Fehler: Fehlendes Grafikbild]

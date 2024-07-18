@@ -22,15 +22,15 @@ Die Übertragungsdauer und Übertragungsgröße bieten wertvolle Informationen z
 
 Der folgende Screenshot zeigt den Replizierungsstatus eines HANA Daten-Volumes.
 
-image:saphana-dr-anf_image14.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-dr-anf_image14.png[Fehler: Fehlendes Grafikbild]
 
 Der folgende Screenshot zeigt den Replizierungsstatus eines HANA-Protokoll-Backup-Volumes.
 
-image:saphana-dr-anf_image15.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-dr-anf_image15.png[Fehler: Fehlendes Grafikbild]
 
 Der folgende Screenshot zeigt den Replizierungsstatus von einem Shared HANA Volume.
 
-image:saphana-dr-anf_image16.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-dr-anf_image16.png[Fehler: Fehlendes Grafikbild]
 
 
 
@@ -41,4 +41,4 @@ Bei jedem Replizierungs-Update vom Quell- zum Ziel-Volume werden alle Blockände
 
 NOTE: Innerhalb des Quell- und Ziel-Volume werden auch SnapMirror Snapshot Kopien erstellt, die für Resynchronisierung und Replizierungs-Updates verwendet werden. Diese Snapshot-Kopien sind aus Sicht der HANA-Datenbank nicht applikationskonsistent. Bei HANA-Recovery-Vorgängen können nur die über AzaCSnap erstellten applikationskonsistenten Snapshots verwendet werden.
 
-image:saphana-dr-anf_image17.png["Fehler: Fehlendes Grafikbild"]
+image::saphana-dr-anf_image17.png[Fehler: Fehlendes Grafikbild]
