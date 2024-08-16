@@ -21,8 +21,8 @@ keywords: netapp, solutions, SAP, lifecycle, management, lcm, videos, demos
 
 == Videos und Demos zu SAP Lifecycle Management
 
-* link:https://www.netapp.tv/details/25588["Verringern Sie Risiken und steigern Sie die Qualität von SAP-Projekten"]
-* link:https://www.netapp.tv/details/25595["Gewährleisten Sie die Kontinuität für die Geschäftsbereiche bei unerwarteten Ereignissen"]
-* link:https://www.netapp.tv/details/28400["Anwendungsfälle für SnapCenter"]
-* link:https://www.netapp.tv/details/28401["SAP Systemkopie mit Libelle und SnapCenter"]
+* link:https://media.netapp.com/video-detail/eae1f74b-6a01-5021-9d3f-96987aa08600/decrease-risk-and-increase-quality-of-sap-projects["Verringern Sie Risiken und steigern Sie die Qualität von SAP-Projekten"^]
+* link:https://media.netapp.com/video-detail/c1229d10-fe84-58f1-9cdf-ca3c0f9d9104/ensure-continuity-for-lines-of-business-in-the-face-of-unexpected-events["Gewährleisten Sie die Kontinuität für die Geschäftsbereiche bei unerwarteten Ereignissen"^]
+* link:https://media.netapp.com/video-detail/1c753169-f70d-5f2b-b798-cd09a604541c/snapcenter-use-cases["Anwendungsfälle für SnapCenter"^]
+* link:https://media.netapp.com/video-detail/5ed450f9-d66b-53d9-99de-d763ea44566c/sap-system-copy-with-libelle-and-snapcenter["SAP Systemkopie mit Libelle und SnapCenter"^]
 
