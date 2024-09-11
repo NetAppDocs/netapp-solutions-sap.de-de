@@ -22,11 +22,11 @@ Verschiedene Modelle der AFF Produktfamilie können auf der Storage-Ebene mitein
 
 Die folgende Abbildung zeigt eine Beispielkonfiguration mit acht SAP HANA-Hosts, die an ein Storage-HA-Paar angeschlossen sind.
 
-image::saphana_aff_nfs_image2.png[Fehler: Fehlendes Grafikbild]
+image::saphana_aff_nfs_image2.png[Saphana AFF nfs image2]
 
 Die folgende Abbildung zeigt ein Beispiel für die Nutzung von VMware vSphere als Virtualisierungsebene.
 
-image::saphana_aff_nfs_image3.jpg[Fehler: Fehlendes Grafikbild]
+image::saphana_aff_nfs_image3.jpg[Saphana AFF, nfs-Bild3]
 
 Die Architektur lässt sich in zwei Dimensionen skalieren:
 
@@ -36,11 +36,11 @@ Die Architektur lässt sich in zwei Dimensionen skalieren:
 
 Die folgende Abbildung zeigt eine Beispielkonfiguration, in der mehr SAP HANA-Hosts mit den Storage-Controllern verbunden sind. In diesem Beispiel sind mehr Platten-Shelves erforderlich, um die Kapazitäts- und Performance-Anforderungen der 16 SAP HANA-Hosts zu erfüllen. Abhängig vom Gesamtdurchsatz müssen Sie den Storage Controllern weitere 10-GbE- oder schnellere Verbindungen hinzufügen.
 
-image::saphana_aff_nfs_image4.png[Fehler: Fehlendes Grafikbild]
+image::saphana_aff_nfs_image4.png[Saphana AFF nfs image4]
 
 Unabhängig vom implementierten AFF System lässt sich die SAP HANA-Landschaft auch durch Hinzufügen eines beliebigen zertifizierten Storage-Controllers skalieren, um die gewünschte Node-Dichte zu erfüllen, wie in der folgenden Abbildung dargestellt.
 
-image::saphana_aff_nfs_image5.png[Fehler: Fehlendes Grafikbild]
+image::saphana_aff_nfs_image5.png[Saphana AFF nfs image5]
 
 
 
@@ -54,7 +54,7 @@ Mit der NetApp SnapMirror Technologie können auf einem Storage-System erstellte
 
 Die Datenbankprotokolle können mithilfe eines NFS-Mount-Speichers direkt auf dem sekundären Storage gesichert werden, wie in der folgenden Abbildung dargestellt.
 
-image::saphana_aff_nfs_image6.jpg[Fehler: Fehlendes Grafikbild]
+image::saphana_aff_nfs_image6.jpg[Saphana AFF nfs image6]
 
 Storage-basierte Snapshot Backups bieten im Vergleich zu herkömmlichen dateibasierten Backups deutliche Vorteile. Zu diesen Vorteilen zählen unter anderem die folgenden:
 
@@ -65,7 +65,7 @@ Storage-basierte Snapshot Backups bieten im Vergleich zu herkömmlichen dateibas
 
 
 
-NOTE: Detaillierte Informationen zur SAP HANA-Backup- und Recovery-Lösung finden Sie unter https://www.netapp.com/us/media/tr-4614.pdf["TR-4614: SAP HANA Backup and Recovery with SnapCenter"^].
+NOTE: Detaillierte Informationen zur Backup- und Recovery-Lösung von SAP HANA finden Sie unter https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["TR-4614: SAP HANA Backup and Recovery with SnapCenter"^].
 
 
 
@@ -73,7 +73,7 @@ NOTE: Detaillierte Informationen zur SAP HANA-Backup- und Recovery-Lösung finde
 
 SAP HANA Disaster-Recovery (DR) kann mithilfe von SAP HANA-Systemreplizierung auf der Datenbankebene oder auf der Storage-Ebene mithilfe von Storage-Replizierungstechnologien durchgeführt werden. Der folgende Abschnitt bietet einen Überblick über Disaster-Recovery-Lösungen basierend auf der Storage-Replizierung.
 
-Detaillierte Informationen zu Disaster-Recovery-Lösungen für SAP HANA finden Sie unter https://www.netapp.com/pdf.html?item=/media/8584-tr4646pdf.pdf["TR-4646: SAP HANA Disaster Recovery with Storage Replication"^].
+Weitere Informationen zu Disaster-Recovery-Lösungen für SAP HANA finden Sie unter  https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-dr-sr_pdf_link.html["TR-4646: SAP HANA Disaster Recovery with Storage Replication"^].
 
 
 
@@ -91,7 +91,7 @@ Die Server an den DR-Standorten können im normalen Betrieb als Entwicklungs- un
 
 Beide Replizierungsmethoden ermöglichen die Durchführung von DR-Workflow-Tests ohne Auswirkungen auf RPO und RTO. FlexClone Volumes werden auf dem Storage erstellt und an die DR-Testserver angeschlossen.
 
-image::saphana_aff_nfs_image7.png[Fehler: Fehlendes Grafikbild]
+image::saphana_aff_nfs_image7.png[Saphana AFF nfs image7]
 
 Die synchrone Replizierung bietet den StrictSync-Modus. Wenn der Schreibvorgang auf den sekundären Storage aus irgendeinem Grund nicht abgeschlossen wird, fällt der Applikations-I/O aus. Dadurch wird sichergestellt, dass die primären und sekundären Storage-Systeme identisch sind. Der Applikations-I/O zum primären Volume wird erst wieder fortgesetzt, nachdem die SnapMirror-Beziehung zum InSync-Status zurückkehrt. Falls der Primär-Storage ausfällt, kann der Applikations-I/O nach dem Failover ohne Datenverlust auf dem sekundären Storage fortgesetzt werden. Im StrictSync-Modus ist der RPO immer Null.
 
@@ -101,4 +101,4 @@ Die synchrone Replizierung bietet den StrictSync-Modus. Wenn der Schreibvorgang 
 
 Die folgende Abbildung bietet einen allgemeinen Überblick über die Lösung. Das Storage-Cluster an jedem Standort bietet lokale Hochverfügbarkeit und wird für den Produktions-Workload verwendet. Die Daten aller Standorte werden synchron zum anderen Standort repliziert und sind im Fall eines Disaster Failovers verfügbar.
 
-image::saphana_aff_nfs_image8.png[Fehler: Fehlendes Grafikbild]
+image::saphana_aff_nfs_image8.png[Saphana AFF nfs image8]

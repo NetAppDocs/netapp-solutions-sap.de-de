@@ -83,11 +83,11 @@ In der folgenden Übersicht sind die erforderlichen Schritte zur Storage-Konfigu
 
 Mit HDDs können maximal zwei DS2246 Festplatten-Shelfs oder vier DS224C Festplatten-Shelfs mit einem SAS-Stack verbunden werden, um die erforderliche Performance für die SAP HANA-Hosts zu liefern, wie in der folgenden Abbildung dargestellt. Die Festplatten in jedem Shelf müssen gleichmäßig auf beide Controller des HA-Paars verteilt werden.
 
-image::saphana-fas-nfs_image13.png[Fehler: Fehlendes Grafikbild]
+image::saphana-fas-nfs_image13.png[Saphana FAS nfs image13]
 
 Bei SSDs kann maximal ein Platten-Shelf mit einem SAS-Stack verbunden werden, um die erforderliche Performance für die SAP HANA-Hosts zu liefern, wie in der folgenden Abbildung dargestellt. Die Festplatten in jedem Shelf müssen gleichmäßig auf beide Controller des HA-Paars verteilt werden. Mit dem DS224C Festplatten-Shelf können auch Quad-Path-SAS-Verkabelung verwendet werden, ist aber nicht erforderlich.
 
-image::saphana-fas-nfs_image14.png[Fehler: Fehlendes Grafikbild]
+image::saphana-fas-nfs_image14.png[Saphana FAS nfs image14]
 
 
 
@@ -101,7 +101,7 @@ Im Allgemeinen müssen zwei Aggregate pro Controller konfiguriert werden, unabh�
 
 Die folgende Abbildung zeigt eine Konfiguration für acht SAP HANA-Hosts. Vier SAP HANA-Hosts sind mit jedem Storage-Controller verbunden. Zwei separate Aggregate, eines an jedem Storage Controller, sind konfiguriert. Jedes Aggregat ist mit 4 × 10 = 40 Datenfestplatten (HDDs) konfiguriert.
 
-image::saphana-fas-nfs_image15.png[Fehler: Fehlendes Grafikbild]
+image::saphana-fas-nfs_image15.png[Saphana FAS nfs image15]
 
 
 
@@ -111,7 +111,7 @@ Im Allgemeinen müssen zwei Aggregate pro Controller konfiguriert werden, unabh�
 
 Die folgende Abbildung zeigt eine Konfiguration mit 12 SAP HANA Hosts, die auf einem 12-GB-SAS-Shelf ausgeführt werden und mit ADPv2 konfiguriert sind. Sechs SAP-HANA-Hosts sind mit jedem Storage-Controller verbunden. Vier separate Aggregate, zwei an jedem Storage Controller, sind konfiguriert. Jedes Aggregat ist mit 11 Festplatten mit neun Daten und zwei Parity-Festplatten-Partitionen konfiguriert. Für jeden Controller stehen zwei Ersatzpartitionen zur Verfügung.
 
-image::saphana-fas-nfs_image16.jpg[Fehler: Fehlendes Grafikbild]
+image::saphana-fas-nfs_image16.jpg[Saphana FAS nfs image16]
 
 
 
@@ -159,7 +159,7 @@ NOTE: Wenn für die SAP HANA Systeme nur ein Storage-Controller eines HA-Paars v
 
 NOTE: Wenn die Daten- und Protokoll-Volumes auf demselben Controller gespeichert sind, muss der Zugriff des Servers auf den Storage mit zwei unterschiedlichen LIFs durchgeführt werden: Einer logischen Schnittstelle für den Zugriff auf das Daten-Volume und einem für den Zugriff auf das Protokoll-Volume.
 
-image::saphana-fas-nfs_image17.jpg[Fehler: Fehlendes Grafikbild]
+image::saphana-fas-nfs_image17.jpg[Saphana FAS nfs image17]
 
 Für jeden SAP HANA DB-Host, ein Daten-Volume, ein Protokoll-Volume und ein Volume für `/hana/shared` Werden konfiguriert. Die folgende Tabelle zeigt eine Beispielkonfiguration für SAP HANA-Systeme mit einem Host.
 
@@ -204,7 +204,7 @@ NOTE: Wenn für das SAP HANA System nur ein Storage-Controller eines HA-Paars ve
 
 NOTE: Wenn die Daten- und Protokoll-Volumes auf demselben Controller gespeichert sind, muss der Zugriff des Servers auf den Storage mit zwei verschiedenen LIFs durchgeführt werden: Einem für den Zugriff auf das Daten-Volume und einem für den Zugriff auf das Protokoll-Volume.
 
-image::saphana-fas-nfs_image18.jpg[Fehler: Fehlendes Grafikbild]
+image::saphana-fas-nfs_image18.jpg[Saphana FAS nfs image18]
 
 Für jeden SAP HANA-Host werden ein Daten-Volume und ein Protokoll-Volume erstellt. Der `/hana/shared` Das Volume wird von allen Hosts des SAP HANA-Systems verwendet. Die folgende Tabelle zeigt eine Beispielkonfiguration für ein SAP HANA-System mit mehreren Hosts und vier aktiven Hosts.
 

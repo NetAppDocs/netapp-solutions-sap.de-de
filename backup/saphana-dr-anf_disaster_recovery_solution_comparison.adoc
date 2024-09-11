@@ -22,7 +22,7 @@ Darüber hinaus werden Daten asynchron in eine sekundäre Region repliziert, um 
 
 Dieses Dokument erläutert verschiedene Implementierungsoptionen für eine Disaster Recovery-Lösung für zwei Regionen.
 
-image::saphana-dr-anf_image3.png[Fehler: Fehlendes Grafikbild]
+image::saphana-dr-anf_image3.png[Saphana dr anf image3]
 
 
 
@@ -52,7 +52,7 @@ Die folgende Abbildung zeigt das Setup einer Disaster-Recovery-Lösung für zwei
 
 Die folgende Abbildung zeigt die SAP HANA System Replication.
 
-image::saphana-dr-anf_image4.png[Fehler: Fehlendes Grafikbild]
+image::saphana-dr-anf_image4.png[Saphana dr anf image4]
 
 
 
@@ -86,7 +86,7 @@ Die Server an den Disaster-Recovery-Standorten können als Entwicklungs-/Testsys
 
 Mit der standortübergreifenden ANF Replizierung können Sie den DR-Workflow testen, ohne dass RPO und RTO beeinträchtigt werden. Dazu werden Volume-Klone erstellt und an den DR-Testserver angeschlossen.
 
-image::saphana-dr-anf_image5.png[Fehler: Fehlendes Grafikbild]
+image::saphana-dr-anf_image5.png[Saphana dr. anf image5]
 
 
 

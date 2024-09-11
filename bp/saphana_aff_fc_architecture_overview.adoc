@@ -19,7 +19,7 @@ Verschiedene Modelle der AFF Produktfamilie können auf der Storage-Ebene mitein
 
 Die folgende Abbildung zeigt eine Beispielkonfiguration mit acht SAP HANA-Hosts, die an ein Storage HA-Paar angeschlossen sind.
 
-image::saphana_aff_fc_image2.png[Fehler: Fehlendes Grafikbild]
+image::saphana_aff_fc_image2.png[Saphana AFF fc image2]
 
 Diese Architektur lässt sich in zwei Dimensionen skalieren:
 
@@ -29,8 +29,8 @@ Diese Architektur lässt sich in zwei Dimensionen skalieren:
 
 Die folgende Abbildung zeigt ein Konfigurationsbeispiel, in dem mehr SAP HANA-Hosts mit den Storage-Controllern verbunden sind. In diesem Beispiel sind mehr Platten-Shelves erforderlich, um die Kapazitäts- und Performance-Anforderungen der 16 SAP HANA-Hosts zu erfüllen. Abhängig von den Anforderungen an den Gesamtdurchsatz müssen die Storage Controller um zusätzliche FC-Verbindungen erweitert werden.
 
-image::saphana_aff_fc_image3.png[Fehler: Fehlendes Grafikbild]
+image::saphana_aff_fc_image3.png[Saphana AFF fc image3]
 
 Unabhängig vom implementierten AFF System lässt sich die SAP HANA-Landschaft auch skalieren, indem beliebige zertifizierte Storage-Controller hinzugefügt werden, um die gewünschte Node-Dichte zu erfüllen, wie in der folgenden Abbildung dargestellt.
 
-image::saphana_aff_fc_image4.png[Fehler: Fehlendes Grafikbild]
+image::saphana_aff_fc_image4.png[Saphana AFF fc image4]

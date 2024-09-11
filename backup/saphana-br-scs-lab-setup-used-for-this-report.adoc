@@ -59,4 +59,4 @@ Der SnapCenter-Server wird als zentraler HANA-Plug-in-Host für die HANA-Systeme
 
 Die folgende Abbildung zeigt die Laboreinrichtung.
 
-image::saphana-br-scs-image21.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image21.png[Saphana br scs image21]

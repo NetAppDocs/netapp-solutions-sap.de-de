@@ -109,10 +109,10 @@ Dieser Abschnitt enthält die Schritte für den automatisierten Restore- und Rec
 NOTE: Sie können Restores von primärem oder externem Backup-Storage wählen.
 
 +
-image::saphana-br-scs-image96.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image96.png[Saphana br scs image96]
 
 +
-image::saphana-br-scs-image97.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image97.png[Saphana br scs image97]
 
 . Wählen Sie den Umfang und den Typ der Wiederherstellung aus.
 +
@@ -126,19 +126,19 @@ Die Restore-Optionen für die Wiederherstellung aus dem primären Speicher.
 NOTE: Die Option zur Umrüstung von Volumes ist nur für die Wiederherstellung von Vorgängen von Primärquelle mit NFS verfügbar.
 
 +
-image::saphana-br-scs-image98.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image98.png[Saphana br scs image98]
 
 +
 Die Wiederherstellungsoptionen für die Wiederherstellung von einem externen Backup-Speicher.
 
 +
-image::saphana-br-scs-image99.jpeg[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image99.jpeg[Saphana br scs image99]
 
 +
 Die Wiederherstellungsoptionen für die Wiederherstellung aus dem primären Speicher mit Fibre Channel SAN.
 
 +
-image::saphana-br-scs-image100.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image100.png[Saphana br scs image100]
 
 . Wählen Sie „Recovery Scope“ aus, und stellen Sie den Speicherort für das Backup und das Katalog-Backup bereit.
 +
@@ -146,27 +146,27 @@ image::saphana-br-scs-image100.png[Fehler: Fehlendes Grafikbild]
 NOTE: SnapCenter verwendet den Standardpfad oder die geänderten Pfade in der HANA global.ini-Datei, um die Backup-Standorte für das Protokoll und den Katalog vorab aufzufüllen.
 
 +
-image::saphana-br-scs-image101.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image101.png[Saphana br scs image101]
 
 . Geben Sie die optionalen Befehle zur Vorratspeicher ein.
 +
-image::saphana-br-scs-image102.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image102.png[Saphana br scs image102]
 
 . Geben Sie die optionalen Befehle nach der Wiederherstellung ein.
 +
-image::saphana-br-scs-image103.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image103.png[Saphana br scs image103]
 
 . Geben Sie die optionalen E-Mail-Einstellungen ein.
 +
-image::saphana-br-scs-image104.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image104.png[Saphana br scs image104]
 
 . Um den Wiederherstellungsvorgang zu starten, klicken Sie auf Fertig stellen.
 +
-image::saphana-br-scs-image105.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image105.png[Saphana br scs image105]
 
 . SnapCenter führt den Wiederherstellungsvorgang und die Wiederherstellung aus. Dieses Beispiel zeigt die Jobdetails des Wiederherstellungsjobs.
 +
-image::saphana-br-scs-image106.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image106.png[Saphana br scs image106]
 
 
 
@@ -214,7 +214,7 @@ hdbsql SYSTEMDB=>
 ....
 . Wählen Sie ein Backup in SnapCenter aus, das für den Wiederherstellungsvorgang verwendet werden soll.
 +
-image::saphana-br-scs-image107.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image107.png[Saphana br scs image107]
 
 . Wählen Sie den wiederherzustellenden Mandanten aus.
 +
@@ -222,35 +222,35 @@ image::saphana-br-scs-image107.png[Fehler: Fehlendes Grafikbild]
 NOTE: SnapCenter zeigt eine Liste aller Mandanten an, die im ausgewählten Backup enthalten sind.
 
 +
-image::saphana-br-scs-image108.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image108.png[Saphana br scs image108]
 
 +
 Die Recovery einzelner Mandanten wird mit SnapCenter 4.3 nicht unterstützt. Keine Wiederherstellung ist vorausgewählt und kann nicht geändert werden.
 
 +
-image::saphana-br-scs-image109.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image109.png[Saphana br scs image109]
 
 . Geben Sie die optionalen Befehle zur Vorratspeicher ein.
 +
-image::saphana-br-scs-image110.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image110.png[Saphana br scs image110]
 
 . Geben Sie optionale Befehle nach der Wiederherstellung ein.
 +
-image::saphana-br-scs-image111.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image111.png[Saphana br scs image111]
 
 . Geben Sie die optionalen E-Mail-Einstellungen ein.
 +
-image::saphana-br-scs-image112.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image112.png[Saphana br scs image112]
 
 . Um den Wiederherstellungsvorgang zu starten, klicken Sie auf Fertig stellen.
 +
-image::saphana-br-scs-image113.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image113.png[Saphana br scs image113]
 
 +
 Der Wiederherstellungsvorgang wird von SnapCenter ausgeführt. Dieses Beispiel zeigt die Jobdetails des Wiederherstellungsjobs.
 
 +
-image::saphana-br-scs-image114.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image114.png[Saphana br scs image114]
 
 +
 
@@ -290,44 +290,44 @@ sm1adm@hana-2:/usr/sap/SM1/HDB00>
 ....
 . Starten Sie die Recovery mit HANA Studio.
 +
-image::saphana-br-scs-image115.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image115.png[Saphana br scs image115]
 
 . Wählen Sie den Mandanten aus.
 +
-image::saphana-br-scs-image116.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image116.png[Saphana br scs image116]
 
 . Wählen Sie den Wiederherstellungstyp aus.
 +
-image::saphana-br-scs-image117.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image117.png[Saphana br scs image117]
 
 . Stellen Sie den Speicherort des Backup-Katalogs bereit.
 +
-image::saphana-br-scs-image118.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image118.png[Saphana br scs image118]
 
 +
-image::saphana-br-scs-image119.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image119.png[Saphana br scs image119]
 
 +
 Im Backup-Katalog wird das wiederhergestellte Backup mit einem grünen Symbol hervorgehoben. Die externe Backup-ID zeigt den Backup-Namen an, der zuvor in SnapCenter ausgewählt wurde.
 
 . Wählen Sie den Eintrag mit dem grünen Symbol aus, und klicken Sie auf Weiter.
 +
-image::saphana-br-scs-image120.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image120.png[Saphana br scs image120]
 
 . Geben Sie den Backup-Speicherort für das Protokoll an.
 +
-image::saphana-br-scs-image121.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image121.png[Saphana br scs image121]
 
 . Wählen Sie die anderen Einstellungen nach Bedarf aus.
 +
-image::saphana-br-scs-image122.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image122.png[Saphana br scs image122]
 
 . Starten Sie den Recovery-Vorgang des Mandanten.
 +
-image::saphana-br-scs-image123.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image123.png[Saphana br scs image123]
 
 +
-image::saphana-br-scs-image124.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image124.png[Saphana br scs image124]
 
 
 
@@ -381,26 +381,26 @@ Im folgenden Abschnitt werden die Schritte der Wiederherstellungs- und Wiederher
 
 . Wählen Sie in SAP HANA Studio die Option Systemdatenbank wiederherstellen aus, um die Wiederherstellung der Systemdatenbank zu starten.
 +
-image::saphana-br-scs-image125.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image125.png[Saphana br scs image125]
 
 . Klicken Sie auf OK, um die SAP HANA-Datenbank herunterzufahren.
 +
-image::saphana-br-scs-image126.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image126.png[Saphana br scs image126]
 
 +
 Das SAP HANA-System wird heruntergefahren und der Wiederherstellungsassistent wird gestartet.
 
 . Wählen Sie den Wiederherstellungstyp aus, und klicken Sie auf Weiter.
 +
-image::saphana-br-scs-image127.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image127.png[Saphana br scs image127]
 
 . Geben Sie den Speicherort des Backup-Katalogs an, und klicken Sie auf Weiter.
 +
-image::saphana-br-scs-image128.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image128.png[Saphana br scs image128]
 
 . Eine Liste der verfügbaren Backups wird basierend auf dem Inhalt des Backup-Katalogs angezeigt. Wählen Sie das gewünschte Backup und notieren Sie sich die externe Backup ID: In unserem Beispiel das aktuellste Backup.
 +
-image::saphana-br-scs-image129.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image129.png[Saphana br scs image129]
 
 . Heben Sie die Bereitstellung aller Daten-Volumes auf.
 +
@@ -417,7 +417,7 @@ NOTE: Bei einer SAP HANA-Konfiguration mit mehreren Hosts mit FC wird der Unmoun
 
 . Wählen Sie in der SnapCenter GUI die Ansicht der Ressourcen-Topologie aus und wählen Sie das Backup aus, das wiederhergestellt werden soll, beispielsweise das aktuellste primäre Backup. Klicken Sie auf das Symbol Wiederherstellen, um die Wiederherstellung zu starten.
 +
-image::saphana-br-scs-image130.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image130.png[Saphana br scs image130]
 
 +
 Der SnapCenter-Wiederherstellungsassistent wird gestartet.
@@ -427,38 +427,38 @@ Der SnapCenter-Wiederherstellungsassistent wird gestartet.
 Wählen Sie „Complete Resource“ aus, um eine Volume-basierte Wiederherstellung zu verwenden.
 
 +
-image::saphana-br-scs-image131.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image131.png[Saphana br scs image131]
 
 . Wählen Sie Dateiebene und Alle, um einen SnapRestore-Vorgang mit einer einzigen Datei für alle Dateien zu verwenden.
 +
-image::saphana-br-scs-image132.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image132.png[Saphana br scs image132]
 
 +
 
 NOTE: Wählen Sie für eine Wiederherstellung auf Dateiebene eines SAP HANA-Host-Systems mit mehreren Hosts alle Volumes aus.
 
 +
-image::saphana-br-scs-image133.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image133.png[Saphana br scs image133]
 
 . (Optional) Geben Sie die Befehle an, die aus dem SAP HANA-Plug-in ausgeführt werden sollen, das auf dem zentralen HANA-Plug-in-Host ausgeführt wird. Klicken Sie Auf Weiter.
 +
-image::saphana-br-scs-image134.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image134.png[Saphana br scs image134]
 
 . Geben Sie die optionalen Befehle an, und klicken Sie auf Weiter.
 +
-image::saphana-br-scs-image135.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image135.png[Saphana br scs image135]
 
 . Geben Sie die Benachrichtigungseinstellungen an, damit SnapCenter eine Status-E-Mail und ein Jobprotokoll senden kann. Klicken Sie Auf Weiter.
 +
-image::saphana-br-scs-image136.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image136.png[Saphana br scs image136]
 
 . Überprüfen Sie die Zusammenfassung und klicken Sie auf Fertig stellen, um die Wiederherstellung zu starten.
 +
-image::saphana-br-scs-image137.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image137.png[Saphana br scs image137]
 
 . Der Wiederherstellungsauftrag wird gestartet, und das Jobprotokoll kann durch Doppelklicken auf die Protokollzeile im Aktivitätsfenster angezeigt werden.
 +
-image::saphana-br-scs-image138.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image138.png[Saphana br scs image138]
 
 . Warten Sie, bis der Wiederherstellungsvorgang abgeschlossen ist. Mounten Sie auf jedem Datenbank-Host alle Daten-Volumes. In unserem Beispiel muss nur ein Volume auf dem Datenbank-Host neu eingebunden werden.
 +
@@ -467,63 +467,63 @@ mount /hana/data/SP1/mnt00001
 ....
 . Gehen Sie zu SAP HANA Studio und klicken Sie auf Aktualisieren, um die Liste der verfügbaren Backups zu aktualisieren. Das mit SnapCenter wiederhergestellte Backup wird durch ein grünes Symbol in der Liste der Backups angezeigt. Wählen Sie das Backup aus, und klicken Sie auf Weiter.
 +
-image::saphana-br-scs-image139.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image139.png[Saphana br scs image139]
 
 . Stellen Sie den Speicherort der Protokoll-Backups bereit. Klicken Sie Auf Weiter.
 +
-image::saphana-br-scs-image140.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image140.png[Saphana br scs image140]
 
 . Wählen Sie je nach Bedarf andere Einstellungen aus. Stellen Sie sicher, dass Delta-Backups verwenden nicht ausgewählt ist. Klicken Sie Auf Weiter.
 +
-image::saphana-br-scs-image141.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image141.png[Saphana br scs image141]
 
 . Überprüfen Sie die Wiederherstellungseinstellungen, und klicken Sie auf Fertig stellen.
 +
-image::saphana-br-scs-image142.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image142.png[Saphana br scs image142]
 
 . Der Wiederherstellungsprozess wird gestartet. Warten Sie, bis die Wiederherstellung der Systemdatenbank abgeschlossen ist.
 +
-image::saphana-br-scs-image143.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image143.png[Saphana br scs image143]
 
 . Wählen Sie in SAP HANA Studio den Eintrag für die Systemdatenbank aus, und starten Sie Backup Recovery - Rcover Tenant Database.
 +
-image::saphana-br-scs-image144.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image144.png[Saphana br scs image144]
 
 . Wählen Sie den zu wiederherzuenden Mieter aus, und klicken Sie auf Weiter.
 +
-image::saphana-br-scs-image145.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image145.png[Saphana br scs image145]
 
 . Geben Sie den Wiederherstellungstyp an, und klicken Sie auf Weiter.
 +
-image::saphana-br-scs-image146.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image146.png[Saphana br scs image146]
 
 . Bestätigen Sie den Speicherort des Backup-Katalogs, und klicken Sie auf Weiter.
 +
-image::saphana-br-scs-image147.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image147.png[Saphana br scs image147]
 
 . Vergewissern Sie sich, dass die Mandantendatenbank offline ist. Klicken Sie auf OK, um fortzufahren.
 +
-image::saphana-br-scs-image148.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image148.png[Saphana br scs image148]
 
 . Da die Wiederherstellung des Daten-Volumes vor der Wiederherstellung der Systemdatenbank erfolgt ist, ist das Mandanten-Backup sofort verfügbar. Wählen Sie das grün markierte Backup aus, und klicken Sie auf Weiter.
 +
-image::saphana-br-scs-image149.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image149.png[Saphana br scs image149]
 
 . Bestätigen Sie den Speicherort für die Protokollsicherung und klicken Sie auf Weiter.
 +
-image::saphana-br-scs-image150.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image150.png[Saphana br scs image150]
 
 . Wählen Sie je nach Bedarf andere Einstellungen aus. Stellen Sie sicher, dass Delta-Backups verwenden nicht ausgewählt ist. Klicken Sie Auf Weiter.
 +
-image::saphana-br-scs-image151.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image151.png[Saphana br scs image151]
 
 . Überprüfen Sie die Wiederherstellungseinstellungen und starten Sie den Wiederherstellungsprozess der Mandantendatenbank, indem Sie auf Fertig stellen klicken.
 +
-image::saphana-br-scs-image152.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image152.png[Saphana br scs image152]
 
 . Warten Sie, bis die Wiederherstellung abgeschlossen ist und die Mandantendatenbank gestartet wird.
 +
-image::saphana-br-scs-image153.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image153.png[Saphana br scs image153]
 
 +
 Das SAP HANA System ist betriebsbereit.

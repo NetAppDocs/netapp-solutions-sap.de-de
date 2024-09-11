@@ -15,40 +15,49 @@ summary:
 
 An dieser Lösung wurden seit ihrer ersten Veröffentlichung folgende technische Änderungen vorgenommen:
 
-[cols="25,25,50"]
+[cols="25,50"]
 |===
-| Version | Datum | Zusammenfassung aktualisieren 
+| Datum | Zusammenfassung aktualisieren 
 
 
-| Version 1.0 | Februar 2015 | Ausgangsversion 
+| Februar 2015 | Ausgangsversion 
 
 
-| Version 2.0 | Oktober 2015 | Integrierte I/O-Parameter für SAP HANA und HWVAL SPS 10 und höher 
+| Oktober 2015 | Integrierte I/O-Parameter für SAP HANA und HWVAL SPS 10 und höher 
 
 
-| Version 2.1 | Februar 2016 | Aktualisierte Kapazitätsdimensionierung 
+| Februar 2016 | Aktualisierte Kapazitätsdimensionierung 
 
 
-| Version 3.0 | Februar 2017 | Neue NetApp Storage-Systeme und Festplatten-Shelfs Neue Funktionen der neuen Betriebssystemversionen von ONTAP 9 (SLES12 SP1 und Red hat Enterprise Linux 7.2) 
+| Februar 2017 | Neue NetApp Storage-Systeme und Festplatten-Shelfs Neue Funktionen der neuen Betriebssystemversionen von ONTAP 9 (SLES12 SP1 und Red hat Enterprise Linux 7.2) 
 
 
-| Version 3.1 | Juli 2017 | Kleine Updates 
+| Juli 2017 | Kleine Updates 
 
 
-| Version 4.0 | September 2018 | Neue NetApp Storage-Systeme Neue Betriebssystemversionen (SLES12 SP3 und Red hat Enterprise Linux 7.4) zusätzliche kleinere Updates für SAP HANA 2.0 SPS3 
+| September 2018 | Neue NetApp Storage-Systeme Neue Betriebssystemversionen (SLES12 SP3 und Red hat Enterprise Linux 7.4) zusätzliche kleinere Updates für SAP HANA 2.0 SPS3 
 
 
-| Version 4.1 | September 2019 | Neues Betriebssystem veröffentlicht kleine Updates 
+| September 2019 | Neues Betriebssystem veröffentlicht kleine Updates 
 
 
-| Version 4.2 | April 2020 | Die neuen Speichersysteme der AFF ASA-Serie bieten seit SAP HANA 2.0 SPS4 mehrere Funktionen für die Datenpartition 
+| April 2020 | Die neuen Speichersysteme der AFF ASA-Serie bieten seit SAP HANA 2.0 SPS4 mehrere Funktionen für die Datenpartition 
 
 
-| Version 4.3 | Juni 2020 | Zusätzliche Informationen über optionale Funktionalitäten kleine Updates 
+| Juni 2020 | Zusätzliche Informationen über optionale Funktionalitäten kleine Updates 
 
 
-| Version 5.0 | Februar 2021 | Linux LVM unterstützt neue NetApp Storage-Systeme Neue Betriebssystemversionen (SLES15SP2, RHEL 8) 
+| Februar 2021 | Linux LVM unterstützt neue NetApp Storage-Systeme Neue Betriebssystemversionen (SLES15SP2, RHEL 8) 
 
 
-| Version 5.1 | April 2021 | VMware vSphere-spezifische Informationen hinzugefügt 
+| April 2021 | VMware vSphere-spezifische Informationen hinzugefügt 
+
+
+| September 2022 | Neue Betriebssystemversionen 
+
+
+| August 2023 | Neue Storage-Systeme (AFF C-Serie) 
+
+
+| Mai 2024 | Neue Storage-Systeme (AFF A-Series) 
 |===

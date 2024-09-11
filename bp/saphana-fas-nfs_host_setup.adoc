@@ -40,26 +40,17 @@ net.ipv4.tcp_moderate_rcvbuf = 1
 net.ipv4.tcp_window_scaling = 1
 net.ipv4.tcp_timestamps = 1
 net.ipv4.tcp_sack = 1
+sunrpc.tcp_max_slot_table_entries = 128
 ....
 
 NOTE: Saptune, das in SLES für SAP OS-Versionen enthalten ist, kann verwendet werden, um diese Werte festzulegen. Siehe https://launchpad.support.sap.com/#/notes/3024346["SAP-Hinweis 3024346"^] (SAP-Login erforderlich).
 
-Der `sunrpc.tcp_max_slot_table_entries` Parameter muss in festgelegt werden `/etc/modprobe.d/sunrpc.conf`. Wenn die Datei nicht vorhanden ist, muss sie zuerst durch Hinzufügen der folgenden Zeile erstellt werden:
-
-....
-options sunrpc tcp_max_slot_table_entries=128
-....
 
 
 == Konfigurationsparameter für Red hat Enterprise Linux 7.2 oder höher
 
 Für den von SAP HANA generierten Workload müssen an jedem SAP HANA-Host zusätzliche Kernel- und Konfigurationsparameter angepasst werden.
 
-Der `sunrpc.tcp_max_slot_table_entries` Parameter muss in festgelegt werden `/etc/modprobe.d/sunrpc.conf`. Wenn die Datei nicht vorhanden ist, muss sie zuerst durch Hinzufügen der folgenden Zeile erstellt werden:
-
-....
-options sunrpc tcp_max_slot_table_entries=128
-....
 Ab Red hat Enterprise Linux 7.2 müssen Sie die Kernel-Parameter in einer Konfigurationsdatei im festlegen `/etc/sysctl.d` Verzeichnis. Beispiel: Eine Konfigurationsdatei mit dem Namen `91-NetApp-HANA.conf` Muss erstellt werden.
 
 ....
@@ -74,6 +65,7 @@ net.ipv4.tcp_moderate_rcvbuf = 1
 net.ipv4.tcp_window_scaling = 1
 net.ipv4.tcp_timestamps = 1
 net.ipv4.tcp_sack = 1
+sunrpc.tcp_max_slot_table_entries = 128
 ....
 
 NOTE: Seit RedHat Enterprise Linux Version 8.6 können diese Einstellungen auch mithilfe von RHEL System Roles for SAP (Ansible) angewendet werden. Siehe https://launchpad.support.sap.com/#/notes/3024346["SAP-Hinweis 3024346"^] (SAP-Login erforderlich).

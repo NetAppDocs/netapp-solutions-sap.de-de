@@ -81,7 +81,7 @@ NOTE: SnapCenter übernimmt die Aufbewahrung im Primärspeicher, während ONTAP 
 
 Die folgende Abbildung zeigt eine Übersicht über die Datenbank- und Backup-Protokollierungs-Konfiguration, bei der die Protokoll-Backups auf einen NFS Mount des externen Backup-Storage geschrieben werden.
 
-image::saphana-br-scs-image7.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image7.png[Saphana br scs image7]
 
 Bei der Ausführung eines Storage-basierten Snapshot-Backups von Volumes ohne Daten führt SnapCenter die folgenden Aufgaben aus:
 
@@ -121,4 +121,4 @@ SnapCenter unterstützt die folgenden SAP HANA-Architekturen und -Releases:
 
 Ab Version 4.6 unterstützt SnapCenter die automatische Erkennung von HANA-Systemen, die in einer HANA-System-Replizierungsbeziehung konfiguriert sind. Jeder Host wird mit seiner physischen IP-Adresse (Host-Name) und seinem individuellen Daten-Volume auf der Storage-Ebene konfiguriert. Die beiden SnapCenter Ressourcen werden in einer Ressourcengruppe kombiniert, SnapCenter erkennt automatisch, welcher Host sich auf einem primären oder sekundären Server befindet, und führt dann die erforderlichen Backup-Vorgänge entsprechend aus. Das Aufbewahrungsmanagement für Snapshot und dateibasierte Backups, die mit SnapCenter erstellt wurden, erfolgt über beide Hosts hinweg, sodass sichergestellt ist, dass alte Backups auch am aktuellen sekundären Host gelöscht werden. Die folgende Abbildung bietet einen allgemeinen Überblick. Eine detaillierte Beschreibung der Konfiguration und des Betriebs von HANA System Replication fähigen HANA-Systemen in SnapCenter finden Sie unter https://www.netapp.com/us/media/tr-4719.pdf["TR-4719 SAP HANA System Replication, Backup und Recovery mit SnapCenter"^].
 
-image::saphana-br-scs-image8.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image8.png[Saphana br scs image8]

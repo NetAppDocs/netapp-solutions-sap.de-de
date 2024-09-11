@@ -16,7 +16,7 @@ Wenn SAP HANA auf Azure NetApp Files (ANF) läuft, erhalten Kunden Zugriff auf z
 
 Zur Entwicklung einer umfassenden Disaster Recovery-Richtlinie müssen Kunden die Anforderungen ihrer Business-Applikationen und die technischen Funktionen kennen, die sie für Datensicherung und Disaster Recovery benötigen. Die folgende Abbildung bietet einen Überblick über die Datensicherung.
 
-image::saphana-dr-anf_image2.png[Fehler: Fehlendes Grafikbild]
+image::saphana-dr-anf_image2.png[Saphana dr. anf image2]
 
 
 

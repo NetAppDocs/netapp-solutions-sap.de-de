@@ -32,4 +32,4 @@ Um Disaster Recovery-Failover auszuführen, gehen Sie wie folgt vor:
 
 In den folgenden Abschnitten werden diese Schritte detailliert beschrieben und die folgende Abbildung zeigt Disaster-Failover-Tests.
 
-image::saphana-dr-anf_image26.png[Fehler: Fehlendes Grafikbild]
+image::saphana-dr-anf_image26.png[Saphana dr anf image26]

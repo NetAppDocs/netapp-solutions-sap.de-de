@@ -20,7 +20,7 @@ Es gibt zwei Optionen zur Konfiguration der Datensicherung mit der NetApp SnapCe
 * Eine einzige SnapCenter-Ressource für beide SAP HANA-Hosts, die eine virtuelle IP-Adresse verwendet
 
 
-image::saphana-sr-scs-image5.png[Fehler: Fehlendes Grafikbild]
+image::saphana-sr-scs-image5.png[Saphana sr scs image5]
 
 Ab SnapCenter 4.6 unterstützt SnapCenter die automatische Erkennung von HANA-Systemen, die in einer HANA-System-Replizierungsbeziehung konfiguriert sind. Jeder Host wird mit seiner physischen IP-Adresse (Host-Name) und seinem individuellen Daten-Volume auf der Storage-Ebene konfiguriert. Die beiden SnapCenter Ressourcen werden zu einer Ressourcengruppe kombiniert. SnapCenter erkennt automatisch, welcher Host sich auf einem primären oder sekundären Volume befindet, und führt die erforderlichen Backup-Vorgänge entsprechend aus. Das Aufbewahrungsmanagement für Snapshot und dateibasierte Backups, die durch SnapCenter erstellt wurden, erfolgt über beide Hosts hinweg. So wird sichergestellt, dass alte Backups auch am aktuellen sekundären Host gelöscht werden.
 

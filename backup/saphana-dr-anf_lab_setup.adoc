@@ -27,7 +27,7 @@ Am DR-Standort wurde ein einzelner Kapazitäts-Pool mit manueller QoS konfigurie
 
 Die folgende Abbildung zeigt die Laboreinrichtung.
 
-image::saphana-dr-anf_image7.png[Fehler: Fehlendes Grafikbild]
+image::saphana-dr-anf_image7.png[Saphana dr. anf image7]
 
 
 
@@ -39,8 +39,8 @@ Bei der Replizierung des Daten-Volumes mithilfe von ANF Cross-Region Replication
 
 Die folgende Abbildung zeigt die Snapshot Backups des HANA Daten-Volumes.
 
-image::saphana-dr-anf_image8.png[Fehler: Fehlendes Grafikbild]
+image::saphana-dr-anf_image8.png[Saphana dr. anf image8]
 
 Die folgende Abbildung zeigt den SAP HANA-Backup-Katalog.
 
-image::saphana-dr-anf_image9.png[Fehler: Fehlendes Grafikbild]
+image::saphana-dr-anf_image9.png[Saphana dr anf image9]

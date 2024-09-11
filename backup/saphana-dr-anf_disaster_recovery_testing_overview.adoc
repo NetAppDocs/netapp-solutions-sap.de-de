@@ -37,4 +37,4 @@ Gehen Sie wie folgt vor, um Disaster-Recovery-Tests durchzuführen:
 
 In den folgenden Abschnitten werden diese Schritte detailliert beschrieben.
 
-image::saphana-dr-anf_image18.png[Fehler: Fehlendes Grafikbild]
+image::saphana-dr-anf_image18.png[Saphana dr. anf image18]

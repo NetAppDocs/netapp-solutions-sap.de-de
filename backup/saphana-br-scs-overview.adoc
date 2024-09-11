@@ -44,7 +44,7 @@ SnapVault bietet im Vergleich zu herkömmlichen Backups deutliche Vorteile. Nach
 
 Die Lösung kann zudem nahtlos auf ein Hybrid-Cloud-Betriebsmodell erweitert werden. Die Datenreplizierung für die Disaster Recovery oder für ein externes Backup kann von lokalen NetApp ONTAP Systemen auf Cloud Volumes ONTAP Instanzen in der Cloud durchgeführt werden. SnapCenter kann als zentrales Tool für das Management der Datensicherung und der Datenreplizierung eingesetzt werden – unabhängig davon, ob das SAP HANA System lokal oder in der Cloud ausgeführt wird. Die folgende Abbildung zeigt einen Überblick über die Backup-Lösung.
 
-image::saphana-br-scs-image1.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image1.png[Saphana br scs image1]
 
 
 
@@ -55,7 +55,7 @@ Der nächste Screenshot zeigt ein Kunde im HANA Studio, in dem SAP HANA auf NetA
 
 NOTE: Der größte Teil der gesamten Laufzeit des Backup-Workflows ist die Zeit, die zur Ausführung des HANA-Backup-Speicherpunktvorgangs benötigt wird. Dieser Schritt hängt von der Last der HANA-Datenbank ab. Das Snapshot Backup selbst ist in wenigen Sekunden abgeschlossen.
 
-image::saphana-br-scs-image2.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image2.png[Saphana br scs image2]
 
 
 
@@ -89,17 +89,17 @@ Backups von Storage Snapshot Kopien werden in der Regel häufiger geplant, da si
 
 Die folgende Abbildung zeigt ein RTO-Beispiel für eine 1-TB-Datenbank, wenn dateibasierte Daten-Backups verwendet werden. In diesem Beispiel wird ein Backup einmal pro Tag erstellt. Die RTO unterscheidet sich je nach dem Zeitpunkt der Wiederherstellung und des Recovery. Falls die Restore- und Recovery-Vorgänge unmittelbar nach dem Backup durchgeführt wurden, basiert die RTO in erster Linie auf der Restore-Zeit, die in dem Beispiel 1 Stunde und 10 Minuten beträgt. Die Recovery-Zeit stieg auf 2 Stunden und 50 Minuten, wenn Restore und Recovery unmittelbar vor dem nächsten Backup durchgeführt wurden und die maximale RTO 4 Stunden und 30 Minuten betrug.
 
-image::saphana-br-scs-image3.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image3.png[Saphana br scs image3]
 
 Die folgende Abbildung zeigt ein RTO-Beispiel für eine 1-TB-Datenbank, wenn Snapshot Backups verwendet werden. Bei Storage-basierten Snapshot Backups hängt die RTO nur von der Startzeit der Datenbank und der Wiederherstellungszeit ab, da die Wiederherstellung unabhängig von der Größe der Datenbank in wenigen Sekunden abgeschlossen wurde. Die Recovery-Zeit bis zur Vorwärtszeit wird auch abhängig vom Zeitpunkt der Wiederherstellung und der Wiederherstellung erhöht. Aufgrund der höheren Backup-Häufigkeit (in diesem Beispiel alle sechs Stunden) beträgt die Recovery-Zeit höchstens 43 Minuten. In diesem Beispiel beträgt die maximale RTO 1 Stunde und 13 Minuten.
 
-image::saphana-br-scs-image4.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image4.png[Saphana br scs image4]
 
 Die folgende Abbildung zeigt einen RTO-Vergleich von dateibasierten und Storage-basierten Snapshot Backups für unterschiedliche Datenbankgrößen und verschiedene Häufigkeit von Snapshot-Backups. Der grüne Balken zeigt das dateibasierte Backup an. Die anderen Balken zeigen Backups von Snapshot Kopien mit unterschiedlichen Backup-Frequenzen.
 
 Bei einem Daten-Backup pro Tag einer einzelnen Snapshot Kopie ist die RTO im Vergleich zu einem dateibasierten Daten-Backup bereits um 40 % reduziert. Die Reduzierung beträgt 70 %, wenn vier Snapshot-Backups pro Tag erstellt werden. Die Abbildung zeigt auch, dass die Kurve konstant bleibt, wenn die Snapshot-Backup-Frequenz auf mehr als vier bis sechs Snapshot-Backups pro Tag erhöht wird. Unsere Kunden konfigurieren daher typischerweise vier bis sechs Snapshot Backups pro Tag.
 
-image::saphana-br-scs-image5.png[Fehler: Fehlendes Grafikbild]
+image::saphana-br-scs-image5.png[Saphana br scs image5]
 
 
 NOTE: Das Diagramm zeigt die RAM-Größe des HANA-Servers. Die Größe der Datenbank im Arbeitsspeicher wird auf die Hälfte des Server-RAM-Größen berechnet.
