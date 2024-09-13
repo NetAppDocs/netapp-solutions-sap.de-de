@@ -22,7 +22,7 @@ SnapCenter 4.6 unterstützt die automatische Erkennung von HANA-Systemen, die mi
 
 Die folgende Abbildung zeigt die für dieses Kapitel verwendete Laboreinrichtung. Zwei HANA-Hosts, hana-3 und hana-4, wurden mit HANA System Replication konfiguriert.
 
-Für die HANA-Systemdatenbank wurde ein Datenbankbenutzer „SnapCenter“ mit den erforderlichen Berechtigungen zum Ausführen von Backup- und Recovery-Vorgängen erstellt (siehe https://www.netapp.com/us/media/tr-4614.pdf["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"^]). Ein HANA-Benutzerspeicherschlüssel muss auf beiden Hosts mit dem oben genannten Datenbankbenutzer konfiguriert sein.
+Für die HANA-Systemdatenbank wurde ein Datenbankbenutzer „SnapCenter“ mit den erforderlichen Privileges erstellt, um Backup- und Recovery-Vorgänge auszuführen (siehe https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"^]). Ein HANA-Benutzerspeicherschlüssel muss auf beiden Hosts mit dem oben genannten Datenbankbenutzer konfiguriert sein.
 
 ....
 ss2adm@hana- 3: / > hdbuserstore set SS2KEY hana- 3:33313 SNAPCENTER <password>
@@ -157,6 +157,6 @@ Die folgende Abbildung zeigt ein Szenario, in dem mehrere Übernahmen ausgeführ
 
 image::saphana-sr-scs-image26.png[Saphana sr scs image26]
 
-Die Wiederherstellungs- und Recovery-Vorgänge für eine SnapCenter 4.6-Ressourcengruppe sind identisch mit einer automatisch erkannten Konfiguration, die nicht vom System stammt. Alle Optionen für Restores und automatisiertes Recovery sind verfügbar. Weitere Einzelheiten finden Sie im technischen Bericht https://www.netapp.com/us/media/tr-4614.pdf["TR-4614: SAP HANA Backup and Recovery with SnapCenter"^].
+Die Wiederherstellungs- und Recovery-Vorgänge für eine SnapCenter 4.6-Ressourcengruppe sind identisch mit einer automatisch erkannten Konfiguration, die nicht vom System stammt. Alle Optionen für Restores und automatisiertes Recovery sind verfügbar. Weitere Einzelheiten finden Sie im technischen Bericht https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["TR-4614: SAP HANA Backup and Recovery with SnapCenter"^].
 
 Eine Wiederherstellung aus einem Backup, das auf dem anderen Host erstellt wurde, wird im Abschnitt beschrieben link:saphana-sr-scs-restore-and-recovery-from-a-backup-created-at-the-other-host.html["Wiederherstellung aus einem Backup, das auf dem anderen Host erstellt wurde"].

@@ -18,7 +18,7 @@ Weitere Informationen zu den in diesem Dokument beschriebenen Daten finden Sie i
 
 * Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter
 +
-https://www.netapp.com/us/media/tr-4614.pdf["https://www.netapp.com/us/media/tr-4614.pdf"^]
+https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["https://www.netapp.com/us/media/tr-4614.pdf"^]
 
 * Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter
 +
@@ -26,6 +26,6 @@ https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-intro
 
 * Technischer Bericht: SAP HANA Disaster Recovery with Storage Replication
 +
-https://www.netapp.com/us/media/tr-4646.pdf["https://www.netapp.com/us/media/tr-4646.pdf"^]
+https://www.netapp.com/pdf.html?item=/media/8584-tr4646pdf.pdf["https://www.netapp.com/us/media/tr-4646.pdf"^]
 
 
