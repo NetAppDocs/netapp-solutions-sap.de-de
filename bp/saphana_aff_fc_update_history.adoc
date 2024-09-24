@@ -57,4 +57,7 @@ An dieser Lösung wurden seit ihrer ersten Veröffentlichung folgende technische
 
 
 | Mai 2024 | Neue Storage-Systeme (AFF A-Series) 
+
+
+| September 2024 | Neue Storage-Systeme (ASA A-Series) 
 |===

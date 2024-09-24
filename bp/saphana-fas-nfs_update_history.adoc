@@ -77,14 +77,11 @@ An dieser Lösung wurden seit ihrer ersten Veröffentlichung folgende technische
 | September 2022 | Neue Betriebssystemversionen 
 
 
-| August 2023 | Neue Storage-Systeme (AFF C-Serie) 
-
-
 | Dezember 2023 | Aktualisierung des Host-Setups überarbeitete nconnect-Einstellungen Informationen zu NFSv4.1-Sitzungen hinzugefügt 
 
 
-| Mai 2024 | Neue Storage-Systeme (AFF A-Series) 
-
-
 | September 2024 | Kleinere Updates 
+
+
+| September 2024 | Neue Storage-Systeme 
 |===
