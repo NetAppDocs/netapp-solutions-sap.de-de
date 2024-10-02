@@ -10,8 +10,11 @@ summary: Die NetApp AFF Produktfamilie ist für die Verwendung mit SAP HANA in T
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
+
+[role="lead"]
+Die NetApp AFF Produktfamilie ist für die Verwendung mit SAP HANA in TDI Projekten zertifiziert. Die zertifizierte Enterprise Storage-Plattform zeichnet sich durch die NetApp ONTAP Software aus.
 
 Nils Bauer und Marco Schoen, NetApp
 
@@ -55,7 +58,7 @@ In einer SAP HANA Umgebung mit mehreren Hosts wird der standardmäßige SAP HANA
 
 NetApp AFF Storage-Systeme sind im SAP HANA TDI Programm mit NFS- (NAS) und FC (SAN) Protokollen zertifiziert. Sie können in allen aktuellen SAP HANA-Szenarien, wie SAP Business Suite on HANA, S/4HANA, BW/4HANA oder SAP Business Warehouse on HANA, entweder in Konfigurationen mit einem Host oder mehreren Hosts implementiert werden. Alle Server, die für den Einsatz mit SAP HANA zertifiziert sind, können mit von NetApp zertifizierten Storage-Lösungen kombiniert werden. Die folgende Abbildung bietet einen Überblick über die Architektur.
 
-image::saphana_aff_fc_image1.png[Saphana AFF fc-Bild1]
+image:saphana_aff_fc_image1.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Weitere Informationen zu den Voraussetzungen und Empfehlungen für produktive SAP HANA-Systeme finden Sie in der folgenden Ressource:
 

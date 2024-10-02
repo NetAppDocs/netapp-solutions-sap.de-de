@@ -10,7 +10,7 @@ summary: Im Falle eines Disaster-Failovers müssen die Ziel-Volumes unterbrochen
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -21,15 +21,15 @@ NOTE: Für das HANA Daten-Volume müssen Sie das aktuelle HANA Snapshot-Backup w
 
 Die nächsten beiden Screenshots zeigen den Break and delete Peering-Vorgang für das HANA-Datenvolumen. Dieselben Vorgänge müssen auch für das Log-Backup und das gemeinsame HANA-Volume durchgeführt werden.
 
-image::saphana-dr-anf_image27.png[Saphana dr anf image27]
+image:saphana-dr-anf_image27.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
-image::saphana-dr-anf_image28.png[Saphana dr. anf image28]
+image:saphana-dr-anf_image28.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Da Replication Peering gelöscht wurde, ist es möglich, das Volume auf das neueste HANA Snapshot Backup zurückzusetzen. Wenn Peering nicht gelöscht wird, wird die Auswahl des Revert-Volumes ausgegraut und ist nicht wählbar. Die folgenden zwei Screenshots zeigen den Vorgang zur Zurücksetzen des Volumens.
 
-image::saphana-dr-anf_image29.png[Saphana dr anf image29]
+image:saphana-dr-anf_image29.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
-image::saphana-dr-anf_image30.png[Saphana dr anf image30]
+image:saphana-dr-anf_image30.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Nach der Wiederherstellung des Volumes basiert das Daten-Volume auf einem konsistenten HANA-Snapshot-Backup und kann nun für Recovery-Vorgänge genutzt werden.
 

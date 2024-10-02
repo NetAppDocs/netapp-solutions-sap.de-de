@@ -10,7 +10,7 @@ summary: Alle in diesem Abschnitt beschriebenen Schritte zur Hosteinrichtung gel
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

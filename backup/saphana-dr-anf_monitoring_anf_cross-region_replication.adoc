@@ -10,7 +10,7 @@ summary: Die folgenden drei Screenshots zeigen den Replikationsstatus für die D
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -22,15 +22,15 @@ Die Übertragungsdauer und Übertragungsgröße bieten wertvolle Informationen z
 
 Der folgende Screenshot zeigt den Replizierungsstatus eines HANA Daten-Volumes.
 
-image::saphana-dr-anf_image14.png[Saphana dr anf image14]
+image:saphana-dr-anf_image14.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Der folgende Screenshot zeigt den Replizierungsstatus eines HANA-Protokoll-Backup-Volumes.
 
-image::saphana-dr-anf_image15.png[Saphana dr. anf image15]
+image:saphana-dr-anf_image15.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Der folgende Screenshot zeigt den Replizierungsstatus von einem Shared HANA Volume.
 
-image::saphana-dr-anf_image16.png[Saphana dr anf image16]
+image:saphana-dr-anf_image16.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -41,4 +41,4 @@ Bei jedem Replizierungs-Update vom Quell- zum Ziel-Volume werden alle Blockände
 
 NOTE: Innerhalb des Quell- und Ziel-Volume werden auch SnapMirror Snapshot Kopien erstellt, die für Resynchronisierung und Replizierungs-Updates verwendet werden. Diese Snapshot-Kopien sind aus Sicht der HANA-Datenbank nicht applikationskonsistent. Bei HANA-Recovery-Vorgängen können nur die über AzaCSnap erstellten applikationskonsistenten Snapshots verwendet werden.
 
-image::saphana-dr-anf_image17.png[Saphana dr anf image17]
+image:saphana-dr-anf_image17.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

@@ -10,7 +10,7 @@ summary: Der folgende Abschnitt bietet einen Überblick über die erforderlichen
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -214,4 +214,4 @@ Die Größe des RAM, die Netto-Datengröße auf der Festplatte jedes SAP HANA-Ho
 
 Die folgende Abbildung fasst den Dimensionierungsprozess zusammen.
 
-image::saphana_aff_nfs_image9.jpg[Saphana AFF nfs image9]
+image:saphana_aff_nfs_image9.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

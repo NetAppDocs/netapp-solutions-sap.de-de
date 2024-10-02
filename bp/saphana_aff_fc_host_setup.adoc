@@ -10,7 +10,7 @@ summary: Vor dem Einrichten des Hosts müssen NetApp SAN Host Utilities von der 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

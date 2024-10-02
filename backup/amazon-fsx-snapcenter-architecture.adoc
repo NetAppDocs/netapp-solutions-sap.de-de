@@ -10,7 +10,7 @@ summary: SnapCenter ist eine einheitliche, skalierbare Plattform für applikatio
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -24,7 +24,7 @@ SnapCenter managt Daten über Endpunkte in der Data-Fabric-Architektur von NetAp
 
 SnapCenter umfasst den SnapCenter-Server, das SnapCenter-Plug-in-Paket für Windows und das SnapCenter-Plug-in-Paket für Linux. Jedes Paket enthält SnapCenter-Plug-ins für diverse Applikations- und Infrastrukturkomponenten.
 
-image::amazon-fsx-image5.png[amazon fsx-Bild5]
+image:amazon-fsx-image5.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -66,7 +66,7 @@ SnapCenter übernimmt die Aufbewahrung auf dem primären Storage, während FSX f
 
 Die folgende Abbildung bietet einen Überblick über die SnapCenter Backup- und Aufbewahrungsvorgänge.
 
-image::amazon-fsx-image6.png[amazon fsx image6]
+image:amazon-fsx-image6.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Beim Ausführen eines Storage-basierten Snapshot Backups der SAP HANA Datenbank führt SnapCenter die folgenden Aufgaben durch:
 
@@ -94,7 +94,7 @@ In diesem Dokument verwenden wir die Amazon Web Services (AWS)-Konsole und die F
 
 Die folgende Abbildung zeigt eine typische Backup-Architektur für SAP HANA auf FSX für ONTAP. Das HANA-System befindet sich in der AWS-Verfügbarkeitszone 1 und verwendet ein FSX für ONTAP-Dateisystem innerhalb derselben Verfügbarkeitszone. Snapshot Backup-Vorgänge werden für die Daten und das gemeinsam genutzte Volume der HANA Datenbank ausgeführt. Neben den lokalen Snapshot Backups, die 3-5 Tage aufbewahrt werden, werden Backups auch zur längerfristigen Aufbewahrung auf einen externen Storage repliziert. Der externe Backup-Storage ist ein zweites FSX für ONTAP-Filesystem, das sich in einer anderen AWS-Verfügbarkeitszone befindet. Backups der HANA Daten und des gemeinsam genutzten Volumes werden mit SnapVault in die zweite FSX für ONTAP Filesystem repliziert und 2-3 Wochen aufbewahrt.
 
-image::amazon-fsx-image7.png[amazon fsx image7]
+image:amazon-fsx-image7.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Vor dem Konfigurieren von SnapCenter muss die Datensicherungsstrategie auf Basis der RTO- und RPO-Anforderungen der verschiedenen SAP Systeme definiert werden.
 
@@ -201,4 +201,4 @@ FSX für ONTAP-Dateisysteme:
 * HANA Daten-Volume zur Replizierung in das zweite FSX für ONTAP Filesystem
 
 
-image::amazon-fsx-image8.png[amazon fsx image8]
+image:amazon-fsx-image8.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

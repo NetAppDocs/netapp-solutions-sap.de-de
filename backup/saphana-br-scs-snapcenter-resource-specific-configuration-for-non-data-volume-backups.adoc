@@ -10,7 +10,7 @@ summary: Das Backup von nicht-Daten-Volumes ist ein integrierter Teil des SAP HA
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -28,15 +28,15 @@ In diesem Beispiel wollen wir die nicht-Daten-Volumes der SAP HANA Datenbank SS1
 
 . Wählen Sie auf der Registerkarte Ressource die Option nicht-Daten-Volume aus, und klicken Sie auf SAP HANA-Datenbank hinzufügen.
 +
-image::saphana-br-scs-image78.png[Saphana br scs image78]
+image:saphana-br-scs-image78.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Wählen Sie in Schritt 1 des Dialogfelds SAP HANA-Datenbank hinzufügen in der Liste Ressourcentyp die Option nicht-Daten-Volumes aus. Geben Sie einen Namen für die Ressource und den zugehörigen SID und den SAP HANA Plug-in-Host an, den Sie für die Ressource verwenden möchten, und klicken Sie dann auf Weiter.
 +
-image::saphana-br-scs-image79.png[Saphana br scs image79]
+image:saphana-br-scs-image79.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Fügen Sie die SVM und das Storage-Volume als Storage-Platzbedarf hinzu und klicken Sie dann auf Weiter.
 +
-image::saphana-br-scs-image80.png[Saphana br scs image80]
+image:saphana-br-scs-image80.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Klicken Sie im Übersichtsschritt auf Fertig stellen, um die Einstellungen zu speichern.
 . Wiederholen Sie diese Schritte für alle erforderlichen nicht-Daten-Volumes.
@@ -49,7 +49,7 @@ NOTE: Die Datensicherung für nicht-Daten-Volume-Ressourcen ist identisch mit de
 Die folgende Abbildung zeigt eine Liste der konfigurierten Ressourcen, die keine Daten-Volumes enthalten.
 
 +
-image::saphana-br-scs-image81.png[Saphana br scs image81]
+image:saphana-br-scs-image81.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 

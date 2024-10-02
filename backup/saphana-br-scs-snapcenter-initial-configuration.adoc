@@ -10,7 +10,7 @@ summary: In diesem Abschnitt wird die ursprüngliche SnapCenter-Konfiguration be
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -35,7 +35,7 @@ In den folgenden Abschnitten werden die ersten Konfigurationsschritte beschriebe
 
 . Melden Sie sich bei der SnapCenter-ServerGUI an.
 +
-image::saphana-br-scs-image23.png[Saphana br scs image23]
+image:saphana-br-scs-image23.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Wählen Sie Storage Systems Aus.
 +
@@ -43,7 +43,7 @@ image::saphana-br-scs-image23.png[Saphana br scs image23]
 NOTE: Im Bildschirm können Sie den Storage-System-Typ auswählen, der ONTAP SVMs oder ONTAP Cluster sein kann. Wenn Sie die Storage-Systeme auf SVM-Ebene konfigurieren, müssen Sie für jede SVM eine Management-LIF konfiguriert haben. Alternativ können Sie einen SnapCenter-Managementzugriff auf Cluster-Ebene verwenden. Das SVM-Management wird im folgenden Beispiel verwendet.
 
 +
-image::saphana-br-scs-image24.png[Saphana br scs image24]
+image:saphana-br-scs-image24.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Klicken Sie auf Neu, um ein Speichersystem hinzuzufügen und den erforderlichen Hostnamen und die erforderlichen Anmeldeinformationen anzugeben.
 +
@@ -51,7 +51,7 @@ image::saphana-br-scs-image24.png[Saphana br scs image24]
 NOTE: Der SVM-Benutzer muss nicht der vsadmin-Benutzer sein, wie in dem Screenshot dargestellt. In der Regel wird ein Benutzer für die SVM konfiguriert und den erforderlichen Berechtigungen zum Ausführen von Backup- und Restore-Vorgängen zugewiesen. Einzelheiten zu den erforderlichen Berechtigungen finden Sie im http://docs.netapp.com/ocsc-43/index.jsp?topic=%2Fcom.netapp.doc.ocsc-isg%2Fhome.html["SnapCenter Installationshandbuch"^] Im Abschnitt „Minimale ONTAP-Berechtigungen erforderlich“.
 
 +
-image::saphana-br-scs-image25.png[Saphana br scs image25]
+image:saphana-br-scs-image25.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Klicken Sie auf Mehr Optionen, um die Storage-Plattform zu konfigurieren.
 +
@@ -62,11 +62,11 @@ Als Storage-Plattform können FAS, AFF, ONTAP Select oder Cloud Volumes ONTAP ve
 NOTE: Wählen Sie bei einem System, das als SnapVault- oder SnapMirror-Ziel verwendet wird, das sekundäre Symbol aus.
 
 +
-image::saphana-br-scs-image26.png[Saphana br scs image26]
+image:saphana-br-scs-image26.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Fügen Sie bei Bedarf zusätzliche Storage-Systeme hinzu. Beispielsweise wurde ein zusätzlicher externer Backup-Storage und eine Disaster Recovery-Storage hinzugefügt.
 +
-image::saphana-br-scs-image27.png[Saphana br scs image27]
+image:saphana-br-scs-image27.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -76,22 +76,22 @@ image::saphana-br-scs-image27.png[Saphana br scs image27]
 
 . Gehen Sie zu Einstellungen, wählen Sie Anmeldeinformationen aus, und klicken Sie auf Neu.
 +
-image::saphana-br-scs-image28.png[Saphana br scs image28]
+image:saphana-br-scs-image28.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Geben Sie die Anmeldeinformationen für den Benutzer an, der für Plug-in-Installationen auf Linux-Systemen verwendet wird.
 +
-image::saphana-br-scs-image29.png[Saphana br scs image29]
+image:saphana-br-scs-image29.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Geben Sie die Anmeldeinformationen für den Benutzer an, der für Plug-in-Installationen auf Windows-Systemen verwendet wird.
 +
-image::saphana-br-scs-image30.png[Saphana br scs image30]
+image:saphana-br-scs-image30.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 +
 Die folgende Abbildung zeigt die konfigurierten Anmeldedaten.
 
 
 
-image::saphana-br-scs-image31.png[Saphana br scs image31]
+image:saphana-br-scs-image31.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -104,17 +104,17 @@ NOTE: Für das SAP HANA Plug-in ist Java 64-Bit Version 1.8 erforderlich. Vor de
 
 . Gehen Sie zu Hosts und klicken Sie auf Hinzufügen.
 +
-image::saphana-br-scs-image32.png[Saphana br scs image32]
+image:saphana-br-scs-image32.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Geben Sie die erforderlichen Hostinformationen ein. Klicken Sie Auf Senden.
 +
-image::saphana-br-scs-image33.png[Saphana br scs image33]
+image:saphana-br-scs-image33.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 +
 Die folgende Abbildung zeigt alle konfigurierten Hosts, die nach der Implementierung des HANA-Plug-ins konfiguriert wurden.
 
 +
-image::saphana-br-scs-image34.png[Saphana br scs image34]
+image:saphana-br-scs-image34.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -161,31 +161,31 @@ In den folgenden Abschnitten wird die Konfiguration dieser drei Richtlinien besc
 
 . Gehen Sie zu Einstellungen > Richtlinien, und klicken Sie auf Neu.
 +
-image::saphana-br-scs-image35.png[Saphana br scs image35]
+image:saphana-br-scs-image35.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Geben Sie den Namen und die Beschreibung der Richtlinie ein. Klicken Sie Auf Weiter.
 +
-image::saphana-br-scs-image36.png[Saphana br scs image36]
+image:saphana-br-scs-image36.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Wählen Sie den Backup-Typ als Snapshot-basiert aus und wählen Sie stündlich für die Zeitplanfrequenz aus.
 +
-image::saphana-br-scs-image37.png[Saphana br scs image37]
+image:saphana-br-scs-image37.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Konfigurieren Sie die Aufbewahrungseinstellungen für On-Demand-Backups.
 +
-image::saphana-br-scs-image38.png[Saphana br scs image38]
+image:saphana-br-scs-image38.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Konfigurieren Sie die Aufbewahrungseinstellungen für geplante Backups.
 +
-image::saphana-br-scs-image39.png[Saphana br scs image39]
+image:saphana-br-scs-image39.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Konfigurieren der Replikationsoptionen. In diesem Fall ist kein SnapVault oder SnapMirror Update ausgewählt.
 +
-image::saphana-br-scs-image40.png[Saphana br scs image40]
+image:saphana-br-scs-image40.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Klicken Sie auf der Seite Zusammenfassung auf Fertig stellen.
 +
-image::saphana-br-scs-image41.png[Saphana br scs image41]
+image:saphana-br-scs-image41.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -196,19 +196,19 @@ image::saphana-br-scs-image41.png[Saphana br scs image41]
 . Gehen Sie zu Einstellungen > Richtlinien, und klicken Sie auf Neu.
 . Geben Sie den Namen und die Beschreibung der Richtlinie ein. Klicken Sie Auf Weiter.
 +
-image::saphana-br-scs-image42.png[Saphana br scs image42]
+image:saphana-br-scs-image42.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Legen Sie den Backup-Typ auf Snapshot-basiert und die Zeitplanfrequenz auf täglich fest.
 +
-image::saphana-br-scs-image43.png[Saphana br scs image43]
+image:saphana-br-scs-image43.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Konfigurieren Sie die Aufbewahrungseinstellungen für On-Demand-Backups.
 +
-image::saphana-br-scs-image44.png[Saphana br scs image44]
+image:saphana-br-scs-image44.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Konfigurieren Sie die Aufbewahrungseinstellungen für geplante Backups.
 +
-image::saphana-br-scs-image45.png[Saphana br scs image45]
+image:saphana-br-scs-image45.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Wählen Sie SnapVault aktualisieren aus, nachdem Sie eine lokale Snapshot-Kopie erstellt haben.
 +
@@ -216,11 +216,11 @@ image::saphana-br-scs-image45.png[Saphana br scs image45]
 NOTE: Das sekundäre Richtlinienetikett muss mit dem SnapMirror Etikett in der Datensicherungskonfiguration auf der Storage-Ebene identisch sein. Siehe Abschnitt link:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html#configuration-of-data-protection-to-off-site-backup-storage["„Konfiguration von Datenschutz auf externen Backup-Speicher“."]
 
 +
-image::saphana-br-scs-image46.png[Saphana br scs image46]
+image:saphana-br-scs-image46.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Klicken Sie auf der Seite Zusammenfassung auf Fertig stellen.
 +
-image::saphana-br-scs-image47.png[Saphana br scs image47]
+image:saphana-br-scs-image47.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -231,28 +231,28 @@ image::saphana-br-scs-image47.png[Saphana br scs image47]
 . Gehen Sie zu Einstellungen > Richtlinien, und klicken Sie auf Neu.
 . Geben Sie den Namen und die Beschreibung der Richtlinie ein. Klicken Sie Auf Weiter.
 +
-image::saphana-br-scs-image48.png[Saphana br scs image48]
+image:saphana-br-scs-image48.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Legen Sie den Sicherungstyp auf „File-based“ und „Schedule Frequency“ auf „Weekly“ fest.
 +
-image::saphana-br-scs-image49.png[Saphana br scs image49]
+image:saphana-br-scs-image49.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Konfigurieren Sie die Aufbewahrungseinstellungen für On-Demand-Backups.
 +
-image::saphana-br-scs-image50.png[Saphana br scs image50]
+image:saphana-br-scs-image50.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Konfigurieren Sie die Aufbewahrungseinstellungen für geplante Backups.
 +
-image::saphana-br-scs-image50.png[Saphana br scs image50]
+image:saphana-br-scs-image50.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Klicken Sie auf der Seite Zusammenfassung auf Fertig stellen.
 +
-image::saphana-br-scs-image51.png[Saphana br scs image51]
+image:saphana-br-scs-image51.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 +
 Die folgende Abbildung zeigt eine Zusammenfassung der konfigurierten Richtlinien.
 
 +
-image::saphana-br-scs-image52.png[Saphana br scs image52]
+image:saphana-br-scs-image52.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 

@@ -10,7 +10,7 @@ summary: Im Folgenden sind Anforderungen für die Softwareinstallation für SAP 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

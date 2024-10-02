@@ -10,7 +10,7 @@ summary: Weitere Informationen zu den in diesem Dokument beschriebenen Daten fin
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

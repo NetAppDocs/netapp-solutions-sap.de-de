@@ -10,8 +10,10 @@ summary: Anwendungsunabhängige Informationen zur Replikation über Regionen fin
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
-Anwendungsunabhängige Informationen zur bereichsübergreifenden Replikation finden Sie unter https://docs.microsoft.com/en-us/azure/azure-netapp-files/["Azure NetApp Files Dokumentation – Microsoft Docs"^] In den Konzepten und Anleitungen.
+Anwendungsunabhängige Informationen zur regionsübergreifenden Replikation finden Sie an folgendem Speicherort.
+
+link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/["Azure NetApp Files Dokumentation – Microsoft Docs"^] In den Abschnitten Konzepte und Anleitungen.

@@ -10,7 +10,7 @@ summary: In diesem Abschnitt werden die SnapCenter-Konzepte und Best Practices i
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -34,7 +34,7 @@ Die automatische Erkennung und die automatisierte Wiederherstellung und Wiederhe
 
 In der folgenden Abbildung sind die Abhängigkeiten zusammengefasst. Weitere Einzelheiten zu den HANA-Implementierungsoptionen finden Sie im Abschnitt „Bereitstellungsoptionen für das SAP HANA-Plug-in“.
 
-image::saphana-br-scs-image9.png[Saphana br scs image9]
+image:saphana-br-scs-image9.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 NOTE: Die HANA- und Linux-Plug-ins sind derzeit nur für Systeme mit Intel-Technik verfügbar. Falls die HANA-Datenbanken auf IBM Power Systems laufen, muss ein zentraler HANA-Plug-in-Host verwendet werden.
@@ -73,7 +73,7 @@ NOTE: HANA MDC-Systeme mit mehreren Mandanten werden für automatische Erkennung
 Die manuelle Konfiguration von HANA-Ressourcen wird für alle HANA-Architekturen unterstützt, erfordert jedoch einen zentralen HANA-Plug-in-Host. Der zentrale Plug-in-Host kann der SnapCenter-Server selbst oder ein separater Linux- oder Windows-Host sein.
 
 
-NOTE: Wenn das HANA-Plug-in auf dem HANA-Datenbank-Host implementiert wird, wird die Ressource standardmäßig automatisch erkannt. Die automatische Erkennung kann für einzelne Hosts deaktiviert werden, sodass das Plug-in bereitgestellt werden kann. Beispielsweise auf einem Datenbank-Host mit aktivierter HANA-Systemreplizierung und einer SnapCenter-Version < 4.6, bei der die automatische Erkennung nicht unterstützt wird. Weitere Informationen finden Sie im Abschnitt link:saphana-br-scs-advanced-configuration-and-tuning.html#disable-auto-discovery-on-the-HANA-plug-in-host["„Automatische Erkennung auf dem HANA-Plug-in-Host deaktivieren.“"]
+NOTE: Wenn das HANA-Plug-in auf dem HANA-Datenbank-Host implementiert wird, wird die Ressource standardmäßig automatisch erkannt. Die automatische Erkennung kann für einzelne Hosts deaktiviert werden, sodass das Plug-in bereitgestellt werden kann. Beispielsweise auf einem Datenbank-Host mit aktivierter HANA-Systemreplizierung und einer SnapCenter-Version < 4.6, bei der die automatische Erkennung nicht unterstützt wird. Weitere Informationen finden Sie im Abschnitt link:saphana-br-scs-advanced-configuration-and-tuning.html#disable-auto["„Automatische Erkennung auf dem HANA-Plug-in-Host deaktivieren.“"]
 
 Die folgende Tabelle zeigt die unterstützten HANA-Konfigurationen für die manuelle HANA-Ressourcenkonfiguration.
 
@@ -101,7 +101,7 @@ Die folgende Abbildung zeigt die logische Ansicht und die Kommunikation zwischen
 
 Der SnapCenter-Server kommuniziert über das SAP HANA Plug-in mit den SAP HANA Datenbanken. Das SAP HANA Plug-in nutzt die SAP HANA hdbsql-Client-Software, um SQL-Befehle an die SAP HANA-Datenbanken auszuführen. Der SAP HANA hdbuserstore wird verwendet, um die Benutzeranmeldeinformationen, den Hostnamen und die Portinformationen für den Zugriff auf die SAP HANA-Datenbanken bereitzustellen.
 
-image::saphana-br-scs-image10.png[Saphana br scs image10]
+image:saphana-br-scs-image10.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 NOTE: Das SAP HANA-Plug-in und die SAP-hdbsql-Client-Software, zu der auch das hdbuserstore-Konfigurationstool gehört, müssen auf demselben Host zusammen installiert werden.
@@ -122,7 +122,7 @@ SnapCenter Server HA wird nicht unterstützt, wenn das HANA-Plug-in auf dem Snap
 
 Die folgende Abbildung zeigt eine Konfiguration, in der der SnapCenter-Server als zentraler Plug-in-Host verwendet wird. Das SAP HANA Plug-in und die SAP hdbsql-Client-Software sind auf dem SnapCenter-Server installiert.
 
-image::saphana-br-scs-image11.png[Saphana br scs image11]
+image:saphana-br-scs-image11.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Da das HANA-Plug-in mit den gemanagten HANA-Datenbanken über den hdbclient über das Netzwerk kommunizieren kann, müssen keine SnapCenter-Komponenten auf den einzelnen HANA-Datenbank-Hosts installiert werden. SnapCenter kann die HANA-Datenbanken über einen zentralen HANA Plug-in-Host sichern, auf dem alle Benutzerspeicherschlüssel für die gemanagten Datenbanken konfiguriert sind.
 
@@ -139,7 +139,7 @@ Die folgende Abbildung zeigt eine Konfiguration, in der ein separater Linux-Host
 
 NOTE: Der separate zentrale Plug-in-Host kann auch ein Windows-Host sein.
 
-image::saphana-br-scs-image12.png[Saphana br scs image12]
+image:saphana-br-scs-image12.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Die gleiche Einschränkung hinsichtlich der im vorherigen Abschnitt beschriebenen Funktionsverfügbarkeit gilt auch für einen separaten zentralen Plug-in Host.
 
@@ -151,7 +151,7 @@ Bei dieser Implementierungsoption kann der SnapCenter Server jedoch mit den in-B
 
 Die folgende Abbildung zeigt eine Konfiguration, in der das SAP HANA Plug-in auf jedem SAP HANA Datenbank-Host installiert ist.
 
-image::saphana-br-scs-image13.png[Saphana br scs image13]
+image:saphana-br-scs-image13.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Wird das HANA-Plug-in auf jedem einzelnen HANA-Datenbank-Host installiert, sind alle Funktionen verfügbar, beispielsweise automatische Erkennung, automatisiertes Restore und Recovery. Zudem kann der SnapCenter Server in einer HA-Konfiguration eingerichtet werden.
 
@@ -165,9 +165,9 @@ NetApp empfiehlt, das HANA Plug-in auf dem HANA-Datenbank-Host für alle HANA-Sy
 
 Die folgenden beiden Abbildungen zeigen gemischte Plug-in-Bereitstellungen entweder mit dem SnapCenter-Server oder einem separaten Linux-Host als zentralen Plug-in-Host. Der einzige Unterschied zwischen diesen beiden Implementierungen ist die optionale HA-Konfiguration.
 
-image::saphana-br-scs-image14.png[Saphana br scs image14]
+image:saphana-br-scs-image14.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
-image::saphana-br-scs-image15.png[Saphana br scs image15]
+image:saphana-br-scs-image15.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -299,7 +299,7 @@ Für das Aufbewahrungsmanagement von Daten-Backups und das HANA-Backup-Katalogma
 
 Die folgende Abbildung zeigt einen Überblick über den Backup-Workflow.
 
-image::saphana-br-scs-image16.png[Saphana br scs image16]
+image:saphana-br-scs-image16.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -365,7 +365,7 @@ Das Management der Daten-Backup-Aufbewahrung und die allgemeine Ordnung der Back
 
 Die folgende Abbildung bietet einen Überblick über die verschiedenen Workflows und die Abhängigkeiten jedes einzelnen Vorgangs. In den folgenden Abschnitten werden die verschiedenen Operationen im Detail beschrieben.
 
-image::saphana-br-scs-image17.png[Saphana br scs image17]
+image:saphana-br-scs-image17.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -404,7 +404,7 @@ Der Bereinigungsjob wird standardmäßig einmal pro Woche geplant. Dieser wöche
 
 NOTE: Der Bereinigungsauftrag kann auch manuell für eine einzelne Ressource ausgelöst werden, indem Sie in der Topologieansicht der Ressource auf die Schaltfläche „Aktualisieren“ klicken.
 
-Details dazu, wie der Zeitplan des Bereinigungsjobs angepasst wird oder wie eine manuelle Aktualisierung ausgelöst wird, finden Sie im Abschnitt link:saphana-br-scs-advanced-configuration-and-tuning.html#change-scheduling-frequency-of-backup-synchronization-with-off-site-backup-storage["„Change Scheduling Frequency of Backup Synchronization with off-Site Backup Storage“."]
+Weitere Informationen zur Anpassung des Zeitplans des Bereinigungsjobs oder zum Auslösen einer manuellen Aktualisierung finden Sie im Abschnitt link:saphana-br-scs-advanced-configuration-and-tuning.html#change-schedule["„Change Scheduling Frequency of Backup Synchronization with off-Site Backup Storage“."]
 
 
 
@@ -434,7 +434,7 @@ NOTE: SnapCenter kümmert sich nur um die allgemeine Ordnung und Sauberkeit der 
 
 NOTE: Obwohl eine Aufbewahrung für On-Demand-Backups in der Richtlinienkonfiguration definiert wird, wird die allgemeine Ordnung und Sauberkeit nur dann ausgeführt, wenn ein weiteres On-Demand-Backup ausgeführt wird. Daher müssen On-Demand-Backups in der Regel manuell in SnapCenter gelöscht werden, um sicherzustellen, dass diese Backups auch im SAP HANA Backup-Katalog gelöscht werden und die allgemeine Ordnung der Protokollbackups nicht auf einem alten On-Demand-Backup basiert.
 
-Das Backup-Aufbewahrungsmanagement für Protokolle ist standardmäßig aktiviert. Falls erforderlich, kann diese deaktiviert werden, wie im Abschnitt beschrieben link:saphana-br-scs-advanced-configuration-and-tuning.html#disable-auto-discovery-on-the-HANA-plug-in-host["„Automatische Erkennung auf dem HANA-Plug-in-Host deaktivieren.“"]
+Das Backup-Aufbewahrungsmanagement für Protokolle ist standardmäßig aktiviert. Bei Bedarf kann er wie im Abschnitt beschrieben deaktiviert werden link:saphana-br-scs-advanced-configuration-and-tuning.html#disable-auto["„Automatische Erkennung auf dem HANA-Plug-in-Host deaktivieren.“"]
 
 
 
@@ -534,7 +534,7 @@ HANA-einzelner Container und HANA MDC-Einzelmandanten-Systeme, die automatisch e
 * *Vollständige Ressource mit manueller Wiederherstellung.* Wenn Sie No Recovery wählen, stoppt SnapCenter die HANA-Datenbank und führt das erforderliche Dateisystem (unmount, Mount) und Restore Operationen aus. Sie müssen die System- und die Mandantendatenbank manuell wiederherstellen.
 
 
-image::saphana-br-scs-image18.png[Saphana br scs image18]
+image:saphana-br-scs-image18.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -548,7 +548,7 @@ Obwohl HANA MDC-Systeme mit mehreren Mandanten automatisch erkannt werden könne
 
 Die Workflows sind die gleichen wie im vorherigen Abschnitt beschrieben.
 
-image::saphana-br-scs-image19.png[Saphana br scs image19]
+image:saphana-br-scs-image19.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -558,7 +558,7 @@ Manuelle konfigurierte HANA-Ressourcen sind für automatisiertes Restore und Rec
 
 Bei manuell konfigurierten HANA-Ressourcen unterstützt SnapCenter nur eine manuelle Recovery, wie in der folgenden Abbildung dargestellt. Der Workflow für die manuelle Wiederherstellung ist der gleiche wie in den vorherigen Abschnitten beschrieben.
 
-image::saphana-br-scs-image20.png[Saphana br scs image20]
+image:saphana-br-scs-image20.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 

@@ -10,7 +10,7 @@ summary: Ein Restore-Vorgang aus einem Backup, das auf dem anderen SAP HANA-Host
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -27,11 +27,11 @@ Bei T1 am Host 1 wurde ein Backup erstellt. Ein Failover wurde an Host 2 durchge
 . Host 1 wird gestartet, und die Neusynchronisierung der Systemreplizierung von Host 1 wird automatisch gestartet.
 
 
-image::saphana-sr-scs-image48.png[Saphana sr scs image48]
+image:saphana-sr-scs-image48.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Die folgende Abbildung zeigt den SAP HANA Backup-Katalog und hebt das auf Host 1 erstellte Backup hervor, das für den Restore- und Recovery-Vorgang verwendet wurde.
 
-image::saphana-sr-scs-image49.png[Saphana sr scs image49]
+image:saphana-sr-scs-image49.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Die Wiederherstellung umfasst die folgenden Schritte:
 
@@ -42,7 +42,7 @@ Die Wiederherstellung umfasst die folgenden Schritte:
 
 In SnapCenter wird das Backup ausgewählt und der Klonvorgang gestartet.
 
-image::saphana-sr-scs-image50.png[Saphana sr scs image50]
+image:saphana-sr-scs-image50.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Sie müssen den Klon-Server und die NFS-Export-IP-Adresse angeben.
 
@@ -51,11 +51,11 @@ NOTE: Bei einer SnapCenter-Konfiguration mit einer Einzelressource ist das SAP H
 
 + in einer SnapCenter-Konfiguration mit separaten Ressourcen wird der HANA-Datenbank-Host als Klon-Server ausgewählt, und ein Mount-Skript wird verwendet, um den Klon auf dem Ziel-Host zu mounten.
 
-image::saphana-sr-scs-image51.png[Saphana sr scs image51]
+image:saphana-sr-scs-image51.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Um den Verbindungspfad zu bestimmen, der zum Mounten des geklonten Volume erforderlich ist, prüfen Sie das Jobprotokoll des Klonjobs, wie in der folgenden Abbildung dargestellt.
 
-image::saphana-sr-scs-image52.png[Saphana sr scs image52]
+image:saphana-sr-scs-image52.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Das geklonte Volume kann jetzt angehängt werden.
 

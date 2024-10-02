@@ -10,8 +10,13 @@ summary: NetApp Lösungen für die Optimierung des Lifecycle Managements von SAP
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
+
+[role="lead"]
+NetApp Lösungen für die Optimierung des Lifecycle Managements von SAP sind in SAP AnyDBs und SAP HANA Datenbanken integriert. Darüber hinaus integriert NetApp in SAP Lifecycle Management-Tools und kombiniert dabei eine effiziente, applikationsintegrierte Datensicherung mit der flexiblen Bereitstellung von SAP Testsystemen.
+
+Autoren:
 
 Holger Zecha, Tobias Brandl, NetApp Franz Digruber, Libelle
 

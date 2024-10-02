@@ -10,7 +10,7 @@ summary: Sie müssen die Zeit zwischen den Storage-Controllern und den SAP HANA 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

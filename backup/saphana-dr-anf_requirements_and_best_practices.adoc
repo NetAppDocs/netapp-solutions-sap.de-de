@@ -10,7 +10,7 @@ summary: 'Microsoft Azure übernimmt keine Garantie für die Verfügbarkeit eine
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

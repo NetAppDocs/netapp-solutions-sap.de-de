@@ -10,7 +10,7 @@ summary: Die Lösungsvalidierung wurde mit einem Single-Host-System für SAP HAN
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -27,7 +27,7 @@ Am DR-Standort wurde ein einzelner Kapazitäts-Pool mit manueller QoS konfigurie
 
 Die folgende Abbildung zeigt die Laboreinrichtung.
 
-image::saphana-dr-anf_image7.png[Saphana dr. anf image7]
+image:saphana-dr-anf_image7.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -39,8 +39,8 @@ Bei der Replizierung des Daten-Volumes mithilfe von ANF Cross-Region Replication
 
 Die folgende Abbildung zeigt die Snapshot Backups des HANA Daten-Volumes.
 
-image::saphana-dr-anf_image8.png[Saphana dr. anf image8]
+image:saphana-dr-anf_image8.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Die folgende Abbildung zeigt den SAP HANA-Backup-Katalog.
 
-image::saphana-dr-anf_image9.png[Saphana dr anf image9]
+image:saphana-dr-anf_image9.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

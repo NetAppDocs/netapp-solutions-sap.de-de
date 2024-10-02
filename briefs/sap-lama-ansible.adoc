@@ -10,7 +10,7 @@ summary: 'Der Schwerpunkt dieses Dokuments liegt auf der Integration von NetApp�
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -43,7 +43,7 @@ Der Begriff SAP-Systemkopie wird oft als Synonym für drei verschiedene Prozesse
 
 Das folgende Bild zeigt die Schritte des SAP-Systems zum Klonen, Kopieren und Aktualisieren des Lama-Workflows, die mit NetApp-Storage zusammenhängen.
 
-image::sap-lama-image1.png[Bild mit den Schritten zum Klonen, Kopieren und Aktualisieren des Lama-Workflows für SAP-Systeme, die zu NetAppstorage gehören]
+image:sap-lama-image1.png["Bild mit den Schritten zum Klonen, Kopieren und Aktualisieren des Lama-Workflows für SAP-Systeme, die zu NetAppstorage gehören"]
 
 
 
@@ -68,7 +68,7 @@ Die Gesamtlösung besteht aus den folgenden Hauptkomponenten:
 
 Die folgende Abbildung zeigt, wie SAP Lama und NetApp-Storage-Systeme über Ansible Playbooks auf einem dedizierten Ansible-Host integriert werden, der durch vom SAP Host Agent ausgeführte Shell-Skripte ausgelöst wird.
 
-image::sap-lama-image2.png[Abbildung: Integration von SAP Lama und NetApp-Storage-Systemen durch Ansible Playbooks auf einem dedizierten Ansible-Host, ausgelöst durch Shell-Skripte, die vom SAP Host Agent ausgeführt werden]
+image:sap-lama-image2.png["Abbildung: Integration von SAP Lama und NetApp-Storage-Systemen durch Ansible Playbooks auf einem dedizierten Ansible-Host, ausgelöst durch Shell-Skripte, die vom SAP Host Agent ausgeführt werden"]
 
 
 
@@ -80,7 +80,7 @@ Um die erforderlichen Aufgaben auf Infrastruktur- und Datenbankebene zu beschleu
 
 Die folgende Abbildung zeigt mögliche Verbesserungen bei der betrieblichen Effizienz durch den Einsatz von Automatisierung.
 
-image::sap-lama-image3.png[Abbildung mit möglichen Verbesserungen der betrieblichen Effizienz bei Einsatz von Automatisierung]
+image:sap-lama-image3.png["Abbildung mit möglichen Verbesserungen der betrieblichen Effizienz bei Einsatz von Automatisierung"]
 
 
 

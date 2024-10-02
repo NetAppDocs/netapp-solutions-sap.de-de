@@ -10,7 +10,7 @@ summary: Ein Storage Connector ist nur in Umgebungen mit mehreren Hosts mit Fail
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

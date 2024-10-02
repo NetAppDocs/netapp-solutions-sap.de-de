@@ -10,7 +10,7 @@ summary: SAP empfiehlt, Storage-basierte Snapshot-Backups mit einem wöchentlich
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -20,7 +20,7 @@ Bei der Planung von Backups mithilfe dieser Richtlinie erstellt SnapCenter eine 
 
 SnapCenter zeigt die Blockintegritätsprüfung nicht auf dieselbe Weise an wie Backups basierend auf Snapshot-Kopien. Stattdessen zeigt die Übersichtskarte die Anzahl der dateibasierten Backups und den Status des vorherigen Backups an.
 
-image::saphana-br-scs-image94.png[Saphana br scs image94]
+image:saphana-br-scs-image94.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Ein Backup zur Block-Integritätsprüfung kann nicht mithilfe der SnapCenter UI gelöscht werden, er kann jedoch mithilfe von PowerShell Befehlen gelöscht werden.
 
@@ -70,7 +70,7 @@ PS C:\Users\scadmin>
 ....
 Der SAP HANA-Backup-Katalog zeigt Einträge sowohl für das System als auch für die Mandanten-Datenbanken an. Die folgende Abbildung zeigt eine SnapCenter-Blockintegritätsprüfung im Backup-Katalog der Systemdatenbank.
 
-image::saphana-br-scs-image95.png[Saphana br scs image95]
+image:saphana-br-scs-image95.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Eine erfolgreiche Überprüfung der Blockintegrität erstellt standardisierte SAP HANA Daten-Backup-Dateien. SnapCenter verwendet den Backup-Pfad, der in der HANA-Datenbank für dateibasierte Daten-Backup-Vorgänge konfiguriert wurde.
 

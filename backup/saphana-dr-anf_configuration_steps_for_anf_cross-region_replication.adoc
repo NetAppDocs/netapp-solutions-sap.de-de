@@ -10,7 +10,7 @@ summary: Am Disaster Recovery-Standort sind einige Vorbereitungsschritte durchzu
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -66,27 +66,27 @@ NOTE: Das Kontingent kann auf Basis der Kapazitätsanforderungen festgelegt werd
 
 NOTE: Wenn der Kapazitäts-Pool mit manueller QoS konfiguriert wurde, können Sie den Durchsatz zusätzlich zu den Kapazitätsanforderungen konfigurieren. Wie oben angegeben können Sie den Durchsatz auch im normalen Betrieb mit niedrigem Wert konfigurieren und im Falle eines Disaster Recovery Failover diesen erhöhen.
 
-image::saphana-dr-anf_image10.png[Saphana dr. anf image10]
+image:saphana-dr-anf_image10.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Auf der Registerkarte Protokoll müssen Sie das Netzwerkprotokoll, den Netzwerkpfad und die Exportrichtlinie angeben.
 
 
 NOTE: Das Protokoll muss dasselbe sein wie das für das Quell-Volume verwendete Protokoll.
 
-image::saphana-dr-anf_image11.png[Saphana dr. anf image11]
+image:saphana-dr-anf_image11.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Auf der Registerkarte „Replikation“ müssen Sie die Quell-Volume-ID und den Replizierungsplan konfigurieren. Für die Datenreplizierung mit Daten-Volumes haben wir einen täglichen Replizierungszeitplan für unsere Einrichtung im Labor konfiguriert.
 
 
 NOTE: Die Quell-Volume-ID kann vom Bildschirm Eigenschaften des Quell-Volumes kopiert werden.
 
-image::saphana-dr-anf_image12.png[Saphana dr. anf image12]
+image:saphana-dr-anf_image12.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Als letzter Schritt müssen Sie die Replikation am Quell-Volume durch Angabe der ID des Ziel-Volume autorisieren.
 
 
 NOTE: Sie können die Ziel-Volume-ID vom Bildschirm Eigenschaften des Ziel-Volumes kopieren.
 
-image::saphana-dr-anf_image13.png[Saphana dr. anf image13]
+image:saphana-dr-anf_image13.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Für das freigegebene HANA und das Protokoll-Backup-Volume müssen dieselben Schritte durchgeführt werden.

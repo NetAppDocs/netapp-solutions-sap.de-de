@@ -10,7 +10,7 @@ summary:
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -217,4 +217,4 @@ Die Größe des RAM, die Netto-Datengröße auf der Festplatte jedes SAP HANA-Ho
 
 Die folgende Abbildung fasst den Dimensionierungsprozess zusammen.
 
-image::saphana_aff_fc_image8.jpg[Saphana AFF fc image8]
+image:saphana_aff_fc_image8.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

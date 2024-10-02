@@ -10,7 +10,7 @@ summary: Es gibt verschiedene Szenarien, in denen Daten aus einem Quellsystem zu
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -18,11 +18,11 @@ Es gibt verschiedene Szenarien, in denen Daten aus einem Quellsystem zu Test- od
 
 Diese Systemaktualisierungen bestehen aus mehreren Aufgaben auf Infrastruktur-, Datenbank- und Applikationsebene und können je nach Automatisierungsgrad mehrere Tage dauern.
 
-image::lama-ansible-image2.png[Dieses Bild zeigt den Umgebungs-Workflow von der Hauptentwicklungslandschaft bis hin zu temporären Projekt-Splits, Reparatur-Systemen, Schulungssystemen und sanbox-Systemen. Hier wird angezeigt, wo Systemaktualisierung, Systemkopie und Systemklonen für diese verschiedenen Zwecke verwendet werden.]
+image:lama-ansible-image2.png["Dieses Bild zeigt den Umgebungs-Workflow von der Hauptentwicklungslandschaft bis hin zu temporären Projekt-Splits, Reparatur-Systemen, Schulungssystemen und sanbox-Systemen. Hier wird angezeigt, wo Systemaktualisierung, Systemkopie und Systemklonen für diese verschiedenen Zwecke verwendet werden."]
 
 Mit den Klon-Workflows von SAP Lama und NetApp werden die erforderlichen Aufgaben in der Infrastruktur- und Datenbankebene beschleunigt und automatisiert. Anstatt ein Backup vom Quellsystem auf das Zielsystem wiederherzustellen, verwendet SAP Lama NetApp Snapshot-Kopie und NetApp FlexClone-Technologie, damit erforderliche Aufgaben bis zu einer gestarteten HANA-Datenbank in Minuten anstelle von Stunden ausgeführt werden können, wie in der folgenden Abbildung dargestellt. Der für das Klonen erforderliche Zeitaufwand ist unabhängig von der Größe der Datenbank, sodass selbst sehr große Systeme in wenigen Minuten erstellt werden können. Eine weitere Reduzierung der Laufzeit erfolgt durch die Automatisierung von Aufgaben auf Betriebssystem- und Datenbankebene sowie auf der Seite SAP-Nachbearbeitung.
 
-image::lama-ansible-image3.png[Das Bild zeigt einen Vergleich des Klonprozesses mit und ohne NetApp Snapshot Kopien und der NetApp FlexClone Technologie, die den Klonprozess drastisch beschleunigt.]
+image:lama-ansible-image3.png["Das Bild zeigt einen Vergleich des Klonprozesses mit und ohne NetApp Snapshot Kopien und der NetApp FlexClone Technologie, die den Klonprozess drastisch beschleunigt."]
 
 
 
@@ -36,7 +36,7 @@ Anstatt das SAP-System wiederherzustellen, ist es besser, den logischen Fehler i
 
 Bei der Einrichtung des Reparatursystems sind Flexibilität und Geschwindigkeit entscheidend. NetApp Storage-basierte Snapshot Backups bieten mehrere konsistente Datenbank-Images, um mithilfe der NetApp FlexClone Technologie einen Klon des Produktionssystems zu erstellen. Die Erstellung von FlexClone Volumes dauert nur wenige Sekunden, anstatt mehrerer Stunden, wenn zum Einrichten des Reparatursystems eine umgeleitete Wiederherstellung aus einem dateibasierten Backup verwendet wird.
 
-image::lama-ansible-image4.png[Dieses Bild zeigt einen Schritt-für-Schritt-Prozess zur Erstellung eines Reparatur-Systems aus dem Cloning-System mithilfe von FlexClone Technologie.]
+image:lama-ansible-image4.png["Dieses Bild zeigt einen Schritt-für-Schritt-Prozess zur Erstellung eines Reparatur-Systems aus dem Cloning-System mithilfe von FlexClone Technologie."]
 
 
 
@@ -48,4 +48,4 @@ Die Storage-Replizierung mit SnapMirror ermöglicht die Ausführung von Disaster
 
 SAP Lama kann für die Orchestrierung des gesamten Testvorgangs verwendet werden, aber auch für Netzwerkfencing, Ziel-Host-Wartung usw.
 
-image::lama-ansible-image5.png[Dieses Bild zeigt die Beziehung zwischen NetApp Storage-Systemen im primären Datacenter, dem lokalen DR-Datacenter und dem Remote-DR-Datacenter. Sie sind sowohl durch synchrone SnapMirror als auch durch asynchrone SnapMirror Beziehungen verbunden.]
+image:lama-ansible-image5.png["Dieses Bild zeigt die Beziehung zwischen NetApp Storage-Systemen im primären Datacenter, dem lokalen DR-Datacenter und dem Remote-DR-Datacenter. Sie sind sowohl durch synchrone SnapMirror als auch durch asynchrone SnapMirror Beziehungen verbunden."]

@@ -10,7 +10,7 @@ summary: Im Folgenden sind die Anforderungen für die Installation der SAP HANA 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

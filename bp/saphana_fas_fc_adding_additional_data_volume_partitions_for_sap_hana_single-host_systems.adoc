@@ -10,7 +10,7 @@ summary: Ab SAP HANA 2.0 SPS4 können weitere Daten-Volume-Partitionen konfiguri
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -116,6 +116,6 @@ Gehen Sie wie folgt vor, um Ihrer Mandanten-Datenbank eine zusätzliche Datavolu
 ALTER SYSTEM ALTER DATAVOLUME ADD PARTITION PATH '/hana/data2/SID/';
 ....
 +
-image::saphana_fas_fc_image28.jpg[Saphana FAS fc image28]
+image:saphana_fas_fc_image28.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 

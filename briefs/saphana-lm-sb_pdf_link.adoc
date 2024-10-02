@@ -8,6 +8,7 @@ summary: 'NetApp bietet eine Lifecycle-Management-Lösung, die vollständig in d
 :allow-uri-read: 
 
 
+[role="lead"]
 NetApp bietet eine Lifecycle-Management-Lösung, die vollständig in die Tools integriert ist, die SAP-Administratoren bei täglichen Aufgaben wie SAP Landscape Management (SAP Lama) einsetzen, um die Herausforderungen der langsamen Implementierung von Funktionen, mangelnden Automatisierung und Produktivitätsverlust zu meistern. Ziel ist es, den Bereitstellungs-Workflow von der vor- bis zur Nachbearbeitung zu vereinfachen. Dies schließt alle Aufgaben auf der Software- und Storage-Ebene ein, die zur Erstellung einer Kopie des Produktionssystems erforderlich sind. Mit dieser Lösung können Administratoren mit nur wenigen Klicks eine Entwicklungs- und Testumgebung erstellen. So wird das Lifecycle Management optimiert.
 
 link:https://www.netapp.com/pdf.html?item=/media/6996-sb-3978pdf.pdf["https://www.netapp.com/pdf.html?item=/media/6996-sb-3978pdf.pdf"]

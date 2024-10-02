@@ -10,7 +10,7 @@ summary: In diesem Abschnitt werden die Konfigurationsschritte für zwei Beispie
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -48,7 +48,7 @@ NOTE: Die erforderlichen Berechtigungen wurden mit HANA 2.0 SPS5 Version geände
 
 NOTE: Bei einem SAP HANA MDC-System muss der Benutzer in der Systemdatenbank erstellt werden, da alle Backup-Befehle für das System und die Mandantendatenbanken über die Systemdatenbank ausgeführt werden.
 
-image::saphana-br-scs-image53.png[Saphana br scs image53]
+image:saphana-br-scs-image53.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Beim HANA-Plug-in-Host, auf dem das SAP HANA-Plug-in und der SAP-hdbsql-Client installiert sind, muss ein Benutzerspeicherschlüssel konfiguriert werden.
 
@@ -163,17 +163,17 @@ Die folgende Abbildung zeigt die konfigurierte Sicherungsbeziehung für das SAP 
 
 NOTE: Der Zeitplan für die Beziehung muss auf „Keine“ gesetzt werden, da SnapCenter das SnapVault Update auslöst.
 
-image::saphana-br-scs-image54.png[Saphana br scs image54]
+image:saphana-br-scs-image54.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Die folgende Abbildung zeigt die Sicherungsrichtlinie. Die Sicherungsrichtlinie, die für die Schutzbeziehung verwendet wird, definiert das SnapMirror-Label und die Aufbewahrung von Backups im sekundären Storage. In unserem Beispiel ist das verwendete Etikett `Daily`, Und die Aufbewahrung ist auf 5 eingestellt.
 
 
-NOTE: Das SnapMirror-Label in der erstellten Richtlinie muss mit der in der Konfiguration der SnapCenter-Richtlinie definierten Beschriftung übereinstimmen. Weitere Informationen finden Sie unter „<<Richtlinie für tägliche Snapshot Backups mit SnapVault Replizierung>>.“
+NOTE: Das SnapMirror-Label in der erstellten Richtlinie muss mit der in der Konfiguration der SnapCenter-Richtlinie definierten Beschriftung übereinstimmen. Weitere Informationen finden Sie unter link:saphana-br-scs-snapcenter-initial-configuration.html#snapshot-policy["Richtlinie für tägliche Snapshot Backups mit SnapVault Replizierung"].
 
 
 NOTE: Die Aufbewahrung für Backups im externen Backup-Storage wird in der Richtlinie definiert und durch ONTAP gesteuert.
 
-image::saphana-br-scs-image55.png[Saphana br scs image55]
+image:saphana-br-scs-image55.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -203,18 +203,18 @@ Der HANA-Plug-in-Host in unserem Beispiel ist der SnapCenter-Server.
 Der hdbuserstore-Schlüssel muss mit dem Schlüssel übereinstimmen, der für die HANA-Datenbank SS2 konfiguriert wurde. In unserem Beispiel ist es SS2KEY.
 
 +
-image::saphana-br-scs-image56.png[Saphana br scs image56]
+image:saphana-br-scs-image56.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 +
 
 NOTE: Bei einem SAP HANA-System mit mehreren Hosts müssen die hdbuserstore-Schlüssel für alle Hosts enthalten sein, wie in der folgenden Abbildung dargestellt. SnapCenter versucht, eine Verbindung mit der ersten Taste in der Liste herzustellen, und setzt den anderen Fall fort, falls der erste Schlüssel nicht funktioniert. Dies ist zur Unterstützung von HANA Failover in einem System mit mehreren Hosts mit Worker und Standby-Hosts erforderlich.
 
 +
-image::saphana-br-scs-image57.png[Saphana br scs image57]
+image:saphana-br-scs-image57.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 .. Wählen Sie die erforderlichen Daten für das Storage-System (SVM) und den Volume-Namen aus.
 +
-image::saphana-br-scs-image58.png[Saphana br scs image58]
+image:saphana-br-scs-image58.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 +
 
@@ -225,16 +225,16 @@ NOTE: Für eine Fibre-Channel-SAN-Konfiguration muss auch die LUN ausgewählt we
 NOTE: Bei einem SAP HANA-System mit mehreren Hosts müssen alle Datenvolumen des SAP HANA Systems ausgewählt werden, wie in der folgenden Abbildung dargestellt.
 
 +
-image::saphana-br-scs-image59.png[Saphana br scs image59]
+image:saphana-br-scs-image59.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 +
 Der Übersichtsbildschirm der Ressourcenkonfiguration wird angezeigt.
 
 .. Klicken Sie auf Fertig stellen, um die SAP HANA-Datenbank hinzuzufügen.
 +
-image::saphana-br-scs-image60.png[Saphana br scs image60]
+image:saphana-br-scs-image60.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
-.. Wenn die Ressourcenkonfiguration abgeschlossen ist, führen Sie die Konfiguration des Ressourcenschutzes durch, wie im Abschnitt „ beschrieben<<Konfiguration für Ressourcenschutz>>.“
+.. Wenn die Ressourcenkonfiguration abgeschlossen ist, führen Sie die Konfiguration des Ressourcenschutzes aus, wie im Abschnitt beschriebenlink:saphana-br-scs-snapcenter-resource-specific-configuration-for-sap-hana-database-backups.html#resource-protection["Konfiguration für Ressourcenschutz"].
 
 
 
@@ -251,17 +251,17 @@ NOTE: Für das SAP HANA Plug-in ist Java 64-Bit Version 1.8 erforderlich. Java m
 . Klicken Sie auf der Registerkarte Host auf Hinzufügen.
 . Geben Sie Host-Informationen an, und wählen Sie das zu installierende SAP HANA-Plug-in aus. Klicken Sie Auf Senden.
 +
-image::saphana-br-scs-image61.png[Saphana br scs image61]
+image:saphana-br-scs-image61.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Bestätigen Sie den Fingerabdruck.
 +
-image::saphana-br-scs-image62.png[Saphana br scs image62]
+image:saphana-br-scs-image62.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 +
 Die Installation des HANA-Plug-ins und des Linux-Plug-ins wird automatisch gestartet. Nach Abschluss der Installation wird in der Statusspalte des Hosts die Ausführung angezeigt. Der Bildschirm zeigt auch, dass das Linux-Plug-in zusammen mit dem HANA-Plug-in installiert wird.
 
 +
-image::saphana-br-scs-image63.png[Saphana br scs image63]
+image:saphana-br-scs-image63.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 +
 Nach der Plug-in-Installation startet der automatische Erkennungsvorgang der HANA-Ressource automatisch. Im Bildschirm Ressourcen wird eine neue Ressource erstellt, die mit dem roten Vorhängeschloss-Symbol als gesperrt markiert ist.
@@ -272,21 +272,21 @@ Nach der Plug-in-Installation startet der automatische Erkennungsvorgang der HAN
 NOTE: Sie können den automatischen Erkennungsvorgang auch manuell im Bildschirm Ressourcen auslösen, indem Sie auf Ressourcen aktualisieren klicken.
 
 +
-image::saphana-br-scs-image64.png[Saphana br scs image64]
+image:saphana-br-scs-image64.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Geben Sie den UserStore-Schlüssel für die HANA-Datenbank an.
 +
-image::saphana-br-scs-image65.png[Saphana br scs image65]
+image:saphana-br-scs-image65.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 +
 Der zweite Ebene-Prozess der automatischen Bestandsaufnahme beginnt, bei dem Mandantendaten und Storage-Platzbedarf erfasst werden.
 
 . Klicken Sie auf Details, um die Konfigurationsinformationen der HANA-Ressource in der Ansicht der Ressourcentopologie anzuzeigen.
 +
-image::saphana-br-scs-image66.png[Saphana br scs image66]
+image:saphana-br-scs-image66.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 +
-image::saphana-br-scs-image67.png[Saphana br scs image67]
+image:saphana-br-scs-image67.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 +
 Wenn die Ressourcenkonfiguration abgeschlossen ist, muss die Konfiguration des Ressourcenschutzes wie im folgenden Abschnitt beschrieben ausgeführt werden.
@@ -318,41 +318,41 @@ In der Konfiguration der folgenden Abbildung haben die Namen von Backup- und Sna
 NOTE: Obwohl eine Aufbewahrung für On-Demand-Backups in der Richtlinienkonfiguration definiert wird, wird die allgemeine Ordnung und Sauberkeit nur dann ausgeführt, wenn ein weiteres On-Demand-Backup ausgeführt wird. Daher müssen On-Demand-Backups in der Regel manuell in SnapCenter gelöscht werden, um sicherzustellen, dass diese Backups auch im SAP HANA Backup-Katalog gelöscht werden und dass die allgemeine Ordnung der Protokollsicherung nicht auf einem alten On-Demand-Backup basiert.
 
 +
-image::saphana-br-scs-image68.png[Saphana br scs image68]
+image:saphana-br-scs-image68.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
 . Auf der Seite „Anwendungseinstellungen“ müssen keine spezifischen Einstellungen vorgenommen werden. Klicken Sie Auf Weiter.
 +
-image::saphana-br-scs-image69.png[Saphana br scs image69]
+image:saphana-br-scs-image69.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Wählen Sie die Richtlinien aus, die der Ressource hinzugefügt werden sollen.
 +
-image::saphana-br-scs-image70.png[Saphana br scs image70]
+image:saphana-br-scs-image70.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Legen Sie den Zeitplan für die LocalSnap-Richtlinie fest (in diesem Beispiel alle vier Stunden).
 +
-image::saphana-br-scs-image71.png[Saphana br scs image71]
+image:saphana-br-scs-image71.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Legen Sie den Zeitplan für die LocalSnapAndSnapVault-Richtlinie fest (in diesem Beispiel einmal pro Tag).
 +
-image::saphana-br-scs-image72.png[Saphana br scs image72]
+image:saphana-br-scs-image72.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Legen Sie den Zeitplan für die Richtlinie zur Integritätsprüfung der Blöcke fest (in diesem Beispiel einmal pro Woche).
 +
-image::saphana-br-scs-image73.png[Saphana br scs image73]
+image:saphana-br-scs-image73.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Geben Sie Informationen zur E-Mail-Benachrichtigung an.
 +
-image::saphana-br-scs-image74.png[Saphana br scs image74]
+image:saphana-br-scs-image74.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Klicken Sie auf der Seite Zusammenfassung auf Fertig stellen.
 +
-image::saphana-br-scs-image75.png[Saphana br scs image75]
+image:saphana-br-scs-image75.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . On-Demand-Backups können jetzt auf der Topologieseite erstellt werden. Die geplanten Backups werden basierend auf den Konfigurationseinstellungen ausgeführt.
 +
-image::saphana-br-scs-image76.png[Saphana br scs image76]
+image:saphana-br-scs-image76.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -396,4 +396,4 @@ Wenn ein separater Linux-Host als zentraler HANA-Plug-in-Host verwendet wird, m�
 
 Die folgende Abbildung zeigt den Befehl Post Quiesce im Konfigurationsbildschirm für Ressourcenschutz.
 
-image::saphana-br-scs-image77.png[Saphana br scs image77]
+image:saphana-br-scs-image77.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

@@ -10,7 +10,7 @@ summary: 'Für NFS Version 4 und höher ist Benutzerauthentifizierung erforderli
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

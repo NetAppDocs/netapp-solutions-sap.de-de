@@ -10,7 +10,7 @@ summary: Die folgende Abbildung zeigt die Volume-Replizierungsbeziehungen für e
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -28,7 +28,7 @@ Bei einem Disaster Failover muss die Replizierungsbeziehung beschädigt werden, 
 
 In der folgenden Abbildung sind die HANA-Konfigurationsoptionen für die regionsübergreifende Replizierung dargestellt.
 
-image::saphana-dr-anf_image6.png[Saphana dr. anf image6]
+image:saphana-dr-anf_image6.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Mit der aktuellen Version der Cross-Region-Replikation können nur feste Zeitpläne ausgewählt werden, und die tatsächliche Replikationsaktualisierungszeit kann nicht vom Benutzer definiert werden. Verfügbare Termine sind täglich, stündlich und alle 10 Minuten. Bei Verwendung dieser Zeitplanoptionen sind zwei verschiedene Konfigurationen je nach RPO-Anforderungen sinnvoll: Daten-Volume-Replizierung ohne Backup-Replizierung bei Protokolldaten sowie Backup-Replizierung mit verschiedenen Zeitplänen entweder stündlich oder alle 10 Minuten. Die niedrigste mögliche RPO beträgt etwa 20 Minuten. In der folgenden Tabelle sind die Konfigurationsoptionen sowie die resultierenden RPO- und RTO-Werte zusammengefasst.
 

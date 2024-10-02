@@ -13,11 +13,12 @@ summary: In diesem Dokument werden die Herausforderungen beim Design von Storage
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
+
+[role="lead"]
+In diesem Dokument werden die Herausforderungen beim Design von Storage-Lösungen erläutert, die bei der Unterstützung von SAP Business Suite Produkten mithilfe einer Oracle Datenbank auftreten. Das Hauptaugenmerk dieses Dokuments liegt auf dem allgemeinen Bedarf an Storage-Infrastruktur-Design, -Implementierung, -Betrieb und -Management-Herausforderungen. Geschäftliche und IT-Führungskräfte stehen dabei vor der Herausforderung, die auf der neuesten Generation von SAP-Lösungen basieren. Die Empfehlungen in diesem Dokument sind allgemein, nicht spezifisch für eine SAP-Anwendung oder Größe und Umfang der SAP-Implementierung. In diesem Dokument wird vorausgesetzt, dass der Leser über die grundlegenden Kenntnisse der Technologie und des Betriebs der NetApp- und SAP-Produkte verfügt. Das Dokument wurde nach Interaktion des technischen Personals von NetApp, SAP, Oracle und unseren Kunden entwickelt.
 
 Nils Bauer, NetApp
-
-In diesem Dokument werden die Herausforderungen beim Design von Storage-Lösungen erläutert, die bei der Unterstützung von SAP Business Suite Produkten mithilfe einer Oracle Datenbank auftreten. Das Hauptaugenmerk dieses Dokuments liegt auf dem allgemeinen Bedarf an Storage-Infrastruktur-Design, -Implementierung, -Betrieb und -Management-Herausforderungen. Geschäftliche und IT-Führungskräfte stehen dabei vor der Herausforderung, die auf der neuesten Generation von SAP-Lösungen basieren. Die Empfehlungen in diesem Dokument sind allgemein, nicht spezifisch für eine SAP-Anwendung oder Größe und Umfang der SAP-Implementierung. In diesem Dokument wird vorausgesetzt, dass der Leser über die grundlegenden Kenntnisse der Technologie und des Betriebs der NetApp- und SAP-Produkte verfügt. Das Dokument wurde nach Interaktion des technischen Personals von NetApp, SAP, Oracle und unseren Kunden entwickelt.
 
 link:https://www.netapp.com/pdf.html?item=/media/19525-tr-4250.pdf["https://www.netapp.com/pdf.html?item=/media/19525-tr-4250.pdf"]

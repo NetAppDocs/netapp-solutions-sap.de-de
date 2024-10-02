@@ -10,7 +10,7 @@ summary: Eine umfassende Disaster Recovery-Lösung muss Kunden nach einem vollst
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -22,7 +22,7 @@ Darüber hinaus werden Daten asynchron in eine sekundäre Region repliziert, um 
 
 Dieses Dokument erläutert verschiedene Implementierungsoptionen für eine Disaster Recovery-Lösung für zwei Regionen.
 
-image::saphana-dr-anf_image3.png[Saphana dr anf image3]
+image:saphana-dr-anf_image3.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -52,7 +52,7 @@ Die folgende Abbildung zeigt das Setup einer Disaster-Recovery-Lösung für zwei
 
 Die folgende Abbildung zeigt die SAP HANA System Replication.
 
-image::saphana-dr-anf_image4.png[Saphana dr anf image4]
+image:saphana-dr-anf_image4.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -80,13 +80,13 @@ Die folgende Abbildung zeigt ein Beispiel für eine Disaster-Recovery-Lösung f�
 
 Das RTO hängt hauptsächlich von der Zeit ab, die zum Starten der HANA-Datenbank am Disaster-Recovery-Standort und zum Laden der Daten in den Arbeitsspeicher benötigt wird. Mit der Annahme, dass die Daten mit einem Durchsatz von 1000 MB/s gelesen werden, dass das Laden von 1 TB Daten ungefähr 18 Minuten dauert. Je nach Replizierungskonfiguration ist auch Recovery-Prozesse erforderlich und wird der RTO-Gesamtwert steigern.
 
-Weitere Details zu den verschiedenen Konfigurationsoptionen finden Sie in Kapitel link:ent-apps-db/saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html["Konfigurationsoptionen für regionsübergreifende Replizierung mit SAP HANA"].
+Weitere Details zu den verschiedenen Konfigurationsoptionen finden Sie in Kapitel link:saphana-dr-anf_anf_cross-region_replication_with_sap_hana_overview.html["Konfigurationsoptionen für regionsübergreifende Replizierung mit SAP HANA"].
 
 Die Server an den Disaster-Recovery-Standorten können als Entwicklungs-/Testsysteme im normalen Betrieb eingesetzt werden. Bei einem Notfall müssen die Entwicklungs-/Testsysteme heruntergefahren und als DR-Produktionsserver gestartet werden.
 
 Mit der standortübergreifenden ANF Replizierung können Sie den DR-Workflow testen, ohne dass RPO und RTO beeinträchtigt werden. Dazu werden Volume-Klone erstellt und an den DR-Testserver angeschlossen.
 
-image::saphana-dr-anf_image5.png[Saphana dr. anf image5]
+image:saphana-dr-anf_image5.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 

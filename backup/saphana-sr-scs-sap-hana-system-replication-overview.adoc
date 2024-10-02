@@ -10,12 +10,13 @@ summary: SAP HANA System Replication wird häufig als Hochverfügbarkeits- oder 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
-Nils Bauer, NetApp
-
+[role="lead"]
 SAP HANA System Replication wird häufig als Hochverfügbarkeits- oder Disaster-Recovery-Lösung für SAP HANA Datenbanken verwendet. SAP HANA System Replication bietet verschiedene Betriebsmodi, die Sie je nach Anwendungsfall oder Verfügbarkeitsanforderungen verwenden können.
+
+Autor: Nils Bauer, NetApp
 
 Es gibt zwei primäre Anwendungsfälle, die miteinander kombiniert werden können:
 
@@ -35,7 +36,7 @@ Aus der Perspektive der Backup-Anforderungen müssen Backups erstellt werden kö
 
 Der Rest dieses Dokuments konzentriert sich auf Backup-Vorgänge mit SAP System Replication, konfiguriert als Hochverfügbarkeitslösung.
 
-image::saphana-sr-scs-image1.png[Saphana sr scs image1]
+image:saphana-sr-scs-image1.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -45,4 +46,4 @@ Die Systemreplizierung kann mit asynchroner Replizierung konfiguriert werden, oh
 
 Hinsichtlich der Backup-Anforderungen müssen Sie in der Lage sein, Backups während des normalen Betriebs in Datacenter 1 und bei Disaster Recovery in Datacenter 2 zu erstellen. In Datacentern 1 und 2 ist eine separate Backup-Infrastruktur verfügbar, Backup-Vorgänge werden als Teil des Disaster Failover aktiviert. Die Backup-Infrastruktur ist in der Regel nicht gemeinsam genutzt und ein Restore eines Backups, das auf dem anderen Datacenter erstellt wurde, ist nicht möglich.
 
-image::saphana-sr-scs-image2.png[Saphana sr scs image2]
+image:saphana-sr-scs-image2.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

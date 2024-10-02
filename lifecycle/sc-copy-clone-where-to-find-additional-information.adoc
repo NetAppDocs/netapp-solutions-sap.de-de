@@ -10,9 +10,10 @@ summary: NetApp Lösungen zur Optimierung des SAP Lifecycle Managements sind in 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
 Weitere Informationen zu den in diesem Dokument beschriebenen Daten finden Sie in den folgenden Dokumenten bzw. auf den folgenden Websites:
 
 * https://docs.netapp.com/us-en/netapp-solutions-sap/["SAP Business Application and SAP HANA Database Solutions (netapp.com)"]

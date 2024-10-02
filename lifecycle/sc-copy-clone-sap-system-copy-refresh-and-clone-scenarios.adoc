@@ -10,9 +10,10 @@ summary: NetApp Lösungen zur Optimierung des SAP Lifecycle Managements sind in 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
 Der Begriff SAP Systemkopie wird oft als Synonym für drei verschiedene Prozesse verwendet: SAP Systemaktualisierung, SAP Systemkopie oder SAP Systemklonvorgänge. Es ist wichtig, zwischen den verschiedenen Vorgängen zu unterscheiden, da sich Workflows und Anwendungsfälle für jedes einzelne unterscheiden.
 
 * *SAP-Systemaktualisierung.* ein SAP-Systemaktualisierung ist eine Aktualisierung eines bestehenden SAP-Zielsystems mit Daten aus einem SAP-Quellsystem. Das Zielsystem ist in der Regel Teil einer SAP-Transportlandschaft, beispielsweise ein Qualitätssicherungssystem, das mit den Daten des Produktionssystems aktualisiert wird. Hostname, Instanznummer und SID unterscheiden sich für die Quell- und Zielsysteme.
@@ -22,4 +23,4 @@ Der Begriff SAP Systemkopie wird oft als Synonym für drei verschiedene Prozesse
 
 In der Abbildung unten sind die wichtigsten Schritte aufgeführt, die während einer Systemaktualisierung, Systemkopie oder Systemklonfunktion durchgeführt werden müssen. Die blauen Felder kennzeichnen Schritte, die mit SnapCenter automatisiert werden können, während die grauen Felder die Schritte kennzeichnen, die entweder manuell oder mithilfe von Tools anderer Hersteller außerhalb von SnapCenter ausgeführt werden müssen.
 
-image::sc-copy-clone-image2.png[sc Kopie Klon image2]
+image:sc-copy-clone-image2.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

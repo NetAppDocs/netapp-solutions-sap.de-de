@@ -10,7 +10,7 @@ summary: Im Folgenden werden die Schritte für das HANA-Datenbank-Recovery aufge
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

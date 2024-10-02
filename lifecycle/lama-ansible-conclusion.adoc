@@ -10,7 +10,7 @@ summary: Die Integration eines modernen Automatisierungs-Frameworks wie Ansible 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

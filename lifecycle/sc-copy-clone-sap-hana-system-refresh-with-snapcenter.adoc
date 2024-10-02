@@ -10,12 +10,13 @@ summary: NetApp Lösungen zur Optimierung des SAP Lifecycle Managements sind in 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
 Im folgenden Abschnitt finden Sie eine Schritt-für-Schritt-Beschreibung der verschiedenen Optionen für die Systemaktualisierung einer SAP HANA-Datenbank.
 
-image::sc-copy-clone-image7.png[sc Kopie Klon image7]
+image:sc-copy-clone-image7.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Je nach Konfiguration der SAP HANA-Datenbank werden weitere Schritte ausgeführt bzw. müssen vorbereitet werden. Die folgende Tabelle bietet eine Zusammenfassung.
 
@@ -105,7 +106,7 @@ Es wurden folgende Softwareversionen verwendet:
 
 Alle SAP HANA-Systeme müssen auf Basis des Konfigurationsleitfadens konfiguriert werden https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_nfs_introduction.html["SAP HANA auf NetApp AFF Systemen mit NFS"]. SnapCenter und die SAP HANA-Ressourcen wurden basierend auf dem Best Practice Guide konfiguriert https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"].
 
-image::sc-copy-clone-image16.png[sc Kopie Klon image16]
+image:sc-copy-clone-image16.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -145,7 +146,7 @@ hana-7:/opt/NetApp/snapcenter/scc/etc #
 
 In diesem Abschnitt wird der Workflow zur Systemaktualisierung von SAP HANA beschrieben, bei dem der Mandantenname am Quell- und Zielsystem mit der SID identisch ist. Das Klonen des Storage wird im Primärspeicher durchgeführt und die Recovery wird mit dem Skript automatisiert `sc-system-refresh.sh`.
 
-image::sc-copy-clone-image17.png[sc Kopie Klon image17]
+image:sc-copy-clone-image17.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Der Workflow besteht aus den folgenden Schritten:
 
@@ -180,7 +181,7 @@ Die folgenden Screenshots zeigen die erforderlichen Schritte.
 . Wählen Sie eine Snapshot-Sicherung aus dem Quellsystem SS1 aus, und klicken Sie auf Klonen.
 
 
-image::sc-copy-clone-image18.png[sc Kopie Klon image18]
+image:sc-copy-clone-image18.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Wählen Sie den Host aus, auf dem das Zielsystem QS1 installiert ist. QS1 als Ziel-SID eingeben. Die NFS-Export-IP-Adresse muss die Speichernetzwerk-Schnittstelle des Ziel-Hosts sein.
 +
@@ -193,28 +194,28 @@ NOTE: Es ist wichtig, dass die Zielsystemressource und der Host vor dem Starten 
 
 
 
-image::sc-copy-clone-image19.png[sc Kopie Klon image19]
+image:sc-copy-clone-image19.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Bei einer Fibre-Channel-SAN-Einrichtung ist keine Export-IP-Adresse erforderlich, Sie müssen jedoch im nächsten Bildschirm das verwendete Protokoll angeben.
 
 
 NOTE: Die Screenshots zeigen ein anderes Lab-Setup mit einer FibreChannel-Konnektivität.
 
-image::sc-copy-clone-image20.png[sc Kopie Klon image20]
+image:sc-copy-clone-image20.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
-image::sc-copy-clone-image21.png[sc Kopie Klon image21]
+image:sc-copy-clone-image21.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Mit Azure NetApp Files und einem manuellen QoS-Kapazitäts-Pool müssen Sie den maximalen Durchsatz für das neue Volume erzielen. Stellen Sie sicher, dass der Kapazitäts-Pool über genügend Reserven verfügt, sonst schlägt der Klon-Workflow fehl.
 
 
 NOTE: Die Screenshots zeigen ein anderes Lab Setup, das in Microsoft Azure mit Azure NetApp Files läuft.
 
-image::sc-copy-clone-image22.png[sc Kopie Klon image22]
+image:sc-copy-clone-image22.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Geben Sie die optionalen Post-Clone-Skripte mit den erforderlichen Befehlszeilenoptionen ein. In unserem Beispiel verwenden wir ein Post-Clone-Skript, um die SAP HANA Datenbank-Recovery auszuführen.
 
 
-image::sc-copy-clone-image23.png[sc Kopie Klon image23]
+image:sc-copy-clone-image23.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 NOTE: Wie bereits besprochen, ist die Verwendung des Wiederherstellungsskripts optional. Die Wiederherstellung kann auch manuell durchgeführt werden, nachdem der SnapCenter Klon-Workflow abgeschlossen ist.
@@ -225,7 +226,7 @@ NOTE: Das Skript für den Wiederherstellungsvorgang stellt die SAP HANA-Datenban
 . Im Bildschirm Jobdetails in SnapCenter wird der Fortschritt des Vorgangs angezeigt. Die Job-Details zeigen außerdem, dass die Gesamtlaufzeit einschließlich Datenbank-Recovery weniger als 3 Minuten beträgt.
 
 
-image::sc-copy-clone-image24.png[sc Kopie Klon image24]
+image:sc-copy-clone-image24.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Die Protokolldatei des `sc-system-refresh` Skripts zeigt die verschiedenen Schritte an, die für den Wiederherstellungsvorgang ausgeführt wurden. Das Skript liest die Liste der Mandanten aus der Systemdatenbank und führt eine Wiederherstellung aller vorhandenen Mandanten durch.
 
@@ -266,21 +267,21 @@ hana-7:/mnt/sapcc-share/SAP-System-Refresh
 . Nach Abschluss des SnapCenter-Jobs ist der Klon in der Topologieansicht des Quellsystems sichtbar.
 
 
-image::sc-copy-clone-image25.png[sc Kopie Klon image25]
+image:sc-copy-clone-image25.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Die SAP HANA Datenbank läuft nun.
 . Wenn Sie das Ziel-SAP HANA-System schützen möchten, müssen Sie die automatische Erkennung ausführen, indem Sie auf die Zielsystemressource klicken.
 
 
-image::sc-copy-clone-image26.png[sc Kopie Klon image26]
+image:sc-copy-clone-image26.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Wenn der automatische Erkennungsprozess abgeschlossen ist, wird das neue geklonte Volume im Abschnitt „Storage-Platzbedarf“ aufgeführt.
 
-image::sc-copy-clone-image27.png[sc Kopie Klon image27]
+image:sc-copy-clone-image27.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Durch erneutes Klicken auf die Ressource kann der Datenschutz für das aktualisierte QS1-System konfiguriert werden.
 
-image::sc-copy-clone-image28.png[sc Kopie Klon image28]
+image:sc-copy-clone-image28.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -288,15 +289,13 @@ image::sc-copy-clone-image28.png[sc Kopie Klon image28]
 
 In diesem Abschnitt wird der Workflow zur Systemaktualisierung von SAP HANA beschrieben, bei dem der Mandantenname am Quell- und Zielsystem mit der SID identisch ist. Das Klonen von Speichern wird im externen Backup-Speicher ausgeführt und wird mithilfe des Skripts sc-System-refresh.sh weiter automatisiert.
 
-image::sc-copy-clone-image29.png[sc Kopie Klon image29]
+image:sc-copy-clone-image29.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"] Der einzige Unterschied im Workflow der SAP HANA Systemaktualisierung zwischen dem Klonen des primären und externen Backup-Storage ist die Auswahl des Snapshot Backups in SnapCenter. Für das Klonen von Backup-Storage außerhalb des Standorts müssen zunächst die sekundären Backups und anschließend die Auswahl des Snapshot-Backups ausgewählt werden.
 
-Der einzige Unterschied im Workflow der SAP HANA Systemaktualisierung zwischen dem Klonen des primären und externen Backup-Storage ist die Auswahl des Snapshot Backups in SnapCenter. Für das Klonen von Backup-Storage außerhalb des Standorts müssen zunächst die sekundären Backups und anschließend die Auswahl des Snapshot-Backups ausgewählt werden.
-
-image::sc-copy-clone-image30.png[sc Kopie Klon image30]
+image:sc-copy-clone-image30.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Wenn mehrere sekundäre Speicherorte für das ausgewählte Backup vorhanden sind, müssen Sie das erforderliche Zielvolume auswählen.
 
-image::sc-copy-clone-image31.png[sc Kopie Klon image31]
+image:sc-copy-clone-image31.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Alle nachfolgenden Schritte sind mit dem Workflow zum Klonen aus dem Primärspeicher identisch.
 
@@ -306,7 +305,7 @@ Alle nachfolgenden Schritte sind mit dem Workflow zum Klonen aus dem Primärspei
 
 In diesem Abschnitt wird der Workflow zur Aktualisierung des SAP HANA-Systems mit mehreren Mandanten beschrieben. Das Klonen von Storage wird im Primär-Storage durchgeführt und weitere automatisiert mithilfe des Skripts `sc-system-refresh.sh`.
 
-image::sc-copy-clone-image32.png[sc Copy Clone image32]
+image:sc-copy-clone-image32.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Die erforderlichen Schritte in SnapCenter sind identisch mit den Schritten, die im Abschnitt „Klonen von primärem Storage mit Mandantenname gleich SID“ beschrieben wurden. Der einzige Unterschied besteht in der Wiederherstellung des Mandanten innerhalb des Skripts `sc-system-refresh.sh`, wo alle Mandanten wiederhergestellt werden.
 
@@ -377,17 +376,17 @@ Der Clone delete Workflow wird nun mit den folgenden Schritten ausgeführt.
 . Wählen Sie den Klon in der Topologieansicht des Quellsystems aus, und klicken Sie auf Löschen.
 
 
-image::sc-copy-clone-image33.png[sc Kopie Klon image33]
+image:sc-copy-clone-image33.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Geben Sie die Skripte vor dem Klonen ein und heben Sie die Bereitstellung mit den erforderlichen Befehlszeilenoptionen ab.
 
 
-image::sc-copy-clone-image34.png[sc Kopie Klon image34]
+image:sc-copy-clone-image34.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Der Bildschirm „Jobdetails“ in SnapCenter zeigt den Fortschritt des Vorgangs an.
 
 
-image::sc-copy-clone-image35.png[sc Kopie Klon image35]
+image:sc-copy-clone-image35.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Die Protokolldatei des `sc-system-refresh` Skripts zeigt die Schritte zum Herunterfahren und Unmounten an.
 
@@ -430,21 +429,21 @@ NOTE: Bei Azure NetApp Files ist der Aufspaltung von Klonen nicht verfügbar, da
 
 Der Clone Split Workflow in SnapCenter wird in der Topologieansicht des Quellsystems initiiert, indem der Klon ausgewählt und auf Clone Split geklickt wird.
 
-image::sc-copy-clone-image36.png[sc Kopie Klon image36]
+image:sc-copy-clone-image36.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Im nächsten Bildschirm wird eine Vorschau angezeigt, die Informationen zur erforderlichen Kapazität für das geteilte Volumen liefert.
 
-image::sc-copy-clone-image37.png[sc Kopie Klon image37]
+image:sc-copy-clone-image37.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Das Jobprotokoll von SnapCenter zeigt den Status des Klonabteilvorgangs an.
 
-image::sc-copy-clone-image38.png[sc Kopie Klon image38]
+image:sc-copy-clone-image38.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 In der Ressourcenansicht in SnapCenter wird das Zielsystem QS1 nun nicht mehr als geklonte Ressource markiert. Wenn der Klon zurück zur Topologieansicht des Quellsystems angezeigt wird, ist er nicht mehr sichtbar. Das Split-Volume ist jetzt unabhängig vom Snapshot Backup des Quellsystems.
 
-image::sc-copy-clone-image39.png[sc Kopie Klon image39]
+image:sc-copy-clone-image39.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
-image::sc-copy-clone-image40.png[sc-Kopierklon image40]
+image:sc-copy-clone-image40.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Der Aktualisierungs-Workflow nach einem Klonteilvorgang sieht etwas anders aus als der Vorgang ohne Klontrennung. Nach einer Klonaufteilung ist kein Klonvorgang erforderlich, da es sich beim Zieldatenvolume nicht mehr um ein FlexClone Volume handelt.
 

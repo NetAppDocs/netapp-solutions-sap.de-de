@@ -10,9 +10,10 @@ summary: NetApp Lösungen zur Optimierung des SAP Lifecycle Managements sind in 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
 In diesem Dokument werden zwei Skripte verwendet, um die Vorgänge zur SnapCenter-Klonerstellung und -Löschung weiter zu automatisieren.
 
 * Das Skript `sc-system-refresh`.sh wird für die Systemaktualisierung und den Systemklonworkflow verwendet, um Recovery- und Shutdown-Vorgänge der SAP HANA-Datenbank auszuführen.
@@ -36,7 +37,7 @@ Das Skript schreibt eine Protokolldatei `sc-system-refresh-SID.log``, in das gle
 
 NOTE: Die aktuelle Version des Skripts unterstützt MDC-Konfigurationen für einzelne Hostsysteme oder MDC für mehrere Mandanten. SAP HANA wird nicht mit Systemen mit mehreren Hosts unterstützt.
 
-image::sc-copy-clone-image14.png[sc Kopie Klon image14]
+image:sc-copy-clone-image14.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -68,7 +69,7 @@ Das Beispielskript `sc-mount-volume.sh` wird zum Ausführen von Mount und Unmoun
 
 NOTE: Das Skript unterstützt SAP HANA-Systeme mit NFS als Storage-Protokoll.
 
-image::sc-copy-clone-image15.png[sc Kopie Klon image15]
+image:sc-copy-clone-image15.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 

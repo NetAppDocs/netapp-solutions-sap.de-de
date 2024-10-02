@@ -10,9 +10,10 @@ summary: NetApp Lösungen zur Optimierung des SAP Lifecycle Managements sind in 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
+[role="lead"]
 Dieses Dokument behandelt Szenarien für SAP-Systemaktualisierung und -Klonen für SAP HANA-Systeme, die auf lokalen NetApp-Systemen, Amazon FSX für NetApp ONTAP-Systemen und Azure NetApp Files ausgeführt werden. Allerdings sind auf jeder Storage-Plattform nicht alle Features und Szenarien verfügbar. In der folgenden Tabelle sind die unterstützten Konfigurationen zusammengefasst.
 
 Im Rahmen dieses Dokuments verwenden wir eine SAP HANA-Landschaft, die auf lokalen NetApp-Systemen mit NFS als Storage-Protokoll ausgeführt wird. Die meisten Workflow-Schritte sind auf den verschiedenen Plattformen identisch. Bei Unterschieden werden sie in diesem Dokument hervorgehoben.

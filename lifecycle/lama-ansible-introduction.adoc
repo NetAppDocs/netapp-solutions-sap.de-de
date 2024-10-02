@@ -10,13 +10,13 @@ summary: 'SAP Landscape Management (Lama) ermöglicht SAP-Systemadministratoren 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
-
-Michael Schlosser, Nils Bauer, NetApp
 
 [role="lead"]
 SAP Landscape Management (Lama) ermöglicht SAP-Systemadministratoren die Automatisierung von SAP-Systemprozessen. Dazu gehören ein lückenloses SAP-Systemklonen, -Kopien und -Aktualisierungen.
+
+Autoren: Michael Schlosser, Nils Bauer, NetApp
 
 NetApp bietet eine umfassende Auswahl an Ansible-Modulen, in denen SAP Lama über SAP Lama Automation Studio auf Technologien wie NetApp Snapshot und FlexClone zugreifen kann. Diese Technologien unterstützen die Vereinfachung und Beschleunigung von SAP Systemkopien, Kopien und Aktualisierungen.
 

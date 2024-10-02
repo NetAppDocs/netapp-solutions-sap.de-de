@@ -8,15 +8,18 @@ summary: Studien haben gezeigt, dass Ausfallzeiten von Business-Applikationen er
 :allow-uri-read: 
 
 
-Nils Bauer, NetApp Ralf Klahr, Microsoft
+[role="lead"]
+Studien haben gezeigt, dass Ausfallzeiten von Business-Applikationen erhebliche negative Auswirkungen auf das Geschäft von Unternehmen haben.
 
-Studien haben gezeigt, dass Ausfallzeiten von Business-Applikationen erhebliche negative Auswirkungen auf das Geschäft von Unternehmen haben. Neben den finanziellen Auswirkungen können Ausfallzeiten auch den Ruf des Unternehmens, die Arbeitsmoral des Personals und die Kundenbindung schädigen. Überraschenderweise haben nicht alle Unternehmen eine umfassende Disaster Recovery-Richtlinie.
+Autoren: Nils Bauer, NetApp Ralf Klahr, Microsoft
+
+Neben den finanziellen Auswirkungen können Ausfallzeiten auch den Ruf des Unternehmens, die Arbeitsmoral des Personals und die Kundenbindung schädigen. Überraschenderweise haben nicht alle Unternehmen eine umfassende Disaster Recovery-Richtlinie.
 
 Wenn SAP HANA auf Azure NetApp Files (ANF) läuft, erhalten Kunden Zugriff auf zusätzliche Funktionen, mit denen die integrierte Datensicherung und Disaster Recovery-Funktionen von SAP HANA erweitert und verbessert werden können. In der Übersicht werden die folgenden Optionen erläutert, mit denen Kunden Optionen auswählen können, die ihre geschäftlichen Anforderungen unterstützen.
 
 Zur Entwicklung einer umfassenden Disaster Recovery-Richtlinie müssen Kunden die Anforderungen ihrer Business-Applikationen und die technischen Funktionen kennen, die sie für Datensicherung und Disaster Recovery benötigen. Die folgende Abbildung bietet einen Überblick über die Datensicherung.
 
-image::saphana-dr-anf_image2.png[Saphana dr. anf image2]
+image:saphana-dr-anf_image2.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 

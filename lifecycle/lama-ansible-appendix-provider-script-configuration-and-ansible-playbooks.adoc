@@ -10,7 +10,7 @@ summary: Die folgende Provider-Konfigurationsdatei, das Ausführungsskript und A
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

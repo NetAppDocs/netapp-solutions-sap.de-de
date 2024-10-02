@@ -10,13 +10,13 @@ summary: Bei dem Integrationsansatz werden individuelle Provisionierungs- und Ho
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
 Bei dem Integrationsansatz werden individuelle Provisionierungs- und Hooks von SAP Lama in Kombination mit Ansible-Playbooks für das NetApp Storage-Management verwendet. Die folgende Abbildung zeigt einen allgemeinen Überblick über die Konfiguration auf Lama-Seite sowie die entsprechenden Komponenten der Beispielimplementierung.
 
-image::lama-ansible-image6.png[Das ist ein ziemlich komplexes Image mit drei Feldern mit Bezeichnung SAP Lama, Ansible-Kontroll-Node und NetApp Storage. Jede Box enthält die jeweiligen Prozessschritte, die auf jeder Ebene stattfinden.]
+image:lama-ansible-image6.png["Das ist ein ziemlich komplexes Image mit drei Feldern mit Bezeichnung SAP Lama, Ansible-Kontroll-Node und NetApp Storage. Jede Box enthält die jeweiligen Prozessschritte, die auf jeder Ebene stattfinden."]
 
 Über einen zentralen Host, der als Ansible-Kontroll-Node fungiert, werden Anfragen von SAP Lama ausgeführt und die NetApp Storage-Vorgänge mit Ansible Playbooks ausgelöst. Die Komponenten des SAP-Hostagenten müssen auf diesem Host installiert sein, damit der Host als Kommunikationstor zu SAP Lama verwendet werden kann.
 

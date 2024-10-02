@@ -10,74 +10,74 @@ summary: In diesem Abschnitt wird der gesamte Workflow zum Klonen von SAP Lama-S
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
 Die folgende Abbildung zeigt die Hauptschritte, die beim Systemklonworkflow ausgeführt werden.
 
-image::lama-ansible-image17.png[Workflow-Diagramm mit den Schritten Storage Cloning, System vorbereiten, Isolation aktivieren und System starten.]
+image:lama-ansible-image17.png["Workflow-Diagramm mit den Schritten Storage Cloning, System vorbereiten, Isolation aktivieren und System starten."]
 
 In diesem Abschnitt wird der gesamte Workflow zum Klonen von SAP Lama-Systemen anhand des SAP-Quellsystems HN9 mit HANA-Datenbank H09 erläutert. Das folgende Bild gibt einen Überblick über die während des Workflows ausgeführten Schritte.
 
-image::lama-ansible-image18.png[Dieses Bild zeigt die während des Workflows ausgeführten Schritte, einschließlich Erstellen geklonter Systemkonfiguration, Erstellen von Storage Snapshot und Klonen, Erstellen der Mount-Punkt-Konfiguration, Festlegen benutzerdefinierter Eigenschaften und Vorbereiten und Starten des Systems.]
+image:lama-ansible-image18.png["Dieses Bild zeigt die während des Workflows ausgeführten Schritte, einschließlich Erstellen geklonter Systemkonfiguration, Erstellen von Storage Snapshot und Klonen, Erstellen der Mount-Punkt-Konfiguration, Festlegen benutzerdefinierter Eigenschaften und Vorbereiten und Starten des Systems."]
 
 . Um den Klon-Workflow zu starten, öffnen Sie *Provisioning* in der Menüstruktur und wählen Sie das Quellsystem (in unserem Beispiel HN9) aus. Starten Sie dann den Assistenten * Clone System*.
 +
-image::lama-ansible-image19.png[Dieser Screenshot stellt die Ansicht des Provisioning Systems dar. Es enthält zwei Systeme.]
+image:lama-ansible-image19.png["Dieser Screenshot stellt die Ansicht des Provisioning Systems dar. Es enthält zwei Systeme."]
 
 . Geben Sie die angeforderten Werte ein. Bildschirm 1 des Assistenten fragt nach dem Poolnamen für das geklonte System. Dieser Schritt gibt die Instanzen (virtuell oder physisch) an, auf denen das geklonte System gestartet werden soll. Standardmäßig wird das System in demselben Pool wie das Zielsystem geklont.
 +
-image::lama-ansible-image20.png[Clone System Wizard (Systemassistent) – Bildschirm 1 zur Bereitstellung grundlegender Daten des Zielsystems.]
+image:lama-ansible-image20.png["Clone System Wizard (Systemassistent) – Bildschirm 1 zur Bereitstellung grundlegender Daten des Zielsystems."]
 
 . Bildschirm 2 des Assistenten fordert die Zielhosts auf, auf denen die neuen SAP-Instanzen gestartet werden. Die Zielhosts für diese Instanz können aus dem im vorherigen Bildschirm angegebenen Host-Pool ausgewählt werden. Jede Instanz oder jeder Service kann auf einem anderen Host gestartet werden. In unserem Beispiel laufen alle drei Dienste auf demselben Host.
 +
-image::lama-ansible-image21.png[Clone System Wizard (Clone System Wizard) (Clone System Wizard) (Clone System Wizard) 2) bietet Host-Auswahl des Zielsystems]
+image:lama-ansible-image21.png["Clone System Wizard (Clone System Wizard) (Clone System Wizard) (Clone System Wizard) 2) bietet Host-Auswahl des Zielsystems"]
 
 . Stellen Sie die in Bildschirm 3 angeforderten Informationen bereit, die Sie nach virtuellen Hostnamen und Netzwerken fragen. In der Regel werden die Hostnamen in DNS gehalten, sodass die IP-Adressen entsprechend vorbelegt sind.
 +
-image::lama-ansible-image22.png[Clone System Wizard Screen 3 ermöglicht Ihnen die Bereitstellung von virtuellen Hostnamen und Netzwerken.]
+image:lama-ansible-image22.png["Clone System Wizard Screen 3 ermöglicht Ihnen die Bereitstellung von virtuellen Hostnamen und Netzwerken."]
 
 . In Bildschirm 4 werden die benutzerdefinierten Klonvorgänge aufgelistet. Es werden ein Klon und ein *SnapPostfix* Name bereitgestellt, die während der Speicherklonoperation für das FlexClone Volume bzw. den Snapshot-Namen verwendet werden. Wenn Sie diese Felder leer lassen, wird der Standardwert im Bereich Variable des Provider-Skripts konfiguriert `netapp_clone.sh` Verwendet wird.
 +
-image::lama-ansible-image23.png[Im Fenster Clone System Wizard Screen 4 werden benutzerdefinierte Clone-Optionen wie die Betriebsparameter aufgelistet.]
+image:lama-ansible-image23.png["Im Fenster Clone System Wizard Screen 4 werden benutzerdefinierte Clone-Optionen wie die Betriebsparameter aufgelistet."]
 
 . In Bildschirm 5 ist die Option Datenbankkonsistenz ausgewählt. In unserem Beispiel haben wir *Online: Clone mit DB* ausgewählt.
 +
-image::lama-ansible-image24.png[Im Clone System Wizard Bildschirm 5 werden die Optionen für Datenbankkonsistenz mit Online: Klonen, auf dem DB ausgeführt wird, aufgeführt.]
+image:lama-ansible-image24.png["Im Clone System Wizard Bildschirm 5 werden die Optionen für Datenbankkonsistenz mit Online: Klonen, auf dem DB ausgeführt wird, aufgeführt."]
 
 . In Bildschirm 6 ist eine Eingabe nur erforderlich, wenn Sie einen Mandantenklon durchführen.
 +
-image::lama-ansible-image25.png[Sie können in Clone System Wizard Screen 6 den Benutzernamen und das Passwort eingeben, wenn Sie einen Mandanten-Klon ausführen.]
+image:lama-ansible-image25.png["Sie können in Clone System Wizard Screen 6 den Benutzernamen und das Passwort eingeben, wenn Sie einen Mandanten-Klon ausführen."]
 
 . In Bildschirm 7 kann die Systemisolierung konfiguriert werden.
 +
-image::lama-ansible-image26.png[Im Bildschirm Clone System Wizard (Systemassistent klonen) 7 können Sie erlaubte ausgehende Verbindungen für die Systemisolierung definieren.]
+image:lama-ansible-image26.png["Im Bildschirm Clone System Wizard (Systemassistent klonen) 7 können Sie erlaubte ausgehende Verbindungen für die Systemisolierung definieren."]
 
 . In Bildschirm 8 enthält eine Übersichtsseite alle Einstellungen zur endgültigen Bestätigung, bevor der Workflow gestartet wird. Klicken Sie auf *Ausführen*, um den Workflow zu starten.
 +
-image::lama-ansible-image27.png[Clone System Wizard, Bildschirm 8, enthält eine Zusammenfassung der eingegebenen Informationen.]
+image:lama-ansible-image27.png["Clone System Wizard, Bildschirm 8, enthält eine Zusammenfassung der eingegebenen Informationen."]
 
 +
 SAP Lama führt nun alle in der Konfiguration angegebenen Aktionen durch. Dazu gehören die Erstellung von Klonen und Exports für das Storage-Volume, das Mounten auf dem Ziel-Host, das Hinzufügen von Firewall-Regeln zur Isolierung sowie der Start der HANA-Datenbank und der SAP-Services.
 
 . Sie können den Fortschritt des Klon-Workflows im Menü *Überwachung* überwachen.
 +
-image::lama-ansible-image28.png[T „sein Screenshot zeigt den Überwachungsbildschirm für den Systemklonvorgang.“]
+image:lama-ansible-image28.png["T „sein Screenshot zeigt den Überwachungsbildschirm für den Systemklonvorgang.“"]
 
 +
 Innerhalb des detaillierten Protokolls werden die Vorgänge *Clone Volume* und *Mountpunkte ändern und Benutzerdefinierte Eigenschaften hinzufügen* auf dem Ansible-Knoten ausgeführt, dem `sap-jump` Host: Diese Schritte werden für jeden Service, die HANA-Datenbank, die SAP-Zentraldienste und den SAP-ALS-Service ausgeführt.
 
 +
-image::lama-ansible-image29.png[Dieser Screenshot zeigt den Bildschirm des Systemklonens, der verschiedene Vorgänge im detaillierten Protokoll anzeigt.]
+image:lama-ansible-image29.png["Dieser Screenshot zeigt den Bildschirm des Systemklonens, der verschiedene Vorgänge im detaillierten Protokoll anzeigt."]
 
 . Durch Auswahl der Task *Clone Volumes* wird das detaillierte Protokoll für diesen Schritt angezeigt und die Ausführung des Ansible Playbook wird hier angezeigt. Wie Sie sehen, das Ansible-Playbook `netapp_lama_CloneVolumes.yml` Wird für jedes HANA Datenbank-Volume, die Daten, das Protokoll und die gemeinsame Nutzung ausgeführt.
 +
-image::lama-ansible-image30.png[Dieser Bildschirm zeigt die Protokolle mit Details zum Volume-Klon.]
+image:lama-ansible-image30.png["Dieser Bildschirm zeigt die Protokolle mit Details zum Volume-Klon."]
 
 . In der Detailansicht des Schritts *Mountpoints ändern und Benutzerdefinierte Eigenschaften hinzufügen* finden Sie Informationen zu den Mount-Punkten und den vom Ausführungsskript übergebenen benutzerdefinierten Eigenschaften.
 +
-image::lama-ansible-image31.png[Weitere Protokollinformationen]
+image:lama-ansible-image31.png["Weitere Protokollinformationen"]
 
 
 

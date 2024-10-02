@@ -10,7 +10,7 @@ summary: Alle in diesem Abschnitt beschriebenen Schritte gelten sowohl für SAP 
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

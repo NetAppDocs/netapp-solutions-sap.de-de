@@ -10,7 +10,7 @@ summary: SAP HANA-Hosts sind über eine redundante 10-GbE- oder schnellere Netzw
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -20,11 +20,11 @@ Eine redundante Switching-Infrastruktur wird empfohlen, um eine fehlertolerante 
 
 Verschiedene Modelle der FAS Produktfamilie können auf der Storage-Ebene miteinander kombiniert werden, um Wachstum und unterschiedliche Anforderungen an Performance und Kapazität zu ermöglichen. Die maximale Anzahl an SAP HANA-Hosts, die an das Storage-System angeschlossen werden können, sind durch die SAP HANA-Performance-Anforderungen und das Modell des verwendeten NetApp Controllers definiert. Die Anzahl der benötigten Festplatten-Shelfs wird nur von den Kapazitäts- und Performance-Anforderungen der SAP HANA Systeme bestimmt. Die folgende Abbildung zeigt eine Beispielkonfiguration mit acht SAP HANA-Hosts, die an ein Storage-HA-Paar angeschlossen sind.
 
-image::saphana-fas-nfs_image2.png[Saphana FAS nfs image2]
+image:saphana-fas-nfs_image2.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Die folgende Abbildung zeigt ein Beispiel für die Verwendung von VMware vSphere als Virtualisierungsebene.
 
-image::saphana-fas-nfs_image3.jpg[Saphana FAS, nfs-Bild3]
+image:saphana-fas-nfs_image3.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Die Architektur lässt sich in zwei Dimensionen skalieren:
 
@@ -34,11 +34,11 @@ Die Architektur lässt sich in zwei Dimensionen skalieren:
 
 Die folgende Abbildung zeigt eine Beispielkonfiguration, in der mehr SAP HANA-Hosts mit den Storage-Controllern verbunden sind. In diesem Beispiel sind mehr Platten-Shelves erforderlich, um sowohl die Kapazitäts- als auch die Performance-Anforderungen von 16 SAP HANA-Hosts zu erfüllen. Je nach Gesamtdurchsatz müssen zusätzliche 10-GbE-Verbindungen (oder schneller) zu den Storage Controllern hinzugefügt werden.
 
-image::saphana-fas-nfs_image4.png[Saphana FAS nfs image4]
+image:saphana-fas-nfs_image4.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Unabhängig vom implementierten FAS System lässt sich die SAP HANA Landschaft auch skalieren, indem beliebige der zertifizierten Storage-Controller hinzugefügt werden, um die gewünschte Node-Dichte zu erfüllen (siehe folgende Abbildung).
 
-image::saphana-fas-nfs_image5.png[Saphana FAS nfs image5]
+image:saphana-fas-nfs_image5.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -52,7 +52,7 @@ Mit der NetApp SnapMirror Technologie können Snapshot Kopien, die auf einem Sto
 
 Die Datenbankprotokolle können mithilfe eines NFS-Mount-Speichers direkt auf dem sekundären Storage gesichert werden, wie in der folgenden Abbildung dargestellt.
 
-image::saphana-fas-nfs_image6.jpg[Saphana FAS nfs image6]
+image:saphana-fas-nfs_image6.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Storage-basierte Snapshot Backups bieten im Vergleich zu herkömmlichen dateibasierten Backups deutliche Vorteile. Zu diesen Vorteilen zählen unter anderem die folgenden:
 
@@ -88,7 +88,7 @@ Die Server an den Disaster-Recovery-Standorten können als Entwicklungs-/Testsys
 
 Beide Replizierungsmethoden ermöglichen die Durchführung von Disaster-Recovery-Workflow-Tests ohne Auswirkungen auf RPO und RTO. FlexClone Volumes werden auf dem Storage erstellt und an die Testserver von Disaster Recovery angeschlossen.
 
-image::saphana-fas-nfs_image7.png[Saphana FAS nfs image7]
+image:saphana-fas-nfs_image7.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Die synchrone Replizierung bietet den StrictSync-Modus. Wenn der Schreibvorgang auf den sekundären Storage aus irgendeinem Grund nicht abgeschlossen wird, fällt der Applikations-I/O aus. Dadurch wird sichergestellt, dass die primären und sekundären Storage-Systeme identisch sind. Der Applikations-I/O zum primären Volume wird erst wieder fortgesetzt, nachdem die SnapMirror-Beziehung zum InSync-Status zurückkehrt. Falls der primäre Storage ausfällt, kann der Applikations-I/O nach dem Failover auf dem sekundären Storage fortgesetzt werden, ohne dass die Daten verloren gehen. Im StrictSync-Modus ist der RPO immer Null.
 
@@ -98,4 +98,4 @@ Die synchrone Replizierung bietet den StrictSync-Modus. Wenn der Schreibvorgang 
 
 Die folgende Abbildung bietet einen allgemeinen Überblick über die Lösung. Das Storage-Cluster an jedem Standort bietet lokale Hochverfügbarkeit und wird für den Produktions-Workload verwendet. Die Daten aller Standorte werden synchron zum anderen Standort repliziert und sind bei einem Disaster Failover verfügbar.
 
-image::saphana-fas-nfs_image8.png[Saphana FAS nfs image8]
+image:saphana-fas-nfs_image8.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

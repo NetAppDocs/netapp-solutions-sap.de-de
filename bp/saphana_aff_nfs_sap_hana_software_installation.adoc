@@ -10,7 +10,7 @@ summary: In diesem Abschnitt wird die Konfiguration eines Systems für die Insta
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

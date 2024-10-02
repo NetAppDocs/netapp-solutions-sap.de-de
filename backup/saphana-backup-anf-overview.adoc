@@ -10,12 +10,13 @@ summary: Dieser technische Bericht enthält die Best Practices für die Datensic
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
-Nils Bauer, NetApp
-
+[role="lead"]
 Dieser technische Bericht enthält die Best Practices für die Datensicherung von SAP HANA mit NetApp SnapCenter Service und Azure NetApp Files. Er behandelt SnapCenter-Servicekonzepte, Konfigurationsempfehlungen und Betriebs-Workflows, einschließlich Backup-/Restore- sowie Recovery-Vorgänge.
+
+Autor: Nils Bauer, NetApp
 
 Unternehmen benötigen heutzutage eine kontinuierliche, unterbrechungsfreie Verfügbarkeit ihrer SAP-Applikationen. Sie erwarten konsistente Performance angesichts stetig wachsender Datenvolumen und bei routinemäßigen Wartungsaufgaben wie System-Backups. Das Durchführen von Backups von SAP-Datenbanken ist eine wichtige Aufgabe, die erhebliche Performance-Auswirkungen auf das SAP-Produktionssystem haben kann.
 

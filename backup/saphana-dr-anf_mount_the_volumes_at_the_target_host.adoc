@@ -10,7 +10,7 @@ summary: 'Die Volumes können jetzt auf der Grundlage des auf dem Zielhost einge
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

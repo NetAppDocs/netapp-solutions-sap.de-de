@@ -8,8 +8,9 @@ summary: Dieses Dokument bietet Kunden und Partnern Best Practices für die Impl
 :allow-uri-read: 
 
 
-Marco Schoen, NetApp
-
+[role="lead"]
 Dieses Dokument bietet Kunden und Partnern Best Practices für die Implementierung von NetApp ONTAP zur Unterstützung von SAP Business Suite Lösungen, die in einem Microsoft SQL Server in einer Windows-Umgebung ausgeführt werden.
+
+Marco Schoen, NetApp
 
 link:https://www.netapp.com/media/16865-tr-4467.pdf["https://www.netapp.com/media/16865-tr-4467.pdf"]

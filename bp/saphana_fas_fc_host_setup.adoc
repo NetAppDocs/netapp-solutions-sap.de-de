@@ -10,7 +10,7 @@ summary: Die Dokumentation enthält auch Informationen zu Multipath-Konfiguratio
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

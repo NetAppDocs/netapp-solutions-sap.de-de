@@ -10,7 +10,7 @@ summary: Dieser Abschnitt beschreibt die Integration von LSC in NetApp SnapCente
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -49,7 +49,7 @@ SAP-Kunden wissen, dass die manuellen Schritte in der Abbildung unten grün darg
 
 Die folgende Abbildung bietet einen Überblick über die allgemeine SnapCenter-basierte Aktualisierung von SAP Systemen.
 
-image::libelle-sc-image1.png[libelle sc-Bild1]
+image:libelle-sc-image1.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -61,27 +61,27 @@ Folgende Voraussetzungen müssen erfüllt sein:
 * Das Speicher-Back-End muss in SnapCenter ordnungsgemäß konfiguriert werden, wie im Bild unten dargestellt.
 
 
-image::libelle-sc-image2.png[libelle sc image2]
+image:libelle-sc-image2.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Die nächsten beiden Images decken die Standardinstallation ab, in der der SnapCenter-Agent und das SAP HANA-Plug-in lokal auf jedem Datenbankserver installiert werden.
 
 Der SnapCenter Agent und das entsprechende Datenbank-Plug-in müssen in der Quelldatenbank installiert sein.
 
-image::libelle-sc-image3.png[libelle sc-Bild3]
+image:libelle-sc-image3.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Der SnapCenter-Agent und das entsprechende Datenbank-Plug-in müssen auf der Zieldatenbank installiert sein.
 
-image::libelle-sc-image4.png[libelle sc image4]
+image:libelle-sc-image4.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Das folgende Bild porträtiert die zentrale Kommunikations-Host-Bereitstellung, in der der SnapCenter-Agent, das SAP HANA Plug-in und der SAP HANA-Datenbank-Client auf einem zentralen Server (wie z.B. SnapCenter-Server) installiert werden, um mehrere SAP HANA-Systeme in der Landschaft zu verwalten.
 
 Auf dem zentralen Kommunikations-Host müssen der SnapCenter Agent, das SAP HANA Datenbank-Plug-in und der HANA Datenbank-Client installiert sein.
 
-image::libelle-sc-image5.png[libelle sc-Bild5]
+image:libelle-sc-image5.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Das Backup für die Quelldatenbank muss in SnapCenter ordnungsgemäß konfiguriert werden, damit die Snapshot Kopie erfolgreich erstellt werden kann.
 
-image::libelle-sc-image6.png[libelle sc image6]
+image:libelle-sc-image6.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Der LSC-Master und der LSC-Worker müssen in der SAP-Umgebung installiert sein. In dieser Bereitstellung haben wir außerdem den LSC-Master auf dem SnapCenter-Server und den LSC-Worker auf dem Ziel-SAP-Datenbankserver installiert, der aktualisiert werden sollte. Weitere Einzelheiten finden Sie im folgenden Abschnitt „<<Laboreinrichtung>>.“
 
@@ -107,7 +107,7 @@ In diesem Abschnitt wird eine Beispielarchitektur beschrieben, die in einem Demo
 
 Die folgende Abbildung zeigt eine Standardinstallation, bei der der SnapCenter Agent zusammen mit dem Datenbank-Plug-in lokal auf dem Quell- und dem Ziel-Datenbankserver installiert wurde. Im Lab-Setup wurde das SAP HANA-Plug-in installiert. Außerdem wurde der LSC-Worker auch auf dem Zielserver installiert. Zur Vereinfachung und zur Verringerung der Anzahl der virtuellen Server haben wir den LSC-Master auf dem SnapCenter-Server installiert. Die Kommunikation zwischen den verschiedenen Komponenten ist in der folgenden Abbildung dargestellt.
 
-image::libelle-sc-image7.png[libelle sc image7]
+image:libelle-sc-image7.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -115,7 +115,7 @@ image::libelle-sc-image7.png[libelle sc image7]
 
 Die folgende Abbildung zeigt die Einrichtung über einen zentralen Kommunikations-Host. In dieser Konfiguration wurde der SnapCenter Agent zusammen mit dem SAP HANA Plug-in und dem HANA Datenbank-Client auf einem dedizierten Server installiert. Bei diesem Setup wurde der zentrale Kommunikations-Host mit dem SnapCenter-Server installiert. Darüber hinaus wurde der LSC-Mitarbeiter wieder auf dem Zielserver installiert. Zur Vereinfachung und zur Verringerung der Anzahl der virtuellen Server haben wir uns entschieden, auch den LSC-Master auf dem SnapCenter-Server zu installieren. Die Kommunikation zwischen den verschiedenen Komponenten ist in der Abbildung unten dargestellt.
 
-image::libelle-sc-image8.png[libelle sc image8]
+image:libelle-sc-image8.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -126,9 +126,9 @@ Es gibt drei Hauptkomponenten einer LSC-Installation:
 * *LSC-Master.* wie der Name schon sagt, ist dies die Master-Komponente, die den automatischen Workflow einer Libelle-basierten Systemkopie steuert. In der Demo-Umgebung wurde der LSC-Master auf dem SnapCenter-Server installiert.
 * *LSC Worker.* ein LSC-Mitarbeiter ist Teil der Libelle-Software, die in der Regel auf dem Ziel-SAP-System läuft und die Skripte ausführt, die für die automatisierte Systemkopie erforderlich sind. In der Demo-Umgebung wurde der LSC-Mitarbeiter auf dem Ziel-SAP HANA-Anwendungsserver installiert.
 * *LSC-Satellit.* ein LSC-Satellit ist Teil der Libelle-Software, die auf einem Drittanbieter-System läuft, auf dem weitere Skripte ausgeführt werden müssen. Gleichzeitig kann der LSC-Master auch die Rolle eines LSC-Satellitensystems erfüllen.
-+
-Zunächst haben wir alle beteiligten Systeme innerhalb des LSC definiert, wie in der folgenden Abbildung dargestellt::
 
+
+Wir haben zunächst alle beteiligten Systeme im LSC definiert, wie in der folgenden Abbildung dargestellt:
 
 * *172.30.15.35.* die IP-Adresse des SAP-Quellsystems und des SAP HANA-Quellsystems.
 * *172.30.15.3.* die IP-Adresse des LSC-Master und des LSC-Satellitensystems für diese Konfiguration. Da wir das LSC-Master auf dem SnapCenter-Server installiert haben, sind die SnapCenter 4.x PowerShell Cmdlets auf diesem Windows Host bereits verfügbar, da sie während der Installation des SnapCenter-Servers installiert wurden. Wir haben also beschlossen, die LSC-Satellitenrolle für dieses System zu aktivieren und alle SnapCenter PowerShell Cmdlets auf diesem Host auszuführen. Wenn Sie ein anderes System verwenden, stellen Sie sicher, dass Sie die SnapCenter PowerShell Commandlets auf diesem Host gemäß der Dokumentation zu SnapCenter installieren.
@@ -139,7 +139,7 @@ Anstelle von IP-Adressen können auch Host-Namen oder vollqualifizierte Domain-N
 
 Das folgende Bild zeigt die LSC-Konfiguration des Master-, Worker-, Satelliten-, SAP-Quellsystems-, SAP-Zielsystems, Quelldatenbank und Zieldatenbank.
 
-image::libelle-sc-image9.png[libelle sc image9]
+image:libelle-sc-image9.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Für die Hauptintegration müssen die Konfigurationsschritte wieder in die Standardinstallation und die Installation über einen zentralen Kommunikations-Host getrennt werden.
 
@@ -151,11 +151,11 @@ In diesem Abschnitt werden die Konfigurationsschritte beschrieben, die bei einer
 
 Das folgende Bild zeigt die Konfiguration von LSC-Tasks in der Kopierphase.
 
-image::libelle-sc-image10.png[libelle sc image10]
+image:libelle-sc-image10.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Die folgende Abbildung zeigt die Konfiguration des `NTAP_SYSTEM_CLONE` Prozess. Da Sie ein PowerShell-Skript ausführen, wird dieses Windows PowerShell-Skript auf dem Satellitensystem ausgeführt. In diesem Fall ist dies der SnapCenter-Server mit dem installierten LSC-Master, der auch als Satellitensystem fungiert.
 
-image::libelle-sc-image11.png[libelle sc image11]
+image:libelle-sc-image11.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Da LSC bekannt sein muss, ob die Snapshot Kopie, das Klonen und der Recovery-Vorgang erfolgreich waren, müssen Sie mindestens zwei Rückgabecodetypen definieren. Ein Code dient zur erfolgreichen Ausführung des Skripts und der andere Code dient zur fehlgeschlagenen Ausführung des Skripts, wie in der folgenden Abbildung dargestellt.
 
@@ -163,11 +163,11 @@ Da LSC bekannt sein muss, ob die Snapshot Kopie, das Klonen und der Recovery-Vor
 * `LSC:ERROR` Muss vom Skript in die Standardausführung geschrieben werden, wenn die Ausführung fehlgeschlagen ist.
 
 
-image::libelle-sc-image12.png[libelle sc image12]
+image:libelle-sc-image12.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Das folgende Bild zeigt einen Teil des PowerShell-Skripts, das ausgeführt werden muss, um ein Snapshot-basiertes Backup auf dem Quelldatenbanksystem und einen Klon auf dem Zieldatenbanksystem auszuführen. Das Skript ist nicht vollständig. Vielmehr zeigt das Skript, wie die Integration zwischen LSC und SnapCenter aussehen kann und wie einfach es ist, es einzurichten.
 
-image::libelle-sc-image13.png[libelle sc image13]
+image:libelle-sc-image13.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Da das Skript auf dem LSC-Master ausgeführt wird (was auch ein Satellitensystem ist), muss der LSC-Master auf dem SnapCenter-Server als Windows-Benutzer ausgeführt werden, der über die entsprechenden Berechtigungen verfügt, um Backup- und Klonvorgänge in SnapCenter auszuführen. Um zu überprüfen, ob der Benutzer über die entsprechenden Berechtigungen verfügt, sollte er eine Snapshot Kopie und einen Klon in der SnapCenter UI ausführen können.
 
@@ -183,11 +183,11 @@ Zur Integration zwischen LSC und SnapCenter über einen zentralen Kommunikationh
 * *NTAP_MNT_RECOVERY_CP.* Diese Aufgabe stoppt das Ziel-SAP-System und die SAP HANA-Datenbank, hängt die alten Volumes ab und hängt dann die neu erstellten Storage-Klon-Volumes an, basierend auf den Parametern, die von der vorherigen Aufgabe übergeben wurden `NTAP_SYSTEM_CLONE_CP`. Die SAP HANA Zieldatenbank wird wiederhergestellt und wiederhergestellt.
 
 
-image::libelle-sc-image14.png[libelle sc image14]
+image:libelle-sc-image14.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Die folgende Abbildung zeigt die Konfiguration der Aufgabe `NTAP_SYSTEM_CLONE_CP`. Dies ist das Windows PowerShell-Skript, das auf dem Satellitensystem ausgeführt wird. In diesem Fall ist das Satellitensystem der SnapCenter-Server mit dem installierten LSC-Master.
 
-image::libelle-sc-image15.png[libelle sc image15]
+image:libelle-sc-image15.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Da LSC wissen muss, ob der Snapshot Kopie- und Klonvorgang erfolgreich war, müssen Sie mindestens zwei Rückgabecodetypen definieren: Einen Rückgabecode für eine erfolgreiche Ausführung des Skripts und den anderen für eine fehlgeschlagene Ausführung des Skripts, wie in dem nachfolgenden Bild dargestellt.
 
@@ -195,11 +195,11 @@ Da LSC wissen muss, ob der Snapshot Kopie- und Klonvorgang erfolgreich war, müs
 * `LSC:ERROR` Muss vom Skript in die Standardausführung geschrieben werden, wenn die Ausführung fehlgeschlagen ist.
 
 
-image::libelle-sc-image16.png[libelle sc image16]
+image:libelle-sc-image16.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Das folgende Bild zeigt einen Teil des PowerShell-Skripts, der ausgeführt werden muss, um eine Snapshot Kopie und einen Klon mithilfe des SnapCenter-Agenten auf dem zentralen Kommunikations-Host auszuführen. Das Skript soll nicht vollständig sein. Vielmehr wird das Skript verwendet, um zu zeigen, wie die Integration zwischen LSC und SnapCenter aussehen kann und wie einfach es ist, es einzurichten.
 
-image::libelle-sc-image17.png[libelle sc image17]
+image:libelle-sc-image17.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Wie bereits erwähnt, müssen Sie den Namen des Klon-Volumes an die nächste Aufgabe übergeben `NTAP_MNT_RECOVER_CP` So mounten Sie das Klon-Volume auf dem Zielserver: Der Name des Klon-Volume, auch als Verbindungspfad bezeichnet, wird in der Variable gespeichert `$JunctionPath`. Die Übergabe an eine nachfolgende LSC-Aufgabe erfolgt über eine benutzerdefinierte LSC-Variable.
 
@@ -210,7 +210,7 @@ Da das Skript auf dem LSC-Master ausgeführt wird (was auch ein Satellitensystem
 
 Die folgende Abbildung zeigt die Konfiguration der Aufgabe `NTAP_MNT_RECOVER_CP`. Da wir ein Linux-Shell-Skript ausführen möchten, ist dies ein Befehlsskript, das auf dem Zieldatenbanksystem ausgeführt wird.
 
-image::libelle-sc-image18.png[libelle sc image18]
+image:libelle-sc-image18.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Da LSC bekannt sein muss, dass die Klon-Volumes Mounten sind und ob das Wiederherstellen und Wiederherstellen der Zieldatenbank erfolgreich war, müssen wir mindestens zwei Rückgabecodetypen definieren. Ein Code dient zur erfolgreichen Ausführung des Skripts und ist für eine fehlgeschlagene Ausführung des Skripts, wie in der folgenden Abbildung dargestellt.
 
@@ -218,7 +218,7 @@ Da LSC bekannt sein muss, dass die Klon-Volumes Mounten sind und ob das Wiederhe
 * `LSC:ERROR` Muss vom Skript in die Standardausführung geschrieben werden, wenn die Ausführung fehlgeschlagen ist.
 
 
-image::libelle-sc-image19.png[libelle sc image19]
+image:libelle-sc-image19.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Die folgende Abbildung zeigt einen Teil des Linux Shell-Skripts, mit dem die Zieldatenbank angehalten, das alte Volume entfernt, das Klon-Volume gemountet und die Zieldatenbank wiederhergestellt werden kann. In der vorherigen Aufgabe wurde der Verbindungspfad in eine LSC-Variable geschrieben. Der folgende Befehl liest diese LSC-Variable und speichert den Wert in `$JunctionPath` Variable des Linux Shell-Skripts.
 
@@ -230,7 +230,7 @@ Der LSC-Worker auf dem Zielsystem läuft als `<sidaadm>`, Aber Mount-Befehle mü
 ....
 hn6adm ALL=(root) NOPASSWD:/usr/local/bin/H06/central_plugin_host_wrapper_script.sh
 ....
-image::libelle-sc-image20.png[libelle sc image20]
+image:libelle-sc-image20.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -240,8 +240,8 @@ Nachdem nun alle notwendigen Integrationsaufgaben zwischen LSC und NetApp SnapCe
 
 Die folgende Abbildung zeigt die Aufgabe `NTAP`_`SYSTEM`_`CLONE` In einer Standardinstallation. Wie Sie sehen, dauerte das Erstellen einer Snapshot Kopie und eines Klons, das Mounten des Klon-Volumes auf dem Zieldatenbankserver und das Wiederherstellen der Zieldatenbank etwa 14 Minuten. Mit den Snapshots und der NetApp FlexClone Technologie bleibt die Dauer dieser Aufgabe unabhängig von der Größe der Quelldatenbank nahezu identisch.
 
-image::libelle-sc-image21.png[libelle sc image21]
+image:libelle-sc-image21.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 In der folgenden Abbildung werden die beiden Aufgaben dargestellt `NTAP_SYSTEM_CLONE_CP` Und `NTAP_MNT_RECOVERY_CP` Bei Verwendung eines zentralen Kommunikations-Hosts. Wie Sie sehen, dauerte das Erstellen einer Snapshot Kopie, ein Klon, das Klon-Volume auf dem Zieldatenbankserver und das Wiederherstellen und Wiederherstellen der Zieldatenbank etwa 12 Minuten. Dies ist mehr oder weniger die gleiche Zeit, um diese Schritte bei der Verwendung einer Standardinstallation durchzuführen. Wie bereits erwähnt, ermöglicht die Snapshot und NetApp FlexClone Technologie diese Aufgaben unabhängig von der Größe der Quelldatenbank konsistent und schnell zu erledigen.
 
-image::libelle-sc-image22.png[libelle sc image22]
+image:libelle-sc-image22.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

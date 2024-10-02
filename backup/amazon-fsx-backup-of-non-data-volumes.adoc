@@ -10,7 +10,7 @@ summary: Das Backup von nicht-Daten-Volumes ist ein integrierter Teil des SnapCe
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -30,46 +30,46 @@ Führen Sie die folgenden Schritte aus, um nicht-Daten-Volume-Ressourcen zu konf
 
 . Wählen Sie auf der Registerkarte Ressourcen die Option Non-Data-Volume, und klicken Sie auf Add SAP HANA Database.
 +
-image::amazon-fsx-image60.png[amazon fsx image60]
+image:amazon-fsx-image60.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Wählen Sie in Schritt 1 des Dialogfelds SAP HANA-Datenbank hinzufügen in der Liste Ressourcentyp die Option nicht-Datenvolumen aus. Geben Sie einen Namen für die Ressource und den zugehörigen SID und den SAP HANA Plug-in-Host an, den Sie für die Ressource verwenden möchten, und klicken Sie dann auf Weiter.
 +
-image::amazon-fsx-image61.png[amazon fsx image61]
+image:amazon-fsx-image61.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Fügen Sie die SVM und das Storage-Volume als Storage-Platzbedarf hinzu und klicken Sie dann auf Weiter.
 +
-image::amazon-fsx-image62.png[amazon fsx image62]
+image:amazon-fsx-image62.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Um die Einstellungen zu speichern, klicken Sie im Zusammenfassungsschritt auf Fertig stellen.
 +
-image::amazon-fsx-image63.png[amazon fsx image63]
+image:amazon-fsx-image63.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 +
 Das neue nicht-Daten-Volume wird nun SnapCenter hinzugefügt. Doppelklicken Sie auf die neue Ressource, um den Ressourcenschutz auszuführen.
 
 +
-image::amazon-fsx-image64.png[amazon fsx image64]
+image:amazon-fsx-image64.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 +
 Der Ressourcenschutz erfolgt auf dieselbe Weise wie zuvor bei einer HANA-Datenbankressource.
 
 . Sie können jetzt ein Backup ausführen, indem Sie auf Jetzt sichern klicken.
 +
-image::amazon-fsx-image65.png[amazon fsx image65]
+image:amazon-fsx-image65.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Wählen Sie die Richtlinie aus, und starten Sie den Backup-Vorgang.
 +
-image::amazon-fsx-image66.png[amazon fsx image66]
+image:amazon-fsx-image66.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
 Das Jobprotokoll von SnapCenter zeigt die einzelnen Workflow-Schritte.
 
-image::amazon-fsx-image67.png[amazon fsx image67]
+image:amazon-fsx-image67.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Das neue Backup ist nun in der Ressourcenansicht der Ressource ohne Datenvolumen sichtbar.
 
-image::amazon-fsx-image68.png[amazon fsx image68]
+image:amazon-fsx-image68.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -119,38 +119,38 @@ Führen Sie die folgenden Schritte aus, um einen manuellen Wiederherstellungsvor
 
 . Wählen Sie ein Backup in SnapCenter aus, das für den Wiederherstellungsvorgang verwendet werden soll.
 +
-image::amazon-fsx-image69.png[amazon fsx image69]
+image:amazon-fsx-image69.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Wählen Sie den Umfang und den Typ der Wiederherstellung aus.
 +
 Das Standardszenario für HANA MDC-Einzelmandant-Systeme besteht darin, komplette Ressourcen mit Zurücksetzen des Volumes zu nutzen. Bei einem HANA MDC-System mit mehreren Mandanten möchten Sie möglicherweise nur einen einzelnen Mandanten wiederherstellen. Weitere Informationen zur Wiederherstellung einzelner Mandanten finden Sie unter https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-restore-and-recovery.html["Restore und Recovery (netapp.com)"^].
 
 +
-image::amazon-fsx-image70.png[amazon fsx image70]
+image:amazon-fsx-image70.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Wählen Sie „Recovery Scope“ aus, und stellen Sie den Speicherort für das Backup und das Katalog-Backup bereit.
 +
 SnapCenter verwendet den Standardpfad oder die geänderten Pfade in der HANA global.ini-Datei, um die Backup-Speicherorte für das Protokoll und den Katalog auszufüllen.
 
 +
-image::amazon-fsx-image71.png[amazon fsx image71]
+image:amazon-fsx-image71.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Geben Sie die optionalen Befehle vor der Wiederherstellung ein.
 +
-image::amazon-fsx-image72.png[amazon fsx image72]
+image:amazon-fsx-image72.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Geben Sie die optionalen Befehle nach der Wiederherstellung ein.
 +
-image::amazon-fsx-image73.png[amazon fsx image73]
+image:amazon-fsx-image73.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Um den Wiederherstellungs- und Wiederherstellungsvorgang zu starten, klicken Sie auf Fertig stellen.
 +
-image::amazon-fsx-image74.png[amazon fsx image74]
+image:amazon-fsx-image74.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 +
 SnapCenter führt den Wiederherstellungsvorgang und die Wiederherstellung aus. Dieses Beispiel zeigt die Jobdetails des Wiederherstellungsjobs.
 
 +
-image::amazon-fsx-image75.png[amazon fsx image75]
+image:amazon-fsx-image75.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 

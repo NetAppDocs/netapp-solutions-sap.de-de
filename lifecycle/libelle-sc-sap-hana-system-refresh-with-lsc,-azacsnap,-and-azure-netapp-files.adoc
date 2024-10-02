@@ -10,7 +10,7 @@ summary: Mithilfe von Azure NetApp Files für SAP HANA, Oracle und DB2 auf Azure
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -30,7 +30,7 @@ Die folgende Abbildung zeigt einen typischen grundlegenden Workflow eines SAP Sy
 
 Das System kann dann als Test- oder QA-System verwendet werden. Wenn eine neue Systemaktualisierung angefordert wird, wird der Workflow mit Schritt 2 neu gestartet. Alle verbleibenden geklonten Volumes müssen manuell gelöscht werden.
 
-image::libelle-sc-image23.png[libelle sc image23]
+image:libelle-sc-image23.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -44,7 +44,7 @@ Folgende Voraussetzungen müssen erfüllt sein.
 
 Im Allgemeinen gibt es zwei Implementierungsoptionen für AzAcSnap, wie in der folgenden Abbildung dargestellt.
 
-image::libelle-sc-image24.png[libelle sc image24]
+image:libelle-sc-image24.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 AzAcSnap kann auf einer zentralen Linux-VM installiert und ausgeführt werden, für die alle DB-Konfigurationsdateien zentral gespeichert werden und AzAcSnap Zugriff auf alle Datenbanken (über den hdbsql-Client) sowie auf die konfigurierten HANA-Benutzerspeicherschlüssel für all diese Datenbanken hat. Bei einer dezentralen Implementierung wird AzAcSnap individuell auf jedem Datenbank-Host installiert, auf dem typischerweise nur die DB-Konfiguration für die lokale Datenbank gespeichert ist. Beide Bereitstellungsoptionen werden für die LSC-Integration unterstützt. Wir haben diesem Dokument jedoch im Lab Setup auf einen hybriden Ansatz gefolgt. AzAcSnap wurde auf einem zentralen NFS-Share sowie allen DB-Konfigurationsdateien installiert. Diese zentrale Installationsfreigabe wurde auf allen VMs unter bereitgestellt `/mnt/software/AZACSNAP/snapshot-tool`. Die Ausführung des Tools erfolgte anschließend lokal auf den DB-VMs.
 
@@ -54,7 +54,7 @@ AzAcSnap kann auf einer zentralen Linux-VM installiert und ausgeführt werden, f
 
 Libelle SystemCopy-Bereitstellungen bestehen aus folgenden Komponenten:
 
-image::libelle-sc-image25.png[libelle sc image25]
+image:libelle-sc-image25.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 * *LSC Master.* wie der Name schon sagt, ist dies die Master-Komponente, die den automatischen Workflow einer Libelle-basierten Systemkopie steuert.
 * *LSC Worker.* ein LSC-Mitarbeiter läuft in der Regel auf dem Ziel-SAP-System und führt die für die automatisierte Systemkopie erforderlichen Skripte aus.
@@ -65,7 +65,7 @@ Die Benutzeroberfläche von Libelle SystemCopy (LSC) muss auf einer geeigneten V
 
 Nach der Installation von LSC ist die Grundkonfiguration für die Quelle und die Zieldatenbank gemäß den LSC-Richtlinien durchzuführen. Die folgenden Abbildungen zeigen die Konfiguration der Lab-Umgebung für dieses Dokument. Im nächsten Abschnitt finden Sie Details zu den Quell- und Zielsystemen und Datenbanken von SAP.
 
-image::libelle-sc-image26.png[libelle sc image26]
+image:libelle-sc-image26.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Für die SAP-Systeme sollten Sie außerdem eine passende Standardaufgabenliste konfigurieren. Weitere Informationen zur Installation und Konfiguration von LSC finden Sie im LSC-Benutzerhandbuch, das Teil des LSC-Installationspakets ist.
 
@@ -85,7 +85,7 @@ Das Lab-Setup besteht aus einem SAP Quell- System und einem SAP Ziel-System, das
 
 Das folgende Bild zeigt die Laboreinrichtung.
 
-image::libelle-sc-image27.png[libelle sc image27]
+image:libelle-sc-image27.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Es enthält die folgenden Systeme, Softwareversionen und Azure NetApp Files Volumes:
 
@@ -107,7 +107,7 @@ Es enthält die folgenden Systeme, Softwareversionen und Azure NetApp Files Volu
 
 Bevor die erste Aktualisierung des SAP Systems ausgeführt werden kann, müssen Azure NetApp Files Storage-Vorgänge zum Kopieren und Klonen von Snapshot mit AzAcSnap integriert werden. Sie müssen auch ein Hilfsskript zum Starten und Stoppen der Datenbank und zum Mounten oder Abhängen der Azure NetApp Files Volumes ausführen. Alle erforderlichen Aufgaben werden im Rahmen der Kopiephase als benutzerdefinierte Aufgaben in LSC ausgeführt. Das folgende Bild zeigt die benutzerdefinierten Aufgaben in der LSC-Aufgabenliste.
 
-image::libelle-sc-image28.png[libelle sc image28]
+image:libelle-sc-image28.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Alle fünf Kopieraufgaben werden hier genauer beschrieben. Bei einigen dieser Aufgaben ein Beispielskript `sc-system-refresh.sh` Wird verwendet, um den erforderlichen SAP HANA Datenbank-Recovery-Vorgang und das Mounten und Aufheben der Datenvolumes weiter zu automatisieren. Das Skript verwendet ein `LSC: success` Meldung in der Systemausgabe, um eine erfolgreiche Ausführung an LSC anzuzeigen. Details zu benutzerdefinierten Aufgaben und verfügbaren Parametern finden Sie im LSC-Benutzerhandbuch und im LSC-Entwicklerhandbuch. Alle Aufgaben in dieser Lab-Umgebung werden auf der Ziel-DB-VM ausgeführt.
 
@@ -144,7 +144,7 @@ sudo /mnt/software/scripts/sc-system-refresh/sc-system-refresh.sh shutdown $_sys
 ....
 Das Skript `sc-system-refresh.sh` Nimmt zwei Parameter an, die `shutdown` Befehl und DB SID, um die SAP HANA Datenbank mit sapcontrol zu beenden. Die Systemausgabe wird an die Standard-LSC-Logdatei umgeleitet. Wie bereits erwähnt, an `LSC: success` Die Meldung wird verwendet, um die erfolgreiche Ausführung anzuzeigen.
 
-image::libelle-sc-image29.png[libelle sc image29]
+image:libelle-sc-image29.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -175,7 +175,7 @@ NOTE: Da die Ausgabe des AzAcSnap-Befehls nicht geändert werden kann, ist der S
 
 Die folgende Abbildung zeigt die Erfolgsmeldung „AzAcSnap Restore to New Volume“.
 
-image::libelle-sc-image30.png[libelle sc image30]
+image:libelle-sc-image30.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -209,34 +209,34 @@ In diesem Abschnitt zeigt eine Beispielaktualisierung der Laborsysteme die Haupt
 
 Es wurden regelmäßige und On-Demand Snapshot Kopien für die P01-Quelldatenbank erstellt, wie im Backup-Katalog aufgelistet.
 
-image::libelle-sc-image31.jpg[libelle sc image31]
+image:libelle-sc-image31.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Für den Aktualisierungsvorgang wurde das aktuelle Backup vom 12. März verwendet. Im Abschnitt Backup-Details wird die externe Backup-ID (EBID) für dieses Backup aufgeführt. Dies ist der Name der Snapshot Kopie des entsprechenden Backup der Snapshot Kopie auf dem Azure NetApp Files Daten-Volume, wie in der folgenden Abbildung dargestellt.
 
-image::libelle-sc-image32.jpg[libelle sc image32]
+image:libelle-sc-image32.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Um den Aktualisierungsvorgang zu starten, wählen Sie in der LSC-GUI die korrekte Konfiguration aus, und klicken Sie dann auf Ausführen starten.
 
-image::libelle-sc-image33.jpg[libelle sc image33]
+image:libelle-sc-image33.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 LSC startet die Ausführung der Aufgaben der Prüfphase gefolgt von den konfigurierten Aufgaben der Vorphase.
 
-image::libelle-sc-image34.jpg[libelle sc image34]
+image:libelle-sc-image34.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Als letzter Schritt der Vorphase wird das Ziel-SAP-System gestoppt. In der folgenden Kopierungsphase werden die im vorherigen Abschnitt beschriebenen Schritte ausgeführt. Zunächst wird die SAP HANA-Zieldatenbank angehalten, und das alte Azure NetApp Files-Volume wird vom Betriebssystem abgehängt.
 
-image::libelle-sc-image35.jpg[libelle sc image35]
+image:libelle-sc-image35.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Die Aufgabe ZAZACSNAPRESTORE erstellt dann aus der vorhandenen Snapshot Kopie des P01 Systems ein neues Volume als Klon. Die folgenden zwei Bilder zeigen die Protokolle der Aufgabe in der LSC GUI und das geklonte Azure NetApp Files Volume im Azure-Portal.
 
-image::libelle-sc-image36.jpg[libelle sc image36]
+image:libelle-sc-image36.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
-image::libelle-sc-image37.jpg[libelle sc image37]
+image:libelle-sc-image37.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Dieses neue Volume wird dann auf den Ziel-DB-Host gemountet und die Systemdatenbank wiederhergestellt – mittels der Snapshot Kopie. Nach der erfolgreichen Recovery wird die SAP HANA-Datenbank automatisch gestartet. Dieser Start der SAP HANA-Datenbank nimmt die meiste Zeit der Kopiephase in Anspruch. Die verbleibenden Schritte sind normalerweise innerhalb weniger Sekunden oder einiger Minuten abgeschlossen, unabhängig von der Größe der Datenbank. Die folgende Abbildung zeigt, wie die Systemdatenbank mit von SAP bereitgestellten Python Recovery-Skripten wiederhergestellt wird.
 
-image::libelle-sc-image38.jpg[libelle sc image38]
+image:libelle-sc-image38.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Nach der Kopiephase wird der LSC mit allen definierten Schritten der Post-Phase fortgesetzt. Wenn die Systemaktualisierung vollständig abgeschlossen ist, ist das Zielsystem wieder betriebsbereit und kann voll genutzt werden. Mit diesem Lab-System betrug die Gesamtlaufzeit für die Aktualisierung des SAP-Systems etwa 25 Minuten, wovon die Kopiephase knapp 5 Minuten in Anspruch genommen hat.
 
-image::libelle-sc-image39.jpg[libelle sc image39]
+image:libelle-sc-image39.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

@@ -8,9 +8,10 @@ summary: Die NetApp FAS Produktfamilie wurde für die Verwendung mit SAP HANA in
 :allow-uri-read: 
 
 
-Marco Schoen, NetApp
-
+[role="lead"]
 Die NetApp FAS Produktfamilie wurde für die Verwendung mit SAP HANA in TDI Projekten zertifiziert. Die zertifizierte Enterprise Storage-Plattform zeichnet sich durch das NetApp ONTAP Betriebssystem aus.
+
+Marco Schoen, NetApp
 
 Die Zertifizierung gilt für folgende Modelle:
 
@@ -26,9 +27,9 @@ NOTE: Die in diesem Dokument beschriebene Konfiguration ist erforderlich, um die
 
 Die Konfigurationsleitfäden für FAS Systeme mit NFS und NetApp AFF Systemen können über die folgenden Links gefunden werden:
 
-* https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_fc_introduction.html["Technischer Bericht: SAP HANA on NetApp AFF Systems with Fibre Channel Protocol"^]
-* https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana-fas-nfs_introduction.html["Technischer Bericht: SAP HANA on NetApp FAS Systems with NFS"^]
-* https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_nfs_introduction.html["Technischer Bericht: SAP HANA on NetApp AFF Systems with NFS"^]
+* link:saphana_aff_fc_introduction.html["Technischer Bericht: SAP HANA on NetApp AFF Systems with Fibre Channel Protocol"^]
+* link:saphana-fas-nfs_introduction.html["Technischer Bericht: SAP HANA on NetApp FAS Systems with NFS"^]
+* link:saphana_aff_nfs_introduction.html["Technischer Bericht: SAP HANA on NetApp AFF Systems with NFS"^]
 
 
 In einer SAP HANA Umgebung mit mehreren Hosts wird der standardmäßige SAP HANA-Storage-Connector verwendet, um im Falle eines Failover des SAP HANA-Hosts zu Fechten. In den entsprechenden SAP-Hinweisen finden Sie die Konfigurationsrichtlinien für das Betriebssystem und die HANA-spezifischen Linux-Kernel-Abhängigkeiten. Weitere Informationen finden Sie unter https://launchpad.support.sap.com/["SAP Note 2235581 – von SAP HANA unterstützte Betriebssysteme"^].
@@ -39,7 +40,7 @@ In einer SAP HANA Umgebung mit mehreren Hosts wird der standardmäßige SAP HANA
 
 NetApp FAS Storage Controller sind im SAP HANA Tailored Datacenter Integration-Programm (TDI) unter Verwendung der NFS-Protokolle (NAS) und Fibre Channel (SAN) zertifiziert. Sie können in beliebigen SAP HANA-Szenarien wie SAP Business Suite on HANA, S/4HANA, BW/4HANA oder SAP Business Warehouse on HANA in Konfigurationen mit einem Host oder mehreren Hosts implementiert werden. Alle Server, die für den Einsatz mit SAP HANA zertifiziert sind, können mit der zertifizierten Storage-Lösung kombiniert werden. In der folgenden Abbildung finden Sie eine Übersicht über die Architektur.
 
-image::saphana_fas_fc_image1.png[Saphana FAS fc-Bild1]
+image:saphana_fas_fc_image1.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Weitere Informationen zu den Voraussetzungen und Empfehlungen für produktive SAP HANA-Systeme finden Sie in der folgenden Ressource:
 
@@ -50,7 +51,7 @@ Weitere Informationen zu den Voraussetzungen und Empfehlungen für produktive SA
 
 == SAP HANA mit VMware vSphere
 
-Für die Verbindung von Storage mit Virtual Machines (VMs) gibt es verschiedene Optionen. Der bevorzugte Modus ist die direkte Verbindung der Storage Volumes mit NFS vom Gastbetriebssystem. Diese Option wird in beschrieben https://docs.netapp.com/us-en/netapp-solutions_main/ent-apps-db/saphana_aff_nfs_introduction.html["Technischer Bericht: SAP HANA on NetApp AFF Systems with NFS"^].
+Für die Verbindung von Storage mit Virtual Machines (VMs) gibt es verschiedene Optionen. Der bevorzugte Modus ist die direkte Verbindung der Storage Volumes mit NFS vom Gastbetriebssystem. Diese Option ist in beschriebenlink:saphana_aff_nfs_introduction.html["Technischer Bericht: SAP HANA on NetApp AFF Systems with NFS"^].
 
 Auch Raw Device Mapping (RDM), FCP Datastores oder VVOL Datastores mit FCP werden unterstützt. Bei beiden Datastore-Optionen muss für produktive Anwendungsfälle nur eine SAP HANA Daten oder ein Protokoll-Volume im Datastore gespeichert werden. Darüber hinaus können Snapshot-basiertes Backup und Recovery, das von SnapCenter orchestriert wurde, und hierauf basierende Lösungen, wie z. B. Klonen von SAP Systemen, nicht implementiert werden.
 

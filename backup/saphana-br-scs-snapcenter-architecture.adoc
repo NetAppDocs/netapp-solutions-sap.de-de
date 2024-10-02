@@ -10,7 +10,7 @@ summary: SnapCenter ist eine einheitliche, skalierbare Plattform für applikatio
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -28,4 +28,4 @@ Mit den benutzerdefinierten SnapCenter Plug-ins können Sie Ihre eigenen Plug-in
 
 In der folgenden Abbildung sind die SnapCenter Komponenten dargestellt.
 
-image::saphana-br-scs-image6.png[Saphana br scs image6]
+image:saphana-br-scs-image6.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

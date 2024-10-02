@@ -10,7 +10,7 @@ summary: Die neuen Volumes können nun auf der Grundlage der zuvor erstellten /e
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

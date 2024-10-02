@@ -10,7 +10,7 @@ summary: Die folgenden Abschnitte enthalten Installations- und Konfigurationsric
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]

@@ -10,7 +10,7 @@ summary: 'Abhängig vom Disaster Recovery Setup (mit oder ohne Log-Backup-Replik
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -20,33 +20,33 @@ Wenn auch die Backup-Daten für das Protokoll repliziert werden, muss ein neues 
 
 . Eines der applikationskonsistenten Snapshot-Backups wird als Quelle für das neue Volume des HANA-Daten-Volumes ausgewählt. Restore to New Volume ist ausgewählt, um ein neues Volume basierend auf der Snapshot-Sicherung zu erstellen.
 +
-image::saphana-dr-anf_image19.png[Saphana dr anf image19]
+image:saphana-dr-anf_image19.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Der neue Volume-Name und die neue Quote müssen in der Benutzeroberfläche angegeben werden.
 +
-image::saphana-dr-anf_image20.png[Saphana dr anf image20]
+image:saphana-dr-anf_image20.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Auf der Registerkarte Protokoll werden der Dateipfad und die Exportrichtlinie konfiguriert.
 +
-image::saphana-dr-anf_image21.png[Saphana dr anf image21]
+image:saphana-dr-anf_image21.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Der Bildschirm Erstellen und Prüfen fasst die Konfiguration zusammen.
 +
-image::saphana-dr-anf_image22.png[Saphana dr. anf image22]
+image:saphana-dr-anf_image22.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 . Auf Basis des HANA-Snapshot-Backups wurde jetzt ein neues Volume erstellt.
 +
-image::saphana-dr-anf_image23.png[Saphana dr anf image23]
+image:saphana-dr-anf_image23.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
 Die gleichen Schritte müssen nun für das freigegebene HANA und das Protokoll-Backup-Volumen, wie in den folgenden beiden Screenshots dargestellt, durchgeführt werden. Da keine zusätzlichen Snapshots für das HANA Shared-Backup-Volume und das Log-Backup-Volume erstellt wurden, muss die neueste SnapMirror Snapshot Kopie als Quelle für das neue Volume ausgewählt werden. Das sind unstrukturierte Daten, und die SnapMirror Snapshot Kopie kann für diesen Anwendungsfall genutzt werden.
 
-image::saphana-dr-anf_image24.png[Saphana dr. anf image24]
+image:saphana-dr-anf_image24.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Der folgende Screenshot zeigt das HANA Shared Volume, das auf dem neuen Volume wiederhergestellt ist.
 
-image::saphana-dr-anf_image25.png[Saphana dr. anf image25]
+image:saphana-dr-anf_image25.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 NOTE: Wenn ein Kapazitäts-Pool mit einer Tier mit niedriger Performance verwendet wurde, müssen die Volumes nun in einen Kapazitäts-Pool verschoben werden, der die erforderliche Performance bietet.

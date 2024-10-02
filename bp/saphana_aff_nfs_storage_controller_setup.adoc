@@ -10,7 +10,7 @@ summary: In diesem Abschnitt wird die Konfiguration des NetApp Storage-Systems b
 :nofooter: 
 :icons: font
 :linkattrs: 
-:imagesdir: ./../media/
+:imagesdir: ../media/
 
 
 [role="lead"]
@@ -69,7 +69,7 @@ In der folgenden Übersicht sind die erforderlichen Schritte zur Storage-Konfigu
 . Erstellen und Konfigurieren der erforderlichen Aggregate wie unter „ “ beschrieben<<Konfiguration von Aggregaten>>.“
 . Erstellen einer Storage Virtual Machine (SVM) wie unter „<<SVM-Konfiguration>>.“
 . Erstellen Sie LIFs wie in „ “ beschrieben.<<LIF-Konfiguration>>.“
-. Erstellen von Volumes in den Aggregaten wie unter „“ beschrieben<<Volume configuration for SAP HANA single host systems>>" Und "<<Volume configuration for SAP HANA multiple host systems>>.“
+. Erstellen Sie Volumes innerhalb der Aggregate, wie in „“ und „ “<<Volume-Konfiguration für SAP HANA Multiple-Host-Systeme>> beschrieben<<Volume-Konfiguration für SAP HANA Single-Host-Systeme>>.
 . Legen Sie die erforderlichen Volume-Optionen fest, wie unter „ “ beschrieben.<<Volume-Optionen>>.“
 . Legen Sie die erforderlichen Optionen für NFSv3 fest, wie in „ “ beschrieben.<<NFS-Konfiguration für NFSv3>>„ Oder für NFSv4 wie in „ “ beschrieben<<NFS-Konfiguration für NFSv4>>.“
 . Mounten Sie die Volumes in Namespace und legen Sie die Richtlinien für den Export wie in „ “ beschrieben fest.<<Volumes werden in Namespace mounten und Richtlinien für den Export festlegen>>.“
@@ -88,7 +88,7 @@ Es kann maximal ein Platten-Shelf mit einem SAS-Stack verbunden werden, um die e
 
 NOTE: Mit dem DS224C Festplatten-Shelf können auch Quad-Path-SAS-Kabel verwendet werden, ist aber nicht erforderlich.
 
-image::saphana_aff_nfs_image13.png[Saphana AFF nfs image13]
+image:saphana_aff_nfs_image13.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -96,7 +96,7 @@ image::saphana_aff_nfs_image13.png[Saphana AFF nfs image13]
 
 Jedes NS224 NVMe-Festplatten-Shelf ist über zwei 100-GbE-Ports pro Controller verbunden. Die Festplatten in jedem Shelf müssen gleichmäßig auf beide Controller des HA-Paars verteilt werden. ADPv2, wie im Kapitel für die Aggregatkonfiguration beschrieben, wird auch für das NS224 Festplatten-Shelf verwendet. Die folgende Abbildung zeigt die Festplatten-Shelf-Verbindung mit einem NVMe-Laufwerk.
 
-image::saphana_aff_nfs_image14.jpg[Saphana AFF nfs image14]
+image:saphana_aff_nfs_image14.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -106,7 +106,7 @@ Im Allgemeinen müssen Sie zwei Aggregate pro Controller konfigurieren, unabhän
 
 Die folgende Abbildung zeigt eine Konfiguration mit 12 SAP HANA Hosts, die auf einem 12-GB-SAS-Shelf ausgeführt werden und mit ADPv2 konfiguriert sind. Sechs SAP-HANA-Hosts sind mit jedem Storage-Controller verbunden. Vier separate Aggregate, zwei an jedem Storage Controller, sind konfiguriert. Jedes Aggregat ist mit 11 Festplatten mit neun Daten und zwei Parity-Festplatten-Partitionen konfiguriert. Für jeden Controller stehen zwei Ersatzpartitionen zur Verfügung.
 
-image::saphana_aff_nfs_image15.jpg[Saphana AFF nfs image15]
+image:saphana_aff_nfs_image15.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -154,7 +154,7 @@ NOTE: Wenn für die SAP HANA Systeme nur ein Storage-Controller eines HA-Paars v
 
 NOTE: Wenn die Daten- und Protokoll-Volumes auf demselben Controller gespeichert sind, muss der Zugriff des Servers auf den Storage mit zwei unterschiedlichen LIFs durchgeführt werden: Einer logischen Schnittstelle für den Zugriff auf das Daten-Volume und der andere für den Zugriff auf das Protokoll-Volume.
 
-image::saphana_aff_nfs_image16.jpg[Saphana AFF nfs image16]
+image:saphana_aff_nfs_image16.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Für jeden SAP HANA-Host, ein Daten-Volume, ein Protokoll-Volume und ein Volume für `/hana/shared` Werden konfiguriert. Die folgende Tabelle zeigt eine Beispielkonfiguration für SAP HANA-Systeme mit einem Host.
 
@@ -199,7 +199,7 @@ NOTE: Wenn für das SAP HANA System nur ein Storage-Controller eines HA-Paars ve
 
 NOTE: Wenn die Daten- und Protokoll-Volumes auf demselben Controller gespeichert sind, muss der Zugriff des Servers auf den Storage mit zwei unterschiedlichen LIFs durchgeführt werden: Einer logischen Schnittstelle für den Zugriff auf das Daten-Volume und einem für den Zugriff auf das Protokoll-Volume.
 
-image::saphana_aff_nfs_image17.jpg[Saphana AFF nfs image17]
+image:saphana_aff_nfs_image17.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Für jeden SAP HANA-Host werden ein Daten-Volume und ein Protokoll-Volume erstellt. Der `/hana/shared` Das Volume wird von allen Hosts des SAP HANA-Systems verwendet. Die folgende Tabelle zeigt eine Beispielkonfiguration für ein SAP HANA-System mit mehreren Hosts und vier aktiven Hosts.
 
