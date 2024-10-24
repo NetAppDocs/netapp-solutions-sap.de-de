@@ -34,7 +34,7 @@ net.core.wmem_max = 16777216
 net.ipv4.tcp_rmem = 4096 131072 16777216
 net.ipv4.tcp_wmem = 4096 16384 16777216
 net.core.netdev_max_backlog = 300000
-net.ipv4.tcp_slow_start_after_idle=0
+net.ipv4.tcp_slow_start_after_idle = 0
 net.ipv4.tcp_no_metrics_save = 1
 net.ipv4.tcp_moderate_rcvbuf = 1
 net.ipv4.tcp_window_scaling = 1
@@ -59,7 +59,7 @@ net.core.wmem_max = 16777216
 net.ipv4.tcp_rmem = 4096 131072 16777216
 net.ipv4.tcp_wmem = 4096 16384  16777216
 net.core.netdev_max_backlog = 300000
-net.ipv4.tcp_slow_start_after_idle=0
+net.ipv4.tcp_slow_start_after_idle = 0
 net.ipv4.tcp_no_metrics_save = 1
 net.ipv4.tcp_moderate_rcvbuf = 1
 net.ipv4.tcp_window_scaling = 1
@@ -234,11 +234,8 @@ NOTE: Performance-Tests zeigen das `nconnect=4` Bietet gute Leseergebnisse spezi
 NOTE: Ab ONTAP 9.8 und SUSE SLES15SP2 oder RedHat RHEL 8.4 oder höher unterstützt NetApp die nconnect Option auch für NFSv4.1.
 
 
-NOTE: Wenn nconnect mit NFSV4.x verwendet wird, sollte die Anzahl der NFSv4.x-Sitzungsplätze gemäß der folgenden Regel angepasst werden:
-Die Anzahl der Sitzungsplätze entspricht <nconnect value> x 64.
-Beim Gastgeber wird dies von adjuseted
-`echo options nfs max_session_slots= <calculated value> > /etc/modprobe.d/nfsclient.conf`
-Gefolgt von einem Neustart. Der serverseitige Wert muss ebenfalls angepasst werden. Legen Sie die Anzahl der Sitzungsplätze fest, wie unter beschrieben link:saphana-fas-nfs_storage_controller_setup.html#nfs-configuration-for-nfsv4["NFS-Konfiguration für NFSv4:"]
+NOTE: Wenn nconnect mit NFSV4.x verwendet wird, sollte die Anzahl der NFSv4.x-Sitzungsplätze gemäß der folgenden Regel angepasst werden: Anzahl der Sitzungsplätze entspricht <nconnect value> x 64. Auf dem Host wird dies durch einen Neustart adjuseted
+`echo options nfs max_session_slots=<calculated value> > /etc/modprobe.d/nfsclient.conf`. Der serverseitige Wert muss ebenfalls angepasst werden. Legen Sie die Anzahl der Sitzungsplätze fest, wie unter beschrieben link:saphana-fas-nfs_storage_controller_setup.html#nfs-configuration-for-nfsv4["NFS-Konfiguration für NFSv4:"]
 
 So mounten Sie die Dateisysteme während des Systemstarts mit dem `/etc/fstab` Konfigurationsdatei, führen Sie die folgenden Schritte aus:
 
