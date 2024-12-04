@@ -53,7 +53,7 @@ Weitere Informationen zu den Voraussetzungen und Empfehlungen für produktive SA
 
 Für die Verbindung von Storage mit Virtual Machines (VMs) gibt es verschiedene Optionen. Der bevorzugte Modus ist die direkte Verbindung der Storage Volumes mit NFS vom Gastbetriebssystem. Diese Option ist in beschriebenlink:saphana_aff_nfs_introduction.html["Technischer Bericht: SAP HANA on NetApp AFF Systems with NFS"^].
 
-Auch Raw Device Mapping (RDM), FCP Datastores oder VVOL Datastores mit FCP werden unterstützt. Bei beiden Datastore-Optionen muss für produktive Anwendungsfälle nur eine SAP HANA Daten oder ein Protokoll-Volume im Datastore gespeichert werden. Darüber hinaus können Snapshot-basiertes Backup und Recovery, das von SnapCenter orchestriert wurde, und hierauf basierende Lösungen, wie z. B. Klonen von SAP Systemen, nicht implementiert werden.
+Auch Raw Device Mapping (RDM), FCP Datastores oder VVOL Datastores mit FCP werden unterstützt. Bei beiden Datastore-Optionen muss für produktive Anwendungsfälle nur eine SAP HANA Daten oder ein Protokoll-Volume im Datastore gespeichert werden.
 
 Weitere Informationen zur Verwendung von vSphere mit SAP HANA finden Sie unter den folgenden Links:
 
