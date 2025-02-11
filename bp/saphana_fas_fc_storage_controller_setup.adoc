@@ -134,17 +134,6 @@ image:saphana_fas_fc_image15.jpeg["Die Abbildung zeigt den Input/Output-Dialog o
 
 
 
-== FCP-Port-Sätze
-
-Ein FCP-Port-Satz wird verwendet, um zu definieren, welche LIFs von einer bestimmten Initiatorgruppe verwendet werden sollen. In der Regel werden alle für HANA-Systeme erstellten LIFs in demselben Portsatz platziert. Die folgende Abbildung zeigt die Konfiguration eines PortSatzes mit dem Namen 32g, der die vier bereits erstellten LIFs enthält.
-
-image:saphana_fas_fc_image16.jpeg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
-
-
-NOTE: Bei ONTAP 9.8 ist kein Portsatz erforderlich, kann aber über die Befehlszeile erstellt und verwendet werden.
-
-
-
 == Initiatorgruppen
 
 Eine Initiatorgruppe kann für jeden Server oder für eine Gruppe von Servern konfiguriert werden, die Zugriff auf eine LUN benötigen. Für die iGroup Konfiguration sind die weltweiten Port-Namen (WWPNs) der Server erforderlich.

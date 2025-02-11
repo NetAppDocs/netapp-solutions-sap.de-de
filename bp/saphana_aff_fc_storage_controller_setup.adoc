@@ -69,7 +69,7 @@ In der folgenden Übersicht sind die erforderlichen Schritte zur Storage-Konfigu
 . Erstellen und Konfigurieren der erforderlichen Aggregate, wie unter „ “ beschrieben<<Konfiguration von Aggregaten>>.“
 . Erstellen einer Storage Virtual Machine (SVM), wie unter „<<Konfiguration von Storage Virtual Machines>>.“
 . Logische Schnittstellen (LIFs) erstellen, wie in „ “ beschrieben<<Konfiguration der logischen Schnittstelle>>.“
-. Erstellen Sie einen Portsatz, wie unter „ “ beschrieben.<<FCP-Port-Sätze>>.“
+. Erstellen Sie einen Portsatz, wie unter „ “ beschrieben.<<FCP port sets>>.“
 . Erstellen von Initiatorgruppen, Volumes und LUNs in den Aggregaten, wie in Erstellen von „ “ beschrieben<<Creating LUNs,Volumes und Zuordnen von LUNs zu Initiatorgruppen>>.
 
 
@@ -128,17 +128,6 @@ image:saphana_aff_fc_image13.jpeg["Die Abbildung zeigt den Input/Output-Dialog o
 Während der SVM-Erstellung mit ONTAP 9.8 System Manager können Sie alle erforderlichen physischen FCP-Ports auswählen und automatisch eine LIF pro physischem Port erstellt wird.
 
 image:saphana_aff_fc_image14.jpeg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
-
-
-
-== FCP-Port-Sätze
-
-Ein FCP-Port-Satz wird verwendet, um zu definieren, welche LIFs von einer bestimmten Initiatorgruppe verwendet werden sollen. In der Regel werden alle für HANA-Systeme erstellten LIFs in demselben Portsatz platziert. Die folgende Abbildung zeigt die Konfiguration eines PortSatzes mit dem Namen 32g, der die vier bereits erstellten LIFs enthält.
-
-image:saphana_aff_fc_image15.jpeg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
-
-
-NOTE: Bei ONTAP 9.8 ist kein Portsatz erforderlich, kann aber über die Befehlszeile erstellt und verwendet werden.
 
 
 

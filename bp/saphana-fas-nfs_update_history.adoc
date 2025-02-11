@@ -81,8 +81,8 @@ An dieser Lösung wurden seit ihrer ersten Veröffentlichung folgende technische
 | Dezember 2023 | Aktualisierung des Host-Setups überarbeitete nconnect-Einstellungen Informationen zu NFSv4.1-Sitzungen hinzugefügt 
 
 
-| September 2024 | Kleinere Updates 
+| September 2024 | Neue Storage-Systeme und kleinere Updates 
 
 
-| September 2024 | Neue Storage-Systeme 
+| Februar 2025 | Neues Storage-System 
 |===

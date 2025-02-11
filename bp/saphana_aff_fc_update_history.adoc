@@ -61,4 +61,10 @@ An dieser Lösung wurden seit ihrer ersten Veröffentlichung folgende technische
 
 
 | September 2024 | Neue Storage-Systeme (ASA A-Series) 
+
+
+| November 2024 | Neue Storage-Systeme 
+
+
+| Februar 2025 | Neue Storage-Systeme 
 |===
