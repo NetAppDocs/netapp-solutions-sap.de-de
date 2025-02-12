@@ -138,7 +138,7 @@ Die maximale Anzahl an Daten- und Protokoll-Volume-Mounts pro physische Schnitts
 | Ethernet-Port-Geschwindigkeit | 10 GbE | 25 GbE | 40 GbE | 100 GeE 
 
 
-| Maximale Anzahl an Protokoll- oder Daten-Volume-Mounts pro physischem Port | 2 | 6 | 12 | 24 
+| Maximale Anzahl an Protokoll- oder Daten-Volume-Mounts pro physischem Port | 3 | 8 | 12 | 30 
 |===
 
 NOTE: Die gemeinsame Nutzung einer logischen Schnittstelle zwischen verschiedenen SAP HANA Hosts erfordert möglicherweise eine Neuaufbindung von Daten- oder Protokoll-Volumes an eine andere logische Schnittstelle. Durch diese Änderung werden Performance-Einbußen vermieden, wenn ein Volume auf einen anderen Storage Controller verschoben wird.

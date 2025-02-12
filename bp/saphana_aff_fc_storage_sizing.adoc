@@ -64,9 +64,7 @@ NOTE: Diese Berechnung erfolgt unabhängig vom eingesetzten Storage Controller. 
 
 === NS224 NVMe-Shelf
 
-Eine NVMe-SSD (Daten) unterstützt bis zu 5 SAP HANA-Hosts.
-Die SSDs und SAP HANA-Hosts müssen auf beide Storage-Controller verteilt sein.
-Gleiches gilt für die internen NVMe-Festplatten von Systemen der Serien AFF A800, AFF A70 und AFF A90.
+Eine NVMe-SSD (Daten) unterstützt bis zu 2/5 SAP HANA-Hosts, je nachdem, welche NVMe-Festplatte verwendet wird. Die SSDs und SAP HANA-Hosts müssen auf beide Storage-Controller verteilt sein. Gleiches gilt für die internen NVMe-Festplatten von AFF und ASA Systemen.
 
 
 NOTE: Durch das Hinzufügen weiterer Platten-Shelves wird nicht die maximale Anzahl von SAP HANA-Hosts erhöht, die ein Storage-Controller unterstützen kann.
@@ -217,4 +215,4 @@ Die Größe des RAM, die Netto-Datengröße auf der Festplatte jedes SAP HANA-Ho
 
 Die folgende Abbildung fasst den Dimensionierungsprozess zusammen.
 
-image:saphana_aff_fc_image8.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:saphana_aff_fc_image8a.png["SAP HANA Dimensionierungsprozess"]

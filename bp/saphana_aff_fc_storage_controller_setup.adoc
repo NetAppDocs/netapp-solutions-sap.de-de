@@ -69,7 +69,6 @@ In der folgenden Übersicht sind die erforderlichen Schritte zur Storage-Konfigu
 . Erstellen und Konfigurieren der erforderlichen Aggregate, wie unter „ “ beschrieben<<Konfiguration von Aggregaten>>.“
 . Erstellen einer Storage Virtual Machine (SVM), wie unter „<<Konfiguration von Storage Virtual Machines>>.“
 . Logische Schnittstellen (LIFs) erstellen, wie in „ “ beschrieben<<Konfiguration der logischen Schnittstelle>>.“
-. Erstellen Sie einen Portsatz, wie unter „ “ beschrieben.<<FCP port sets>>.“
 . Erstellen von Initiatorgruppen, Volumes und LUNs in den Aggregaten, wie in Erstellen von „ “ beschrieben<<Creating LUNs,Volumes und Zuordnen von LUNs zu Initiatorgruppen>>.
 
 
@@ -81,30 +80,33 @@ In der folgenden Übersicht sind die erforderlichen Schritte zur Storage-Konfigu
 
 === SAS-basierte Platten-Shelves
 
-Es kann maximal ein Platten-Shelf mit einem SAS-Stack verbunden werden, um die erforderliche Performance für die SAP HANA-Hosts zu liefern, wie in der folgenden Abbildung dargestellt. Die Festplatten in jedem Shelf müssen gleichmäßig zwischen beiden Controllern des HA-Paars verteilt werden. ADPv2 wird mit ONTAP 9 und den neuen DS224C Festplatten-Shelfs verwendet.
+Es kann maximal ein Platten-Shelf mit einem SAS-Stack verbunden werden, um die erforderliche Performance für die SAP HANA-Hosts zu liefern, wie in der folgenden Abbildung dargestellt. Die Festplatten in jedem Shelf müssen gleichmäßig zwischen beiden Controllern des HA-Paars verteilt werden. ADPv2 wird mit ONTAP 9 und DS224C Festplatten-Shelfs verwendet.
 
 
 NOTE: Mit dem DS224C Festplatten-Shelf können auch Quad-Path-SAS-Kabel verwendet werden, ist aber nicht erforderlich.
 
-image:saphana_aff_fc_image10.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:saphana_aff_fc_image10.png["DS224C Festplatten-Shelf-Verbindung"]
 
 
 
 === NVMe-basierte Festplatten-Shelfs (100 GbE)
 
-Jedes NS224 NVMe Desk-Shelf ist über zwei 100-GbE-Ports pro Controller verbunden, wie in der folgenden Abbildung dargestellt. Die Festplatten in jedem Shelf müssen gleichmäßig auf beide Controller des HA-Paars verteilt werden. ADPv2 ist auch für das NS224 Festplatten-Shelf genutzt.
+Jedes NS224 NVMe-Festplatten-Shelf ist, wie in der folgenden Abbildung dargestellt, mit zwei 100-GbE-Ports pro Controller verbunden. Die Festplatten in jedem Shelf müssen gleichmäßig auf beide Controller des HA-Paars verteilt werden. ADPv2 ist auch für das NS224 Festplatten-Shelf genutzt.
 
-image:saphana_aff_fc_image11.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:saphana_aff_fc_image11a.png["NS224 NVMe-Festplatten-Shelf-Verbindung"]
 
 
 
 == Konfiguration von Aggregaten
 
-Im Allgemeinen müssen zwei Aggregate pro Controller konfiguriert werden, unabhängig davon, welches Platten-Shelf oder Festplattentechnologie (SSD oder HDD) zum Einsatz kommt. Dieser Schritt ist notwendig, damit Sie alle verfügbaren Controller-Ressourcen nutzen können. Für die Systeme der AFF A200 Serie reicht ein Datenaggregat aus.
+Im Allgemeinen müssen zwei Aggregate pro Controller konfiguriert werden, unabhängig davon, welches Platten-Shelf oder Festplattentechnologie (SSD oder HDD) zum Einsatz kommt. Dieser Schritt ist notwendig, damit Sie alle verfügbaren Controller-Ressourcen nutzen können.
+
+
+NOTE: ASA-Systeme, die nach dem 2024. August eingeführt wurden, erfordern diesen Schritt nicht wie automatisch
 
 Die folgende Abbildung zeigt eine Konfiguration mit 12 SAP HANA Hosts, die auf einem 12-GB-SAS-Shelf ausgeführt werden und mit ADPv2 konfiguriert sind. Sechs SAP-HANA-Hosts sind mit jedem Storage-Controller verbunden. Vier separate Aggregate, zwei an jedem Storage Controller, sind konfiguriert. Jedes Aggregat ist mit 11 Festplatten mit neun Daten und zwei Parity-Festplatten-Partitionen konfiguriert. Für jeden Controller stehen zwei Ersatzpartitionen zur Verfügung.
 
-image:saphana_aff_fc_image12.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:saphana_aff_fc_image12a.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 
 
@@ -123,11 +125,14 @@ vserver modify -vserver <svm-name> -qos-policy-group none
 
 Innerhalb der Storage-Cluster-Konfiguration muss eine Netzwerkschnittstelle (LIF) erstellt und einem dedizierten FCP-Port zugewiesen werden. Wenn beispielsweise vier FCP-Ports aus Performance-Gründen erforderlich sind, müssen vier LIFs erstellt werden. Die folgende Abbildung zeigt einen Screenshot der acht LIFs (mit dem Namen `fc_*_*`) Die auf dem konfiguriert wurden `hana` SVM:
 
-image:saphana_aff_fc_image13.jpeg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:saphana_aff_fc_image13a.png["Überlagerung logischer Schnittstellen"]
 
-Während der SVM-Erstellung mit ONTAP 9.8 System Manager können Sie alle erforderlichen physischen FCP-Ports auswählen und automatisch eine LIF pro physischem Port erstellt wird.
+Während der SVM-Erstellung mit ONTAP System Manager können Sie alle erforderlichen physischen FCP-Ports auswählen und es wird automatisch eine logische Schnittstelle pro physischem Port erstellt.
 
-image:saphana_aff_fc_image14.jpeg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:saphana_aff_fc_image14a.png["SVM-Erstellung"]
+
+
+NOTE: ASA-Systeme, die nach dem 2024. August eingeführt wurden, erfordern diesen Schritt nicht wie automatisch
 
 
 
@@ -138,7 +143,7 @@ Die folgende Abbildung zeigt die Volume-Konfiguration von vier SAP HANA-Systemen
 
 NOTE: Wenn für die SAP HANA Systeme nur ein Storage-Controller eines HA-Paars verwendet wird, können Daten-Volumes und Protokoll-Volumes auch auf demselben Storage Controller gespeichert werden.
 
-image:saphana_aff_fc_image16.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:saphana_aff_fc_image16a.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Für jeden SAP HANA-Host, ein Daten-Volume, ein Protokoll-Volume und ein Volume für `/hana/shared` Werden konfiguriert. Die folgende Tabelle zeigt eine Beispielkonfiguration mit vier SAP HANA Single-Host-Systemen.
 
@@ -220,7 +225,7 @@ NOTE: Wenn für das SAP HANA System nur ein Storage-Controller eines HA-Paars ve
 
 NOTE: NetApp ASA AFF Systeme unterstützen NFS als Protokoll nicht. NetApp empfiehlt die Verwendung eines weiteren AFF oder FAS Systems für das `/hana/shared` File-System.
 
-image:saphana_aff_fc_image17.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:saphana_aff_fc_image17a.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Für jeden SAP HANA-Host werden ein Daten-Volume und ein Protokoll-Volume erstellt. Der `/hana/shared` Das Volume wird von allen Hosts des SAP HANA-Systems verwendet. Die folgende Tabelle zeigt eine Beispielkonfiguration für ein SAP HANA System mit 4+1 mehreren Hosts.
 
@@ -377,6 +382,10 @@ vol create -volume FC5_log2_mnt00001  -aggregate aggr1_1 -size 280g -snapshot-po
 vol create -volume FC5_data2_mnt00002  -aggregate aggr2_1 -size 1200g -snapshot-policy none -foreground true -encrypt false -space-guarantee none
 vol create -volume FC5_shared -aggregate aggr1_1 -size 512g -state online -policy default -snapshot-policy none -junction-path /FC5_shared -encrypt false  -space-guarantee none
 ....
++
+
+NOTE: ASA-Systeme, die nach dem 2024. August gestartet wurden, erfordern diesen Schritt nicht, da er automatisch während _lun Create_ durchgeführt wird
+
 . Erstellen Sie alle LUNs.
 +
 ....
@@ -389,6 +398,10 @@ lun create -path /vol/FC5_log2_mnt00001/FC5_log2_mnt00001 -size 260g -ostype lin
 lun create -path /vol/FC5_log_mnt00002/FC5_log_mnt00002 -size 260g -ostype linux -space-reserve disabled -space-allocation disabled -class regular
 lun create -path /vol/FC5_log2_mnt00002/FC5_log2_mnt00002 -size 260g -ostype linux -space-reserve disabled -space-allocation disabled -class regular
 ....
++
+
+NOTE: Geben Sie den LUN-Namen nur als Pfad für ASA-Systeme an, die nach August 2024 gestartet wurden. Dies gilt auch für den unten stehenden Befehl _lun map_. Außerdem stehen die Optionen _-space-Reserve_ und _-space-Allocation_ nicht zur Verfügung.
+
 . Erstellen Sie die Initiatorgruppe für alle Server, die zu System FC5 gehören.
 +
 ....

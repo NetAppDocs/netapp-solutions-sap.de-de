@@ -22,11 +22,7 @@ Verschiedene Modelle der AFF Produktfamilie können auf der Storage-Ebene mitein
 
 Die folgende Abbildung zeigt eine Beispielkonfiguration mit acht SAP HANA-Hosts, die an ein Storage-HA-Paar angeschlossen sind.
 
-image:saphana_aff_nfs_image2.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
-
-Die folgende Abbildung zeigt ein Beispiel für die Nutzung von VMware vSphere als Virtualisierungsebene.
-
-image:saphana_aff_nfs_image3.jpg["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:saphana_aff_nfs_image2a.png["Acht SAP HANA-Hosts, die an ein Storage-HA-Paar angeschlossen sind"]
 
 Die Architektur lässt sich in zwei Dimensionen skalieren:
 
@@ -36,11 +32,11 @@ Die Architektur lässt sich in zwei Dimensionen skalieren:
 
 Die folgende Abbildung zeigt eine Beispielkonfiguration, in der mehr SAP HANA-Hosts mit den Storage-Controllern verbunden sind. In diesem Beispiel sind mehr Platten-Shelves erforderlich, um die Kapazitäts- und Performance-Anforderungen der 16 SAP HANA-Hosts zu erfüllen. Abhängig vom Gesamtdurchsatz müssen Sie den Storage Controllern weitere 10-GbE- oder schnellere Verbindungen hinzufügen.
 
-image:saphana_aff_nfs_image4.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:saphana_aff_nfs_image3a.png["Zusätzliche SAP HANA-Hosts zu einem vorhandenen Storage Controller HA-Paar"]
 
 Unabhängig vom implementierten AFF System lässt sich die SAP HANA-Landschaft auch durch Hinzufügen eines beliebigen zertifizierten Storage-Controllers skalieren, um die gewünschte Node-Dichte zu erfüllen, wie in der folgenden Abbildung dargestellt.
 
-image:saphana_aff_nfs_image5.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:saphana_aff_nfs_image4a.png["Zusätzliches HA-Paar hinzugefügt"]
 
 
 
