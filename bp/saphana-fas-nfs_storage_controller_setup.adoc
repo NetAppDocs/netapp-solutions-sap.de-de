@@ -91,6 +91,14 @@ image:saphana-fas-nfs_image14.png["Die Abbildung zeigt den Input/Output-Dialog o
 
 
 
+=== NVMe (100 GbE) Festplatten-Shelfs
+
+Jedes NS224 NVMe-Festplatten-Shelf ist, wie in der folgenden Abbildung dargestellt, mit zwei 100-GbE-Ports pro Controller verbunden. Die Festplatten in jedem Shelf müssen gleichmäßig auf beide Controller des HA-Paars verteilt werden.
+
+image:saphana_fas_ns224.png["MVMe Platten-Shelf-Verbindungen"]
+
+
+
 == Konfiguration von Aggregaten
 
 Im Allgemeinen müssen zwei Aggregate pro Controller konfiguriert werden, unabhängig vom verwendeten Festplatten-Shelf oder der Festplattentechnologie (SSD oder HDD). Für Systeme der FAS2000 Serie genügt ein Datenaggregat.

@@ -94,7 +94,7 @@ image:saphana_aff_nfs_image13.png["SAS Shelf-Verbindungen"]
 
 === NVMe (100 GbE) Festplatten-Shelfs
 
-Jedes NS224 NVMe-Festplatten-Shelf ist über zwei 100-GbE-Ports pro Controller verbunden. Die Festplatten in jedem Shelf müssen gleichmäßig auf beide Controller des HA-Paars verteilt werden. ADPv2, wie im Kapitel für die Aggregatkonfiguration beschrieben, wird auch für das NS224 Festplatten-Shelf verwendet. Die folgende Abbildung zeigt die Festplatten-Shelf-Verbindung mit einem NVMe-Laufwerk.
+Jedes NS224 NVMe-Festplatten-Shelf ist, wie in der folgenden Abbildung dargestellt, mit zwei 100-GbE-Ports pro Controller verbunden. Die Festplatten in jedem Shelf müssen gleichmäßig auf beide Controller des HA-Paars verteilt werden. ADPv2, wie im Kapitel für die Aggregatkonfiguration beschrieben, wird auch für das NS224 Festplatten-Shelf verwendet.
 
 image:saphana_aff_nfs_image14a.png["MVMe Platten-Shelf-Verbindungen"]
 

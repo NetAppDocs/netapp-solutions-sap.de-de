@@ -73,6 +73,12 @@ NOTE: Diese Berechnung erfolgt unabhängig vom eingesetzten Storage Controller. 
 
 
 
+=== NS224 NVMe-Shelf
+
+Eine NVMe-SSD (Daten) unterstützt bis zu 2 SAP HANA-Hosts. Die SSDs und SAP HANA-Hosts müssen auf beide Storage-Controller verteilt sein.
+
+
+
 == Heterogenen Workloads
 
 SAP HANA und andere Applikations-Workloads werden auf demselben Storage Controller oder im selben Storage-Aggregat unterstützt. Es ist jedoch eine NetApp Best Practice, SAP HANA-Workloads von allen anderen Applikations-Workloads zu trennen.

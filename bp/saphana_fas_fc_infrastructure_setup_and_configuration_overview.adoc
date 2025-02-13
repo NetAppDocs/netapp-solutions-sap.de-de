@@ -16,13 +16,13 @@ summary: Die folgenden Abschnitte enthalten Installations- und Konfigurationsric
 [role="lead"]
 Die folgenden Abschnitte enthalten Installations- und Konfigurationsrichtlinien für die SAP HANA-Infrastruktur. Alle Schritte zur Einrichtung von SAP HANA sind enthalten. Eine SVM wird zum Hosten der Daten erstellt. In diesen Abschnitten werden die folgenden Beispielkonfigurationen verwendet:
 
-* HANA-System mit SID=SS3 und ONTAP 9.7 oder früher
+* HANA-System mit SID=SS3
 +
 ** SAP HANA mit einem oder mehreren Hosts
 ** SAP HANA Einzelhost mit SAP HANA mehrere Partitionen
 
 
-* HANA-System mit SID=FC5 und ONTAP 9.8 mit Linux Logical Volume Manager (LVM)
+* HANA-System mit SID=FC5 mit Linux Logical Volume Manager (LVM)
 +
 ** SAP HANA mit einem oder mehreren Hosts
 
