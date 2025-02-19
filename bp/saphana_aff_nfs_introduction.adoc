@@ -99,7 +99,7 @@ In diesem Dokument wird das empfohlene Setup mit direkten NFS-Mounts vom Gastbet
 
 Weitere Informationen zur Verwendung von vSphere mit SAP HANA finden Sie unter den folgenden Links:
 
-* link:https://wiki.scn.sap.com/wiki/display/VIRTUALIZATION/SAP+HANA+on+VMware+vSphere["SAP HANA on VMware vSphere - Virtualization - Community Wiki"^]
-* https://core.vmware.com/resource/sap-hana-vmware-vsphere-best-practices-and-reference-architecture-guide#introduction["Best Practices and Reference Architecture Guide für SAP HANA auf VMware vSphere"^]
-* link:https://launchpad.support.sap.com/#/notes/2161991["2161991 - Konfigurationsrichtlinien für VMware vSphere - SAP ONE Support Launchpad (Anmeldung erforderlich)"^]
+* https://help.sap.com/docs/SUPPORT_CONTENT/virtualization/3362185751.html["SAP HANA on VMware vSphere - Virtualization - Community Wiki"^]
+* https://www.vmware.com/docs/sap_hana_on_vmware_vsphere_best_practices_guide-white-paper["Best Practices Guide für SAP HANA auf VMware vSphere"^]
+* https://launchpad.support.sap.com/["2161991 - Konfigurationsrichtlinien für VMware vSphere - SAP ONE Support Launchpad (Anmeldung erforderlich)"^]
 
