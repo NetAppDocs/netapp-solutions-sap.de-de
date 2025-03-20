@@ -1,0 +1,121 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmware-smas-smas-config.html 
+keywords: SAP HANA, VMware, SnapMirror active sync, SnapCenter, backup and recovery 
+summary:  
+---
+= Konfiguration der aktiven SnapMirror-Synchronisierung
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+:firstname: ---
+:author: ---
+:authorinitials: -
+:authors: ---
+
+
+
+
+== Voraussetzungen
+
+Storage-Cluster und relevante SVMs müssen aktiviert werden.
+
+Der ONTAP Mediator muss auf beiden Storage-Clustern verfügbar und konfiguriert sein.
+
+image:sc-saphana-vmware-smas-image10.png[""]
+
+image:sc-saphana-vmware-smas-image11.png[""]
+
+
+
+== Konfiguration von Storage-Layout und Konsistenzgruppen
+
+In der ONTAP-Dokumentation https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html#key-concepts["Übersicht über die aktive SnapMirror-Synchronisierung in ONTAP"] wird das Konzept der Konsistenzgruppen mit SnapMirror Active Sync wie folgt beschrieben:
+
+Eine Konsistenzgruppe ist eine Sammlung von FlexVol Volumes, die eine Konsistenzgarantie für den Applikations-Workload bietet, der für Business Continuity geschützt werden muss.
+
+Der Zweck einer Konsistenzgruppe besteht darin, gleichzeitige Snapshot Images mehrerer Volumes zu erstellen. Auf diese Weise wird sichergestellt, dass absturzkonsistente Kopien einer Sammlung von Volumes zu einem Zeitpunkt erstellt werden. Eine Konsistenzgruppe stellt sicher, dass alle Volumes eines Datensatzes stillgelegt und dann zu genau dem gleichen Zeitpunkt eingerastet werden. So erhalten Sie einen datenkonsistenten Restore-Zeitpunkt über Volumes hinweg, der den Datensatz unterstützt. Eine Konsistenzgruppe behält dabei die abhängige Konsistenz der Schreibreihenfolge bei. Wenn Sie Applikationen für Business Continuity schützen möchten, muss die Volume-Gruppe, die dieser Applikation entspricht, einer Konsistenzgruppe hinzugefügt werden, damit eine Datensicherungsbeziehung zwischen einer Quell- und einer Zielkonsistenzgruppe hergestellt wird. Die Quell- und Zielkonsistenz muss die gleiche Anzahl und den gleichen Typ von Volumes enthalten.
+
+Für die Replizierung von HANA-Systemen muss die Konsistenzgruppe alle Volumes enthalten, die vom einzelnen HANA-System verwendet werden (Daten, Protokoll und Shared). Volumes, die Teil einer Konsistenzgruppe sein sollten, müssen auf derselben SVM gespeichert werden. Betriebssystem-Images können auf einem separaten Volume mit einer eigenen Konsistenzgruppe gespeichert werden. Die Abbildung unten zeigt ein Konfigurationsbeispiel mit zwei HANA-Systemen.
+
+image:sc-saphana-vmware-smas-image12.png[""]
+
+
+
+== Konfiguration der Initiatorgruppe
+
+In unserem Lab-Setup haben wir eine Initiatorgruppe erstellt, die beide Storage-SVMs für die aktive synchrone Replizierung mit SnapMirror verwendet. In der später beschriebenen Konfiguration für aktive SnapMirror-Synchronisierung wird festgelegt, dass die Initiatorgruppe Teil der Replizierung ist.
+
+Mithilfe der Annäherungseinstellungen wurde festgelegt, welcher ESX Host sich in der Nähe des Storage-Clusters befindet. In unserem Fall liegt die A700 in der Nähe von ESX-1 und die A800 ist nah an ESX-2.
+
+image:sc-saphana-vmware-smas-image13.png[""]
+
+image:sc-saphana-vmware-smas-image14.png[""]
+
+
+NOTE: In einem nicht einheitlichen Access Setup darf die Initiatorgruppe im primären Storage-Cluster (A700) nur die Initiatoren des ESX-1-Hosts einschließen, da es keine SAN-Verbindung zu ESX-2 gibt. Darüber hinaus müssen Sie eine andere Initiatorgruppe auf dem zweiten Storage-Cluster (A800) konfigurieren, der nur die Initiatoren des ESX-2 Hosts enthalten. Die Proximity-Konfiguration und die Replizierung von Initiatorgruppen sind nicht erforderlich.
+
+
+
+== Konfigurieren Sie den Schutz mit ONTAP System Manager
+
+image:sc-saphana-vmware-smas-image15.png[""]
+
+
+
+=== Replizierung von Konsistenzgruppen und Initiatorgruppen
+
+Eine neue Konsistenzgruppe muss erstellt werden, und alle drei LUNs des HANA-Systems müssen der Konsistenzgruppe hinzugefügt werden.
+
+„Initiatorgruppe replizieren“ wurde aktiviert. Die Imitatorgruppe bleibt dann unabhängig, wo Änderungen vorgenommen werden.
+
+
+NOTE: In einer nicht einheitlichen Zugriffseinrichtung darf die Initiatorgruppe nicht repliziert werden, da auf dem zweiten Storage-Cluster eine separate Initiatorgruppe konfiguriert werden muss.
+
+image:sc-saphana-vmware-smas-image16.png[""]
+
+Indem Sie auf „Annäherungseinstellungen“ klicken, können Sie die zuvor im Setup der Initiatorgruppe vorgenommenen Konfigurationen überprüfen.
+
+image:sc-saphana-vmware-smas-image17.png[""]
+
+Der Ziel-Storage-Cluster muss konfiguriert und die „Initialisierungsbeziehung“ aktiviert sein.
+
+
+
+=== Synchronisierung
+
+Bei dem A700 Storage-Cluster (Quelle) ist die neue Beziehung jetzt aufgelistet.
+
+image:sc-saphana-vmware-smas-image18.png[""]
+
+Am A800 Storage-Cluster (Ziel) werden die neue Beziehung und der Status der Replizierung aufgeführt.
+
+image:sc-saphana-vmware-smas-image19.png[""]
+
+
+
+== Infrastrukturdatenspeicher
+
+Der Datastore, in dem die OS-Images des HANA-Systems, SnapCenter und das vSphere Plug-in gespeichert werden, wird in der gleichen Weise repliziert wie bei den HANA-Datenbankdatenspeichern beschrieben.
+
+
+
+== Primärer Standort
+
+Das aktive Synchronisierungsverhalten von SnapMirror ist symmetrisch, mit einer wichtigen Ausnahme: Konfiguration des primären Standorts.
+
+SnapMirror Active Sync betrachtet einen Standort als „Quelle“ und den anderen als „Ziel“. Dies impliziert eine One-Way-Replikationsbeziehung, aber dies gilt nicht für das IO-Verhalten. Die Replizierung ist bidirektional und symmetrisch, und die I/O-Reaktionszeiten sind auf beiden Seiten der Spiegelung identisch.
+
+Wenn die Replikationsverbindung verloren geht, stellen die LUN-Pfade auf der Quellkopie weiterhin Daten bereit, während die LUN-Pfade auf der Zielkopie erst dann nicht mehr verfügbar sind, wenn die Replikation wiederhergestellt ist und SnapMirror wieder in den synchronen Zustand wechselt. Die Pfade setzen dann das Bereitstellen von Daten fort.
+
+Der Effekt der Festlegung eines Clusters als Quelle steuert einfach, welches Cluster als Lese-/Schreib-Speichersystem überlebt, wenn die Replikationsverbindung verloren geht.
+
+Der primäre Standort wird von SnapCenter erkannt und zur Durchführung von Backup-, Wiederherstellungs- und Klonvorgängen verwendet.
+
+
+NOTE: Beachten Sie, dass Quelle und Ziel nicht an SVM oder Storage-Cluster gebunden sind, sondern für jede Replizierungsbeziehung unterschiedlich sein können.
+
+image:sc-saphana-vmware-smas-image20.png[""]

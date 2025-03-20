@@ -65,6 +65,33 @@ entries:
     url: "/backup/saphana-br-scs-advanced-configuration-and-tuning.html"
   - title: Wo finden Sie weitere Informationen und Versionsverlauf
     url: "/backup/saphana-br-scs-where-to-find-additional-information.html"
+- title: SAP HANA Datensicherung und Hochverfügbarkeit mit SnapCenter, SnapMirror
+    Active Sync und VMware Metro Storage Cluster
+  entries:
+  - title: Inhalt des vorliegenden Dokuments
+    url: "/backup/hana-sc-vmware-smas-scope.html"
+  - title: Überblick über die Hochverfügbarkeit mit SAP HANA
+    url: "/backup/hana-sc-vmware-smas-hana-ha.html"
+  - title: Beispiel für eine Konfigurationsübersicht
+    url: "/backup/hana-sc-vmware-smas-example-config.html"
+  - title: HANA-Systembereitstellung und -Installation
+    url: "/backup/hana-sc-vmware-smas-hana-install.html"
+  - title: Konfiguration der aktiven SnapMirror-Synchronisierung
+    url: "/backup/hana-sc-vmware-smas-smas-config.html"
+  - title: SnapCenter-Konfiguration
+    url: "/backup/hana-sc-vmware-smas-sc-config.html"
+  - title: SnapCenter-Backup-Vorgänge
+    url: "/backup/hana-sc-vmware-smas-sc-backup.html"
+  - title: SnapCenter Restore und Recovery
+    url: "/backup/hana-sc-vmware-smas-sc-restore.html"
+  - title: Aktualisierung des SAP-Systems
+    url: "/backup/hana-sc-vmware-smas-sc-system-refresh.html"
+  - title: Nicht datenbasierte SnapCenter-Volumes
+    url: "/backup/hana-sc-vmware-smas-sc-non-data-vols.html"
+  - title: Failover-Szenarien
+    url: "/backup/hana-sc-vmware-smas-failover-scenarios.html"
+  - title: Zusätzliche Informationen und Versionsverlauf
+    url: "/backup/hana-sc-vmware-smas-additional-info.html"
 - title: BlueXP Backup and Recovery for SAP HANA – Cloud-Objekt-Storage als Backup-Ziel
   entries:
   - title: BlueXP Backup and Recovery for SAP HANA – Überblick
