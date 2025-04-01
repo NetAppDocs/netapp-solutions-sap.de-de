@@ -36,15 +36,38 @@ Die Verwendung von NetApp Volume Encryption (NVE) und NetApp Aggregate Encryptio
 
 
 
-== Um Servicequalität bieten zu können
+== Quality of Service
 
-Mit QoS lässt sich der Storage-Durchsatz für spezifische SAP HANA Systeme oder für SAP Applikationen ohne SAP Applikationen auf einem gemeinsam genutzten Controller begrenzen. Ein Anwendungsfall wäre, den Durchsatz von Entwicklungs- und Testsystemen zu begrenzen, damit sie bei einem gemischten Setup keinen Einfluss auf die Produktionssysteme haben.
+QoS kann verwendet werden, um den Storage-Durchsatz für bestimmte SAP HANA Systeme oder nicht-SAP Applikationen auf einem Shared Controller zu begrenzen.
 
-Während des Dimensionierungsprozesses sollten Sie die Performance-Anforderungen eines nicht für die Produktion verwendeten Systems ermitteln. Entwicklungs- und Testsysteme können mit niedrigeren Leistungswerten dimensioniert werden, typischerweise im Bereich von 20 % bis 50 % eines von SAP definierten Produktionssystems-KPI.
 
-Ab ONTAP 9 wird QoS auf Storage-Volume-Ebene konfiguriert und verwendet maximale Werte für Durchsatz (MB/s) und I/O-Menge (IOPS).
 
-Ein großer I/O-Schreibvorgang wirkt sich am stärksten auf die Performance des Storage-Systems aus. Daher sollte die QoS-Durchsatzbegrenzung auf einen Prozentsatz der entsprechenden KPI-Werte für die SAP HANA-Speicherleistung in den Daten- und Protokoll-Volumes gesetzt werden.
+=== Produktion und Entwicklung/Test
+
+Ein Anwendungsfall wäre, den Durchsatz von Entwicklungs- und Testsystemen zu begrenzen, damit sie bei einem gemischten Setup keinen Einfluss auf die Produktionssysteme haben. Während des Dimensionierungsprozesses sollten Sie die Performance-Anforderungen eines nicht für die Produktion verwendeten Systems ermitteln. Entwicklungs- und Testsysteme können mit niedrigeren Leistungswerten dimensioniert werden, typischerweise im Bereich von 20 % bis 50 % eines von SAP definierten Produktionssystems-KPI. Ein großer I/O-Schreibvorgang wirkt sich am stärksten auf die Performance des Storage-Systems aus. Daher sollte die QoS-Durchsatzbegrenzung auf einen Prozentsatz der entsprechenden KPI-Werte für die SAP HANA-Speicherleistung in den Daten- und Protokoll-Volumes gesetzt werden.
+
+
+
+=== Shared-Umgebungen
+
+Ein weiterer Anwendungsfall ist die Einschränkung des Durchsatzes bei umfangreichen Schreib-Workloads, insbesondere um zu vermeiden, dass diese Workloads Auswirkungen auf andere latenzempfindliche Schreib-Workloads haben. In solchen Umgebungen empfiehlt es sich, eine QoS-Gruppenrichtlinie ohne gemeinsam genutzten Durchsatz auf jede LUN innerhalb jeder SVM (Storage Virtual Machine) anzuwenden, um den maximalen Durchsatz jedes einzelnen Storage-Objekts auf den angegebenen Wert zu beschränken. So besteht weniger Gefahr, dass ein einzelner Workload andere Workloads negativ beeinflussen kann.
+
+Dazu muss über die CLI des ONTAP-Clusters für jede SVM eine Gruppenrichtlinie erstellt werden:
+
+....
+qos policy-group create -policy-group <policy-name> -vserver <vserver name> -max-throughput 1000MB/s -is-shared false
+....
+Und auf jede LUN in der SVM angewendet. Nachfolgend sehen Sie ein Beispiel, um die Richtliniengruppe auf alle vorhandenen LUNs innerhalb einer SVM anzuwenden:
+
+....
+lun modify -vserver <vserver name>  -path * -qos-policy-group  <policy-name>
+....
+Dies muss für jede SVM geschehen. Der Name der QoS-Polizeigruppe für jede SVM muss unterschiedlich sein. Für neue LUNs kann die Richtlinie direkt angewendet werden:
+
+....
+lun create -vserver <vserver_name> -path  /vol/<volume_name>/<lun_name>   -size <size> -ostype <e.g. linux>  -qos-policy-group <policy-name>
+....
+Es wird empfohlen, 1000 MB/s als maximalen Durchsatz für eine bestimmte LUN zu verwenden. Wenn eine Applikation einen höheren Durchsatz erfordert, müssen mehrere LUNs mit LUN-Striping verwendet werden, um die erforderliche Bandbreite bereitzustellen. Dieser Leitfaden enthält ein Beispiel für SAP HANA auf Basis von Linux LVM in Abschnitt https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_fc_host_setup.html#create-lvm-volume-groups-and-logical-volumes["Host-Setup"].
 
 
 
