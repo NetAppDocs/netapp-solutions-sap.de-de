@@ -70,6 +70,9 @@ lun create -vserver <vserver_name> -path  /vol/<volume_name>/<lun_name>   -size 
 Es wird empfohlen, 1000 MB/s als maximalen Durchsatz für eine bestimmte LUN zu verwenden. Wenn eine Applikation einen höheren Durchsatz erfordert, müssen mehrere LUNs mit LUN-Striping verwendet werden, um die erforderliche Bandbreite bereitzustellen. Dieser Leitfaden enthält ein Beispiel für SAP HANA auf Basis von Linux LVM in Abschnitt https://docs.netapp.com/us-en/netapp-solutions-sap/bp/saphana_aff_fc_host_setup.html#create-lvm-volume-groups-and-logical-volumes["Host-Setup"].
 
 
+NOTE: Das Limit gilt auch für Lesevorgänge. Daher genügend LUNs verwenden, um die erforderlichen SLAs für die Startzeit der SAP HANA-Datenbank und für Backups zu erfüllen.
+
+
 
 == NetApp FabricPool
 
