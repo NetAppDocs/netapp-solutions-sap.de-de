@@ -20,7 +20,7 @@ summary:
 [role="lead"]
 Im Lab Setup verwenden wir eine einheitliche Zugriffskonfiguration, auf der beide ESX Hosts Zugriff auf beide Storage Cluster haben. In den nächsten Abschnitten beschreiben wir die einheitliche Zugriffskonfiguration, heben aber auch die Unterschiede für ein nicht einheitliches Setup hervor.
 
-image:sc-saphana-vmware-smas-image1.png[""]
+image:sc-saphana-vmware-smas-image1.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 
 

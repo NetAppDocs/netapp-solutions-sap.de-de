@@ -10,12 +10,9 @@ summary:
 :icons: font
 :linkattrs: 
 :imagesdir: ../media/
-:firstname: ---
-:author: ---
-:authorinitials: -
-:authors: ---
 
 
+[role="lead"]
 Klonvorgänge können am primären Standort oder im sekundären Storage ausgeführt werden.
 
 Das geklonte Volume ist nicht Teil der HANA-Konsistenzgruppe und wird nicht mit der aktiven SnapMirror-Synchronisierung repliziert.

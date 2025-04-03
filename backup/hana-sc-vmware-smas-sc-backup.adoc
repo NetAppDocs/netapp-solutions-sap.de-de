@@ -11,15 +11,12 @@ summary:
 :icons: font
 :linkattrs: 
 :imagesdir: ../media/
-:firstname: ---
-:author: ---
-:authorinitials: -
-:authors: ---
 
 
+[role="lead"]
 Bei jedem Backup-Vorgang führt SnapCenter die Erkennung auf VMware-Seite aus und erkennt den primären Standort. Bei einem Storage-Failover erkennt SnapCenter den neuen primären Standort, sobald ein Backup für die Ressource ausgeführt wurde.
 
-image:sc-saphana-vmware-smas-image31.png[""]
+image:sc-saphana-vmware-smas-image31.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 
 
@@ -27,13 +24,13 @@ image:sc-saphana-vmware-smas-image31.png[""]
 
 In der Topologieansicht zeigt SnapCenter die Backups sowohl des Quell- als auch des Ziel-Storage-Clusters.
 
-image:sc-saphana-vmware-smas-image32.png[""]
+image:sc-saphana-vmware-smas-image32.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
-image:sc-saphana-vmware-smas-image33.png[""]
+image:sc-saphana-vmware-smas-image33.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 Durch Klicken auf die Zählzahl im sekundären Speicher wird die aktuelle Beziehung und Replikationsrichtung angezeigt. Die Quelle ist immer der aktuelle primäre Standort. Nach einem Speicher-Failover ändert sich der primäre Standort und die Anzeige wird entsprechend angepasst. Alle Backups verfügen immer über die gleiche Beziehung, je nach Speichersystem derzeit der primäre Standort ist.
 
-image:sc-saphana-vmware-smas-image34.png[""]
+image:sc-saphana-vmware-smas-image34.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 
 
@@ -43,8 +40,8 @@ Die von SnapCenter erstellten Snapshot Backups sind bei beiden HANA Daten-Volume
 
 Die Abbildung unten zeigt die Snapshots des HANA-Daten-Volumes beim A700-Cluster.
 
-image:sc-saphana-vmware-smas-image35.png[""]
+image:sc-saphana-vmware-smas-image35.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 Die Abbildung unten zeigt die Snapshots des HANA-Daten-Volumes auf dem A800 Cluster.
 
-image:sc-saphana-vmware-smas-image36.png[""]
+image:sc-saphana-vmware-smas-image36.png["Abbildung zeigt den Inhalt, der besprochen wird"]

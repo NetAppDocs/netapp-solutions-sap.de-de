@@ -30,7 +30,7 @@ Bei einem Ausfall am primären Standort, Speicher, Host oder kompletten Standort
 
 Eine vollständige Beschreibung aller Konfigurationsoptionen und Replikationsszenarien finden Sie unter https://help.sap.com/docs/SAP_HANA_PLATFORM/4e9b18c116aa42fc84c7dbfd02111aba/afac7100bc6d47729ae8eae32da5fdec.html["SAP HANA System Replication ++++ SAP Help Portal"].
 
-image:sc-saphana-vmware-smas-image2.png[""]
+image:sc-saphana-vmware-smas-image2.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 
 
@@ -52,7 +52,7 @@ Bei einem Storage-Ausfall greift das HANA-System über den zweiten FCP-Pfad tran
 
 Im Falle eines Host- oder vollständigen Standortausfalls muss ein neuer Server am sekundären Standort bereitgestellt werden, um auf die Daten vom ausgefallenen Host zugreifen zu können. Dabei handelt es sich normalerweise um ein Test- oder QA-System der gleichen Größe wie die Produktion, das nun heruntergefahren und für die Ausführung des Produktionssystems verwendet wird. Nachdem die LUNs am sekundären Standort mit dem neuen Host verbunden wurden, muss die HANA-Datenbank gestartet werden. Das gesamte RTO hängt daher von der für die Bereitstellung des Hosts benötigten Zeit und der Startzeit der HANA-Datenbank ab.
 
-image:sc-saphana-vmware-smas-image3.png[""]
+image:sc-saphana-vmware-smas-image3.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 
 
@@ -64,7 +64,7 @@ Bei einem Storage-Ausfall greift der ESX-Host automatisch auf die gespiegelte Ko
 
 Im Fall eines Host- oder vollständigen Standortausfalls wird vSphere HA verwendet, um die HANA-VM auf dem sekundären ESX-Host zu starten. Wenn die HANA VM ausgeführt wird, muss die HANA Datenbank gestartet werden. Die gesamte RTO hängt daher hauptsächlich von der Startzeit der HANA-Datenbank ab.
 
-image:sc-saphana-vmware-smas-image4.png[""]
+image:sc-saphana-vmware-smas-image4.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 
 

@@ -26,14 +26,14 @@ In diesem Kapitel werden die Installation und Konfiguration des für eine VMware
 
 Die Abbildung unten zeigt die Storage- und Datastore-Konfiguration für das HANA-System. Sie müssen für jedes Dateisystem des HANA-Systems ein dediziertes Volume, eine LUN oder einen Datastore konfigurieren. Datastores dürfen nicht über mehrere HANA-Systeme oder andere Workloads hinweg freigegeben werden.
 
-image:sc-saphana-vmware-smas-image5.png[""]
+image:sc-saphana-vmware-smas-image5.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 Alle drei LUNs des HANA-Systems (hana++_++Data++_++SMA, hana++_++log+_++SAM und hana+_++shared+_++SMA) sowie die LUN für die OS-Images und SnapCenter-Komponenten wurden beim A700-Storage-Cluster bereitgestellt.
 
 
 NOTE: Alle Volumes des HANA-Systems müssen in derselben SVM bereitgestellt werden. In der später beschriebenen Konfiguration für aktive SnapMirror-Synchronisierung wird eine Konsistenzgruppe über alle drei HANA-Volumes erstellt, bei der sich die Volumes in derselben SVM befinden müssen. Das Infrastruktur-Volume wird sich in einer anderen Konsistenzgruppe befinden und könnte sich daher in einer anderen SVM befinden.
 
-image:sc-saphana-vmware-smas-image6.png[""]
+image:sc-saphana-vmware-smas-image6.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 Eine Initiatorgruppe muss konfiguriert werden und die oben genannten LUNs müssen dem ESX-1 Host zugeordnet werden, der sich in unserem Lab-Setup in unmittelbarer Nähe des A700 Storage-Systems befindet.
 
@@ -43,7 +43,7 @@ Eine Initiatorgruppe muss konfiguriert werden und die oben genannten LUNs müsse
 
 Wir haben drei Datastores für das HANA-System mit den drei LUNs erstellt, die wir zuvor bereitgestellt haben. Darüber hinaus haben wir mit der Infrastruktur-LUN einen Infrastruktur-Datastore erstellt.
 
-image:sc-saphana-vmware-smas-image7.png[""]
+image:sc-saphana-vmware-smas-image7.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 
 
@@ -57,7 +57,7 @@ In unserem Lab-Setup haben wir eine neue VM implementiert und die VMDK für das 
 
 Der HANA VM wurden drei neue Festplatten hinzugefügt, jede Festplatte in einem der Datenspeicher, die für das HANA-System erstellt wurden.
 
-image:sc-saphana-vmware-smas-image8.png[""]
+image:sc-saphana-vmware-smas-image8.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 
 
@@ -67,7 +67,7 @@ Der Parameter Disk.EnableUUID muss hinzugefügt und auf TRUE gesetzt werden. Der
 
 Die VM muss angehalten werden, bevor Parameter hinzugefügt werden können.
 
-image:sc-saphana-vmware-smas-image9.png[""]
+image:sc-saphana-vmware-smas-image9.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 Die Funktionalität kann mit dem folgenden Befehl überprüft werden.
 

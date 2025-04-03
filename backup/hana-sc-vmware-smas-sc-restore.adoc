@@ -6,9 +6,13 @@ summary:
 ---
 = SnapCenter Restore und Recovery
 :allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
 
 
-'''
+[role="lead"]
 Wenn virtuelle Ressourcen auf VMFS/VMDK gespeichert sind, erfolgt eine SnapCenter-Wiederherstellung immer durch einen Klon-, Mount- und Kopiervorgang.
 
 . SnapCenter erstellt auf Basis des ausgewählten Snapshots einen Volume-Klon
@@ -24,11 +28,11 @@ Die Gesamtlaufzeit des Wiederherstellungsvorgangs ist daher abhängig von der Da
 
 Wenn eine Ressource mit SnapMirror Active Sync konfiguriert ist, kann die SnapCenter-Wiederherstellung auch nur am aktuellen primären Standort ausgewählt werden.
 
-image:sc-saphana-vmware-smas-image37.png[""]
+image:sc-saphana-vmware-smas-image37.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 Während der Restore- und Recovery-Vorgang ausgeführt wird, sehen Sie ein neues geklontes Volume, das am aktuellen Primärstandort erstellt wurde.
 
-image:sc-saphana-vmware-smas-image38.png[""]
+image:sc-saphana-vmware-smas-image38.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 Auf dem HANA Linux Host sehen Sie eine neue Festplatte, die auf den Host gemountet wurde. Wenn die Wiederherstellung abgeschlossen ist, werden die Festplatte, Datenspeicher und Volumes von SnapCenter wieder entfernt.
 

@@ -11,11 +11,10 @@ summary:
 :icons: font
 :linkattrs: 
 :imagesdir: ../media/
-:firstname: ---
-:author: ---
-:authorinitials: -
-:authors: ---
 
+
+[role="lead"]
+In diesem Artikel werden die für diese Lösung erforderlichen Konfigurationsschritte beschrieben.
 
 
 
@@ -25,9 +24,9 @@ Storage-Cluster und relevante SVMs müssen aktiviert werden.
 
 Der ONTAP Mediator muss auf beiden Storage-Clustern verfügbar und konfiguriert sein.
 
-image:sc-saphana-vmware-smas-image10.png[""]
+image:sc-saphana-vmware-smas-image10.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
-image:sc-saphana-vmware-smas-image11.png[""]
+image:sc-saphana-vmware-smas-image11.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 
 
@@ -41,7 +40,7 @@ Der Zweck einer Konsistenzgruppe besteht darin, gleichzeitige Snapshot Images me
 
 Für die Replizierung von HANA-Systemen muss die Konsistenzgruppe alle Volumes enthalten, die vom einzelnen HANA-System verwendet werden (Daten, Protokoll und Shared). Volumes, die Teil einer Konsistenzgruppe sein sollten, müssen auf derselben SVM gespeichert werden. Betriebssystem-Images können auf einem separaten Volume mit einer eigenen Konsistenzgruppe gespeichert werden. Die Abbildung unten zeigt ein Konfigurationsbeispiel mit zwei HANA-Systemen.
 
-image:sc-saphana-vmware-smas-image12.png[""]
+image:sc-saphana-vmware-smas-image12.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 
 
@@ -51,9 +50,9 @@ In unserem Lab-Setup haben wir eine Initiatorgruppe erstellt, die beide Storage-
 
 Mithilfe der Annäherungseinstellungen wurde festgelegt, welcher ESX Host sich in der Nähe des Storage-Clusters befindet. In unserem Fall liegt die A700 in der Nähe von ESX-1 und die A800 ist nah an ESX-2.
 
-image:sc-saphana-vmware-smas-image13.png[""]
+image:sc-saphana-vmware-smas-image13.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
-image:sc-saphana-vmware-smas-image14.png[""]
+image:sc-saphana-vmware-smas-image14.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 
 NOTE: In einem nicht einheitlichen Access Setup darf die Initiatorgruppe im primären Storage-Cluster (A700) nur die Initiatoren des ESX-1-Hosts einschließen, da es keine SAN-Verbindung zu ESX-2 gibt. Darüber hinaus müssen Sie eine andere Initiatorgruppe auf dem zweiten Storage-Cluster (A800) konfigurieren, der nur die Initiatoren des ESX-2 Hosts enthalten. Die Proximity-Konfiguration und die Replizierung von Initiatorgruppen sind nicht erforderlich.
@@ -62,7 +61,7 @@ NOTE: In einem nicht einheitlichen Access Setup darf die Initiatorgruppe im prim
 
 == Konfigurieren Sie den Schutz mit ONTAP System Manager
 
-image:sc-saphana-vmware-smas-image15.png[""]
+image:sc-saphana-vmware-smas-image15.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 
 
@@ -75,11 +74,11 @@ Eine neue Konsistenzgruppe muss erstellt werden, und alle drei LUNs des HANA-Sys
 
 NOTE: In einer nicht einheitlichen Zugriffseinrichtung darf die Initiatorgruppe nicht repliziert werden, da auf dem zweiten Storage-Cluster eine separate Initiatorgruppe konfiguriert werden muss.
 
-image:sc-saphana-vmware-smas-image16.png[""]
+image:sc-saphana-vmware-smas-image16.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 Indem Sie auf „Annäherungseinstellungen“ klicken, können Sie die zuvor im Setup der Initiatorgruppe vorgenommenen Konfigurationen überprüfen.
 
-image:sc-saphana-vmware-smas-image17.png[""]
+image:sc-saphana-vmware-smas-image17.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 Der Ziel-Storage-Cluster muss konfiguriert und die „Initialisierungsbeziehung“ aktiviert sein.
 
@@ -89,11 +88,11 @@ Der Ziel-Storage-Cluster muss konfiguriert und die „Initialisierungsbeziehung�
 
 Bei dem A700 Storage-Cluster (Quelle) ist die neue Beziehung jetzt aufgelistet.
 
-image:sc-saphana-vmware-smas-image18.png[""]
+image:sc-saphana-vmware-smas-image18.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 Am A800 Storage-Cluster (Ziel) werden die neue Beziehung und der Status der Replizierung aufgeführt.
 
-image:sc-saphana-vmware-smas-image19.png[""]
+image:sc-saphana-vmware-smas-image19.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 
 
@@ -118,4 +117,4 @@ Der primäre Standort wird von SnapCenter erkannt und zur Durchführung von Back
 
 NOTE: Beachten Sie, dass Quelle und Ziel nicht an SVM oder Storage-Cluster gebunden sind, sondern für jede Replizierungsbeziehung unterschiedlich sein können.
 
-image:sc-saphana-vmware-smas-image20.png[""]
+image:sc-saphana-vmware-smas-image20.png["Abbildung zeigt den Inhalt, der besprochen wird"]
