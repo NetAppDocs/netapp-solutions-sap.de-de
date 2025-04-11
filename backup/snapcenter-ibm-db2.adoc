@@ -1,0 +1,341 @@
+---
+sidebar: sidebar 
+permalink: backup/snapcenter-ibm-db2.html 
+keywords: SAP, snapcenter, IBM DB2, database, backup, restore 
+summary: In diesem Dokument werden die Besonderheiten der SnapCenter-Integration für die in einer SAP-Umgebung verwendete IBM DB2-Datenbank beschrieben. 
+---
+= SnapCenter Integration für IBM DB2 Database
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+In diesem Dokument werden die Besonderheiten der SnapCenter-Integration für die in einer SAP-Umgebung verwendete IBM DB2-Datenbank beschrieben.
+
+
+
+== Einführung
+
+Das Dokument soll keine Schritt-für-Schritt-Beschreibung der Einrichtung der gesamten Umgebung sein, sondern umfasst Konzepte und relevante Details zu:
+
+* Beispiel für eine Konfigurationsübersicht
+* Beispiellayout
+* Schutz von DB2-Datenbanken
+* Wiederherstellung und Wiederherstellung der DB2-Datenbank
+
+
+Autor: Michael Schlosser, NetApp
+
+
+
+== Beispiel für eine Konfigurationsübersicht
+
+Beispiel für eine Implementierung für das SnapCenter DB2 Plug-in für ein SAP-System auf der Azure Plattform.
+
+
+NOTE: Diese Implementierung beschreibt die minimal erforderliche Volume-Konfiguration.
+
+Alternativ könnte die in diesem Abschnitt beschriebene Volume-Struktur link:https://techcommunity.microsoft.com/blog/sapapplications/db2-installation-guide-on-anf/3709437["MS Technical Community-Blog"]verwendet werden.
+
+image:sc-ibm-db2-image01.png["Diagramm der Beispielimplementierung mit IBM DB2"]
+
+
+
+== Demo-Umgebung
+
+
+
+=== Softwareversionen
+
+[cols="50%, 50%"]
+|===
+| *Software* | *Version* 
+
+
+| Linux BS | SLES FÜR SAP 15 SP5 
+
+
+| SAP | SAP NetWeaver 7.5 unterstützt 
+
+
+| DB2 | 10.5.0.7 
+
+
+| SnapCenter | 6,1 
+|===
+
+
+=== DB2-Volume-Design
+
+Das folgende Least-Volume-Layout muss verwendet werden, um Backup-/Recovery- und Klonfälle für die DB2-Datenbank zu ermöglichen. Die Beispielkonfiguration verwendet <SID>: D01.
+
+[cols="20%, 20%, 30%, 30%"]
+|===
+| *Volumenname* | *Verzeichnis (qtree) auf Volumen* | *Mount-Punkt auf Server* | *Kommentar* 
+
+
+| <SID>-sapdb2 | db2 | /db2 |  
+
+
+|  |  | /db2/<SID> | Übergeordnetes Verzeichnis für DB2-bezogene Dateien 
+
+
+|  |  | /db2/db2<sid> | Home-Verzeichnis der Benutzer db2 <sid> und DB2 Software 
+
+
+|  |  | /db2/<SID>/db2dump | DB2-Diagnoseprotokoll und Dump-Dateien 
+
+
+|  |  | /db2/<SID>/Backup | Backup-Speicherort (kann auf einem anderen Volume platziert werden) 
+
+
+|  |  | /db2/<SID>/log_ARCH | Offline Redo Logs (möglicherweise auf einem anderen Volume platziert – Snapshot wird ausgelöst) 
+
+
+|  |  | /db2/<SID>/log_dir | Online Redo Logs (können auf einem anderen Volume platziert werden – Snapshot wird ausgelöst) 
+
+
+|  | <sid>-Lösungen m | /Home/<sid>-Programm m | Home Verzeichnis der Benutzer <sid> Hmm 
+
+
+|  | <sid> auslassen | /Home/<sid> | Home Verzeichnis des Benutzers <sid> 
+
+
+|  | Usrsaptrans | /Usr/sap/trans | Transportverzeichnis 
+
+
+|  | <SID> | /Usr/sap/<SID> | Usr sap 
+
+
+|  | <SID> | /Sapmnt/<SID> | SAP GlobalHost-Verzeichnis 
+
+
+| <SID>-Daten | sapdata1 | /db2/<SID>/sapdata1 | DB-Daten 
+
+
+|  | sapdata2 | /db2/<SID>/sapdata2 | DB-Daten 
+
+
+|  | sapdata3 | /db2/<SID>/sapdata3 | DB-Daten 
+
+
+|  | sapdata4 | /db2/<SID>/sapdata4 | DB-Daten 
+
+
+|  | saptmp1 | /db2/<SID>/saptmp1 | DB Temp-Dateien 
+
+
+|  | saptmp2 | /db2/<SID>/saptmp2 | DB Temp-Dateien 
+
+
+|  | saptmp3 | /db2/<SID>/saptmp3 | DB Temp-Dateien 
+
+
+|  | saptmp4 | /db2/<SID>/saptmp4 | DB Temp-Dateien 
+
+
+|  | Db2 <sid> | /db2/<SID>/db2<sid> | Instanzdateien 
+|===
+Da die automatische Ermittlung standardmäßig für das DB2-Plug-in aktiviert ist, wird ein Snapshot für Volumes erstellt, die den folgenden Dateipfaden entsprechen.
+
+image:sc-ibm-db2-image02.png["Screenshot der Datenbankdateipfade"]
+
+
+
+=== Schritte zum Schutz von Datenbank D01
+
+* Prüfen Sie die Dateiverteilung gemäß dem Beispiellayout
+* Prüfen Sie die Voraussetzungen für den Host (vm-d01).
+* Voraussetzungen für die Datenbank prüfen (D01)
+* SnapCenter-Agent auf Host bereitstellen/installieren (vm-d01)
+* Erstellen Sie die Ressourcenkonfiguration der SnapCenter-Instanz
+
+
+
+
+=== Voraussetzungen auf Host
+
+Weitere aktuelle Informationen finden Sie hier:
+
+* https://docs.netapp.com/us-en/snapcenter/protect-scu/reference_prerequisites_for_adding_hosts_and_installing_snapcenter_plug_ins_package_for_linux.html[]
+* https://docs.netapp.com/us-en/snapcenter/protect-db2/prerequisites-for-using-snapcenter-plug-in-for-ibm-db2.html[]
+
+
+Bevor Sie einen Host hinzufügen und das Plug-in-Paket für Linux installieren, müssen Sie alle Anforderungen erfüllen.
+
+* Wenn Sie iSCSI verwenden, muss der iSCSI-Dienst ausgeführt werden.
+* Sie können entweder die passwortbasierte Authentifizierung für den Root- oder nicht-Root-Benutzer oder die SSH-Schlüsselauthentifizierung verwenden.
+* Das SnapCenter-Plug-in für Unix-Dateisysteme kann von einem Benutzer installiert werden, der kein Root-Benutzer ist. Sie sollten jedoch die sudo-Berechtigungen für den nicht-Root-Benutzer konfigurieren, um den Plug-in-Prozess zu installieren und zu starten. Nach der Installation des Plug-ins werden die Prozesse als effektiver nicht-Root-Benutzer ausgeführt.
+* Anmeldedaten mit Authentifizierungsmodus als Linux für den Installationsbenutzer erstellen.
+* Sie müssen Java 11 auf Ihrem Linux-Host installiert haben.
+* Stellen Sie sicher, dass Sie nur die zertifizierte Version von JAVA 11 auf dem Linux-Host installiert haben
+* Informationen zum Herunterladen von JAVA finden Sie unter Java Downloads für alle Betriebssysteme
+* Sie sollten bash als Standard-Shell für die Plug-in-Installation verwenden.
+
+
+
+
+=== Voraussetzungen für die Datenbank – Aktivieren Sie Protokollierung und Backups
+
+
+NOTE: Um Offline-Protokolle zu aktivieren, ist ein vollständiges Offline-Backup der Datenbank erforderlich. In der Regel ist es bereits für produktive Systeme aktiviert.
+
+* Verzeichnisse für Backup und log_ARCH erstellen (/db2/D01/Backup, /sybase/D01/log_ARCH)
+* Logarchmeth1 aktivieren (als OS-user db2d01)
++
+** db2-Update db cfg für D01 mit logarchmeth1-LAUFWERK:/db2/D01/log_ARCH/
+
+
+* Offline-Backup erstellen (als OS-user db2d01)
++
+** Db2STOP-Kraft
+** Db2start Admin-Modus eingeschränkter Zugriff
+** db2 Backup db D01 auf /db2/D01/Backup
+** db2 aktiviert db D01
+
+
+
+
+
+
+=== Bereitstellen des SnapCenter-Agenten auf der Host-vm-d01
+
+Weitere Informationen finden Sie im link:https://docs.netapp.com/us-en/snapcenter/protect-scu/task_add_hosts_and_install_the_snapcenter_plug_ins_package_for_linux.html["SnapCenter-Dokumentation"].
+
+Wählen Sie IBM DB2 und Unix File Systems Plugins aus.
+
+image:sc-ibm-db2-image03.png["Screenshot des Hinzufügens von IBM DB2- und Unix-Dateisystem-Plugins"]
+
+
+NOTE: Nach der Installation wird eine Erkennung der Datenbanken auf dem Host ausgelöst.
+
+image:sc-ibm-db2-image04.png["Screenshot der Datenbankerkennung auf dem Host"]
+
+
+
+=== Ressourcenkonfiguration für Datenbank D01 erstellen
+
+Wählen Sie erkannte Ressource D01
+
+image:sc-ibm-db2-image05.png["Screenshot der Datenbankerkennung auf dem Host"]
+
+Konfigurieren Sie Den Snapshot-Namen
+
+image:sc-ibm-db2-image06.png["Screenshot des Dialogfelds „Snapshot-Namen konfigurieren“"]
+
+Es sind keine spezifischen Anwendungseinstellungen erforderlich. Konfigurieren Sie Richtlinien- und Benachrichtigungseinstellungen nach Bedarf.
+
+image:sc-ibm-db2-image07.png["Screenshot der Konfiguration von Richtlinien- und Benachrichtigungseinstellungen"]
+
+Und beenden Sie die Konfiguration.
+
+
+
+==== Sequenz zum Wiederherstellen von System D01
+
+. SAP System D01 stoppen (einschließlich Datenbank)
+. SnapCenter-Sicherung wiederherstellen (Volume D01-Daten)
++
+.. Unmounten Sie Dateisysteme
+.. Volume Wiederherstellen
+.. Mounten Sie Dateisysteme
+.. Initialisieren Sie die Datenbank als Spiegel db
+
+
+. Datenbank D01 wiederherstellen (mit db2 Rollforward)
+. Starten Sie SAP System D01
+
+
+
+
+=== Datenbank D01 wiederherstellen
+
+* Beenden Sie SAP System + DB D01 auf Host vm-d01
++
+** User d01adm: Stopp
+
+
+* Backup Wiederherstellen
++
+** SnapCenter GUI: Wählen Sie erforderliche Sicherung für Wiederherstellung
++
+image:sc-ibm-db2-image08.png["Screenshot der SnapCenter GUI zur Auswahl von Backup für die Wiederherstellung"]
+
+** Für die ANF Implementierung – nur vollständige Ressource verfügbar
++
+image:sc-ibm-db2-image09.png["Screenshot der SnapCenter GUI zur Auswahl von Backup für die Wiederherstellung"]
+
+
+
+
+
+Die Zusammenfassung wird angezeigt und mit „Fertig stellen“ wird die eigentliche Wiederherstellung gestartet.
+
+image:sc-ibm-db2-image10.png["Screenshot der Zusammenfassung für die Sicherung für die Wiederherstellung"]
+
+
+NOTE: „Db2inidb D01 als Spiegel“ wird im Rahmen des SnapCenter-Wiederherstellungs-Workflows ausgeführt.
+
+* Überprüfen Sie den Wiederherstellungsstatus Datenbank D01 (als Benutzer db2d01)
++
+** db2 Rollforward db D01 Abfragestatus
+
+
+* Datenbank nach Bedarf wiederherstellen – hier ist eine verlustfreie Wiederherstellung angestachelt (als Benutzer db2d01)
++
+** db2 Rollforward db D01 zum Ende der Protokolle
+
+
+* Stoppen Sie die Datenbankwiederherstellung und Online-Datenbank D01 (als Benutzer db2d01)
++
+** db2 Rollforward db D01 Stopp
+
+
+* SAP-System starten (als Benutzer d01adm)
++
+** Startsap
+
+
+
+
+
+
+== Zusätzliche Informationen und Versionsverlauf
+
+Folgende neu kodierte Demos stehen zur Unterstützung der Dokumentation zur Verfügung.
+
+.Installation und Konfiguration DB2 Plugin, Backup der DB2-Datenbank
+video::66c87afd-ca53-4af1-8bd8-b2b900c1fb0f[panopto,width=360]
+.Wiederherstellung und Recovery von DB2-Datenbanken
+video::3a82e561-e5a2-4a23-9465-b2b900c1fac5[panopto,width=360]
+Sehen Sie sich die folgenden Dokumente und/oder Websites an, um mehr über die in diesem Dokument beschriebenen Informationen zu erfahren:
+
+* link:https://techcommunity.microsoft.com/blog/sapapplications/db2-installation-guide-on-anf/3709437["SAP auf DB2 Installation Azure auf ANF"]
+* link:https://docs.netapp.com/us-en/snapcenter/protect-scu/reference_prerequisites_for_adding_hosts_and_installing_snapcenter_plug_ins_package_for_linux.html["SnapCenter-Voraussetzungen für Plugins"]
+* link:https://docs.netapp.com/us-en/snapcenter/protect-scu/task_add_hosts_and_install_the_snapcenter_plug_ins_package_for_linux.html["SnapCenter Installations-Plugins"]
+* link:https://docs.netapp.com/us-en/snapcenter/protect-db2/snapcenter-plug-in-for-ibm-db2-overview.html["Dokumentation zum SnapCenter DB2 Plug-in"]
+* SAP-Hinweise (Anmeldung erforderlich)
++
+** 83000 - DB2/390: Backup- und Recovery-Optionen: https://me.sap.com/notes/83000[]
+** 594301 - DB6: Admin Tools und Split Mirror: https://me.sap.com/notes/594301[]
+
+
+* NetApp Produktdokumentation: https://www.netapp.com/support-and-training/documentation/[]
+* NetApp SAP-Lösungen – Informationen zu Anwendungsfällen, Best Practices und Vorteilen: https://docs.netapp.com/us-en/netapp-solutions-sap[]
+
+
+
+
+=== Versionsverlauf
+
+[cols="25 %, 25%, 50%"]
+|===
+| *Version* | *Datum* | *Versionsverlauf des Dokuments* 
+
+
+| Version 1.0 | April 2025 | Erste Version – Backup / Recovery DB2-Datenbank 
+|===
