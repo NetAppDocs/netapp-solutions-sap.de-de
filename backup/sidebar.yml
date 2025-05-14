@@ -169,13 +169,8 @@ entries:
       url: "/backup/saphana-dr-anf_update_history.html"
 - title: 'Technischer Bericht: SAP HANA Disaster Recovery with Storage Replication'
   url: "/backup/saphana-dr-sr_pdf_link.html"
-- title: 'Technischer Bericht: SAP HANA Backup and Recovery by Using Snap Creator'
-  url: "/backup/saphana-bandr-sc_pdf_link.html"
 - title: SAP HANA Backup und Recovery mit NetApp Storage und CommVault Software
   url: "/backup/saphana-commvault_pdf_link.html"
-- title: 'SAP HANA auf dem NetApp All-SAN-Array: Modernes SAN, Datensicherung und
-    Disaster Recovery'
-  url: "/backup/saphana-san_pdf_link.html"
 - title: SnapCenter Integration für SAP ASE Database
   url: "/backup/snapcenter-sap-ase.html"
 - title: SnapCenter Integration für IBM DB2 Database

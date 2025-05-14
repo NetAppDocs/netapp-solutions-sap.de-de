@@ -60,5 +60,3 @@ entries:
     url: "/lifecycle/libelle-sc-sap-hana-system-refresh-with-lsc,-azacsnap,-and-azure-netapp-files.html"
   - title: Weitere Informationen und Versionsverlauf finden
     url: "/lifecycle/libelle-sc-where-to-find-additional-information.html"
-- title: Integration von NetApp Storage in SAP Landscape Management
-  url: https://www.netapp.com/pdf.html?item=/media/17195-tr4018pdf.pdf
