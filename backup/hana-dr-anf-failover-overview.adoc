@@ -1,0 +1,35 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-failover-overview.html 
+keywords: log, backup, replication, disaster, recovery, system, data 
+summary: Je nachdem, ob die Backup-Replizierung des Protokolls Teil der Disaster Recovery-Einrichtung ist, unterscheiden sich die Schritte für Disaster Recovery leicht. 
+---
+= Disaster-Recovery-Failover
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Je nachdem, ob die Backup-Replizierung des Protokolls Teil der Disaster Recovery-Einrichtung ist, unterscheiden sich die Schritte für Disaster Recovery leicht. In diesem Abschnitt wird das Disaster Recovery Failover für die reine Daten-Backup-Replizierung sowie für die Replizierung von Daten-Volumes in Kombination mit der Replizierung des Backup-Volumes für das Protokoll beschrieben.
+
+Um Disaster Recovery-Failover auszuführen, gehen Sie wie folgt vor:
+
+. Bereiten Sie den Zielhost vor.
+. Brechen Sie die Replikationsbeziehungen auf und löschen Sie sie.
+. Wiederherstellung des Datenvolumens im letzten applikationskonsistenten Snapshot-Backup
+. Mounten Sie die Volumes am Ziel-Host.
+. Stellen Sie die HANA Datenbank wieder her.
++
+** Nur Daten-Volume-Recovery.
+** Recovery mit replizierten Protokoll-Backups vorführen.
+
+
+
+
+In den folgenden Abschnitten werden diese Schritte detailliert beschrieben und die folgende Abbildung zeigt Disaster-Failover-Tests.
+
+image:saphana-dr-anf_image26.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

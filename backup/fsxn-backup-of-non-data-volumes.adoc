@@ -1,0 +1,156 @@
+---
+sidebar: sidebar 
+permalink: backup/fsxn-backup-of-non-data-volumes.html 
+keywords: non-data volume, restore, recover 
+summary: Das Backup von nicht-Daten-Volumes ist ein integrierter Teil des SnapCenter und des SAP HANA Plug-ins. Der Schutz des Datenbank-Daten-Volumes reicht aus, um die SAP HANA Datenbank auf einen bestimmten Zeitpunkt wiederherzustellen, vorausgesetzt, die Ressourcen für die Datenbankinstallation und die erforderlichen Protokolle sind weiterhin verfügbar. 
+---
+= Backup nicht datenmengen
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Das Backup von nicht-Daten-Volumes ist ein integrierter Teil des SnapCenter und des SAP HANA Plug-ins.
+
+Der Schutz des Datenbank-Daten-Volumes reicht aus, um die SAP HANA Datenbank auf einen bestimmten Zeitpunkt wiederherzustellen, vorausgesetzt, die Ressourcen für die Datenbankinstallation und die erforderlichen Protokolle sind weiterhin verfügbar.
+
+Um das Recovery von Situationen durchzuführen, in denen andere nicht-Datendateien wiederhergestellt werden müssen, empfiehlt NetApp, eine zusätzliche Backup-Strategie für nicht-Daten-Volumes zu entwickeln, um das SAP HANA Datenbank-Backup zu erweitern. Je nach Ihren spezifischen Anforderungen kann sich das Backup von nicht-Daten-Volumes in den Einstellungen für die Planungsfrequenz und -Aufbewahrung unterscheiden, und Sie sollten bedenken, wie oft nicht-Datendateien geändert werden. Zum Beispiel das HANA Volume `/hana/shared` Enthält ausführbare Dateien, aber auch SAP HANA Trace-Dateien. Zwar ändern sich ausführbare Dateien nur beim Upgrade der SAP HANA Datenbank, doch benötigen die SAP HANA Trace-Dateien möglicherweise eine höhere Backup-Häufigkeit, um Problemsituationen mit SAP HANA zu analysieren.
+
+Dank des nicht-Daten-Volume-Backups von SnapCenter können Snapshot-Kopien aller relevanten Volumes in wenigen Sekunden mit derselben Speichereffizienz erstellt werden wie bei SAP HANA-Datenbank-Backups. Der Unterschied liegt darin, dass keine SQL Kommunikation mit der SAP HANA Datenbank erforderlich ist.
+
+
+
+=== Konfiguration von Ressourcen, die nicht von Datenvolumen stammen
+
+Führen Sie die folgenden Schritte aus, um nicht-Daten-Volume-Ressourcen zu konfigurieren:
+
+. Wählen Sie auf der Registerkarte Ressourcen die Option Non-Data-Volume, und klicken Sie auf Add SAP HANA Database.
++
+image:amazon-fsx-image60.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Wählen Sie in Schritt 1 des Dialogfelds SAP HANA-Datenbank hinzufügen in der Liste Ressourcentyp die Option nicht-Datenvolumen aus. Geben Sie einen Namen für die Ressource und den zugehörigen SID und den SAP HANA Plug-in-Host an, den Sie für die Ressource verwenden möchten, und klicken Sie dann auf Weiter.
++
+image:amazon-fsx-image61.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Fügen Sie die SVM und das Storage-Volume als Storage-Platzbedarf hinzu und klicken Sie dann auf Weiter.
++
+image:amazon-fsx-image62.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Um die Einstellungen zu speichern, klicken Sie im Zusammenfassungsschritt auf Fertig stellen.
++
+image:amazon-fsx-image63.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
++
+Das neue nicht-Daten-Volume wird nun SnapCenter hinzugefügt. Doppelklicken Sie auf die neue Ressource, um den Ressourcenschutz auszuführen.
+
++
+image:amazon-fsx-image64.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
++
+Der Ressourcenschutz erfolgt auf dieselbe Weise wie zuvor bei einer HANA-Datenbankressource.
+
+. Sie können jetzt ein Backup ausführen, indem Sie auf Jetzt sichern klicken.
++
+image:amazon-fsx-image65.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Wählen Sie die Richtlinie aus, und starten Sie den Backup-Vorgang.
++
+image:amazon-fsx-image66.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+
+
+Das Jobprotokoll von SnapCenter zeigt die einzelnen Workflow-Schritte.
+
+image:amazon-fsx-image67.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+Das neue Backup ist nun in der Ressourcenansicht der Ressource ohne Datenvolumen sichtbar.
+
+image:amazon-fsx-image68.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+
+
+= Restore und Recovery
+
+Mit SnapCenter werden für HANA-einzelne-Host-MDC-Systeme über einen einzelnen Mandanten automatisierte Restore- und Recovery-Vorgänge unterstützt. Bei Systemen mit mehreren Hosts oder MDC-Systemen mit mehreren Mandanten führt SnapCenter nur den Wiederherstellungsvorgang aus, und Sie müssen die Wiederherstellung manuell durchführen.
+
+Sie können eine automatisierte Wiederherstellung und Operation mit den folgenden Schritten ausführen:
+
+. Wählen Sie das Backup aus, das für den Wiederherstellungsvorgang verwendet werden soll.
+. Wählen Sie den Wiederherstellungstyp aus. Wählen Sie mit Volume Revert oder ohne Volume Revert die Option Complete Restore.
+. Wählen Sie den Wiederherstellungstyp aus den folgenden Optionen aus:
++
+** Auf den letzten Stand
+** Zeitpunktgenau
+** Zu einem bestimmten Daten-Backup
+** Keine Wiederherstellung
++
+Der ausgewählte Wiederherstellungstyp wird für die Wiederherstellung des Systems und der Mandanten-Datenbank verwendet.
+
+
+
+
+
+Als Nächstes führt SnapCenter die folgenden Operationen durch:
+
+. Die HANA-Datenbank wird gestoppt.
+. Die Datenbank wird wiederhergestellt. Je nach gewähltem Wiederherstellungstyp werden verschiedene Operationen ausgeführt.
++
+** Wenn das Zurücksetzen von Volumes ausgewählt wird, hängt SnapCenter das Volume ab, stellt das Volume mithilfe von Volume-basierten SnapRestore auf der Storage-Ebene wieder her und hängt das Volume an.
+** Wenn das Zurücksetzen von Volumes nicht ausgewählt wird, stellt SnapCenter alle Dateien mithilfe einzelner Datei-SnapRestore-Vorgänge auf der Storage-Ebene wieder her.
+
+
+. Es stellt die Datenbank wieder her:
++
+.. Durch Wiederherstellen der Systemdatenbank
+.. Wiederherstellung der Mandantendatenbank
+.. Starten der HANA-Datenbank
++
+Wenn keine Wiederherstellung ausgewählt ist, wird die SnapCenter beendet, und Sie müssen den Wiederherstellungsvorgang für das System und die Mandantendatenbank manuell durchführen.
+
+
+
+
+
+Führen Sie die folgenden Schritte aus, um einen manuellen Wiederherstellungsvorgang durchzuführen:
+
+. Wählen Sie ein Backup in SnapCenter aus, das für den Wiederherstellungsvorgang verwendet werden soll.
++
+image:amazon-fsx-image69.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Wählen Sie den Umfang und den Typ der Wiederherstellung aus.
++
+Das Standardszenario für HANA MDC-Einzelmandant-Systeme besteht darin, komplette Ressourcen mit Zurücksetzen des Volumes zu nutzen. Bei einem HANA MDC-System mit mehreren Mandanten möchten Sie möglicherweise nur einen einzelnen Mandanten wiederherstellen. Weitere Informationen zur Wiederherstellung einzelner Mandanten finden Sie unter link:hana-br-scs-restore-recovery.html["Restore und Recovery (netapp.com)"^].
+
++
+image:amazon-fsx-image70.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Wählen Sie „Recovery Scope“ aus, und stellen Sie den Speicherort für das Backup und das Katalog-Backup bereit.
++
+SnapCenter verwendet den Standardpfad oder die geänderten Pfade in der HANA global.ini-Datei, um die Backup-Standorte für das Protokoll und den Katalog vorab aufzufüllen.
+
++
+image:amazon-fsx-image71.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Geben Sie die optionalen Befehle vor der Wiederherstellung ein.
++
+image:amazon-fsx-image72.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Geben Sie die optionalen Befehle nach der Wiederherstellung ein.
++
+image:amazon-fsx-image73.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Um den Wiederherstellungs- und Wiederherstellungsvorgang zu starten, klicken Sie auf Fertig stellen.
++
+image:amazon-fsx-image74.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
++
+SnapCenter führt den Wiederherstellungsvorgang und die Wiederherstellung aus. Dieses Beispiel zeigt die Jobdetails des Wiederherstellungsjobs.
+
++
+image:amazon-fsx-image75.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+

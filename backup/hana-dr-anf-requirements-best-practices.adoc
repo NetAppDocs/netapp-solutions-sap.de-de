@@ -1,0 +1,23 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-requirements-best-practices.html 
+keywords: requirements, best, practices, microsoft, azure, virtual, machine, vm 
+summary: 'Microsoft Azure übernimmt keine Garantie für die Verfügbarkeit eines bestimmten VM-Typs (Virtual Machine) bei der Erstellung oder beim Starten einer nicht zugewiesenen VM.' 
+---
+= Anforderungen und Best Practices
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Microsoft Azure übernimmt keine Garantie für die Verfügbarkeit eines bestimmten VM-Typs (Virtual Machine) bei der Erstellung oder beim Starten einer nicht zugewiesenen VM. Insbesondere im Falle eines regionalen Ausfalls benötigen viele Clients möglicherweise zusätzliche VMs in der Disaster Recovery-Region. Daher wird empfohlen, eine VM mit der erforderlichen Größe für Disaster Failover aktiv als Test- oder QA-System in der Disaster Recovery-Region zu verwenden, um den erforderlichen VM-Typ zugewiesen zu haben.
+
+Es empfiehlt sich, einen ANF-Kapazitätspool mit einer niedrigeren Performance Tier im normalen Betrieb zu verwenden, um eine Kostenoptimierung zu ermöglichen. Die Datenreplizierung erfordert keine hohe Performance und kann daher einen Kapazitäts-Pool mit einer Standard-Performance-Tier verwenden. Bei Disaster-Recovery-Tests oder bei einem Ausfall muss die Volume in einen Kapazitäts-Pool mit einer hochperformanten Tier verschoben werden.
+
+Wenn ein zweiter Kapazitäts-Pool keine Option ist, sollten die Ziel-Volumes für die Replizierung auf Basis der Kapazitätsanforderungen konfiguriert werden und nicht auf die Performance-Anforderungen während des normalen Betriebs. Das Kontingent oder der Durchsatz (für manuelle QoS) kann dann für Disaster-Recovery-Tests angepasst werden, falls ein Notfall besteht.
+
+Weitere Informationen finden Sie unter https://docs.microsoft.com/en-us/azure/azure-netapp-files/cross-region-replication-requirements-considerations["Anforderungen und Überlegungen für die Verwendung von Azure NetApp Files-Volume-regionsübergreifende Replikation mit Microsoft Docs"^].

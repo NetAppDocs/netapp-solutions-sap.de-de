@@ -1,0 +1,85 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-data-protection-overview.html 
+keywords:  
+summary:  
+---
+= TR-4891: SAP HANA Disaster Recovery mit Azure NetApp Files
+:allow-uri-read: 
+
+
+[role="lead"]
+Studien haben gezeigt, dass Ausfallzeiten von Business-Applikationen erhebliche negative Auswirkungen auf das Geschäft von Unternehmen haben.
+
+Autoren: Nils Bauer, NetApp Ralf Klahr, Microsoft
+
+Neben den finanziellen Auswirkungen können Ausfallzeiten auch den Ruf des Unternehmens, die Arbeitsmoral des Personals und die Kundenbindung schädigen. Überraschenderweise haben nicht alle Unternehmen eine umfassende Disaster Recovery-Richtlinie.
+
+Wenn SAP HANA auf Azure NetApp Files (ANF) läuft, erhalten Kunden Zugriff auf zusätzliche Funktionen, mit denen die integrierte Datensicherung und Disaster Recovery-Funktionen von SAP HANA erweitert und verbessert werden können. In der Übersicht werden die folgenden Optionen erläutert, mit denen Kunden Optionen auswählen können, die ihre geschäftlichen Anforderungen unterstützen.
+
+Zur Entwicklung einer umfassenden Disaster Recovery-Richtlinie müssen Kunden die Anforderungen ihrer Business-Applikationen und die technischen Funktionen kennen, die sie für Datensicherung und Disaster Recovery benötigen. Die folgende Abbildung bietet einen Überblick über die Datensicherung.
+
+image:saphana-dr-anf_image2.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+
+
+== Anforderungen von Business-Applikationen
+
+Für Geschäftsanwendungen gibt es zwei wichtige Indikatoren:
+
+* Der Recovery-Zeitpunkt (Recovery Point Objective, RPO) oder der maximal tolerierbare Datenverlust
+* Die Recovery-Zeitvorgabe (Recovery Time Objective, RTO) bzw. die maximal tolerierbare Ausfallzeit von Business-Applikationen
+
+
+Diese Anforderungen werden durch die Art der verwendeten Applikation und die Art der Geschäftsdaten definiert. RPO und RTO können unterschiedlich sein, wenn Sie vor Ausfällen in einer einzelnen Azure Region schützen. Sie können auch voneinander abweichen, wenn Sie sich auf katastrophale Katastrophen wie den Verlust einer kompletten Azure-Region vorbereiten. Es ist wichtig, die geschäftlichen Anforderungen zu bewerten, die RPO und RTO definieren, da diese Anforderungen erhebliche Auswirkungen auf die verfügbaren technischen Optionen haben.
+
+
+
+== Hochverfügbarkeit
+
+Die Infrastruktur für SAP HANA wie Virtual Machines, Netzwerk und Storage muss über redundante Komponenten verfügen, um sicherzustellen, dass es keinen Single Point of Failure gibt. MS Azure bietet Redundanz für die verschiedenen Infrastrukturkomponenten.
+
+Um auf der Computing- und Applikationsseite Hochverfügbarkeit zu gewährleisten, können Standby-SAP HANA-Hosts mit einem SAP HANA System mit mehreren Hosts für integrierte Hochverfügbarkeit konfiguriert werden. Wenn ein Server oder ein SAP HANA-Service ausfällt, erfolgt ein Failover des SAP HANA-Service auf den Standby-Host, was zu einem Ausfall von Applikationen führt.
+
+Wenn eine Applikationsausfallzeit im Falle eines Server- oder Applikationsausfalls nicht akzeptabel ist, kann auch die SAP HANA Systemreplizierung als Hochverfügbarkeitslösung eingesetzt werden, die Failover in einem sehr kurzen Zeitrahmen ermöglicht. SAP-Kunden nutzen HANA-Systemreplizierung, um Hochverfügbarkeit bei ungeplanten Ausfällen sicherzustellen, aber auch die Ausfallzeiten bei geplanten Vorgängen wie HANA-Software-Upgrades zu minimieren.
+
+
+
+== Logische Beschädigung
+
+Logische Beschädigungen können durch Softwarefehler, menschliche Fehler oder Sabotage verursacht werden. Leider können logische Beschädigungen oft nicht mit standardmäßigen Hochverfügbarkeits- und Disaster Recovery-Lösungen behoben werden. Daher können in manchen Fällen RTO- und RPO-Anforderungen in Abhängigkeit von der Ebene, der Applikation, dem File-System oder dem Storage mit der logischen Beschädigung nicht erfüllt werden.
+
+Schlimmstenfalls ist die SAP-Applikation beschädigt oder logisch. SAP Applikationen laufen oft in einer Landschaft, in der verschiedene Applikationen miteinander kommunizieren und Daten austauschen. Daher wird die Wiederherstellung eines SAP-Systems, bei dem eine logische Beschädigung aufgetreten ist, nicht empfohlen. Das Wiederherstellen des Systems zu einem Zeitpunkt vor der Beschädigung führt zu Datenverlusten, sodass die RPO größer als null ist. Außerdem würde die SAP-Landschaft nicht mehr synchron sein und eine zusätzliche Nachbearbeitung erfordern.
+
+Anstatt das SAP-System wiederherzustellen, ist es besser, den logischen Fehler innerhalb des Systems zu beheben, indem das Problem in einem separaten Reparatursystem analysiert wird. Zur Ursachenanalyse ist die Einbindung des Geschäftsprozesses und der Applikationseigentümer erforderlich. Für dieses Szenario erstellen Sie ein Reparatursystem (ein Klon des Produktionssystems) auf Basis der Daten, die vor dem Auftreten der logischen Beschädigung gespeichert wurden. Innerhalb des Reparatursystems können die erforderlichen Daten exportiert und in das Produktionssystem importiert werden. Bei diesem Ansatz muss das produktive System nicht gestoppt werden, und im besten Fall gehen keine Daten oder nur ein Bruchteil der Daten verloren.
+
+
+NOTE: Die zum Einrichten eines Reparatursystems erforderlichen Schritte sind mit einem in diesem Dokument beschriebenen Disaster-Recovery-Testszenario identisch. Somit kann die beschriebene Disaster Recovery-Lösung problemlos auf logische Beschädigungen erweitert werden.
+
+
+
+== Backups
+
+Backups werden erstellt, um Restores und Recovery von unterschiedlichen zeitpunktgenauen Datensätzen zu ermöglichen. In der Regel werden diese Backups einige Tage bis einige Wochen aufbewahrt.
+
+Je nach Art der Beschädigung können Restores und Recovery mit oder ohne Datenverlust durchgeführt werden. Wenn das RPO null beträgt, selbst bei einem Verlust des Primär- und Backup-Storage, muss das Backup mit der synchronen Datenreplizierung kombiniert werden.
+
+Die RTO für Restore und Recovery wird durch die erforderliche Wiederherstellungszeit, die Recovery-Zeit (einschließlich Datenbankstart) und das Laden der Daten in den Arbeitsspeicher definiert. Bei großen Datenbanken und herkömmlichen Backup-Ansätzen kann die RTO problemlos mehrere Stunden betragen, was unter Umständen nicht akzeptabel ist. Um eine sehr geringe RTO-Werte zu erzielen, muss ein Backup mit einer Hot-Standby-Lösung kombiniert werden, die das Vorladen von Daten in den Speicher beinhaltet.
+
+Eine Backup-Lösung muss dagegen die logische Beschädigung beheben, da Datenreplizierungslösungen nicht alle Arten von logischen Beschädigungen abdecken können.
+
+
+
+== Synchrone oder asynchrone Datenreplizierung
+
+Der RPO bestimmt hauptsächlich, welche Datenreplizierungsmethode Sie verwenden sollten. Bei einem RPO von null muss auch bei einem Ausfall des primären und des Backup-Storage die Daten synchron repliziert werden. Allerdings gibt es technische Einschränkungen bei der synchronen Replizierung, beispielsweise die Entfernung zwischen zwei Azure Regionen. In den meisten Fällen ist synchrone Replizierung aufgrund von Latenz bei Entfernungen von mehr als 100 km nicht geeignet. Daher ist diese Lösung keine Option für die Datenreplizierung zwischen Azure Regionen.
+
+Wenn ein größerer RPO-Wert akzeptabel ist, kann die asynchrone Replizierung über große Entfernungen hinweg verwendet werden. Der RPO in diesem Fall wird durch die Replizierungsfrequenz definiert.
+
+
+
+== HANA System-Replizierung mit oder ohne vorab geladen
+
+Die Startzeit einer SAP HANA-Datenbank ist wesentlich länger als die von herkömmlichen Datenbanken, da eine große Datenmenge in den Arbeitsspeicher geladen werden muss, bevor die Datenbank die erwartete Performance liefern kann. Daher ist ein großer Teil der RTO die Zeit, die zum Starten der Datenbank benötigt wird. Mit jeder Storage-basierten Replizierung sowie mit HANA System Replication ohne vorab geladen werden, muss die SAP HANA-Datenbank für den Failover zum Disaster-Recovery-Standort gestartet werden.
+
+Die SAP HANA Systemreplizierung bietet einen Betriebsmodus, in dem die Daten vorgeladen und kontinuierlich am sekundären Host aktualisiert werden. Dieser Modus ermöglicht sehr niedrige RTO-Werte, benötigt aber auch einen dedizierten Server, der nur für den Empfang der Replizierungsdaten vom Quellsystem verwendet wird.

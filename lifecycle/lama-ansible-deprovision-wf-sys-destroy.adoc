@@ -1,0 +1,54 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/lama-ansible-deprovision-wf-sys-destroy.html 
+keywords: destroy, workflow 
+summary: Um ein geklontes System außer Betrieb zu nehmen, muss es vorab angehalten und vorbereitet werden. Anschließend kann der Workflow zum Löschen des Systems gestartet werden. 
+---
+= Workflow zur Deprovisionierung von SAP Lama – Systemzerstöre
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Die folgende Abbildung zeigt die wichtigsten Schritte, die mit dem Workflow zum Löschen des Systems ausgeführt werden.
+
+image:lama-ansible-image32.png["Dieses Bild zeigt einen Überblick über den Workflow zum Löschen des Systems. Sie enthält die Schritte System stoppen, System nicht vorbereiten, Speicher-Klon löschen und Systemkonfiguration löschen."]
+
+. Um ein geklontes System außer Betrieb zu nehmen, muss es vorab angehalten und vorbereitet werden. Anschließend kann der Workflow zum Löschen des Systems gestartet werden.
++
+image:lama-ansible-image33.png["Diese Grafik enthält ein Architekturdiagramm kombiniert mit dem, wo die zuvor genannten Workflow-Schritte dem System zutreffen."]
+
+. In diesem Beispiel wird für das zuvor erstellte System ein Workflow zur Systemzerstörung ausgeführt. Wir wählen das System im Bildschirm *Systemansicht* aus und starten den System Workflow zerstören unter *Prozesse zerstören*.
++
+image:lama-ansible-image34.png["Dieser Screenshot zeigt die SAP Lama-GUI offen für System > Provisioning Systems View, mit der Sie das Dropdown-Menü „Destroy Systems“ öffnen können."]
+
+. Hier werden alle während der Bereitstellungsphase gepflegten Mount-Punkte angezeigt und während des Workflow-Prozesses zur Systemzerstörung gelöscht.
++
+image:lama-ansible-image35.png["Dieser Screenshot zeigt den Bildschirm „System zerstören“ unter der Registerkarte „Storage Volumes zerstören“, in dem alle Mount-Punkte aufgeführt sind."]
+
++
+Es werden keine virtuellen Hostnamen gelöscht, da sie über DNS gepflegt und automatisch zugewiesen wurden.
+
++
+image:lama-ansible-image36.png["Dieser Screenshot zeigt den Bildschirm System zerstören auf der Registerkarte Hostnamen löschen. Es werden keine Hostnamen aufgeführt."]
+
+. Klicken Sie auf die Schaltfläche Ausführen, um den Vorgang zu starten.
++
+image:lama-ansible-image37.png["Dieser Screenshot zeigt die Seite „Zusammenfassung zu speicherVolumes zerstören“."]
+
++
+SAP Lama führt jetzt das Löschen der Volume-Klone durch und löscht die Konfiguration des geklonten Systems.
+
+. Sie können den Fortschritt des Klon-Workflows im Menü *Überwachung* überwachen.
++
+image:lama-ansible-image38.png["In diesem Screenshot wird der Fortschritt des Arbeitsablaufs zum Löschen des Systems in Echtzeit angezeigt."]
+
+. Durch Auswahl der Task *NetAppClone löschen* wird das detaillierte Protokoll für diesen Schritt angezeigt. Die Ausführung des Ansible Playbook ist hier dargestellt. Wie Sie sehen, das Ansible Playbook `netapp_lama_ServiceConfigRemoval.yml` Wird für jedes HANA Datenbank-Volume, die Daten, das Protokoll und die gemeinsame Nutzung ausgeführt.
++
+image:lama-ansible-image39.png["Dieser Screenshot zeigt die Protokollseite für den Workflow zum Löschen des Systems."]
+
+

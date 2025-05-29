@@ -1,0 +1,37 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-break-delete-replication-peering.html 
+keywords: break, delete, replication, peering, disaster, failover, target, volumes 
+summary: Im Falle eines Disaster-Failovers müssen die Ziel-Volumes unterbrochen werden, damit der Zielhost die Volumes für Lese- und Schreibvorgänge mounten kann. 
+---
+= Peering der Replizierung unterbrechen und löschen
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Im Falle eines Disaster-Failovers müssen die Ziel-Volumes unterbrochen werden, damit der Zielhost die Volumes für Lese- und Schreibvorgänge mounten kann.
+
+
+NOTE: Für das HANA Daten-Volume müssen Sie das aktuelle HANA Snapshot-Backup wiederherstellen, das mit AzAcSnap erstellt wurde. Dieser Vorgang zum Zurücksetzen des Volumes ist nicht möglich, wenn der neueste ReplikationssSnapshot aufgrund des Replication Peering als belegt markiert wird. Deshalb müssen Sie auch das Replication Peering löschen.
+
+Die nächsten beiden Screenshots zeigen den Break and delete Peering-Vorgang für das HANA-Datenvolumen. Dieselben Vorgänge müssen auch für das Log-Backup und das gemeinsame HANA-Volume durchgeführt werden.
+
+image:saphana-dr-anf_image27.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+image:saphana-dr-anf_image28.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+Da Replication Peering gelöscht wurde, ist es möglich, das Volume auf das neueste HANA Snapshot Backup zurückzusetzen. Wenn Peering nicht gelöscht wird, wird die Auswahl des Revert-Volumes ausgegraut und ist nicht wählbar. Die folgenden zwei Screenshots zeigen den Vorgang zur Zurücksetzen des Volumens.
+
+image:saphana-dr-anf_image29.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+image:saphana-dr-anf_image30.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+Nach der Wiederherstellung des Volumes basiert das Daten-Volume auf einem konsistenten HANA-Snapshot-Backup und kann nun für Recovery-Vorgänge genutzt werden.
+
+
+NOTE: Wenn ein Kapazitäts-Pool mit einer Tier mit niedriger Performance verwendet wurde, müssen die Volumes nun in einen Kapazitäts-Pool verschoben werden, der die erforderliche Performance bietet.

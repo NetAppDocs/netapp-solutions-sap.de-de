@@ -1,0 +1,100 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/sc-copy-clone-automation-scripts.html 
+keywords: tr4667, 4667, SAP HANA, cloning, system refresh 
+summary: NetApp Lösungen zur Optimierung des SAP Lifecycle Managements sind in SAP HANA Datenbank- und Lifecycle Management-Tools integriert und verbinden effiziente applikationsintegrierte Datensicherung mit der flexiblen Bereitstellung von SAP Testsystemen. 
+---
+= Beispielskripte zur Automatisierung
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+In diesem Dokument werden zwei Skripte verwendet, um die Vorgänge zur SnapCenter-Klonerstellung und -Löschung weiter zu automatisieren.
+
+* Das Skript `sc-system-refresh`.sh wird für die Systemaktualisierung und den Systemklonworkflow verwendet, um Recovery- und Shutdown-Vorgänge der SAP HANA-Datenbank auszuführen.
+* Das Skript `sc-mount-volume.sh` wird für den Systemklonworkflow verwendet, um Mount- und Unmounting-Vorgänge für das gemeinsam genutzte SAP HANA-Volume auszuführen.
++
+
+NOTE: Die Beispielskripte werden wie IS bereitgestellt und von NetApp nicht unterstützt. Die Skripte können Sie per E-Mail an ng-sapcc@netapp.com anfordern.
+
+
+
+
+
+== Skript sc-system-refresh.sh
+
+Das Beispielskript `sc-system-refresh.sh` wird verwendet, um Recovery- und Shutdown-Vorgänge auszuführen. Das Skript wird mit spezifischen Befehlszeilenoptionen innerhalb der SnapCenter-Workflows zum Erstellen und Löschen von Klonen aufgerufen, wie in der Abbildung unten dargestellt.
+
+Das Skript ist generisch und liest alle erforderlichen Parameter, wie die SID vom Zielsystem. Das Skript muss auf dem Zielhost des Systemaktualisierungsvorgangs verfügbar sein. Ein hdb-Benutzerspeicherschlüssel muss für die Benutzer-<SID>-Konfiguration m auf dem Zielsystem konfiguriert werden. Der Schlüssel muss den Zugriff auf die SAP HANA-Systemdatenbank ermöglichen und Berechtigungen für Wiederherstellungsvorgänge bereitstellen. Der Schlüssel muss den Namen <TARGET-SID>-Ausmuster Y haben.
+
+Das Skript schreibt eine Protokolldatei `sc-system-refresh-SID.log``, in das gleiche Verzeichnis, wo es ausgeführt wird.
+
+
+NOTE: Die aktuelle Version des Skripts unterstützt MDC-Konfigurationen für einzelne Hostsysteme oder MDC für mehrere Mandanten. SAP HANA wird nicht mit Systemen mit mehreren Hosts unterstützt.
+
+image:sc-copy-clone-image14.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+
+
+=== Unterstützte Mandanten-Recovery-Vorgänge
+
+Wie im Abschnitt „SAP HANA System Refresh Operation Workflows using Storage Snapshot“ beschrieben, hängen die möglichen Mandanten-Recovery-Operationen am Zielsystem von der Mandantenkonfiguration des Quellsystems ab. Das Skript `sc-system-refresh.sh` unterstützt alle Wiederherstellungsvorgänge für Mandanten, die je nach Konfiguration des Quellsystems möglich sind, wie in der Tabelle unten gezeigt.
+
+Wenn auf dem Zielsystem ein anderer Mandantenname benötigt wird, muss der Mandant nach dem Recovery-Vorgang manuell umbenannt werden.
+
+[cols="29%,35%,36%"]
+|===
+| SAP HANA-System | Mandantenkonfiguration + am Quellsystem | Resultierende Mandantenkonfiguration + am Zielsystem 
+
+
+| MDC-Einzelmandant | Quell-Mandantenname entspricht der Quell-SID | Der Zielmandant-Name entspricht der Ziel-SID 
+
+
+| MDC-Einzelmandant | Der Name des Quell-Mandanten entspricht nicht dem Quell-SID | Der Zielmandant-Name entspricht dem Quell-Mandantennamen 
+
+
+| MDC mehrere Mandanten | Alle Mandantennamen | Alle Mandanten werden wiederhergestellt und haben denselben Namen wie die Quell-Mandanten. 
+|===
+
+
+== Skript sc-mount-volume.sh
+
+Das Beispielskript `sc-mount-volume.sh` wird zum Ausführen von Mount und Unmounten für ein beliebiges Volume verwendet. Das Skript wird verwendet, um das gemeinsam genutzte SAP HANA-Volume bei der Klonoperation des SAP HANA-Systems zu mounten. Das Skript wird mit spezifischen Befehlszeilenoptionen innerhalb der SnapCenter-Workflows zum Erstellen und Löschen von Klonen aufgerufen, wie in der Abbildung unten dargestellt.
+
+
+NOTE: Das Skript unterstützt SAP HANA-Systeme mit NFS als Storage-Protokoll.
+
+image:sc-copy-clone-image15.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+
+
+=== SnapCenter-Umgebungsvariablen
+
+SnapCenter bietet einen Satz von Umgebungsvariablen, die innerhalb des Skripts verfügbar sind, die auf dem Ziel-Host ausgeführt werden. Das Skript verwendet diese Variablen, um die entsprechenden Konfigurationseinstellungen zu bestimmen.
+
+* Die Skriptvariablen `STORAGE, JUNCTION_PATH` werden für den Mount-Vorgang verwendet.
+* Abgeleitet von `CLONED_VOLUMES_MOUNT_PATH` Umgebungsvariable:
+* `CLONED_VOLUMES_MOUNT_PATH=${STORAGE}:/${JUNCTION_PATH}`
+* Beispiel: `CLONED_VOLUMES_MOUNT_PATH=192.168.175.117:/SS1_shared_Clone_05112206115489411`
+
+
+
+
+== Skript zum Abrufen von SnapCenter Umgebungsvariablen
+
+Wenn keine Automatisierungsskripts verwendet werden und die Schritte manuell ausgeführt werden sollten, müssen Sie den Verbindungspfad des FlexClone Volume zum Storage-System kennen. Der Verbindungspfad ist in SnapCenter nicht sichtbar. Sie müssen also entweder den Verbindungspfad direkt am Storage-System nachschlagen oder ein einfaches Skript verwenden, das die SnapCenter Umgebungsvariablen auf dem Ziel-Host bereitstellt. Dieses Skript muss als Mount-Operation-Skript innerhalb der SnapCenter Clone Erstellungsvorgang hinzugefügt werden.
+
+....
+ss1adm@hana-1:/mnt/sapcc-share/SAP-System-Refresh> cat get-env.sh
+#!/bin/bash
+env > /tmp/env-from-sc.txt
+ss1adm@hana-1:/mnt/sapcc-share/SAP-System-Refresh>
+....
+Innerhalb des `env-from-sc.txt` Datei, suchen Sie nach der Variable `CLONED_VOLUMES_MOUNT_PATH` Um die IP-Adresse des Storage-Systems und den Verbindungspfad des FlexClone Volume zu erhalten.
+
+Beispiel: `CLONED_VOLUMES_MOUNT_PATH=192.168.175.117:/SS1_data_mnt00001_Clone_05112206115489411`

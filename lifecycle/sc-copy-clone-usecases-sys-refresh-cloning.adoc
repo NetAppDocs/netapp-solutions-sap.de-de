@@ -1,0 +1,61 @@
+---
+sidebar: sidebar 
+permalink: lifecycle/sc-copy-clone-usecases-sys-refresh-cloning.html 
+keywords: tr4667, 4667, SAP HANA, cloning, system refresh 
+summary: NetApp Lösungen zur Optimierung des SAP Lifecycle Managements sind in SAP HANA Datenbank- und Lifecycle Management-Tools integriert und verbinden effiziente applikationsintegrierte Datensicherung mit der flexiblen Bereitstellung von SAP Testsystemen. 
+---
+= Anwendungsfälle für Systemaktualisierung und Klonen
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+NetApp Lösungen zur Optimierung des SAP Lifecycle Managements sind in SAP HANA Datenbank- und Lifecycle Management-Tools integriert und verbinden effiziente applikationsintegrierte Datensicherung mit der flexiblen Bereitstellung von SAP Testsystemen.
+
+
+
+== Datenaktualisierung von QA-, Test-, Sandboxsystemen- und Trainingssystemen
+
+Es gibt verschiedene Szenarien, in denen Daten aus einem Quellsystem zu Test- oder Schulungszwecken einem Zielsystem zur Verfügung gestellt werden müssen. Diese Test- und Trainingssysteme müssen regelmäßig mit Daten des Quellsystems aktualisiert werden, um sicherzustellen, dass die Test- und Schulungsmaßnahmen mit dem aktuellen Datensatz durchgeführt werden. Diese Systemaktualisierungen bestehen aus mehreren Aufgaben auf Infrastruktur-, Datenbank- und Applikationsebene und können je nach Automatisierungsgrad mehrere Tage dauern.
+
+image:sc-copy-clone-image3.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"] Mit SnapCenter Klon-Workflows können die erforderlichen Aufgaben auf der Infrastruktur- und Datenbankebene beschleunigt und automatisiert werden. Anstatt ein Backup vom Quellsystem zum Zielsystem wiederherzustellen, verwendet SnapCenter die NetApp Snapshot Kopie und die NetApp FlexClone Technologie. So können erforderliche Aufgaben bis zu einer gestarteten SAP HANA Datenbank in Minuten anstatt Stunden durchgeführt werden. Der für das Klonen erforderliche Zeitaufwand ist unabhängig von der Größe der Datenbank, sodass selbst sehr große Systeme innerhalb weniger Minuten erstellt werden können. Die Startzeit hängt nur von der Größe der Datenbank und der Verbindung zwischen dem Datenbankserver und dem Storage-System ab.
+
+image:sc-copy-clone-image4.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+Der Workflow für Systemaktualisierungen wird im Abschnitt beschrieben link:sc-copy-clone-hana-sys-refresh-with-sc.html["„SAP HANA-Systemaktualisierung mit SnapCenter.“"]
+
+
+
+== Beseitigung logischer Beschädigungen
+
+Logische Beschädigungen können durch Softwarefehler, menschliche Fehler oder Sabotage verursacht werden. Leider können logische Beschädigungen oft nicht mit standardmäßigen Hochverfügbarkeits- und Disaster Recovery-Lösungen behoben werden. Daher können abhängig von Schicht, Applikation, Filesystem oder Storage mit einer logischen Beschädigung minimale Ausfallzeiten und maximale Datenverluste nicht erfüllt werden.
+
+Schlimmstenfalls ist die SAP-Anwendung logisch beschädigt. SAP Applikationen laufen oft in einer Landschaft, in der verschiedene Applikationen miteinander kommunizieren und Daten austauschen. Daher wird die Wiederherstellung eines SAP-Systems, bei dem eine logische Beschädigung aufgetreten ist, nicht empfohlen. Wenn Sie das System auf einen Zeitpunkt vor der Beschädigung wiederherstellen, führt dies zu Datenverlust. Außerdem würde die SAP-Landschaft nicht mehr synchron sein und eine zusätzliche Nachbearbeitung erfordern.
+
+Anstatt das SAP-System wiederherzustellen, ist es besser, den logischen Fehler innerhalb des Systems zu beheben, indem das Problem in einem separaten Reparatursystem analysiert wird. Zur Ursachenanalyse ist die Einbindung des Geschäftsprozesses und der Applikationseigentümer erforderlich. Für dieses Szenario erstellen Sie ein Reparatursystem (ein Klon des Produktionssystems) auf Basis der Daten, die vor dem Auftreten der logischen Beschädigung gespeichert wurden. Innerhalb des Reparatursystems können die erforderlichen Daten exportiert und in das Produktionssystem importiert werden. Bei diesem Ansatz muss das Produktionssystem nicht angehalten werden. Im besten Fall gehen keine Daten oder nur ein Bruchteil der Daten verloren.
+
+Bei der Einrichtung des Reparatursystems sind Flexibilität und Agilität entscheidend. Bei Verwendung von Storage-basierten Snapshot Backups von NetApp sind mehrere konsistente Datenbank-Images verfügbar, um mithilfe der NetApp FlexClone Technologie einen Klon des Produktionssystems zu erstellen. Die Erstellung von FlexClone Volumes dauert nur wenige Sekunden, anstatt mehrerer Stunden, wenn zum Einrichten des Reparatursystems eine umgeleitete Wiederherstellung aus einem dateibasierten Backup verwendet wird.
+
+image:sc-copy-clone-image5.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+Der Arbeitsablauf der Erstellung des Reparatursystems wird im Abschnitt beschrieben link:sc-copy-clone-sys-clone-with-sc.html["„SAP Systemklon mit SnapCenter.“"]
+
+
+
+== Disaster Recovery-Tests
+
+Für eine effiziente Disaster-Recovery-Strategie muss der erforderliche Workflow getestet werden. Die Tests zeigen, ob die Strategie funktioniert und ob die interne Dokumentation ausreichend ist. Darüber hinaus können Administratoren die erforderlichen Verfahren Schulen.
+
+Die Storage-Replizierung mit SnapMirror ermöglicht die Ausführung von Disaster-Recovery-Tests ohne Risiko von RTO und RPO. Disaster-Recovery-Tests können ohne Unterbrechung der Datenreplizierung durchgeführt werden.
+
+Disaster Recovery-Tests für asynchronen und synchronen SnapMirror verwenden Snapshot Backups und FlexClone Volumes am Disaster Recovery-Ziel.
+
+image:sc-copy-clone-image6.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"] Eine detaillierte Schritt-für-Schritt-Beschreibung finden Sie in den technischen Berichten
+
+https://www.netapp.com/pdf.html?item=/media/8584-tr4646pdf.pdf["TR-4646: SAP HANA Disaster Recovery with Storage Replication (netapp.com)"]
+
+link:../backup/hana-dr-anf-data-protection-overview.html["TR-4891: SAP HANA Disaster Recovery mit Azure NetApp Files"]

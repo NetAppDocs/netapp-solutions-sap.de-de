@@ -1,0 +1,49 @@
+---
+sidebar: sidebar 
+permalink: backup/fsxn-backup-replication-with-snapvault-overview.html 
+keywords: overview, configuration, 
+summary: Im Lab-Setup verwenden wir ein zweites FSX für ONTAP-Filesystem in einer zweiten AWS-Verfügbarkeitszone, um die Backup-Replizierung für das HANA-Datenvolumen zu präsentieren. 
+---
+= Übersicht - Backup-Replikation mit SnapVault
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Im Lab-Setup verwenden wir ein zweites FSX für ONTAP-Filesystem in einer zweiten AWS-Verfügbarkeitszone, um die Backup-Replizierung für das HANA-Datenvolumen zu präsentieren.
+
+Wie in Kapitel erläutertlink:fsxn-snapcenter-architecture.html#data-protection-strategy["„Datensicherungsstrategie“"], muss das Replikationsziel ein zweites FSX für ONTAP-Dateisystem in einer anderen Verfügbarkeitszone sein, um vor einem Ausfall des primären FSX für ONTAP-Dateisystems geschützt zu werden. Außerdem sollte das gemeinsame HANA-Volume auf das sekundäre FSX für das ONTAP-Dateisystem repliziert werden.
+
+image:amazon-fsx-image8.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+
+
+=== Übersicht über die Konfigurationsschritte
+
+Es gibt einige Konfigurationsschritte, die auf der FSX für ONTAP-Ebene ausgeführt werden müssen. Dies lässt sich entweder mit NetApp Cloud Manager oder über die Befehlszeile des FSX für ONTAP durchführen.
+
+. Peer-FSX für ONTAP-Filesysteme FSX für ONTAP-Dateisysteme müssen peed werden, um eine Replizierung zwischen beiden zu ermöglichen.
+. Peer-SVMs: SVMs müssen Peering durchgeführt werden, um eine Replizierung zwischen den beiden SVMs zu ermöglichen.
+. Erstellen eines Ziel-Volumes Erstellung eines Volumes in der Ziel-SVM mit Volume-Typ `DP`. Typ `DP` Muss als Ziel-Volume für die Replikation verwendet werden.
+. SnapMirror-Richtlinie erstellen Dies wird verwendet, um eine Policy für Replikation mit Typ zu erstellen `vault`.
++
+.. Fügen Sie eine Regel zur Richtlinie hinzu. Die Regel enthält das SnapMirror-Etikett und die Aufbewahrung für Backups am sekundären Standort. Sie müssen dasselbe SnapMirror-Label später in der SnapCenter-Richtlinie konfigurieren, damit SnapCenter Snapshot-Backups auf dem Quell-Volume mit diesem Etikett erstellt.
+
+
+. SnapMirror Beziehung erstellen Definiert die Replikationsbeziehung zwischen dem Quell- und dem Ziel-Volume und fügt eine Richtlinie hinzu.
+. SnapMirror initialisieren. Damit wird die erste Replikation gestartet, bei der die vollständigen Quelldaten auf das Ziel-Volume übertragen werden.
+
+
+Wenn die Konfiguration der Volume-Replikation abgeschlossen ist, müssen Sie die Backup-Replikation in SnapCenter wie folgt konfigurieren:
+
+. Fügen Sie die Ziel-SVM zu SnapCenter hinzu.
+. Erstellen einer neuen SnapCenter-Richtlinie für Snapshot Backup und SnapVault-Replizierung
+. Fügen Sie die Richtlinie zu HANA-Ressourcenschutz hinzu.
+. Sie können jetzt Backups mit der neuen Richtlinie ausführen.
+
+
+In den folgenden Kapiteln werden die einzelnen Schritte detaillierter beschrieben.

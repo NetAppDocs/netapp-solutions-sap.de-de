@@ -1,0 +1,57 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-fas-nfs-install-prep-nfsv4.html 
+keywords: sap, hana, installation, preparations, nfsv4, user, authentication, storage, controller, hosts 
+summary: 'Für NFS Version 4 und höher ist Benutzerauthentifizierung erforderlich. Diese Authentifizierung kann über ein zentrales Benutzerverwaltungstool wie z. B. einen LDAP-Server (Lightweight Directory Access Protocol) oder lokale Benutzerkonten erfolgen.' 
+---
+= Vorbereitung der Installation von SAP HANA auf NFSv4
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Für NFS Version 4 und höher ist Benutzerauthentifizierung erforderlich. Diese Authentifizierung kann über ein zentrales Benutzerverwaltungstool wie z. B. einen LDAP-Server (Lightweight Directory Access Protocol) oder lokale Benutzerkonten erfolgen. In den folgenden Abschnitten wird die Konfiguration lokaler Benutzerkonten beschrieben.
+
+Die Administrationsteilnehmer `<sid>adm`,`<sid>crypt` und die `sapsys` Gruppe müssen vor Beginn der Installation der SAP HANA-Software manuell auf den SAP HANA-Hosts und den Speicher-Controllern erstellt werden.
+
+
+
+== SAP HANA-Hosts
+
+Wenn es nicht existiert, die `sapsys` Die Gruppe muss auf dem SAP HANA-Host erstellt werden. Es muss eine eindeutige Gruppen-ID ausgewählt werden, die keinen Konflikt mit den vorhandenen Gruppen-IDs auf den Speicher-Controllern hat.
+
+Die Benutzer `<sid>adm` und `<sid>crypt` werden auf dem SAP HANA-Host erstellt. Es müssen eindeutige IDs ausgewählt werden, die nicht mit bestehenden Benutzer-IDs auf den Storage Controllern in Konflikt stehen.
+
+Bei einem SAP HANA-System mit mehreren Hosts müssen die Benutzer- und Gruppen-IDs auf allen SAP HANA-Hosts identisch sein. Die Gruppe und der Benutzer werden auf den anderen SAP HANA Hosts erstellt, indem die betroffenen Zeilen in und `/etc/passwd` vom Quellsystem auf alle anderen SAP HANA Hosts kopiert `/etc/group` werden.
+
+
+NOTE: Die NFSv4-Domäne muss auf allen Linux Servern auf den gleichen Wert gesetzt werden  `/etc/idmapd.conf`) Und SVMs. Legen Sie in der Datei den Domain-Parameter „Domain = <Domain-Name>“ fest `/etc/idmapd.conf` Für die Linux-Hosts.
+
+Aktivieren und starten Sie den NFS-IDMAPD-Service.
+
+....
+systemctl enable nfs-idmapd.service
+systemctl start nfs-idmapd.service
+....
+
+NOTE: Die neuesten Linux-Kernel benötigen diesen Schritt nicht. Warnmeldungen können sicher ignoriert werden.
+
+
+
+== Storage Controller
+
+Die Benutzer-IDs und Gruppen-IDs müssen auf den SAP HANA-Hosts und den Speicher-Controllern identisch sein. Die Gruppe und der Benutzer werden durch Eingabe der folgenden Befehle auf dem Storage-Cluster erstellt:
+
+....
+vserver services unix-group create -vserver <vserver> -name <group name> -id <group id>
+vserver services unix-user create -vserver <vserver> -user <user name> -id <user-id> -primary-gid <group id>
+....
+Legen Sie außerdem die Gruppen-ID des UNIX-Benutzerstamms der SVM auf 0 fest.
+
+....
+vserver services unix-user modify -vserver <vserver> -user root -primary-gid 0
+....

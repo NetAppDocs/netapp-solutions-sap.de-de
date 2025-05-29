@@ -7,23 +7,23 @@ entries:
   - title: Einführung
     url: "/lifecycle/lama-ansible-introduction.html"
   - title: SAP Szenarien für Klonen, Kopieren und Aktualisieren von Systemen
-    url: "/lifecycle/lama-ansible-sap-system-clone,-copy,-and-refresh-scenarios.html"
+    url: "/lifecycle/lama-ansible-sys-clone-copy-refresh.html"
   - title: Anwendungsfälle für Systemaktualisierung, Kopie und Klonen
-    url: "/lifecycle/lama-ansible-use-cases-for-system-refresh,-copy,-and-cloning.html"
+    url: "/lifecycle/lama-ansible-usecases-sys-refresh-copy-clone.html"
   - title: Integration von NetApp SAP Lama mithilfe von Ansible
-    url: "/lifecycle/lama-ansible-netapp-sap-lama-integration-using-ansible.html"
+    url: "/lifecycle/lama-ansible-netapp-integration.html"
   - title: Beispiel für eine Implementierung
     url: "/lifecycle/lama-ansible-example-implementation.html"
   - title: Workflow zur Bereitstellung von SAP Lama – Klon-System
-    url: "/lifecycle/lama-ansible-sap-lama-provisioning-workflow-clone-system.html"
+    url: "/lifecycle/lama-ansible-provision-wf-clone-system.html"
   - title: Workflow zur Deprovisionierung von SAP Lama – Systemzerstöre
-    url: "/lifecycle/lama-ansible-sap-lama-deprovisioning-workflow-system-destroy.html"
+    url: "/lifecycle/lama-ansible-deprovision-wf-sys-destroy.html"
   - title: Workflow zur Bereitstellung von SAP Lama – Kopiersystem
-    url: "/lifecycle/lama-ansible-sap-lama-provisioning-workflow-copy-system.html"
+    url: "/lifecycle/lama-ansible-provision-wf-copy-sys.html"
   - title: SAP Lama-Bereitstellungs-Workflow – Systemaktualisierung
-    url: "/lifecycle/lama-ansible-sap-lama-provisioning-workflow-system-refresh.html"
+    url: "/lifecycle/lama-ansible-provision-wf-sys-refresh.html"
   - title: Provider-Skriptkonfiguration und Ansible Playbooks
-    url: "/lifecycle/lama-ansible-appendix-provider-script-configuration-and-ansible-playbooks.html"
+    url: "/lifecycle/lama-ansible-appendix.html"
   - title: Schlussfolgerung
     url: "/lifecycle/lama-ansible-conclusion.html"
 - title: Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter
@@ -31,32 +31,32 @@ entries:
   - title: Einführung
     url: "/lifecycle/sc-copy-clone-introduction.html"
   - title: SAP Szenarien für Systemkopie, Aktualisierung und Klonen
-    url: "/lifecycle/sc-copy-clone-sap-system-copy-refresh-and-clone-scenarios.html"
+    url: "/lifecycle/sc-copy-clone-sys-copy-refresh-clone.html"
   - title: Anwendungsfälle für Systemaktualisierung und Klonen
-    url: "/lifecycle/sc-copy-clone-use-cases-for-system-refresh-and-cloning.html"
+    url: "/lifecycle/sc-copy-clone-usecases-sys-refresh-cloning.html"
   - title: Unterstützte Infrastruktur und Szenarien
-    url: "/lifecycle/sc-copy-clone-supported-infrastructure-and-scenarios.html"
+    url: "/lifecycle/sc-copy-clone-supported-infrastructure.html"
   - title: Überblick über den Workflow zur SAP Systemaktualisierung mit SnapCenter
-    url: "/lifecycle/sc-copy-clone-overview-of-sap-system-refresh-workflow-with-snapcenter.html"
+    url: "/lifecycle/sc-copy-clone-overview-sys-refresh-wf-sc.html"
   - title: Überblick über den SAP Systemklonen-Workflow mit SnapCenter
-    url: "/lifecycle/sc-copy-clone-overview-of-sap-system-clone-workflow-with-snapcenter.html"
+    url: "/lifecycle/sc-copy-clone-overview-of-sys-clone-wf-sc.html"
   - title: Überlegungen zu Systemaktualisierungen für SAP HANA mit Storage-Snapshot-Backups
-    url: "/lifecycle/sc-copy-clone-considerations-for-sap-hana-system-refresh-operations-using-snapshot-backups.html"
+    url: "/lifecycle/sc-copy-clone-sys-refresh-using-snapshot-backups.html"
   - title: Beispielskripte zur Automatisierung
-    url: "/lifecycle/sc-copy-clone-automation-example-scripts.html"
+    url: "/lifecycle/sc-copy-clone-automation-scripts.html"
   - title: Systemaktualisierung für SAP HANA mit SnapCenter
-    url: "/lifecycle/sc-copy-clone-sap-hana-system-refresh-with-snapcenter.html"
+    url: "/lifecycle/sc-copy-clone-hana-sys-refresh-with-sc.html"
   - title: SAP Systemklon mit SnapCenter
-    url: "/lifecycle/sc-copy-clone-sap-system-clone-with-snapcenter.html"
+    url: "/lifecycle/sc-copy-clone-sys-clone-with-sc.html"
   - title: Wo finden Sie weitere Informationen und Versionsverlauf
-    url: "/lifecycle/sc-copy-clone-where-to-find-additional-information.html"
+    url: "/lifecycle/sc-copy-clone-additional-info.html"
 - title: Automatisierung von SAP-Systemkopievorgängen mit Libelle SystemCopy
   entries:
   - title: Überblick
     url: "/lifecycle/libelle-sc-overview.html"
   - title: Systemaktualisierung für SAP HANA mit LSC und SnapCenter
-    url: "/lifecycle/libelle-sc-sap-hana-system-refresh-with-lsc-and-snapcenter.html"
+    url: "/lifecycle/libelle-sc-hana-sys-refresh-lsc-sc.html"
   - title: Systemaktualisierung für SAP HANA mit LSC, AzACSnap und Azure NetApp Files
-    url: "/lifecycle/libelle-sc-sap-hana-system-refresh-with-lsc,-azacsnap,-and-azure-netapp-files.html"
+    url: "/lifecycle/libelle-sc-hana-sys-refresh-lsc-azacsnap-anf.html"
   - title: Weitere Informationen und Versionsverlauf finden
-    url: "/lifecycle/libelle-sc-where-to-find-additional-information.html"
+    url: "/lifecycle/libelle-sc-additional-info.html"

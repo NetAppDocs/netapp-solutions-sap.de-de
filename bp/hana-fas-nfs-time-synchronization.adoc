@@ -1,0 +1,17 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-fas-nfs-time-synchronization.html 
+keywords: time, synchronization, sap, hana, nfs, fas 
+summary: Sie müssen die Zeit zwischen den Storage-Controllern und den SAP HANA Datenbank-Hosts synchronisieren. 
+---
+= Zeitsynchronisierung
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie müssen die Zeit zwischen den Storage-Controllern und den SAP HANA Datenbank-Hosts synchronisieren. Legen Sie dazu denselben Zeitserver für alle Storage Controller und alle SAP HANA-Hosts fest.

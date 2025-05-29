@@ -1,0 +1,116 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-aff-fc-add-data-volume-partitions-single-host-systems.html 
+keywords: data, volume, partitions, lun 
+summary: Ab SAP HANA 2.0 SPS4 können weitere Daten-Volume-Partitionen konfiguriert werden. Mit dieser Funktion können Sie zwei oder mehr LUNs für das Daten-Volume einer SAP HANA-Mandantendatenbank konfigurieren und eine Skalierung über die Größe und Performance-Grenzen einer einzelnen LUN hinaus vornehmen. 
+---
+= Hinzufügen von zusätzlichen Daten-Volume-Partitionen für SAP HANA Single-Host-Systeme
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Ab SAP HANA 2.0 SPS4 können weitere Daten-Volume-Partitionen konfiguriert werden. Mit dieser Funktion können Sie zwei oder mehr LUNs für das Daten-Volume einer SAP HANA-Mandantendatenbank konfigurieren und eine Skalierung über die Größe und Performance-Grenzen einer einzelnen LUN hinaus vornehmen.
+
+
+NOTE: Es ist nicht nötig, mehrere Partitionen zu verwenden, um die SAP HANA-KPIs zu erfüllen. Eine einzelne LUN mit einer einzigen Partition erfüllt die erforderlichen KPIs.
+
+
+NOTE: Die Nutzung von zwei oder mehr einzelnen LUNs für das Daten-Volume ist nur für SAP HANA Single-Host-Systeme verfügbar. Der für SAP HANA mehrere-Host-Systeme erforderliche SAP-Storage-Connector unterstützt nur ein Gerät für das Daten-Volume.
+
+Das Hinzufügen weiterer Partitionen für Datenvolumen kann jederzeit erfolgen, erfordert aber unter Umständen einen Neustart der SAP HANA Datenbank.
+
+
+
+== Aktivieren von zusätzlichen Partitionen für Volumes
+
+Führen Sie folgende Schritte aus, um zusätzliche Datenträger-Partitionen zu aktivieren:
+
+. Fügen Sie den folgenden Eintrag in das hinzu `global.ini` Datei:
++
+....
+[customizable_functionalities]
+persistence_datavolume_partition_multipath = true
+....
+. Starten Sie die Datenbank neu, um die Funktion zu aktivieren. Hinzufügen des Parameters über SAP HANA Studio zum `global.ini` Die Datei unter Verwendung der Systemdb-Konfiguration verhindert den Neustart der Datenbank.
+
+
+
+
+== Konfiguration von Volume und LUN
+
+Das Layout der Volumes und LUNs ist wie das Layout eines einzelnen Hosts mit einer Daten-Volume-Partition, aber mit einem zusätzlichen Daten-Volume und LUN auf einem anderen Aggregat als dem Protokoll-Volume und dem anderen Daten-Volume gespeichert. Die folgende Tabelle zeigt eine Beispielkonfiguration eines SAP HANA Einzelhost-Systems mit zwei Daten-Volume-Partitionen.
+
+|===
+| Aggregat 1 bei Controller A | Aggregat 2 bei Controller A | Aggregat 1 bei Controller B | Aggregieren 2 bei Controller B 
+
+
+| Datenvolumen: SID_Data_mnt00001 | Gemeinsam genutztes Volume: SID_shared | Datenvolumen: SID_data2_mnt00001 | Protokollvolumen: SID_log_mnt00001 
+|===
+Die folgende Tabelle zeigt ein Beispiel für die Mount-Punkt-Konfiguration für ein System mit einem einzelnen Host mit zwei Daten-Volume-Partitionen.
+
+|===
+| LUN | Bereitstellungspunkt beim HANA-Host | Hinweis 
+
+
+| SID_Data_mnt00001 | /hana/Data/SID/mnt00001 | Mit /etc/fstab-Eintrag montiert 
+
+
+| SID_data2_mnt00001 | /hana/data2/SID/mnt00001 | Mit /etc/fstab-Eintrag montiert 
+
+
+| SID_Log_mnt00001 | /hana/log/SID/mnt00001 | Mit /etc/fstab-Eintrag montiert 
+
+
+| SID_freigegeben | /hana/Shared/SID | Mit /etc/fstab-Eintrag montiert 
+|===
+Erstellen Sie die neuen Daten-LUNs entweder mit ONTAP System Manager oder mit der ONTAP CLI.
+
+
+
+== Host-Konfiguration
+
+Gehen Sie wie folgt vor, um einen Host zu konfigurieren:
+
+. Konfigurieren Sie Multipathing für die zusätzlichen LUNs, wie in Kapitel 0 beschrieben.
+. Erstellen Sie das XFS-Dateisystem auf jeder zusätzlichen LUN, die zum HANA-System gehört:
++
+....
+stlrx300s8-6:/ # mkfs.xfs /dev/mapper/hana-SS3_data2_mnt00001
+....
+. Fügen Sie die zusätzlichen Dateisysteme dem hinzu `/etc/fstab` Konfigurationsdatei
++
+
+NOTE: Die XFS-Dateisysteme für die Daten- und Protokoll-LUN müssen mit dem gemountet werden `relatime` Und `inode64` Mount-Optionen:
+
++
+....
+stlrx300s8-6:/ # cat /etc/fstab
+/dev/mapper/hana-SS3_shared /hana/shared xfs defaults 0 0
+/dev/mapper/hana-SS3_log_mnt00001 /hana/log/SS3/mnt00001 xfs relatime,inode64 0 0
+/dev/mapper/hana-SS3_data_mnt00001 /hana/data/SS3/mnt00001 xfs relatime,inode64 0 0
+/dev/mapper/hana-SS3_data2_mnt00001 /hana/data2/SS3/mnt00001 xfs relatime,inode64 0 0
+....
+. Erstellen Sie Mount-Punkte und legen Sie Berechtigungen auf dem Datenbank-Host fest.
++
+....
+stlrx300s8-6:/ # mkdir -p /hana/data2/SS3/mnt00001
+stlrx300s8-6:/ # chmod –R 777 /hana/data2/SS3
+....
+. Mounten Sie die Dateisysteme, führen Sie den aus `mount –a` Befehl.
+
+
+
+
+== Hinzufügen einer zusätzlichen datavolume-Partition
+
+Um Ihrer Mandanten-Datenbank eine zusätzliche Datavolume-Partition hinzuzufügen, führen Sie die folgende SQL-Anweisung mit der Mandanten-Datenbank aus. Jede weitere LUN kann einen anderen Pfad haben:
+
+....
+ALTER SYSTEM ALTER DATAVOLUME ADD PARTITION PATH '/hana/data2/SID/';
+....
+image:saphana_aff_fc_image20.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

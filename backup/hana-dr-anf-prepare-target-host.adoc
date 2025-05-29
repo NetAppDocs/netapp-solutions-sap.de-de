@@ -1,0 +1,112 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-prepare-target-host.html 
+keywords: prepare, target, host, sap, hana, azure, log, volume, users, ports, configure, file, system 
+summary: In diesem Abschnitt werden die Vorbereitungsschritte beschrieben, die auf dem Server für das Disaster-Recovery-Failover erforderlich sind. 
+---
+= Bereiten Sie den Zielhost vor
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+In diesem Abschnitt werden die Vorbereitungsschritte beschrieben, die auf dem Server für das Disaster-Recovery-Failover erforderlich sind.
+
+Im normalen Betrieb wird der Zielhost normalerweise für andere Zwecke verwendet, beispielsweise als HANA QA- oder Testsystem. Daher müssen die meisten der beschriebenen Schritte bei der Ausführung von Disaster Failover-Tests ausgeführt werden. Zum anderen die relevanten Konfigurationsdateien, wie `/etc/fstab` Und `/usr/sap/sapservices`, Kann vorbereitet werden und dann in die Produktion durch einfaches Kopieren der Konfigurationsdatei. Das Disaster Recovery-Failover-Verfahren stellt sicher, dass die relevanten vorbereiteten Konfigurationsdateien korrekt konfiguriert sind.
+
+Die Vorbereitung des Ziel-Hosts umfasst auch das Herunterfahren des HANA QA- oder Testsystems sowie das Anhalten aller Services mit `systemctl stop sapinit`.
+
+
+
+== Hostname und IP-Adresse des Zielservers
+
+Der Hostname des Zielservers muss mit dem Hostnamen des Quellsystems identisch sein. Die IP-Adresse kann unterschiedlich sein.
+
+
+NOTE: Ein ordnungsgemäßes Fechten des Zielservers muss eingerichtet werden, damit er nicht mit anderen Systemen kommunizieren kann. Wenn keine ordnungsgemäße Fechten vorhanden sind, kann das geklonte Produktionssystem Daten mit anderen Produktionssystemen austauschen, was zu logisch beschädigten Daten führt.
+
+
+
+== Installieren Sie die erforderliche Software
+
+Die SAP-Hostagent-Software muss auf dem Zielserver installiert sein. Ausführliche Informationen finden Sie im https://help.sap.com/viewer/9f03f1852ce94582af41bb49e0a667a7/103/en-US["SAP Host Agent"^] Im SAP-Hilfeportal.
+
+
+NOTE: Wenn der Host als HANA QA- oder Testsystem verwendet wird, ist die SAP-Hostagent-Software bereits installiert.
+
+
+
+== Konfiguration von Benutzern, Ports und SAP-Diensten
+
+Die erforderlichen Anwender und Gruppen für die SAP HANA-Datenbank müssen auf dem Zielserver verfügbar sein. In der Regel wird die zentrale Benutzerverwaltung verwendet. Daher sind keine Konfigurationsschritte auf dem Zielserver erforderlich. Die erforderlichen Ports für die HANA-Datenbank müssen auf den Ziel-Hosts konfiguriert sein. Die Konfiguration kann durch Kopieren des aus dem Quellsystem kopiert werden `/etc/services` Datei auf dem Zielserver.
+
+Die erforderlichen SAP Services-Einträge müssen auf dem Zielhost verfügbar sein. Die Konfiguration kann durch Kopieren des aus dem Quellsystem kopiert werden `/usr/sap/sapservices` Datei auf dem Zielserver. Die folgende Ausgabe zeigt die erforderlichen Einträge für die im Lab-Setup verwendete SAP HANA-Datenbank.
+
+....
+vm-pr1:~ # cat /usr/sap/sapservices
+#!/bin/sh
+LD_LIBRARY_PATH=/usr/sap/PR1/HDB01/exe:$LD_LIBRARY_PATH;export LD_LIBRARY_PATH;/usr/sap/PR1/HDB01/exe/sapstartsrv pf=/usr/sap/PR1/SYS/profile/PR1_HDB01_vm-pr1 -D -u pr1adm
+limit.descriptors=1048576
+....
+
+
+== HANA-Protokollvolumen vorbereiten
+
+Da das HANA-Protokoll-Volume nicht Teil der Replikation ist, muss auf dem Ziel-Host ein leeres Protokoll-Volume vorhanden sein. Das Protokoll-Volume muss dieselben Unterverzeichnisse enthalten wie das Quell-HANA-System.
+
+....
+vm-pr1:~ # ls -al /hana/log/PR1/mnt00001/
+total 16
+drwxrwxrwx 5 root   root   4096 Feb 19 16:20 .
+drwxr-xr-x 3 root   root     22 Feb 18 13:38 ..
+drwxr-xr-- 2 pr1adm sapsys 4096 Feb 22 10:25 hdb00001
+drwxr-xr-- 2 pr1adm sapsys 4096 Feb 22 10:25 hdb00002.00003
+drwxr-xr-- 2 pr1adm sapsys 4096 Feb 22 10:25 hdb00003.00003
+vm-pr1:~ #
+....
+
+
+== Erstellen des Backup-Volumes für das Protokoll
+
+Da das Quellsystem für die HANA-Protokoll-Backups mit einem separaten Volume konfiguriert ist, muss auch ein Protokoll-Backup-Volume auf dem Zielhost verfügbar sein. Ein Volume für die Protokoll-Backups muss konfiguriert und auf dem Ziel-Host gemountet werden.
+
+Wenn die Protokollsicherung Teil der Disaster Recovery-Einrichtung ist, wird das replizierte Backup-Volume für das Protokoll auf dem Zielhost gemountet und es ist nicht erforderlich, ein zusätzliches Protokoll-Backup-Volume vorzubereiten.
+
+
+
+== Bereiten Sie Dateisystemeinhängungen vor
+
+In der folgenden Tabelle sind die Namenskonventionen aufgeführt, die für das Lab-Setup verwendet werden. Die Volume-Namen am Disaster-Recovery-Standort sind in enthalten `/etc/fstab`.
+
+|===
+| HANA PR1-Volumes | Volumes und Unterverzeichnisse am Disaster Recovery-Standort | Bereitstellungspunkt am Zielhost 
+
+
+| Datenvolumen | PR1-Data-mnt00001-SM-dest | /hana/Data/PR1/mnt00001 
+
+
+| Freigegebenes Volume | PR1-shared-sm-dest/shared PR1-shared-SM-dest/usr-sap-PR1 | /hana/shared /usr/sap/PR1 
+
+
+| Backup-Volume protokollieren | Hanabackup-SM-dest | /Hanabackup 
+|===
+
+NOTE: Die Mount-Punkte aus dieser Tabelle müssen auf dem Zielhost erstellt werden.
+
+Hier sind die erforderlichen `/etc/fstab` Einträge.
+
+....
+vm-pr1:~ # cat /etc/fstab
+# HANA ANF DB Mounts
+10.0.2.4:/PR1-data-mnt0001-sm-dest /hana/data/PR1/mnt00001 nfs   rw,vers=4,minorversion=1,hard,timeo=600,rsize=262144,wsize=262144,intr,noatime,lock,_netdev,sec=sys  0  0
+10.0.2.4:/PR1-log-mnt00001-dr /hana/log/PR1/mnt00001 nfs   rw,vers=4,minorversion=1,hard,timeo=600,rsize=262144,wsize=262144,intr,noatime,lock,_netdev,sec=sys  0  0
+# HANA ANF Shared Mounts
+10.0.2.4:/PR1-shared-sm-dest/hana-shared /hana/shared nfs rw,vers=4,minorversion=1,hard,timeo=600,rsize=262144,wsize=262144,intr,noatime,lock,_netdev,sec=sys  0  0
+10.0.2.4:/PR1-shared-sm-dest/usr-sap-PR1 /usr/sap/PR1 nfs rw,vers=4,minorversion=1,hard,timeo=600,rsize=262144,wsize=262144,intr,noatime,lock,_netdev,sec=sys  0  0
+# HANA file and log backup destination
+10.0.2.4:/hanabackup-sm-dest    /hanabackup nfs   rw,vers=3,hard,timeo=600,rsize=262144,wsize=262144,nconnect=8,bg,noatime,nolock 0 0
+....

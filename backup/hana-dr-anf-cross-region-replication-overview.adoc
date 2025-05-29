@@ -1,0 +1,19 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-cross-region-replication-overview.html 
+keywords: application, agnostic, information, azure, sap, hana 
+summary: Anwendungsunabhängige Informationen zur Replikation über Regionen finden Sie an der folgenden Stelle. 
+---
+= ANF: Regionale Replizierung mit SAP HANA
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Anwendungsunabhängige Informationen zur regionsübergreifenden Replikation finden Sie an folgendem Speicherort.
+
+link:https://docs.microsoft.com/en-us/azure/azure-netapp-files/["Azure NetApp Files Dokumentation – Microsoft Docs"^] In den Abschnitten Konzepte und Anleitungen.

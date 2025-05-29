@@ -325,7 +325,7 @@ Sehen Sie sich die folgenden Dokumente und/oder Websites an, um mehr über die i
 
 
 * NetApp Produktdokumentation: https://www.netapp.com/support-and-training/documentation/[]
-* NetApp SAP-Lösungen – Informationen zu Anwendungsfällen, Best Practices und Vorteilen: https://docs.netapp.com/us-en/netapp-solutions-sap[]
+* link:../index.html["NetApp SAP-Lösungen – Informationen zu Anwendungsfällen, Best Practices und Vorteilen"]
 
 
 

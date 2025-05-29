@@ -1,0 +1,352 @@
+---
+sidebar: sidebar 
+permalink: backup/fsxn-snapcenter-config.html 
+keywords: configuration, hdbuserstore, credentials, plugin deployment, host, 
+summary: Sie müssen die in diesem Abschnitt aufgeführten Schritte zur Basiskonfiguration von SnapCenter und zum Schutz der HANA-Ressource ausführen. 
+---
+= SnapCenter-Konfiguration
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Sie müssen die in diesem Abschnitt aufgeführten Schritte zur Basiskonfiguration von SnapCenter und zum Schutz der HANA-Ressource ausführen.
+
+
+
+== Übersicht über die Konfigurationsschritte
+
+Führen Sie die folgenden Schritte für die SnapCenter Basiskonfiguration und den Schutz der HANA-Ressource durch. Jeder Schritt wird in den folgenden Kapiteln detailliert beschrieben.
+
+. Konfiguration des SAP HANA-Backup-Benutzers und des hdbuserstore-Schlüssels Zugriff auf die HANA-Datenbank mit dem hdbsql-Client
+. Konfigurieren Sie den Speicher in SnapCenter. Zugangsdaten für den Zugriff auf FSX für ONTAP SVMs von SnapCenter aus
+. Konfigurieren Sie Anmeldedaten für die Plug-in-Bereitstellung. Wird verwendet, um die erforderlichen SnapCenter-Plug-ins automatisch auf dem HANA-Datenbank-Host zu implementieren und zu installieren.
+. Fügen Sie HANA-Host zu SnapCenter hinzu. Implementierung und Installation der erforderlichen SnapCenter Plug-ins
+. Richtlinien konfigurieren. Definiert den Backup-Typ (Snapshot, Datei), die Aufbewahrung sowie optionale Snapshot Backup-Replizierung.
+. Konfigurieren Sie den Schutz von HANA-Ressourcen. Bereitstellung von hdbuserstore-Schlüsselrichtlinien und -Zeitplänen sowie Anhängen an die HANA-Ressource
+
+
+
+
+== SAP HANA Backup-Benutzer und hdbuserstore-Konfiguration
+
+NetApp empfiehlt, einen dedizierten Datenbankbenutzer in der HANA Datenbank zu konfigurieren, um Backup-Vorgänge mit SnapCenter auszuführen. Im zweiten Schritt wird für diesen Backup-Benutzer ein SAP HANA User Store Key konfiguriert und dieser User Store Key wird bei der Konfiguration des SnapCenter SAP HANA Plug-ins verwendet.
+
+Die folgende Abbildung zeigt das SAP HANA Studio, über das Sie den Backup-Benutzer erstellen können
+
+Die erforderlichen Berechtigungen werden mit HANA 2.0 SPS5 Version geändert: Backup-Admin, Lesevorgang im Katalog, Datenbank-Backup-Administrator und Datenbank-Recovery-Operator. Für ältere Versionen reichen der Backup-Administrator und der Lesevorgang des Katalogs aus.
+
+Für ein SAP HANA MDC-System müssen Sie den Benutzer in der Systemdatenbank erstellen, da alle Backup-Befehle für das System und die Mandantendatenbanken über die Systemdatenbank ausgeführt werden.
+
+image:amazon-fsx-image9.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+Der folgende Befehl wird für die Konfiguration des Benutzerspeichers mit dem verwendet `<sid>adm` Benutzer:
+
+....
+hdbuserstore set <key> <host>:<port> <database user> <password>
+....
+SnapCenter verwendet das `<sid>adm` Benutzer zur Kommunikation mit der HANA-Datenbank. Daher müssen Sie den User Store Key mit dem <`sid>adm` Benutzer auf dem Datenbank-Host konfigurieren. In der Regel wird die SAP HANA hdbsql-Client-Software zusammen mit der Datenbank-Server-Installation installiert. Wenn dies nicht der Fall ist, müssen Sie zuerst den hdbclient installieren.
+
+In einer SAP HANA MDC-Einrichtung, Port `3<instanceNo>13` Ist der Standard-Port für den SQL-Zugriff auf die Systemdatenbank und muss in der hdbuserstore-Konfiguration verwendet werden.
+
+Für eine SAP HANA Einrichtung mit mehreren Hosts müssen Sie die Benutzerspeicherschlüssel für alle Hosts konfigurieren. SnapCenter versucht, über jeden der angegebenen Schlüssel eine Verbindung zur Datenbank herzustellen und kann somit unabhängig vom Failover eines SAP HANA Service zu einem anderen Host funktionieren. In unserem Labor-Setup haben wir einen User Store Key für den Benutzer konfiguriert `pfxadm` Für unser System PFX, ein einziges HANA MDC-Host-System mit einem einzelnen Mandanten.
+
+....
+pfxadm@hana-1:/usr/sap/PFX/home> hdbuserstore set PFXKEY hana-1:30013 SNAPCENTER <password>
+Operation succeed.
+....
+....
+pfxadm@hana-1:/usr/sap/PFX/home> hdbuserstore list
+DATA FILE       : /usr/sap/PFX/home/.hdb/hana-1/SSFS_HDB.DAT
+KEY FILE        : /usr/sap/PFX/home/.hdb/hana-1/SSFS_HDB.KEY
+ACTIVE RECORDS  : 7
+DELETED RECORDS : 0
+KEY PFXKEY
+  ENV : hana-1:30013
+  USER: SNAPCENTER
+KEY PFXSAPDBCTRL
+  ENV : hana-1:30013
+  USER: SAPDBCTRL
+Operation succeed.
+....
+Sie können den Zugriff auf die HANA-Systemdatenbank prüfen, die den Schlüssel mit dem verwendet `hdbsql` Befehl.
+
+....
+pfxadm@hana-1:/usr/sap/PFX/home> hdbsql -U PFXKEY
+Welcome to the SAP HANA Database interactive terminal.
+Type:  \h for help with commands
+       \q to quit
+hdbsql SYSTEMDB=>
+....
+
+
+== Speicher konfigurieren
+
+Führen Sie diese Schritte aus, um Storage in SnapCenter zu konfigurieren.
+
+. Wählen Sie in der SnapCenter-Benutzeroberfläche Storage-Systeme aus.
++
+image:amazon-fsx-image10.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
++
+Sie können den Storage-Systemtyp auswählen, der ONTAP SVMs oder ONTAP Cluster sein kann. Im folgenden Beispiel ist das SVM-Management ausgewählt.
+
++
+image:amazon-fsx-image11.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Klicken Sie auf Neu, um ein Speichersystem hinzuzufügen und den erforderlichen Hostnamen und die Anmeldeinformationen anzugeben.
++
+Der SVM-Benutzer muss nicht wie in der folgenden Abbildung dargestellt vsadmin verwendet werden. In der Regel wird ein Benutzer für die SVM konfiguriert und den erforderlichen Berechtigungen zum Ausführen von Backup- und Restore-Vorgängen zugewiesen. Informationen zu erforderlichen Berechtigungen finden Sie unter http://docs.netapp.com/ocsc-43/index.jsp?topic=%2Fcom.netapp.doc.ocsc-isg%2Fhome.html["SnapCenter Installationshandbuch"^] Im Abschnitt „Minimale ONTAP-Berechtigungen erforderlich“.
+
++
+image:amazon-fsx-image12.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Klicken Sie zum Konfigurieren der Speicherplattform auf Weitere Optionen.
+. Wählen Sie als Storage-System All-Flash FAS aus, um sicherzustellen, dass die Lizenz, die Teil des FSX für ONTAP ist, für SnapCenter verfügbar ist.
++
+image:amazon-fsx-image13.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
++
+Der SVM `sapcc-hana-svm` Ist jetzt in SnapCenter konfiguriert.
+
++
+image:amazon-fsx-image14.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+
+
+
+
+=== Anmeldedaten für Plug-in-Implementierung erstellen
+
+Damit SnapCenter die erforderlichen Plug-ins auf den HANA-Hosts bereitstellen kann, müssen die Benutzeranmeldeinformationen konfiguriert werden.
+
+. Gehen Sie zu Einstellungen, wählen Sie Anmeldeinformationen aus, und klicken Sie auf Neu.
++
+image:amazon-fsx-image15.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Im Lab-Setup haben wir einen neuen Benutzer,  `snapcenter`, Auf dem HANA-Host, der für die Plug-in-Implementierung verwendet wird. Sie müssen sudo prvileges aktivieren, wie in der folgenden Abbildung dargestellt.
++
+image:amazon-fsx-image16.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+
+
+....
+hana-1:/etc/sudoers.d # cat /etc/sudoers.d/90-cloud-init-users
+# Created by cloud-init v. 20.2-8.48.1 on Mon, 14 Feb 2022 10:36:40 +0000
+# User rules for ec2-user
+ec2-user ALL=(ALL) NOPASSWD:ALL
+# User rules for snapcenter user
+snapcenter ALL=(ALL) NOPASSWD:ALL
+hana-1:/etc/sudoers.d #
+....
+
+
+== Hinzufügen eines SAP HANA-Hosts
+
+Beim Hinzufügen eines SAP HANA-Hosts implementiert SnapCenter die erforderlichen Plug-ins auf dem Datenbank-Host und führt automatische Erkennungsvorgänge aus.
+
+Für das SAP HANA Plug-in ist Java 64-Bit Version 1.8 erforderlich. Java muss auf dem Host installiert sein, bevor der Host zu SnapCenter hinzugefügt wird.
+
+....
+hana-1:/etc/ssh # java -version
+openjdk version "1.8.0_312"
+OpenJDK Runtime Environment (IcedTea 3.21.0) (build 1.8.0_312-b07 suse-3.61.3-x86_64)
+OpenJDK 64-Bit Server VM (build 25.312-b07, mixed mode)
+hana-1:/etc/ssh #
+....
+OpenJDK oder Oracle Java wird mit SnapCenter unterstützt.
+
+Gehen Sie wie folgt vor, um den SAP HANA-Host hinzuzufügen:
+
+. Klicken Sie auf der Registerkarte Host auf Hinzufügen.
++
+image:amazon-fsx-image17.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Geben Sie Host-Informationen an, und wählen Sie das zu installierende SAP HANA-Plug-in aus. Klicken Sie Auf Senden.
++
+image:amazon-fsx-image18.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Bestätigen Sie den Fingerabdruck.
++
+image:amazon-fsx-image19.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
++
+Die Installation des HANA und des Linux Plug-ins wird automatisch gestartet. Nach Abschluss der Installation wird in der Statusspalte des Hosts das VMware Plug-in konfigurieren angezeigt. SnapCenter erkennt, ob das SAP HANA Plug-in in in einer virtualisierten Umgebung installiert ist. Dabei kann es sich um eine VMware Umgebung oder eine Umgebung bei einem Public Cloud-Provider handelt. In diesem Fall zeigt SnapCenter eine Warnung an, um den Hypervisor zu konfigurieren.
+
++
+Sie können die Warnmeldung mithilfe der folgenden Schritte entfernen.
+
++
+image:amazon-fsx-image20.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
++
+.. Wählen Sie auf der Registerkarte Einstellungen die Option Globale Einstellungen.
+.. Wählen Sie für die Hypervisor-Einstellungen die Option VMs mit iSCSI Direct Attached Disks oder NFS für alle Hosts aus, und aktualisieren Sie die Einstellungen.
++
+image:amazon-fsx-image21.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
++
+Der Bildschirm zeigt nun das Linux-Plug-in und das HANA-Plug-in mit dem Status läuft.
+
++
+image:amazon-fsx-image22.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+
+
+
+
+
+
+== Richtlinien konfigurieren
+
+Richtlinien werden normalerweise unabhängig von der Ressource konfiguriert und können von mehreren SAP HANA Datenbanken verwendet werden.
+
+Eine typische Minimalkonfiguration umfasst folgende Richtlinien:
+
+* Richtlinie für stündliche Backups ohne Replikation: `LocalSnap`.
+* Richtlinie für wöchentliche Blockintegritätsprüfung über ein dateibasiertes Backup: `BlockIntegrityCheck`.
+
+
+In den folgenden Abschnitten wird die Konfiguration dieser Richtlinien beschrieben.
+
+
+
+=== Richtlinien für Snapshot-Backups
+
+Führen Sie diese Schritte aus, um Snapshot Backup-Richtlinien zu konfigurieren.
+
+. Gehen Sie zu Einstellungen > Richtlinien, und klicken Sie auf Neu.
++
+image:amazon-fsx-image23.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Geben Sie den Namen und die Beschreibung der Richtlinie ein. Klicken Sie Auf Weiter.
++
+image:amazon-fsx-image24.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Wählen Sie den Backup-Typ als Snapshot-basiert aus und wählen Sie stündlich für die Zeitplanfrequenz aus.
++
+Der Zeitplan selbst wird später mit der HANA-Ressourcenschutzkonfiguration konfiguriert.
+
++
+image:amazon-fsx-image25.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Konfigurieren Sie die Aufbewahrungseinstellungen für On-Demand-Backups.
++
+image:amazon-fsx-image26.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Konfigurieren der Replikationsoptionen. In diesem Fall ist kein SnapVault oder SnapMirror Update ausgewählt.
++
+image:amazon-fsx-image27.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
++
+image:amazon-fsx-image28.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+
+
+Die neue Richtlinie ist jetzt konfiguriert.
+
+image:amazon-fsx-image29.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+
+
+=== Richtlinie zur Block-Integritätsprüfung
+
+Befolgen Sie diese Schritte, um die Richtlinie zur Integritätsprüfung von Blöcken zu konfigurieren.
+
+. Gehen Sie zu Einstellungen > Richtlinien, und klicken Sie auf Neu.
+. Geben Sie den Namen und die Beschreibung der Richtlinie ein. Klicken Sie Auf Weiter.
++
+image:amazon-fsx-image30.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Legen Sie den Sicherungstyp auf „File-based“ und „Schedule Frequency“ auf „Weekly“ fest. Der Zeitplan selbst wird später mit der HANA-Ressourcenschutzkonfiguration konfiguriert.
++
+image:amazon-fsx-image31.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Konfigurieren Sie die Aufbewahrungseinstellungen für On-Demand-Backups.
++
+image:amazon-fsx-image32.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Klicken Sie auf der Seite Zusammenfassung auf Fertig stellen.
++
+image:amazon-fsx-image33.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
++
+image:amazon-fsx-image34.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+
+
+
+
+== Konfiguration und Sicherung einer HANA-Ressource
+
+Nach der Plug-in-Installation startet der automatische Erkennungsvorgang der HANA-Ressource automatisch. Im Bildschirm Ressourcen wird eine neue Ressource erstellt, die mit dem roten Vorhängeschloss-Symbol als gesperrt markiert ist. Gehen Sie wie folgt vor, um die neue HANA-Ressource zu konfigurieren und zu schützen:
+
+. Wählen Sie und klicken Sie auf die Ressource, um mit der Konfiguration fortzufahren.
++
+Sie können den automatischen Erkennungsvorgang auch manuell im Bildschirm Ressourcen auslösen, indem Sie auf Ressourcen aktualisieren klicken.
+
++
+image:amazon-fsx-image35.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Geben Sie den UserStore-Schlüssel für die HANA-Datenbank an.
++
+image:amazon-fsx-image36.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
++
+Der zweite Ebene-Prozess der automatischen Bestandsaufnahme beginnt, bei dem Mandantendaten und Storage-Platzbedarf erfasst werden.
+
++
+image:amazon-fsx-image37.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Doppelklicken Sie auf der Registerkarte Ressourcen auf die Ressource, um den Ressourcenschutz zu konfigurieren.
++
+image:amazon-fsx-image38.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Konfigurieren Sie ein benutzerdefiniertes Namensformat für die Snapshot Kopie.
++
+NetApp empfiehlt den Einsatz einer benutzerdefinierten Snapshot Kopie, um schnell ermitteln zu können, mit welcher Richtlinie und welche Zeitplantypen Backups erstellt wurden. Durch Hinzufügen des Zeitplantyps zum Namen der Snapshot Kopie können Sie zwischen geplanten und On-Demand-Backups unterscheiden. Der `schedule name` String für On-Demand-Backups ist leer, während geplante Backups den String enthalten `Hourly`, `Daily`, `or Weekly`.
+
++
+image:amazon-fsx-image39.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Auf der Seite „Anwendungseinstellungen“ müssen keine spezifischen Einstellungen vorgenommen werden. Klicken Sie Auf Weiter.
++
+image:amazon-fsx-image40.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Wählen Sie die Richtlinien aus, die der Ressource hinzugefügt werden sollen.
++
+image:amazon-fsx-image41.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Legen Sie den Zeitplan für die Richtlinie zur Integritätsprüfung der Blöcke fest.
++
+In diesem Beispiel wird sie für einmal pro Woche festgelegt.
+
++
+image:amazon-fsx-image42.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Legen Sie den Zeitplan für die lokale Snapshot-Richtlinie fest.
++
+In diesem Beispiel wird die Einstellung alle 6 Stunden durchgeführt.
+
++
+image:amazon-fsx-image43.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
++
+image:amazon-fsx-image44.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+. Geben Sie Informationen zur E-Mail-Benachrichtigung an.
++
+image:amazon-fsx-image45.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
++
+image:amazon-fsx-image46.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+
+
+Die Konfiguration der HANA-Ressourcen ist jetzt abgeschlossen, und Sie können Backups ausführen.
+
+image:amazon-fsx-image47.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

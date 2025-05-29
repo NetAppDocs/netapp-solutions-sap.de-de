@@ -121,7 +121,7 @@ Da Systemaktualisierungen, Kopien, Klone und Disaster-Recovery-Tests sehr sensit
 Weitere Informationen zu den in diesem Dokument enthaltenen Informationen finden Sie in den folgenden Dokumenten und auf den folgenden Websites:
 
 * link:https://pcg.io/de/sap/alpaca/["ALPAKA"]
-* link:https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"]
+* link:../lifecycle/sc-copy-clone-introduction.html["Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"]
 * link:https://docs.netapp.com/us-en/snapcenter/sc-automation/reference_supported_rest_apis.html["REST-APIs, die für SnapCenter Server und Plug-ins unterstützt werden"]
 
 

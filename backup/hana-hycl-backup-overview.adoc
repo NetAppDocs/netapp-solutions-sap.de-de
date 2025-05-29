@@ -22,7 +22,7 @@ Dieser technische Bericht enthält Best Practices für die SAP HANA Datensicheru
 
 In diesem Dokument wird beschrieben, wie Sie SAP HANA für die Datensicherung mit NetApp BlueXP einrichten und konfigurieren – von lokalen bis hin zu Cloud-basierten Objektspeichern. Sie deckt den Backup- und Recovery-Teil der Lösung von BlueXP ab. Diese Lösung ist eine Erweiterung der lokalen SAP HANA Backup-Lösung mit NetApp Snap Center und bietet eine kostengünstige Möglichkeit für die langfristige Archivierung von SAP HANA-Backups in Cloud-basiertem Objekt-Storage. Außerdem bietet sie optionales Tiering von Objekt-Storage in Archiv-Storage wie AWS Glacier/Deep Glacier, Microsoft Azure Blob Archive und GCP Archive Storage.
 
-Die Einrichtung und Konfiguration der lokalen Backup- und Recovery-Lösung für SAP HANA wird in beschrieben https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-overview.html#the-netapp-solution["TR-4614: SAP HANA Backup und Recovery mit SnapCenter (netapp.com)"].
+Die Einrichtung und Konfiguration der On-Premises SAP HANA Backup- und Recovery-Lösung wird in beschriebenlink:hana-br-scs-overview.html#the-netapp-solution["TR-4614: SAP HANA Backup und Recovery mit SnapCenter (netapp.com)"].
 
 In dieser TR wird nur beschrieben, wie Sie die lokale SnapCenter-basierte SAP HANA Backup- und Recovery-Lösung mit BlueXP Backup und Recovery für SAP HANA erweitern können. Dabei kommen z. B. AWS S3 Objekt-Storage zum Einsatz. Das Setup und die Konfiguration mit Microsoft Azure und GCP-Objekt-Storage statt AWS S3 ist ähnlich, wird in diesem Dokument aber nicht beschrieben.
 
@@ -45,8 +45,7 @@ image:hana-hycl-back-image1.png["Ein Bild, das Text, Screenshot, Diagramm, Kreis
 
 == Überblick über die Installations- und Konfigurationsschritte
 
-Die erforderlichen Installations- und Konfigurationsschritte lassen sich in drei Bereiche aufteilen. +
-Voraussetzung ist, dass die SAP HANA-Backup-Konfiguration im NetApp Snap Center konfiguriert ist. Informationen zur Einrichtung von Snap Center für SAP HANA finden Sie in https://docs.netapp.com/us-en/netapp-solutions-sap/backup/saphana-br-scs-snapcenter-configuration.html["SnapCenter-Konfiguration (netapp.com)"].
+Die erforderlichen Installations- und Konfigurationsschritte lassen sich in drei Bereiche aufteilen. + Voraussetzung ist, dass die SAP HANA Backup Konfiguration im NetApp Snap Center konfiguriert wurde. Informationen zur Einrichtung von Snap Center für SAP HANA finden Sie in link:hana-br-scs-snapcenter-config.html["SnapCenter-Konfiguration (netapp.com)"].
 
 . Installation und Konfiguration von NetApp BlueXP Komponenten
 +

@@ -1,0 +1,93 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-fas-nfs-introduction.html 
+keywords: sap, hana, fas, systems, nfs, configuration, guide 
+summary: 'Die NetApp FAS Produktfamilie wurde für die Verwendung mit SAP HANA für Tailored Datacenter Integration-Projekte (TDI) zertifiziert. Das zertifizierte Enterprise Storage-System zeichnet sich durch die NetApp ONTAP aus.' 
+---
+= Leitfaden für SAP HANA auf NetApp FAS-Systemen mit NFS-Konfiguration
+:allow-uri-read: 
+
+
+[role="lead"]
+Die NetApp FAS Produktfamilie wurde für die Verwendung mit SAP HANA für Tailored Datacenter Integration-Projekte (TDI) zertifiziert. Das zertifizierte Enterprise Storage-System zeichnet sich durch die NetApp ONTAP aus.
+
+Marco schön, NetApp
+
+Diese Zertifizierung gilt derzeit nur für die folgenden Modelle:
+
+* FAS2750, FAS2820, FAS8300, FAS50, FAS8700, FAS70, FAS9500, FAS90 Eine vollständige Liste der von NetApp zertifizierten Storage-Lösungen für SAP HANA finden Sie unter https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=v:deCertified;ve:13["Zertifiziertes und unterstütztes SAP HANA Hardware Directory"^] .
+
+
+In diesem Dokument werden die ONTAP-Konfigurationsanforderungen für das NFS-Protokoll, Version 3 (NFSv3) oder das NFS Version 4 (NFSv4.1)-Protokoll beschrieben.
+
+
+NOTE: Es werden nur NFS-Versionen 3 oder 4.1 unterstützt. NFS-Versionen 1, 2, 4.0 und 4.2 werden nicht unterstützt.
+
+
+NOTE: Die in diesem Dokument beschriebene Konfiguration ist erforderlich, um die erforderlichen SAP HANA KPIs und die beste Performance für SAP HANA zu erreichen. Wenn Sie Einstellungen oder Funktionen ändern, die nicht in diesem Dokument aufgeführt sind, kann dies zu einer Performance-Verschlechterung oder zu einem unerwarteten Verhalten führen. Diese Einstellungen sollten nur durchgeführt werden, wenn sie vom NetApp Support empfohlen werden.
+
+Die Konfigurationsleitfäden für NetApp FAS Systeme mit FCP und für AFF Systeme mit NFS oder FC sind unter folgenden Links verfügbar:
+
+* link:hana-fas-fc-introduction.html["Technischer Bericht: SAP HANA on NetApp FAS Systems with Fibre Channel Protocol"^]
+* link:hana-aff-nfs-introduction.html["Technischer Bericht: SAP HANA on NetApp AFF Systems with NFS"^]
+* link:hana-aff-fc-introduction.html["Technischer Bericht: SAP HANA on NetApp AFF Systems with Fibre Channel Protocol"^]
+
+
+In der folgenden Tabelle sind die unterstützten Kombinationen aus der NFS-Version, der NFS-Sperre und den erforderlichen Isolierungs-Implementierungen in Abhängigkeit von der Konfiguration der SAP HANA Datenbank aufgeführt.
+
+Für SAP HANA Single-Host-Systeme oder mehrere Hosts ohne Host Auto-Failover werden NFSv3 und NFSv4 unterstützt.
+
+Für SAP HANA unterstützen mehrere Host-Systeme mit Host Auto-Failover nur NetApp NFSv4, während die NFSv4-Sperrung als Alternative zu einer serverspezifischen STONITH-Implementierung (SAP HANA HA/DR-Provider) dient.
+
+|===
+| SAP HANA | NFS-Version | NFS-Sperre | SAP HANA HA-/DR-PROVIDER 
+
+
+.2+| SAP HANA ein Host, mehrere Hosts ohne Host Auto-Failover | NFSv3 | Aus | k. A. 
+
+
+| NFSv4 | Ein | k. A. 
+
+
+.2+| SAP HANA mehrere Hosts mit Host Auto-Failover | NFSv3 | Aus | Serverspezifische STONITH-Implementierung erforderlich 
+
+
+| NFSv4 | Ein | Nicht erforderlich 
+|===
+
+NOTE: Eine serverspezifische STONITH-Implementierung ist nicht Teil dieses Leitfadens. Wenden Sie sich für eine solche Implementierung an Ihren Server-Anbieter.
+
+Dieses Dokument enthält Konfigurationsempfehlungen für SAP HANA, die auf physischen Servern und virtuellen Servern ausgeführt werden, die VMware vSphere verwenden.
+
+
+NOTE: Beachten Sie immer die relevanten SAP-Hinweise für Konfigurationsrichtlinien für Betriebssysteme und HANA-spezifische Linux-Kernel-Abhängigkeiten. Weitere Informationen finden Sie unter https://launchpad.support.sap.com/["SAP-Hinweis 2235581: Von SAP HANA unterstützte Betriebssysteme"^].
+
+
+
+== SAP HANA Tailored Datacenter Integration
+
+NetApp FAS Storage Controller sind im SAP HANA TDI Programm unter Verwendung von NFS- (NAS) und FC (SAN) Protokollen zertifiziert. Sie können in allen aktuellen SAP HANA-Szenarien wie SAP Business Suite on HANA, S/4HANA, BW/4HANA oder SAP Business Warehouse on HANA in Konfigurationen mit einem Host oder mehreren Hosts implementiert werden. Alle Server, die für den Einsatz mit SAP HANA zertifiziert sind, können mit von NetApp zertifizierten Storage-Lösungen kombiniert werden. In der folgenden Abbildung finden Sie eine Übersicht über die Architektur.
+
+image:saphana-fas-nfs_image1.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+Weitere Informationen zu den Voraussetzungen und Empfehlungen für SAP HANA-Systeme in der Produktion finden Sie in der folgenden SAP-Ressource:
+
+* http://go.sap.com/documents/2016/05/e8705aae-717c-0010-82c7-eda71af511fa.html["SAP HANA Tailored Data Center Integration Häufig gestellte Fragen"^]
+
+
+
+
+== SAP HANA mit VMware vSphere
+
+Es gibt verschiedene Optionen, um den Storage mit Virtual Machines (VMs) zu verbinden. Der bevorzugte Modus ist die direkte Verbindung der Storage Volumes mit NFS vom Gastbetriebssystem. Bei Verwendung dieser Option unterscheidet sich die Konfiguration der Hosts und Storages nicht zwischen physischen Hosts und VMs.
+
+NFS Datastores oder VVOL Datastores mit NFS werden ebenfalls unterstützt. Bei beiden Optionen muss nur ein SAP HANA Daten- oder Protokoll-Volume im Datastore für Produktionsanwendungsfälle gespeichert werden.
+
+In diesem Dokument wird das empfohlene Setup mit direkten NFS-Mounts vom Gastbetriebssystem beschrieben.
+
+Weitere Informationen zur Verwendung von vSphere mit SAP HANA finden Sie unter den folgenden Links:
+
+* https://help.sap.com/docs/SUPPORT_CONTENT/virtualization/3362185751.html["SAP HANA on VMware vSphere - Virtualization - Community Wiki"^]
+* https://www.vmware.com/docs/sap_hana_on_vmware_vsphere_best_practices_guide-white-paper["Best Practices Guide für SAP HANA auf VMware vSphere"^]
+* https://launchpad.support.sap.com/["2161991 - Konfigurationsrichtlinien für VMware vSphere - SAP ONE Support Launchpad (Anmeldung erforderlich)"^]
+

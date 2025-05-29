@@ -1,0 +1,17 @@
+---
+sidebar: sidebar 
+permalink: backup/fsxn-backup-replication-with-snapvault.html 
+keywords:  
+summary:  
+---
+= Backup-Replizierung mit SnapVault
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+In diesem Dokument wird beschrieben, wie Sie mit SnapVault ein Backup erstellen.

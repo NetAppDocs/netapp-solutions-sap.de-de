@@ -1,0 +1,17 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-dr-anf-testing.html 
+keywords:  
+summary:  
+---
+= Disaster Recovery-Tests
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dieser Abschnitt enthält einen Überblick über die Disaster-Recovery-Tests für SAP HANA in Azure NetApp Files (ANF).

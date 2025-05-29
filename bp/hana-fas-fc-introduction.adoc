@@ -1,0 +1,63 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-fas-fc-introduction.html 
+keywords: sap, hana, fas, systems, fibre, channel, protocol, configuration, data, vmware, vsphere 
+summary: Die NetApp FAS Produktfamilie wurde für die Verwendung mit SAP HANA in TDI Projekten zertifiziert. Die zertifizierte Enterprise Storage-Plattform zeichnet sich durch das NetApp ONTAP Betriebssystem aus. 
+---
+= Konfigurationsleitfaden: SAP HANA auf NetApp FAS Systemen mit Fibre Channel Protocol
+:allow-uri-read: 
+
+
+[role="lead"]
+Die NetApp FAS Produktfamilie wurde für die Verwendung mit SAP HANA in TDI Projekten zertifiziert. Die zertifizierte Enterprise Storage-Plattform zeichnet sich durch das NetApp ONTAP Betriebssystem aus.
+
+Marco Schoen, NetApp
+
+Die Zertifizierung gilt für folgende Modelle:
+
+* FAS2750, FAS2820, FAS8300, FAS50, FAS8700 FAS70, FAS9500, FAS90
+
+
+Eine vollständige Liste der zertifizierten NetApp Storage-Lösungen für SAP HANA finden Sie unter https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN/#/solutions?filters=v:deCertified;ve:13["Zertifiziertes und unterstütztes SAP HANA-Hardwaresverzeichnis"^].
+
+In diesem Dokument werden die FAS-Konfigurationen beschrieben, die das Fibre Channel Protocol (FCP) verwenden.
+
+
+NOTE: Die in diesem Dokument beschriebene Konfiguration ist erforderlich, um die erforderlichen SAP HANA KPIs und die beste Performance für SAP HANA zu erreichen. Wenn Sie Einstellungen oder Funktionen ändern, die nicht in diesem Dokument aufgeführt sind, kann dies zu einer Performance-Verschlechterung oder zu einem unerwarteten Verhalten führen. Diese Einstellungen sollten nur nach Rat des NetApp Supports vorgenommen werden.
+
+Die Konfigurationsleitfäden für FAS Systeme mit NFS und NetApp AFF Systemen können über die folgenden Links gefunden werden:
+
+* link:hana-aff-fc-introduction.html["Technischer Bericht: SAP HANA on NetApp AFF Systems with Fibre Channel Protocol"^]
+* link:hana-fas-nfs-introduction.html["Technischer Bericht: SAP HANA on NetApp FAS Systems with NFS"^]
+* link:hana-aff-nfs-introduction.html["Technischer Bericht: SAP HANA on NetApp AFF Systems with NFS"^]
+
+
+In einer SAP HANA Umgebung mit mehreren Hosts wird der standardmäßige SAP HANA-Storage-Connector verwendet, um im Falle eines Failover des SAP HANA-Hosts zu Fechten. In den entsprechenden SAP-Hinweisen finden Sie die Konfigurationsrichtlinien für das Betriebssystem und die HANA-spezifischen Linux-Kernel-Abhängigkeiten. Weitere Informationen finden Sie unter https://launchpad.support.sap.com/["SAP Note 2235581 – von SAP HANA unterstützte Betriebssysteme"^].
+
+
+
+== SAP HANA Tailored Datacenter Integration
+
+NetApp FAS Storage Controller sind im SAP HANA Tailored Datacenter Integration-Programm (TDI) unter Verwendung der NFS-Protokolle (NAS) und Fibre Channel (SAN) zertifiziert. Sie können in beliebigen SAP HANA-Szenarien wie SAP Business Suite on HANA, S/4HANA, BW/4HANA oder SAP Business Warehouse on HANA in Konfigurationen mit einem Host oder mehreren Hosts implementiert werden. Alle Server, die für den Einsatz mit SAP HANA zertifiziert sind, können mit der zertifizierten Storage-Lösung kombiniert werden. In der folgenden Abbildung finden Sie eine Übersicht über die Architektur.
+
+image:saphana_fas_fc_image1.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+Weitere Informationen zu den Voraussetzungen und Empfehlungen für produktive SAP HANA-Systeme finden Sie in der folgenden Ressource:
+
+* http://go.sap.com/documents/2016/05/e8705aae-717c-0010-82c7-eda71af511fa.html["SAP HANA Tailored Data Center Integration Häufig gestellte Fragen"^]
+
+
+
+
+== SAP HANA mit VMware vSphere
+
+Für die Verbindung von Storage mit Virtual Machines (VMs) gibt es verschiedene Optionen. Der bevorzugte Modus ist die direkte Verbindung der Storage Volumes mit NFS vom Gastbetriebssystem. Diese Option ist in beschriebenlink:hana-aff-nfs-introduction.html["Technischer Bericht: SAP HANA on NetApp AFF Systems with NFS"^].
+
+Auch Raw Device Mapping (RDM), FCP Datastores oder VVOL Datastores mit FCP werden unterstützt. Bei beiden Datastore-Optionen muss für produktive Anwendungsfälle nur eine SAP HANA Daten oder ein Protokoll-Volume im Datastore gespeichert werden.
+
+Weitere Informationen zur Verwendung von vSphere mit SAP HANA finden Sie unter den folgenden Links:
+
+* https://help.sap.com/docs/SUPPORT_CONTENT/virtualization/3362185751.html["SAP HANA on VMware vSphere - Virtualization - Community Wiki"^]
+* https://www.vmware.com/docs/sap_hana_on_vmware_vsphere_best_practices_guide-white-paper["Best Practices Guide für SAP HANA auf VMware vSphere"^]
+* https://launchpad.support.sap.com/["2161991 - Konfigurationsrichtlinien für VMware vSphere - SAP ONE Support Launchpad (Anmeldung erforderlich)"^]
+

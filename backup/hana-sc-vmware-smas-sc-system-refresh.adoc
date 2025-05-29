@@ -17,4 +17,4 @@ Klonvorgänge können am primären Standort oder im sekundären Storage ausgefü
 
 Das geklonte Volume ist nicht Teil der HANA-Konsistenzgruppe und wird nicht mit der aktiven SnapMirror-Synchronisierung repliziert.
 
-Detaillierte Informationen zu den Workflows für die Systemaktualisierung sind verfügbar unter: https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["TR-4667: Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"]
+Detaillierte Informationen zu den Workflows für die Systemaktualisierung sind verfügbar unter: link:../lifecycle/sc-copy-clone-introduction.html["TR-4667: Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"]

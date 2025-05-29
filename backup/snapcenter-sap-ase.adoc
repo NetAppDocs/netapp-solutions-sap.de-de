@@ -440,7 +440,7 @@ Sehen Sie sich die folgenden Dokumente und/oder Websites an, um mehr über die i
 ** 1585981 – SYB: Sicherstellung der Recovery-Fähigkeit für SAP ASE: https://me.sap.com/notes/1585981/E[]
 ** 1588316 - SYB: Automatische Datenbank- und Protokollsicherungen konfigurieren: https://me.sap.com/notes/1588316/E[]
 ** NetApp Produktdokumentation: https://www.netapp.com/support-and-training/documentation/[]
-** NetApp SAP-Lösungen – Informationen zu Anwendungsfällen, Best Practices und Vorteilen: https://docs.netapp.com/us-en/netapp-solutions-sap[]
+** link:../index.html["NetApp SAP-Lösungen – Informationen zu Anwendungsfällen, Best Practices und Vorteilen"]
 
 
 

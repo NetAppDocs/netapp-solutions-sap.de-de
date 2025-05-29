@@ -65,10 +65,10 @@ NetApp SnapCenter mit dem Plug-in für SAP HANA wird verwendet, um die erforderl
 
 Eine vollautomatisierte End-to-End-Bereitstellung von SAP Testsystemen kann unter Verwendung von Tools anderer Anbieter und durch die Integration von NetApp Funktionen durchgeführt werden. Weitere Informationen finden Sie unter:
 
-https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/lama-ansible-introduction.html["TR-4953: NetApp SAP Landscape Management Integration Using Ansible"]
+link:lama-ansible-introduction.html["TR-4953: NetApp SAP Landscape Management Integration Using Ansible"]
 
-https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/libelle-sc-overview.html["TR-4929: SAP-Systemkopien automatisieren mit Libelle SystemCopy (netapp.com)"]
+link:libelle-sc-overview.html["TR-4929: SAP-Systemkopien automatisieren mit Libelle SystemCopy (netapp.com)"]
 
-https://docs.netapp.com/us-en/netapp-solutions-sap/briefs/sap-alpaca-automation.html#solution-overview["Automatisierung von SAP System copy, Refresh, und Klonen von Workflows mit ALPACA und NetApp SnapCenter"]
+link:../briefs/sap-alpaca-automation.html#solution-overview["Automatisierung von SAP System copy, Refresh, und Klonen von Workflows mit ALPACA und NetApp SnapCenter"]
 
-https://docs.netapp.com/us-en/netapp-solutions-sap/briefs/sap-avantra-automation.html#solution-overview["Automatisierung von SAP Systemkopien  Verstärkern;#44; Refresh, Klonen von Workflows mit Avantra und NetApp SnapCenter"]
+link:../briefs/sap-avantra-automation.html#solution-overview["Automatisierung von SAP Systemkopien  Verstärkern;#44; Refresh, Klonen von Workflows mit Avantra und NetApp SnapCenter"]

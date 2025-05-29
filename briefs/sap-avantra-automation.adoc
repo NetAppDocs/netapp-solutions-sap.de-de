@@ -114,7 +114,7 @@ Da Systemaktualisierungen, Kopien, Klone und Disaster-Recovery-Tests sehr sensit
 Sehen Sie sich die folgenden Dokumente und Websites an, um mehr über die in diesem Dokument beschriebenen Daten zu erfahren:
 
 * link:https://www.avantra.com/["Avantra"]
-* link:https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"]
+* link:../lifecycle/sc-copy-clone-introduction.html["Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"]
 * link:https://docs.netapp.com/us-en/snapcenter/sc-automation/reference_supported_rest_apis.html["REST-APIs werden für SnapCenter Server und Plug-ins unterstützt"]
 
 
