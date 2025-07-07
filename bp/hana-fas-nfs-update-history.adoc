@@ -85,4 +85,7 @@ An dieser Lösung wurden seit ihrer ersten Veröffentlichung folgende technische
 
 
 | Februar 2025 | Neues Storage-System 
+
+
+| Juli 2025 | Kleine Updates 
 |===

@@ -76,4 +76,7 @@ An dieser Lösung wurden seit ihrer ersten Veröffentlichung folgende technische
 
 
 | November 2024 | Neue Storage-Systeme 
+
+
+| Juli 2025 | Kleine Updates 
 |===

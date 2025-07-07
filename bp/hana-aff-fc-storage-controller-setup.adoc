@@ -423,10 +423,6 @@ vol create -volume FC5_log2_mnt00001  -aggregate aggr1_1 -size 280g -snapshot-po
 vol create -volume FC5_data2_mnt00002  -aggregate aggr2_1 -size 1200g -snapshot-policy none -foreground true -encrypt false -space-guarantee none
 vol create -volume FC5_shared -aggregate aggr1_1 -size 512g -state online -policy default -snapshot-policy none -junction-path /FC5_shared -encrypt false  -space-guarantee none
 ....
-+
-
-NOTE: ASA-Systeme, die nach dem 2024. August gestartet wurden, erfordern diesen Schritt nicht, da er automatisch während _lun Create_ durchgeführt wird
-
 . Erstellen Sie alle LUNs.
 +
 ....
@@ -439,10 +435,6 @@ lun create -path /vol/FC5_log2_mnt00001/FC5_log2_mnt00001 -size 260g -ostype lin
 lun create -path /vol/FC5_log_mnt00002/FC5_log_mnt00002 -size 260g -ostype linux -space-reserve disabled -space-allocation disabled -class regular
 lun create -path /vol/FC5_log2_mnt00002/FC5_log2_mnt00002 -size 260g -ostype linux -space-reserve disabled -space-allocation disabled -class regular
 ....
-+
-
-NOTE: Geben Sie den LUN-Namen nur als Pfad für ASA-Systeme an, die nach August 2024 gestartet wurden. Dies gilt auch für den unten stehenden Befehl _lun map_. Außerdem stehen die Optionen _-space-Reserve_ und _-space-Allocation_ nicht zur Verfügung.
-
 . Erstellen Sie die Initiatorgruppe für alle Server, die zu System FC5 gehören.
 +
 ....

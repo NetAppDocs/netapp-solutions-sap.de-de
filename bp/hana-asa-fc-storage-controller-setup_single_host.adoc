@@ -1,0 +1,78 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-asa-fc-storage-controller-setup_single_host.html 
+keywords: storage efficiency, netapp volume encryption, quality of service, qos, fabricpool, Disk shelf, sas, fcp port sets, linux lvm, 
+summary: In diesem Abschnitt wird die Konfiguration des NetApp Storage-Systems beschrieben. Sie müssen die primäre Installation und Einrichtung gemäß den entsprechenden Data ONTAP Setup- und Konfigurationsleitfäden abschließen. 
+---
+= Speichercontroller-Setup – einzelner Host
+:allow-uri-read: 
+
+
+
+
+== Speichercontroller-Setup – einzelner Host
+
+[role="lead"]
+Dieser Abschnitt beschreibt die Konfiguration des NetApp-Speichersystems speziell für SAP HANA-Einzelhostsysteme
+
+
+
+== LUN-Konfiguration für SAP HANA Single-Host-Systeme
+
+Das Linux LVM wird verwendet, um die Leistung zu steigern und LUN-Größenbeschränkungen zu beheben. Beim SAP HANA-Host müssen Volume-Gruppen und logische Volumes erstellt und eingebunden werden, wie in der folgenden Tabelle angegeben.
+
+|===
+| Logisches Volume/LUN | Bereitstellungspunkt beim SAP HANA-Host | Hinweis 
+
+
+| LV: FC5_data_mnt0000-vol | /hana/Data/FC5/mnt00001 | Mit /etc/fstab-Eintrag montiert 
+
+
+| LV: FC5_log_mnt00001-vol | /hana/log/FC5/mnt00001 | Mit /etc/fstab-Eintrag montiert 
+
+
+| LUN: FC5_shared | /hana/Shared/FC5 | Mit /etc/fstab-Eintrag montiert 
+|===
+
+NOTE: Mit der beschriebenen Konfiguration wird die  `/usr/sap/FC5` Das Verzeichnis, in dem das Standard-Home-Verzeichnis des Benutzers FC5adm gespeichert ist, befindet sich auf der lokalen Festplatte. In einem Disaster Recovery-Setup mit festplattenbasierter Replikation empfiehlt NetApp die Erstellung einer zusätzlichen LUN für die  `/usr/sap/FC5` Verzeichnis, sodass sich alle Dateisysteme auf dem zentralen Speicher befinden.
+
+
+
+== Erstellen von LUNs und Zuordnen von LUNs zu Initiatorgruppen
+
+Sie können NetApp ONTAP System Manager verwenden, um Storage Volumes und LUNs zu erstellen und sie Initiatorgruppen der Server und der ONTAP CLI zuzuordnen. In diesem Leitfaden wird die Verwendung der CLI beschrieben.
+
+
+NOTE: Der `sanlun` Tool ist Teil der NetApp Host Utilities und muss auf jedem SAP HANA Host installiert sein. Weitere Informationen finden Sie im Abschnitt „Host_Setup“.
+
+
+
+=== Erstellen von LUNs und Zuordnen von LUNs zu Initiatorgruppen mithilfe der CLI
+
+Dieser Abschnitt zeigt eine Beispielkonfiguration unter Verwendung der Befehlszeile mit ONTAP 9 für ein SAP HANA-Einzelhostsystem mit SID FC5 unter Verwendung von LVM und zwei LUNs pro LVM-Volume-Gruppe:
+
+. Erstellen Sie alle LUNs.
++
+....
+lun create -path  FC5_data_mnt00001   -size 1t -ostype linux  -class regular
+lun create -path FC5_data2_mnt00001 -size 1t -ostype linux  -class regular
+lun create -path FC5_log_mnt00001 -size 260g -ostype linux  -class regular
+lun create -path FC5_log2_mnt00001 -size 260g -ostype linux  -class regular
+lun create -path FC5_shared -size 260g -ostype linux  -class regular
+
+....
+. Erstellen Sie die Initiatorgruppe für alle Server, die zu System FC5 gehören.
++
+....
+lun igroup create -igroup HANA-FC5 -protocol fcp -ostype linux -initiator 10000090fadcc5fa,10000090fadcc5fb -vserver svm1
+....
+. Ordnen Sie alle LUNs der erstellten Initiatorgruppe zu.
++
+....
+lun map -path FC5_data_mnt00001    -igroup HANA-FC5
+lun map -path FC5_data2_mnt00001  -igroup HANA-FC5
+lun map -path FC5_log_mnt00001  -igroup HANA-FC5
+lun map -path FC5_log2_mnt00001  -igroup HANA-FC5
+lun map -path FC5_shared  -igroup HANA-FC5
+....
+

@@ -213,4 +213,4 @@ Die Größe des RAM, die Netto-Datengröße auf der Festplatte jedes SAP HANA-Ho
 
 Die folgende Abbildung fasst den Dimensionierungsprozess zusammen.
 
-image:saphana_aff_nfs_image9a.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:saphana_aff_nfs_image9b.png["Prozess zur Größenbestimmung des SAP HANA-Speichers"]

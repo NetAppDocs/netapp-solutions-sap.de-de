@@ -1,0 +1,94 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-asa-fc-storage-controller-setup_multiple_hosts.html 
+keywords: storage efficiency, netapp volume encryption, quality of service, qos, fabricpool, Disk shelf, sas, fcp port sets, linux lvm, 
+summary: In diesem Abschnitt wird beschrieben, wie Sie LUNS für ein System mit mehreren Hosts erstellen. 
+---
+= Speichercontroller-Setup – mehrere Hosts
+:allow-uri-read: 
+
+
+
+
+== Speichercontroller-Setup – mehrere Hosts
+
+[role="lead"]
+Dieser Abschnitt beschreibt die Konfiguration des NetApp-Speichersystems speziell für SAP HANA-Mehrfachhostsysteme
+
+
+
+== LUN-Konfiguration für SAP HANA-Mehrhostsysteme
+
+Das Linux LVM wird verwendet, um die Leistung zu steigern und LUN-Größenbeschränkungen zu beheben.
+
+Beim SAP HANA-Host müssen Volume-Gruppen und logische Volumes erstellt und eingebunden werden, wie in der folgenden Tabelle angegeben.
+
+|===
+| Logisches Volume (LV) | Bereitstellungspunkt beim SAP HANA-Host | Hinweis 
+
+
+| LV: FC5_data_mnt00001-vol | /hana/Data/FC5/mnt00001 | Montiert mit Speicheranschluss 
+
+
+| LV: FC5_log_mnt00001-vol | /hana/log/FC5/mnt00001 | Montiert mit Speicheranschluss 
+
+
+| LV: FC5_data_mnt00002-vol | /hana/Data/FC5/mnt00002 | Montiert mit Speicheranschluss 
+
+
+| LV: FC5_log_mnt00002-vol | /hana/log/FC5/mnt00002 | Montiert mit Speicheranschluss 
+
+
+| Externe NFS-Freigabe: FC5_shared | /hana/Shared | Gemountet auf allen Hosts mit NFS und /etc/fstab Eintrag 
+|===
+
+NOTE: SAP HANA-Multi-Host-Systeme erfordern die  `/hana/shared` Dateisystem, das mit allen Hosts eines Systems verbunden ist. In der Regel handelt es sich dabei um eine NFS-Freigabe, die von einem NFS-Server bereitgestellt wird. Es wird empfohlen, einen hochverfügbaren NFS-Server zu verwenden, z. B. ein NetApp FAS- oder AFF-System. Alternativ kann der integrierte NFS-Server eines Linux-Hosts verwendet werden.
+
+
+NOTE: Mit der beschriebenen Konfiguration wird die  `/usr/sap/FC5` Das Verzeichnis, in dem das Standard-Home-Verzeichnis des Benutzers FC5adm gespeichert ist, befindet sich auf der lokalen Festplatte jedes HANA-Hosts. In einem Disaster Recovery-Setup mit festplattenbasierter Replikation empfiehlt NetApp die Verwendung von vier zusätzlichen LUNs für  `/usr/sap/FC5` Dateisystem jedes Hosts, sodass jeder Datenbankhost alle seine Dateisysteme auf dem zentralen Speicher hat.
+
+
+
+== Erstellen von LUNs und Zuordnen von LUNs zu Initiatorgruppen
+
+Sie können NetApp ONTAP System Manager verwenden, um Storage Volumes und LUNs zu erstellen und sie Initiatorgruppen der Server und der ONTAP CLI zuzuordnen. In diesem Leitfaden wird die Verwendung der CLI beschrieben.
+
+
+NOTE: Der `sanlun` Tool ist Teil der NetApp Host Utilities und muss auf jedem SAP HANA Host installiert sein. Weitere Informationen finden Sie im Abschnitt „Host_Setup“.
+
+
+
+=== Erstellen von LUNs und Zuordnen von LUNs zu Initiatorgruppen mithilfe der CLI
+
+Dieser Abschnitt zeigt eine Beispielkonfiguration unter Verwendung der Befehlszeile mit ONTAP 9 für ein 2+1 SAP HANA-Mehrhostsystem mit FC5 FC5 unter Verwendung von LVM und zwei LUNs pro LVM-Volume-Gruppe:
+
+. Erstellen Sie alle LUNs.
++
+....
+lun create -path FC5_data_mnt00001   -size 1t -ostype linux  -class regular
+lun create -path FC5_data2_mnt00001 -size 1t -ostype linux  -class regular
+lun create -path FC5_data_mnt00002 -size 1t -ostype linux  -class regular
+lun create -path FC5_data2_mnt00002 -size 1t -ostype linux  -class regular
+lun create -path FC5_log_mnt00001 -size 260g -ostype linux  -class regular
+lun create -path FC5_log2_mnt00001 -size 260g -ostype linux  -class regular
+lun create -path FC5_log_mnt00002 -size 260g -ostype linux  -class regular
+lun create -path FC5_log2_mnt00002 -size 260g -ostype linux  -class regular
+....
+. Erstellen Sie die Initiatorgruppe für alle Server, die zu System FC5 gehören.
++
+....
+lun igroup create -igroup HANA-FC5 -protocol fcp -ostype linux -initiator 10000090fadcc5fa,10000090fadcc5fb,10000090fadcc5c1,10000090fadcc5c2,10000090fadcc5c3,10000090fadcc5c4 -vserver svm1
+....
+. Ordnen Sie alle LUNs der erstellten Initiatorgruppe zu.
++
+....
+lun map -path FC5_data_mnt00001  -igroup HANA-FC5
+lun map -path FC5_data2_mnt00001  -igroup HANA-FC5
+lun map -path FC5_data_mnt00002  -igroup HANA-FC5
+lun map -path FC5_data2_mnt00002  -igroup HANA-FC5
+lun map -path FC5_log_mnt00001  -igroup HANA-FC5
+lun map -path FC5_log2_mnt00001  -igroup HANA-FC5
+lun map -path FC5_log_mnt00002  -igroup HANA-FC5
+lun map -path FC5_log2_mnt00002  -igroup HANA-FC5
+....
+
