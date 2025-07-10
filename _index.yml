@@ -26,6 +26,8 @@ indexpage:
     - title: SAP HANA Datensicherung und Hochverfügbarkeit mit SnapCenter, SnapMirror
         Active Sync und VMware Metro Storage Cluster
       url: backup/hana-sc-vmware-smas-scope.html
+    - title: SAP HANA-Datenschutz mit SnapCenter mit VMware VMFS und NetApp ASA -Systemen
+      url: backup/hana-sc-vmfs-asar2-scope.html
     - title: BlueXP Backup and Recovery for SAP HANA – Cloud-Objekt-Storage als Backup-Ziel
       url: backup/hana-hycl-backup-overview.html
     - title: 'Technischer Bericht: SAP HANA Disaster Recovery with Storage Replication'

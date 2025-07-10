@@ -1,0 +1,76 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmfs-asar2-sc-restore.html 
+keywords: SAP HANA, VMware, SnapCenter, backup and recovery 
+summary:  
+---
+= Restore- und Recovery-Vorgänge
+:allow-uri-read: 
+
+
+Bei virtuellen Ressourcen, die auf dem SnapCenter von VMFS/VMDK gespeichert sind, werden Wiederherstellungsvorgänge immer durch einen Klon-, Mount- und Kopiervorgang durchgeführt.
+
+. SnapCenter erstellt einen Speicherklon basierend auf dem ausgewählten Snapshot
+. SnapCenter mountet die LUN als neuen Datenspeicher auf dem ESX-Host
+. SnapCenter fügt die VMDK innerhalb des Datenspeichers der HANA-VM als neue Festplatte hinzu
+. SnapCenter bindet die neue Festplatte an das Linux Betriebssystem an
+. SnapCenter kopiert die Daten von der neuen Festplatte zurück in den ursprünglichen Speicherort
+. Wenn der Kopiervorgang abgeschlossen ist, werden alle oben genannten Ressourcen wieder entfernt
+. SnapCenter führt die Wiederherstellung der HANA-Systemdatenbank durch
+. SnapCenter führt die Wiederherstellung der HANA-Tenant-Datenbank durch
+
+
+Die Gesamtlaufzeit des Wiederherstellungsvorgangs hängt von der Datenbankgröße und dem Durchsatz der FC-Verbindung zwischen den Storage-Clustern und den ESX-Hosts ab. In unserem Laboraufbau mit einer initialen HANA-Installation betrug die Laufzeit etwa 12 Minuten.
+
+image:sc-hana-asrr2-vmfs-image23.png["Abbildung zeigt den Inhalt, der besprochen wird"]
+
+image:sc-hana-asrr2-vmfs-image24.png["Abbildung zeigt den Inhalt, der besprochen wird"]
+
+Während der Wiederherstellungsvorgang ausgeführt wird, können Sie eine neue geklonte Speichereinheit sehen.
+
+image:sc-hana-asrr2-vmfs-image25.png["Abbildung zeigt den Inhalt, der besprochen wird"]
+
+Die neue LUN (Datenspeicher) basierend auf der geklonten Speichereinheit wird an den ESX-Cluster angeschlossen.
+
+image:sc-hana-asrr2-vmfs-image26.png["Abbildung zeigt den Inhalt, der besprochen wird"]
+
+Die VMDK im Datenspeicher wird der Ziel-HANA-VM zugeordnet und im HANA-System bereitgestellt.
+
+....
+hana-8:~ # df -h
+
+Filesystem Size Used Avail Use% Mounted on
+/dev/mapper/system-root 60G 5.3G 54G 9% /
+devtmpfs 4.0M 8.0K 4.0M 1% /dev
+tmpfs 49G 0 49G 0% /dev/shm
+efivarfs 256K 57K 195K 23% /sys/firmware/efi/efivars
+tmpfs 13G 26M 13G 1% /run
+tmpfs 1.0M 0 1.0M 0% /run/credentials/systemd-tmpfiles-setup-dev-early.service
+tmpfs 1.0M 0 1.0M 0% /run/credentials/systemd-sysctl.service
+tmpfs 1.0M 0 1.0M 0% /run/credentials/systemd-sysusers.service
+tmpfs 1.0M 0 1.0M 0% /run/credentials/systemd-tmpfiles-setup-dev.service
+/dev/mapper/system-root 60G 5.3G 54G 9% /.snapshots
+/dev/mapper/system-root 60G 5.3G 54G 9% /boot/grub2/i386-pc
+/dev/mapper/system-root 60G 5.3G 54G 9% /boot/grub2/x86++_++64-efi
+/dev/mapper/system-root 60G 5.3G 54G 9% /home
+/dev/mapper/system-root 60G 5.3G 54G 9% /opt
+/dev/mapper/system-root 60G 5.3G 54G 9% /root
+/dev/mapper/system-root 60G 5.3G 54G 9% /srv
+/dev/mapper/system-root 60G 5.3G 54G 9% /usr/local
+/dev/mapper/system-root 60G 5.3G 54G 9% /tmp
+/dev/mapper/system-root 60G 5.3G 54G 9% /var
+tmpfs 1.0M 0 1.0M 0% /run/credentials/systemd-vconsole-setup.service
+/dev/sdc 95G 8.9G 87G 10% /hana/log/VFS/mnt00001
+/dev/sdb 95G 7.6G 88G 8% /hana/data/VFS/mnt00001
+/dev/sdd 95G 15G 81G 16% /hana/shared
+/dev/sda1 253M 5.9M 247M 3% /boot/efi
+tmpfs 1.0M 0 1.0M 0% /run/credentials/systemd-tmpfiles-setup.service
+192.168.175.86:/sapcc_share 1.4T 858G 568G 61% /mnt/sapcc-share
+tmpfs 6.3G 72K 6.3G 1% /run/user/464
+tmpfs 1.0M 0 1.0M 0% /run/credentials/getty@tty1.service
+tmpfs 6.3G 52K 6.3G 1% /run/user/0
+/dev/sde 95G 9.2G 86G 10% /var/opt/snapcenter/scu/clones/hana_data_VFS_mnt00001_142592_scu_clone_1
+
+hana-8:~ #
+....
+image:sc-hana-asrr2-vmfs-image27.png["Abbildung zeigt den Inhalt, der besprochen wird"]
