@@ -46,7 +46,7 @@ Da in dieser Lösung alle Daten für SAP HANA Instanzen, einschließlich Perform
 
 Die folgende Abbildung bietet einen Netzwerküberblick.
 
-image:saphana-fas-nfs_image11a.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:saphana-fas-nfs_image11b.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
 Jeder SAP HANA Node verwendet eine dedizierte Portgruppe auf dem VMware Distributed Switch. Diese Port-Gruppe ermöglicht eine verbesserte Servicequalität (QoS) und eine dedizierte Zuweisung von physischen Netzwerkkarten (NICs) auf den ESX Hosts. Um dedizierte physische NICs zu verwenden und gleichzeitig HA-Funktionen bei einem NIC-Ausfall zu erhalten, wird die dedizierte physische NIC als aktiver Uplink konfiguriert. Zusätzliche NICs werden in den Teaming- und Failover-Einstellungen der SAP HANA-Portgruppe als Standby-Uplinks konfiguriert. Darüber hinaus müssen Jumbo Frames (MTU 9,000) End-to-End-aktiviert sein, auf physischen und virtuellen Switches. Deaktivieren Sie darüber hinaus die Flusskontrolle bei allen ethernet-Ports, die für den Storage-Datenverkehr bei Servern, Switches und Storage-Systemen verwendet werden. Die folgende Abbildung zeigt ein Beispiel für eine solche Konfiguration.
 

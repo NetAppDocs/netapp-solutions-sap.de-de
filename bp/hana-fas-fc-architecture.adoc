@@ -94,4 +94,4 @@ Die synchrone Replizierung bietet den StrictSync-Modus. Wenn der Schreibvorgang 
 
 Die folgende Abbildung bietet einen allgemeinen Überblick über die Lösung. Der Storage Cluster an jedem Standort sorgt für lokale Hochverfügbarkeit und wird für Produktions-Workloads verwendet. Die Daten an jedem Standort werden synchron zum anderen Standort repliziert und sind im Fall eines Disaster Failovers verfügbar.
 
-image:saphana_fas_fc_image7.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:saphana_fas_image8.png["NetApp MetroCluster IP"]

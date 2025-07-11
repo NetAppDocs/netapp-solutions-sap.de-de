@@ -76,11 +76,11 @@ Erstellen Sie die neuen Daten-LUNs entweder mit ONTAP System Manager oder mit de
 
 Gehen Sie wie folgt vor, um einen Host zu konfigurieren:
 
-. Konfigurieren Sie Multipathing für die zusätzlichen LUNs, wie in Kapitel 0 beschrieben.
+. Konfigurieren Sie Multipathing für die zusätzlichen LUNs, wie im Kapitel link:hana-aff-fc-host-setup.html["Host-Setup"] .
 . Erstellen Sie das XFS-Dateisystem auf jeder zusätzlichen LUN, die zum HANA-System gehört:
 +
 ....
-stlrx300s8-6:/ # mkfs.xfs /dev/mapper/hana-SS3_data2_mnt00001
+stlrx300s8-6:/ # mkfs.xfs /dev/mapper/hana-FC5_data2_mnt00001
 ....
 . Fügen Sie die zusätzlichen Dateisysteme dem hinzu `/etc/fstab` Konfigurationsdatei
 +
@@ -90,16 +90,16 @@ NOTE: Die XFS-Dateisysteme für die Daten- und Protokoll-LUN müssen mit dem gem
 +
 ....
 stlrx300s8-6:/ # cat /etc/fstab
-/dev/mapper/hana-SS3_shared /hana/shared xfs defaults 0 0
-/dev/mapper/hana-SS3_log_mnt00001 /hana/log/SS3/mnt00001 xfs relatime,inode64 0 0
-/dev/mapper/hana-SS3_data_mnt00001 /hana/data/SS3/mnt00001 xfs relatime,inode64 0 0
-/dev/mapper/hana-SS3_data2_mnt00001 /hana/data2/SS3/mnt00001 xfs relatime,inode64 0 0
+/dev/mapper/hana-FC5_shared /hana/shared xfs defaults 0 0
+/dev/mapper/hana-FC5_log_mnt00001 /hana/log/FC5/mnt00001 xfs relatime,inode64 0 0
+/dev/mapper/hana-FC5_data_mnt00001 /hana/data/FC5/mnt00001 xfs relatime,inode64 0 0
+/dev/mapper/hana-FC5_data2_mnt00001 /hana/data2/FC5/mnt00001 xfs relatime,inode64 0 0
 ....
 . Erstellen Sie Mount-Punkte und legen Sie Berechtigungen auf dem Datenbank-Host fest.
 +
 ....
-stlrx300s8-6:/ # mkdir -p /hana/data2/SS3/mnt00001
-stlrx300s8-6:/ # chmod –R 777 /hana/data2/SS3
+stlrx300s8-6:/ # mkdir -p /hana/data2/FC5/mnt00001
+stlrx300s8-6:/ # chmod –R 777 /hana/data2/FC5
 ....
 . Mounten Sie die Dateisysteme, führen Sie den aus `mount –a` Befehl.
 

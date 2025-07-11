@@ -72,21 +72,17 @@ Weitere Informationen zu den Disaster-Recovery-Lösungen für SAP HANA finden Si
 
 === Storage-Replizierung basierend auf SnapMirror
 
-Die folgende Abbildung zeigt eine Disaster Recovery-Lösung für drei Standorte mit synchroner SnapMirror Replizierung am lokalen DR-Datacenter und asynchroner SnapMirror Replizierung der Daten in das Remote-DR-Datacenter.
+Die folgende Abbildung zeigt eine Disaster-Recovery-Lösung für drei Standorte mit synchroner SnapMirror Active Sync zum lokalen DR-Rechenzentrum und asynchroner SnapMirror zur Replikation der Daten in das Remote-DR-Rechenzentrum. SnapMirror Active Sync ermöglicht die Weiterführung von Geschäftsdiensten auch bei einem kompletten Standortausfall und unterstützt ein transparentes Failover von Anwendungen mithilfe einer sekundären Kopie (RPO=0 und RTO=0). Für die Auslösung eines Failover mit SnapMirror Active Sync sind keine manuellen Eingriffe oder benutzerdefinierten Skripts erforderlich. Ab ONTAP 9.15.1 unterstützt die SnapMirror Active Sync symmetrische aktiv/aktiv-Funktion. Symmetrische aktiv/aktiv-Konfiguration ermöglicht I/O-Vorgänge für Lese- und Schreibvorgänge von beiden Kopien einer geschützten LUN mit bidirektionaler synchroner Replizierung, sodass beide LUN-Kopien lokal für I/O-Vorgänge sorgen können.
 
-Die Datenreplizierung mit synchronem SnapMirror sorgt für einen RPO von null. Die Entfernung zwischen dem primären und dem lokalen DR-Datacenter ist auf etwa 100 km beschränkt.
+Weitere Details finden Sie unter  https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html["Übersicht über die aktive SnapMirror-Synchronisierung in ONTAP"] ..
 
-Der Schutz vor Ausfällen des primären und lokalen DR-Standorts wird durch Replizieren der Daten zu einem dritten Remote-DR-Datacenter mithilfe von asynchronem SnapMirror durchgeführt. Der RPO hängt von der Häufigkeit der Replizierungs-Updates und der Übertragungsgeschwindigkeit ab. Theoretisch ist die Entfernung unbegrenzt, aber die Obergrenze hängt von der zu übertragenden Datenmenge und der zwischen den Rechenzentren verfügbaren Verbindung ab. Typische RPO-Werte liegen im Bereich von 30 Minuten bis mehreren Stunden.
-
-Das RTO für beide Replizierungsmethoden hängt in erster Linie von der Zeit ab, die zum Starten der HANA-Datenbank am DR-Standort und zum Laden der Daten in den Speicher erforderlich ist. Mit der Annahme, dass die Daten mit einem Durchsatz von 1000 MBit/s gelesen werden, dass das Laden von 1 TB Daten ungefähr 18 Minuten dauert.
+Die RTO für die asynchrone SnapMirror-Replikation hängt in erster Linie von der Zeit ab, die zum Starten der HANA-Datenbank am DR-Standort und zum Laden der Daten in den Speicher benötigt wird. Mit der Annahme, dass die Daten mit einem Durchsatz von 1000 MBit/s gelesen werden, dass das Laden von 1 TB Daten ungefähr 18 Minuten dauert.
 
 Die Server an den DR-Standorten können im normalen Betrieb als Entwicklungs- und Testsysteme genutzt werden. Bei einem Ausfall müssten die Entwicklungs- und Testsysteme heruntergefahren und als DR-Produktionsserver gestartet werden.
 
 Beide Replizierungsmethoden ermöglichen die Durchführung von DR-Workflow-Tests ohne Auswirkungen auf RPO und RTO. FlexClone Volumes werden auf dem Storage erstellt und an die DR-Testserver angeschlossen.
 
-image:saphana_aff_fc_image6.png["SnapMirror-Lösung"]
-
-Die synchrone Replizierung bietet den StrictSync-Modus. Wenn der Schreibvorgang auf den sekundären Storage aus irgendeinem Grund nicht abgeschlossen wird, fällt der Applikations-I/O aus. Dadurch wird sichergestellt, dass die primären und sekundären Storage-Systeme identisch sind. Der Applikations-I/O zum primären Volume wird erst wieder fortgesetzt, nachdem die SnapMirror-Beziehung zum InSync-Status zurückkehrt. Falls der Primär-Storage ausfällt, kann der Applikations-I/O nach dem Failover ohne Datenverlust auf dem sekundären Storage fortgesetzt werden. Im StrictSync-Modus ist der RPO immer Null.
+image:saphana_aff_fc_image6a.png["SnapMirror-Lösung"]
 
 
 
@@ -94,4 +90,4 @@ Die synchrone Replizierung bietet den StrictSync-Modus. Wenn der Schreibvorgang 
 
 Die folgende Abbildung bietet einen allgemeinen Überblick über die Lösung. Das Storage-Cluster an jedem Standort bietet lokale Hochverfügbarkeit und wird für den Produktions-Workload verwendet. Die Daten aller Standorte werden synchron zum anderen Standort repliziert und sind im Fall eines Disaster Failovers verfügbar.
 
-image:saphana_aff_fc_image7.png["NetApp MetroCluster"]
+image:saphana_aff_image7a.png["NetApp MetroCluster"]

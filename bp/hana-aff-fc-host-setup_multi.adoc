@@ -1,0 +1,108 @@
+---
+sidebar: sidebar 
+permalink: bp/hana-aff-fc-host-setup_multi.html 
+keywords: multipathing, fcp, hba, configure 
+summary: Vor dem Einrichten des Hosts müssen NetApp SAN Host Utilities von der NetApp Support Site heruntergeladen und auf den HANA-Servern installiert werden. Die Dokumentation des Host Utility enthält Informationen zu zusätzlicher Software, die abhängig vom verwendeten FCP HBA installiert werden muss. 
+---
+= Einrichtung mehrerer Hosts
+:allow-uri-read: 
+
+
+
+
+== Einrichtung mehrerer Hosts
+
+[role="lead"]
+In diesem Kapitel wird beispielhaft die Einrichtung eines 2+1 SAP HANA-Mehrhostsystems beschrieben.
+
+
+
+=== Erstellen von LVM-Volume-Gruppen und logischen Volumes
+
+. Initialisieren Sie alle LUNs als ein physisches Volume.
++
+....
+pvcreate /dev/mapper/hana-FC5_data_mnt00001
+pvcreate /dev/mapper/hana-FC5_data2_mnt00001
+pvcreate /dev/mapper/hana-FC5_data_mnt00002
+pvcreate /dev/mapper/hana-FC5_data2_mnt00002
+pvcreate /dev/mapper/hana-FC5_log_mnt00001
+pvcreate /dev/mapper/hana-FC5_log2_mnt00001
+pvcreate /dev/mapper/hana-FC5_log_mnt00002
+pvcreate /dev/mapper/hana-FC5_log2_mnt00002
+....
+. Erstellen Sie die Volume-Gruppen für jede Daten- und Protokollpartition.
++
+....
+vgcreate FC5_data_mnt00001 /dev/mapper/hana-FC5_data_mnt00001 /dev/mapper/hana-FC5_data2_mnt00001
+vgcreate FC5_data_mnt00002 /dev/mapper/hana-FC5_data_mnt00002 /dev/mapper/hana-FC5_data2_mnt00002
+vgcreate FC5_log_mnt00001 /dev/mapper/hana-FC5_log_mnt00001 /dev/mapper/hana-FC5_log2_mnt00001
+vgcreate FC5_log_mnt00002 /dev/mapper/hana-FC5_log_mnt00002 /dev/mapper/hana-FC5_log2_mnt00002
+....
+. Erstellen Sie für jede Daten- und Protokollpartition ein logisches Volume. Verwenden Sie eine Stripe-Größe, die der Anzahl der LUNs pro Volume-Gruppe entspricht (in diesem Beispiel sind es zwei), eine Stripe-Größe von 256 KB für Daten und 64.000 für das Protokoll. SAP unterstützt nur ein logisches Volume pro Volume-Gruppe.
++
+....
+lvcreate --extents 100%FREE -i 2 -I 256k --name vol FC5_data_mnt00001
+lvcreate --extents 100%FREE -i 2 -I 256k --name vol FC5_data_mnt00002
+lvcreate --extents 100%FREE -i 2 -I 64k --name vol FC5_log_mnt00002
+lvcreate --extents 100%FREE -i 2 -I 64k --name vol FC5_log_mnt00001
+....
+. Scannen Sie bei allen anderen Hosts die physischen Volumes, Volume-Gruppen und Volume-Gruppen.
+
+
+....
+modprobe dm_mod
+pvscan
+vgscan
+lvscan
+....
+
+NOTE: Wenn diese Befehle die Volumes nicht finden, ist ein Neustart erforderlich.
+
+Zum Mounten der logischen Volumes müssen die logischen Volumes aktiviert sein. Um die Volumes zu aktivieren, führen Sie den folgenden Befehl aus:
+
+....
+vgchange -a y
+....
+
+
+=== Erstellen von Dateisystemen
+
+Erstellen Sie das XFS-Dateisystem auf allen logischen Daten- und Protokollvolumes.
+
+....
+mkfs.xfs FC5_data_mnt00001-vol
+mkfs.xfs FC5_data_mnt00002-vol
+mkfs.xfs FC5_log_mnt00001-vol
+mkfs.xfs FC5_log_mnt00002-vol
+....
+
+
+=== Erstellen von Bereitstellungspunkten
+
+Um die erforderlichen Mount-Point-Verzeichnisse zu erstellen, legen Sie Berechtigungen fest und erstellen Sie Mount-Points auf allen Worker- und Standby-Hosts.
+
+....
+sapcc-hana-tst:/ # mkdir -p /hana/data/FC5/mnt00001
+sapcc-hana-tst:/ # mkdir -p /hana/log/FC5/mnt00001
+sapcc-hana-tst:/ # mkdir -p /hana/data/FC5/mnt00002
+sapcc-hana-tst:/ # mkdir -p /hana/log/FC5/mnt00002
+sapcc-hana-tst:/ # mkdir -p /hana/shared
+sapcc-hana-tst:/ # chmod –R 777 /hana/log/FC5
+sapcc-hana-tst:/ # chmod –R 777 /hana/data/FC5
+sapcc-hana-tst:/ # chmod 777 /hana/shared
+....
+
+
+=== Mounten Sie File-Systeme
+
+Zur Montage des  `/hana/shared` Dateisysteme während des Systemstarts mithilfe der  `/etc/fstab` Konfigurationsdatei, fügen Sie die  `/hana/shared` Dateisystem in die  `/etc/fstab` Konfigurationsdatei jedes Hosts.
+
+....
+sapcc-hana-tst:/ # cat /etc/fstab
+<storage-ip>:/hana_shared /hana/shared nfs rw,vers=3,hard,timeo=600, intr,noatime,nolock 0 0
+....
+
+NOTE: Alle Daten- und Protokolldateisysteme sind über den SAP HANA Storage Connector gemountet.
+
+Führen Sie zum Mounten der Dateisysteme den aus `mount –a` Befehl an jedem Host.
