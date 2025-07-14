@@ -80,7 +80,7 @@ mkfs.xfs FC5_log_mnt00002-vol
 
 === Erstellen von Bereitstellungspunkten
 
-Um die erforderlichen Mount-Point-Verzeichnisse zu erstellen, legen Sie Berechtigungen fest und erstellen Sie Mount-Points auf allen Worker- und Standby-Hosts.
+Erstellen Sie die erforderlichen Mount-Point-Verzeichnisse und legen Sie die Berechtigungen auf allen Worker- und Standby-Hosts fest:
 
 ....
 sapcc-hana-tst:/ # mkdir -p /hana/data/FC5/mnt00001

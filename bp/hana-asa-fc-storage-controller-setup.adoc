@@ -66,14 +66,14 @@ NOTE: Das Limit gilt auch für Lesevorgänge. Daher genügend LUNs verwenden, um
 
 In der folgenden Übersicht sind die erforderlichen Schritte zur Storage-Konfiguration zusammengefasst. Jeder Schritt wird in den nachfolgenden Abschnitten näher beschrieben. In diesem Abschnitt wird die Storage-Hardware eingerichtet und die ONTAP Software bereits installiert. Außerdem muss die Verbindung der Storage FCP-Ports zur SAN-Fabric bereits vorhanden sein.
 
-. Überprüfen Sie die richtige Festplatten-Shelf-Konfiguration, wie in beschrieben<<NVMe-basierte Festplatten-Shelfs (100 GbE)>>.
+. Überprüfen Sie die richtige Festplatten-Shelf-Konfiguration, wie in beschrieben<<NVMe-basierte Festplattenregale>>.
 . Erstellen Sie Initiatorgruppen (igroups) mit weltweiten Namen (WWNs) von HANA-Servern, wie im Abschnitt link:saphana-asa-fc-storage-controller-setup.html#initiator-groups beschrieben. <<Initiatorgruppen>> .
 . Erstellen Sie LUNs und ordnen Sie sie den im Abschnitt beschriebenen Servern zu link:hana-asa-fc-storage-controller-setup_single_host.html["LUN-Konfiguration für SAP HANA Single-Host-Systeme"] Und link:hana-asa-fc-storage-controller-setup_multiple_hosts.html["LUN-Konfiguration für SAP HANA-Mehrhostsysteme"]
 
 
 
 
-=== NVMe-basierte Festplatten-Shelfs (100 GbE)
+=== NVMe-basierte Festplattenregale
 
 Jedes NS224 NVMe-Festplatten-Shelf ist, wie in der folgenden Abbildung dargestellt, mit zwei 100-GbE-Ports pro Controller verbunden. Die Platten werden automatisch auf die beiden Controller des HA-Paares verteilt.
 

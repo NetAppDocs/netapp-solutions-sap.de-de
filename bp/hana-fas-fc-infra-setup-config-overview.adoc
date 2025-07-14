@@ -4,7 +4,7 @@ permalink: bp/hana-fas-fc-infra-setup-config-overview.html
 keywords: sap, hana, infrastructure, setup, configuration, guidelines, steps, host, data 
 summary: Die folgenden Abschnitte enthalten Installations- und Konfigurationsrichtlinien für die SAP HANA-Infrastruktur. 
 ---
-= Überblick
+= Einrichtung und Konfiguration der Infrastruktur
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -14,17 +14,12 @@ summary: Die folgenden Abschnitte enthalten Installations- und Konfigurationsric
 
 
 [role="lead"]
-Die folgenden Abschnitte enthalten Installations- und Konfigurationsrichtlinien für die SAP HANA-Infrastruktur. Alle Schritte zur Einrichtung von SAP HANA sind enthalten. Eine SVM wird zum Hosten der Daten erstellt. In diesen Abschnitten werden die folgenden Beispielkonfigurationen verwendet:
+In den folgenden Abschnitten finden Sie Richtlinien zur Einrichtung und Konfiguration der SAP HANA-Infrastruktur sowie alle Schritte zur Einrichtung eines SAP HANA-Systems. In diesen Abschnitten werden die folgenden Beispielkonfigurationen verwendet:
 
-* HANA-System mit SID=SS3
+* HANA-System mit SID=FC5
 +
-** SAP HANA mit einem oder mehreren Hosts
+** SAP HANA Einzel- und Mehrfachhost mit Linux Logical Volume Manager (LVM)
 ** SAP HANA Einzelhost mit SAP HANA mehrere Partitionen
-
-
-* HANA-System mit SID=FC5 mit Linux Logical Volume Manager (LVM)
-+
-** SAP HANA mit einem oder mehreren Hosts
 
 
 

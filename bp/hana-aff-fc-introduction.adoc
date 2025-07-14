@@ -70,7 +70,7 @@ Weitere Informationen zu den Voraussetzungen und Empfehlungen für produktive SA
 
 = SAP HANA mit VMware vSphere
 
-Es stehen verschiedene Optionen zur Verbindung von Storage mit Virtual Machines (VMs) zur Verfügung. Der bevorzugte Modus ist die direkte Verbindung der Storage Volumes mit NFS vom Gastbetriebssystem. Diese Option ist in beschriebenlink:hana-aff-nfs-introduction.html["Technischer Bericht: SAP HANA on NetApp AFF Systems with NFS"].
+Es stehen verschiedene Optionen zur Verbindung von Storage mit Virtual Machines (VMs) zur Verfügung. Der bevorzugte Modus ist die direkte Verbindung der Storage Volumes mit NFS vom Gastbetriebssystem. Diese Option ist in beschriebenlink:hana-aff-nfs-introduction.html["Technischer Bericht: SAP HANA on NetApp AFF Systems with NFS"^].
 
 Auch Raw Device Mapping (RDM), FCP Datastores oder VVOL Datastores mit FCP werden unterstützt. Bei beiden Datastore-Optionen muss für produktive Anwendungsfälle nur eine SAP HANA Daten oder ein Protokoll-Volume im Datastore gespeichert werden.
 

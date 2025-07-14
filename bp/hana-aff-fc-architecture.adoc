@@ -74,7 +74,7 @@ Weitere Informationen zu den Disaster-Recovery-Lösungen für SAP HANA finden Si
 
 Die folgende Abbildung zeigt eine Disaster-Recovery-Lösung für drei Standorte mit synchroner SnapMirror Active Sync zum lokalen DR-Rechenzentrum und asynchroner SnapMirror zur Replikation der Daten in das Remote-DR-Rechenzentrum. SnapMirror Active Sync ermöglicht die Weiterführung von Geschäftsdiensten auch bei einem kompletten Standortausfall und unterstützt ein transparentes Failover von Anwendungen mithilfe einer sekundären Kopie (RPO=0 und RTO=0). Für die Auslösung eines Failover mit SnapMirror Active Sync sind keine manuellen Eingriffe oder benutzerdefinierten Skripts erforderlich. Ab ONTAP 9.15.1 unterstützt die SnapMirror Active Sync symmetrische aktiv/aktiv-Funktion. Symmetrische aktiv/aktiv-Konfiguration ermöglicht I/O-Vorgänge für Lese- und Schreibvorgänge von beiden Kopien einer geschützten LUN mit bidirektionaler synchroner Replizierung, sodass beide LUN-Kopien lokal für I/O-Vorgänge sorgen können.
 
-Weitere Details finden Sie unter  https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html["Übersicht über die aktive SnapMirror-Synchronisierung in ONTAP"] ..
+Weitere Details finden Sie unter https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html["Übersicht über die aktive SnapMirror-Synchronisierung in ONTAP"^].
 
 Die RTO für die asynchrone SnapMirror-Replikation hängt in erster Linie von der Zeit ab, die zum Starten der HANA-Datenbank am DR-Standort und zum Laden der Daten in den Speicher benötigt wird. Mit der Annahme, dass die Daten mit einem Durchsatz von 1000 MBit/s gelesen werden, dass das Laden von 1 TB Daten ungefähr 18 Minuten dauert.
 

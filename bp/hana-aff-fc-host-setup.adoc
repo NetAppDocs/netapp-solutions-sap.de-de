@@ -5,12 +5,13 @@ keywords: multipathing, fcp, hba, configure
 summary: Vor dem Einrichten des Hosts müssen NetApp SAN Host Utilities von der NetApp Support Site heruntergeladen und auf den HANA-Servern installiert werden. Die Dokumentation des Host Utility enthält Informationen zu zusätzlicher Software, die abhängig vom verwendeten FCP HBA installiert werden muss. 
 ---
 = Hosteinrichtung
+:hardbreaks:
 :allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
 
-
-
-
-== Hosteinrichtung
 
 [role="lead"]
 Bevor Sie den Host einrichten, müssen die NetApp SAN Host Utilities von heruntergeladen werden http://mysupport.netapp.com/["NetApp Support"^] Standort und auf den HANA-Servern installiert. Die Dokumentation des Host Utility enthält Informationen zu zusätzlicher Software, die abhängig vom verwendeten FCP HBA installiert werden muss.

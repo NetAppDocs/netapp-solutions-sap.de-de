@@ -74,10 +74,7 @@ NOTE: Die Beispielbefehle für mehrere Hosts zeigen ein 2+1-HANA-System mit mehr
 
 === Erstellen von Bereitstellungspunkten
 
-Um die erforderlichen Mount-Point-Verzeichnisse zu erstellen, führen Sie eine der folgenden Aktionen durch:
-
-* Legen Sie für ein System mit einem einzelnen Host Berechtigungen fest und erstellen Sie Mount-Punkte auf dem Datenbank-Host.
-
+Erstellen Sie die erforderlichen Mount-Point-Verzeichnisse und legen Sie die Berechtigungen auf dem Datenbankhost fest:
 
 ....
 sapcc-hana-tst:/ # mkdir -p /hana/data/FC5/mnt00001
@@ -91,21 +88,15 @@ sapcc-hana-tst:/ # chmod 777 /hana/shared
 
 === Mounten Sie File-Systeme
 
-Um Dateisysteme während des Systemstarts mit dem zu mounten `/etc/fstab` Konfigurationsdatei, führen Sie die folgenden Schritte aus:
+Um Dateisysteme während des Systemstarts mit dem  `/etc/fstab` Konfigurationsdatei, fügen Sie die erforderlichen Dateisysteme zum  `/etc/fstab` Konfigurationsdatei:
 
-* Fügen Sie bei einem Single-Host-System dem die erforderlichen Dateisysteme hinzu `/etc/fstab` Konfigurationsdatei
-+
 ....
 # cat /etc/fstab
 /dev/mapper/hana-FC5_shared /hana/shared xfs defaults 0 0
 /dev/mapper/FC5_log_mnt00001-vol /hana/log/FC5/mnt00001 xfs relatime,inode64 0 0
 /dev/mapper/FC5_data_mnt00001-vol /hana/data/FC5/mnt00001 xfs relatime,inode64 0 0
 ....
-+
 
 NOTE: Die XFS-Dateisysteme für die Daten- und Protokoll-LUNs müssen mit dem gemountet werden `relatime` Und `inode64` Mount-Optionen:
 
-+
 Um die Dateisysteme zu mounten, führen Sie den  `mount –a` Befehl beim Host.
-
-

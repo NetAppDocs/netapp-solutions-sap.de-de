@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
-permalink: bp/hana-aff-fc-host-setup_single.html 
-keywords: multipathing, fcp, hba, configure 
-summary: Vor dem Einrichten des Hosts müssen NetApp SAN Host Utilities von der NetApp Support Site heruntergeladen und auf den HANA-Servern installiert werden. Die Dokumentation des Host Utility enthält Informationen zu zusätzlicher Software, die abhängig vom verwendeten FCP HBA installiert werden muss. 
+permalink: bp/hana-fas-fc-host-setup_single_host.html 
+keywords: configure, multipathing, create, lvm, volume, groups, logical, mount, points, file, systems 
+summary: Die Dokumentation enthält auch Informationen zu Multipath-Konfigurationen, die spezifisch für die verwendete Linux-Version sind. 
 ---
 = Einzelhost-Setup
 :allow-uri-read: 

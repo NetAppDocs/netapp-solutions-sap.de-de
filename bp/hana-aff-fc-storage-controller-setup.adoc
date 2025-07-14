@@ -96,12 +96,12 @@ In der folgenden Übersicht sind die erforderlichen Schritte zur Storage-Konfigu
 . Erstellen Sie eine Storage Virtual Machine (SVM), wie in beschrieben.<<Konfiguration von Storage Virtual Machines>>
 . Erstellung logischer Schnittstellen (LIFs), wie in beschrieben.<<Konfiguration der logischen Schnittstelle>>
 . Erstellen Sie Initiatorgruppen (igroups) mit weltweiten Namen (WWNs) von HANA-Servern, wie im Abschnitt beschrieben <<Initiatorgruppen>> .
-. Erstellen und konfigurieren Sie Volumes und LUNs innerhalb der Aggregate wie im Abschnitt beschrieben link:hana-aff-fc-host-setup_single_host.html["Einzelhost-Setup"] für einzelne Hosts oder im Abschnitt link:hana-aff-fc-host-setup_multiple_hosts.html["Einrichtung mehrerer Hosts"]
+. Erstellen und konfigurieren Sie Volumes und LUNs innerhalb der Aggregate wie im Abschnitt beschrieben link:hana-aff-fc-storage-controller-setup_single_host.html["Einzelhost-Setup"] für einzelne Hosts oder im Abschnitt link:hana-aff-fc-storage-controller-setup_multiple_hosts.html["Einrichtung mehrerer Hosts"]
 
 
 
 
-== Festplatten-Shelf-Verbindung
+== Festplatten-Shelf-Verbindungen
 
 
 
@@ -116,7 +116,7 @@ image:saphana_aff_fc_image10.png["DS224C Festplatten-Shelf-Verbindung"]
 
 
 
-=== NVMe-basierte Festplatten-Shelfs (100 GbE)
+=== NVMe-basierte Festplattenregale
 
 Jedes NS224 NVMe-Festplatten-Shelf ist, wie in der folgenden Abbildung dargestellt, mit zwei 100-GbE-Ports pro Controller verbunden. Die Festplatten in jedem Shelf müssen gleichmäßig auf beide Controller des HA-Paars verteilt werden. ADPv2 ist auch für das NS224 Festplatten-Shelf genutzt.
 
