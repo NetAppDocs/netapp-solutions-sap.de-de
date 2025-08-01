@@ -67,27 +67,13 @@ NOTE: Mit der beschriebenen Konfiguration wird der verwendet `/usr/sap/SID1` Ver
 Der Linux LVM kann verwendet werden, um die Leistung zu steigern und um LUN-Größenbeschränkungen zu beheben. Die verschiedenen LUNs einer LVM Volume-Gruppe sollten in einem anderen Aggregat und einem anderen Controller gespeichert werden. Die folgende Tabelle enthält ein Beispiel für zwei LUNs pro Volume-Gruppe.
 
 
-NOTE: Zur Erfüllung der SAP HANA-KPIs ist es nicht erforderlich, LVM mit mehreren LUNs zu verwenden. Ein einzelnes LUN-Setup erfüllt die erforderlichen KPIs.
+NOTE: Es ist nicht notwendig, LVM mit mehreren LUNs zu verwenden, um die SAP HANA KPIs zu erfüllen, aber es wird empfohlen
 
 |===
 | Zweck | Aggregat 1 bei Controller A | Aggregat 2 bei Controller A | Aggregat 1 bei Controller B | Aggregieren 2 bei Controller B 
 
 
 | Daten-, Protokoll- und gemeinsam genutzte Volumes für LVM-basierte Systeme | Datenvolumen: SID1_Data_mnt00001 | Gemeinsames Volume: SID1_Shared Log2 Volume: SID1_log2_mnt00001 | Daten2 Volumen: SID1_data2_mnt00001 | Protokollvolumen: SID1_log_mnt00001 
-|===
-Auf dem SAP HANA-Host müssen Volume-Gruppen und logische Volumes erstellt und eingebunden werden. In der nächsten Tabelle werden die Mount-Punkte für Einzelhostsysteme mit LVM aufgeführt.
-
-|===
-| Logisches Volume/LUN | Bereitstellungspunkt beim SAP HANA-Host | Hinweis 
-
-
-| LV: SID1_Data_mnt0000-vol | /hana/Data/SID1/mnt00001 | Mit /etc/fstab-Eintrag montiert 
-
-
-| LV: SID1_log_mnt00001-vol | /hana/log/SID1/mnt00001 | Mit /etc/fstab-Eintrag montiert 
-
-
-| LUN: SID1_Shared | /hana/Shared/SID1 | Mit /etc/fstab-Eintrag montiert 
 |===
 
 NOTE: Mit der beschriebenen Konfiguration wird der verwendet `/usr/sap/SID1` Verzeichnis, in dem das Standard-Home-Verzeichnis des Benutzers SID1adm gespeichert ist, befindet sich auf der lokalen Festplatte. Für ein Disaster Recovery mit festplattenbasierter Replizierung empfiehlt NetApp die Erstellung einer zusätzlichen LUN innerhalb von `SID1_shared` Volume für das `/usr/sap/SID1` Verzeichnis so dass alle Dateisysteme auf dem zentralen Speicher sind.

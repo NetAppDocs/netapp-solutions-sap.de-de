@@ -27,7 +27,7 @@ Der `/hana/shared` Das Volume muss von allen HANA-Hosts zugänglich sein und wir
 NOTE: Wenn für das SAP HANA System nur ein Storage-Controller eines HA-Paars verwendet wird, können Daten- und Protokoll-Volumes auch auf demselben Storage Controller gespeichert werden.
 
 
-NOTE: NetApp ASA AFF Systeme unterstützen NFS als Protokoll nicht. NetApp empfiehlt die Verwendung eines weiteren AFF oder FAS Systems für das `/hana/shared` File-System.
+NOTE: NetApp ASA -Systeme unterstützen NFS nicht als Protokoll.  NetApp empfiehlt den Einsatz eines zusätzlichen AFF oder FAS -Systems für die `/hana/shared` Dateisystem.
 
 image:saphana_aff_fc_image17a.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
@@ -93,7 +93,7 @@ NOTE: Mit der beschriebenen Konfiguration wird der verwendet `/usr/sap/SID` Verz
 Der Linux LVM kann verwendet werden, um die Leistung zu steigern und um LUN-Größenbeschränkungen zu beheben. Die verschiedenen LUNs einer LVM Volume-Gruppe sollten in einem anderen Aggregat und einem anderen Controller gespeichert werden.
 
 
-NOTE: Es ist nicht notwendig, LVM zu verwenden, um mehrere LUN zu kombinieren, um die SAP HANA-KPIs zu erfüllen. Ein einzelnes LUN-Setup erfüllt die erforderlichen KPIs.
+NOTE: Es ist nicht notwendig, LVM zu verwenden, um mehrere LUNs zu kombinieren, um die SAP HANA KPIs zu erfüllen, aber es wird empfohlen
 
 Die folgende Tabelle zeigt ein Beispiel für zwei LUNs pro Volume-Gruppe für ein 2+1 SAP HANA System mit mehreren Hosts.
 
@@ -109,29 +109,6 @@ Die folgende Tabelle zeigt ein Beispiel für zwei LUNs pro Volume-Gruppe für ei
 
 | Gemeinsames Volume für alle Hosts | Gemeinsam genutztes Volume: SID_shared | – | – | – 
 |===
-Beim SAP HANA-Host müssen Volume-Gruppen und logische Volumes erstellt und eingebunden werden, wie in der folgenden Tabelle angegeben.
-
-|===
-| Logisches Volumen (LV) oder Volumen | Bereitstellungspunkt beim SAP HANA-Host | Hinweis 
-
-
-| LV: SID_Data_mnt00001-vol | /hana/Data/SID/mnt00001 | Montiert mit Speicheranschluss 
-
-
-| LV: SID_log_mnt00001-vol | /hana/log/SID/mnt00001 | Montiert mit Speicheranschluss 
-
-
-| LV: SID_Data_mnt002-vol | /hana/Data/SID/mnt002 | Montiert mit Speicheranschluss 
-
-
-| LV: SID_Log_mnt002-vol | /hana/log/SID/mnt002 | Montiert mit Speicheranschluss 
-
-
-| Volume: SID_Shared | /hana/Shared | Gemountet auf allen Hosts mit NFS und /etc/fstab Eintrag 
-|===
-
-NOTE: Mit der beschriebenen Konfiguration wird der verwendet `/usr/sap/SID` Verzeichnis, in dem das Standard-Home-Verzeichnis des Benutzers SIDadm gespeichert ist, befindet sich auf der lokalen Festplatte für jeden HANA-Host. Bei einem Disaster Recovery Setup mit festplattenbasierter Replizierung empfiehlt NetApp das Erstellen von vier zusätzlichen Unterverzeichnissen in `SID_shared` Volume für das `/usr/sap/SID` Dateisystem so, dass jeder Datenbank-Host alle seine Dateisysteme auf dem zentralen Speicher hat.
-
 
 
 === Volume-Optionen

@@ -17,6 +17,33 @@ In diesem Kapitel wird beispielhaft die Einrichtung eines 2+1 SAP HANA-Mehrhosts
 
 
 
+== LUN-Konfiguration für SAP HANA-Mehrhostsysteme
+
+Beim SAP HANA-Host müssen Volume-Gruppen und logische Volumes erstellt und eingebunden werden, wie in der folgenden Tabelle angegeben.
+
+|===
+| Logisches Volumen (LV) oder Volumen | Bereitstellungspunkt beim SAP HANA-Host | Hinweis 
+
+
+| LV: FC5_data_mnt00001-vol | /hana/Data/FC5/mnt00001 | Montiert mit Speicheranschluss 
+
+
+| LV: FC5_log_mnt00001-vol | /hana/log/FC5/mnt00001 | Montiert mit Speicheranschluss 
+
+
+| LV: FC5_data_mnt00002-vol | /hana/Data/FC5/mnt00002 | Montiert mit Speicheranschluss 
+
+
+| LV: FC5_log_mnt00002-vol | /hana/log/FC5/mnt00002 | Montiert mit Speicheranschluss 
+
+
+| Volume: FC5_shared | /hana/Shared | Gemountet auf allen Hosts mit NFS und /etc/fstab Eintrag 
+|===
+
+NOTE: Mit der beschriebenen Konfiguration wird die `/usr/sap/FC5` Das Verzeichnis, in dem das Standard-Home-Verzeichnis des Benutzers FC5adm gespeichert ist, befindet sich auf der lokalen Festplatte jedes HANA-Hosts.  In einem Disaster Recovery-Setup mit festplattenbasierter Replikation empfiehlt NetApp die Erstellung von vier zusätzlichen Unterverzeichnissen im `FC5_shared` Volumen für die `/usr/sap/FC5` Dateisystem, sodass jeder Datenbankhost alle seine Dateisysteme auf dem zentralen Speicher hat.
+
+
+
 === Erstellen von LVM-Volume-Gruppen und logischen Volumes
 
 . Initialisieren Sie alle LUNs als ein physisches Volume.
