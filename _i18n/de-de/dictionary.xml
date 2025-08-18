@@ -978,7 +978,6 @@
   <block id="48d5e63e9107995e8ea0ce708339c7bd" category="inline-link-macro">TR-4891: SAP HANA Disaster Recovery mit Azure NetApp Files</block>
   <block id="91e3a26ea4105ecd20561989c3c58a32" category="inline-link-macro">TR-4290: SAP HANA on NetApp FAS Systems with NFS Configuration Guide</block>
   <block id="c54076227bebe4b120f17a0f5a22ce81" category="summary">NetApp verfügt über eine umfangreiche Sammlung technischer Berichte, validierter Designs, Videos, Blogs und Lösungsübersichten für SAP und SAP HANA.</block>
-  <block id="269e48a148be46c6e5fb065e74629d57" category="doc">SAP Business Application und SAP HANA Database Lösungen</block>
   <block id="8c0446786df20f3bab9e76c7238785bb" category="summary">Tools und Tipps für Best Practices für SAP-Konfigurationen</block>
   <block id="c22c310ff34da15c4cf9e24071a8d99a" category="doc">Best Practices Tools für die SAP-Konfiguration</block>
   <block id="37efeba04a4ec5b4f483120771d49605" category="paragraph">Überblick über Tools für SAP Configuration Best Practices-Lösungen und -Lösungen.</block>
@@ -2898,9 +2897,7 @@
   <block id="08fc5b32a35c491189156ebd21b39ecf" category="paragraph">Übersicht über die Tools für SAP Lifecycle Management-Lösungen und -Lösungen.</block>
   <block id="3336391ac14de02458baea06fda369fd" category="inline-link-macro">Storage Services Connector (SSC) für SAP Lama</block>
   <block id="64089c921d1f873faaec351a3fbb7b06" category="list-text"><block ref="64089c921d1f873faaec351a3fbb7b06" category="inline-link-macro-rx"></block></block>
-  <block id="677f2e7e550075f7bbbdac91e0918f2f" category="sidebar">SAP Lösungen</block>
   <block id="b45ecd3afcfa865514a59b475de3e93e" category="sidebar">FlexPod Lösungen für SAP</block>
-  <block id="fcf140abed196b8eba71c45f21312bce" category="sidebar">NetApp Lösungen</block>
   <block id="fa532045e834ec2fac1200964a189516" category="sidebar">Lifecycle Management</block>
   <block id="cd47dd01745339787e4c7300389401f2" category="sidebar">Best Practices In Sich Vereint</block>
   <block id="88aa48beec8729be73be99084cd76b79" category="sidebar">Technischer Bericht: SAP HANA on NetApp AFF Systems with FCP Configuration Guide</block>
@@ -5790,4 +5787,27 @@ Siehe<block ref="7f3b31b88f0e42104578f538777bc3e6" category="inline-link-rx"></b
   <block id="d9bb80ae32f686bbae368979a76f86d7" category="paragraph">NetApp hat ein umfassendes Portfolio an Technologien und Tools entwickelt, die IT-Organisationen dabei unterstützen, ihre Disaster Recovery-Pläne zu erstellen oder anzupassen, um allen Geschäftsanforderungen gerecht zu werden:</block>
   <block id="6a9c098947d8b811552347f2ed990ebd" category="inline-link-macro"><block ref="6a9c098947d8b811552347f2ed990ebd" category="inline-link-rx"></block></block>
   <block id="702c9bfa6d3b8d8b923fbeba4db3625f" category="paragraph"><block ref="702c9bfa6d3b8d8b923fbeba4db3625f" category="inline-link-macro-rx"></block></block>
+  <block id="225b42e7cb6036e97607adda6dcca1c3" category="summary">Protokoll der letzten Änderungen an den NetApp -Lösungen für SAP-Sicherheiten.</block>
+  <block id="4a2fff3ce5a292ada8e788cd34005db8" category="doc">Was gibt es Neues bei NetApp Virtualisierungslösungen?</block>
+  <block id="2ca0fa0a322d6c31c3d0906a34c85e6c" category="paragraph">Informieren Sie sich über Neuigkeiten zu Lösungen für SAP.</block>
+  <block id="bab52961b58c502c7991d35556c25367" category="section-title">18. August 2025</block>
+  <block id="47e26e0d5bbeef43c544dd9ae72e66b0" category="inline-link-macro">NetApp Lösungsfamilie</block>
+  <block id="840125a006aee7dc0e8efd313e7b614e" category="paragraph">Die NetApp Solutions-Site ist jetzt die<block ref="f083b096ae581e72c5ab727ef8bd5732" category="inline-link-macro-rx"></block> , das die folgenden Websites umfasst:</block>
+  <block id="e87298059f60b0844dc971f315184cf5" category="inline-link-macro">NetApp Lösungen für künstliche Intelligenz</block>
+  <block id="ac42ca0e1f789a8367b40d9824726778" category="list-text"><block ref="ac42ca0e1f789a8367b40d9824726778" category="inline-link-macro-rx"></block></block>
+  <block id="9cae574c1dc1ca50a949c1e889637ba7" category="inline-link-macro">NetApp Container-Lösungen</block>
+  <block id="31d1ae0120af1d791e4320e17eb10687" category="list-text"><block ref="31d1ae0120af1d791e4320e17eb10687" category="inline-link-macro-rx"></block></block>
+  <block id="3947417923606d3599bcba7a82f71f1b" category="inline-link-macro">NetApp Datenmanagementlösungen</block>
+  <block id="56c054d4bb919790ebe189f7a7d11c3c" category="list-text"><block ref="56c054d4bb919790ebe189f7a7d11c3c" category="inline-link-macro-rx"></block></block>
+  <block id="9bb3e58246c5654a6d8e08a7bddd60ec" category="inline-link-macro">NetApp Datenbanklösungen</block>
+  <block id="3e2420ab1ec1d6e02b32b017d3ba969a" category="list-text"><block ref="3e2420ab1ec1d6e02b32b017d3ba969a" category="inline-link-macro-rx"></block></block>
+  <block id="a37049a2a78422ac5627c7987db5c337" category="inline-link-macro">NetApp Public- und Hybrid-Cloud-Lösungen</block>
+  <block id="144417321224efbf0afc2ae665a84a46" category="list-text"><block ref="144417321224efbf0afc2ae665a84a46" category="inline-link-macro-rx"></block></block>
+  <block id="2729aba3baa90aaaed37b282e515f6e4" category="list-text">NetApp Lösungen für SAP</block>
+  <block id="4ead908c2ca3b4c7156e0e703642415d" category="inline-link-macro">NetApp Virtualisierungslösungen</block>
+  <block id="3100186c9f62cec85ac05309c5d10217" category="list-text"><block ref="3100186c9f62cec85ac05309c5d10217" category="inline-link-macro-rx"></block></block>
+  <block id="a96e55f331afdc0c9a301d1a5ad2c3db" category="sidebar">SAP-Geschäftsanwendungs- und SAP HANA-Datenbanklösungen</block>
+  <block id="7caa0b3fa0fd74ced773a86b62850a8b" category="sidebar">Einführung in SAP auf FlexPod</block>
+  <block id="36211f481e2e2626220b1d9e8a3325bb" category="sidebar">Lösungen für SAP</block>
+  <block id="33871b6190a8d5adbe8b15282054766c" category="sidebar">Was ist neu</block>
 </blocks>

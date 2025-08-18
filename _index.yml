@@ -1,6 +1,6 @@
 ---
 indexpage:
-  title: SAP Business Application und SAP HANA Database Lösungen
+  title: SAP-Geschäftsanwendungs- und SAP HANA-Datenbanklösungen
   summary: NetApp verfügt über eine umfangreiche Sammlung technischer Berichte, validierter
     Designs, Videos, Blogs und Lösungsübersichten für SAP und SAP HANA.
   lead: NetApp verfügt über eine umfangreiche Sammlung technischer Berichte, validierter
@@ -71,3 +71,7 @@ indexpage:
       url: backup/snapcenter-ibm-db2.html
     - title: SnapCenter Integration für SAP MaxDB Datenbank
       url: backup/snapcenter-sap-maxdb.html
+  - title: FlexPod Lösungen für SAP
+    links:
+    - title: Einführung in SAP auf FlexPod
+      url: https://docs.netapp.com/us-en/flexpod/ent-db/index.html
