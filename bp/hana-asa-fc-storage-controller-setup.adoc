@@ -55,7 +55,7 @@ Dies muss für jede SVM geschehen. Der Name der QoS-Polizeigruppe für jede SVM 
 ....
 lun create -vserver <vserver_name> -path  /vol/<volume_name>/<lun_name>   -size <size> -ostype <e.g. linux>  -qos-policy-group <policy-name>
 ....
-Es wird empfohlen, 1000 MB/s als maximalen Durchsatz für eine bestimmte LUN zu verwenden. Wenn eine Applikation einen höheren Durchsatz erfordert, müssen mehrere LUNs mit LUN-Striping verwendet werden, um die erforderliche Bandbreite bereitzustellen. Dieser Leitfaden enthält ein Beispiel für SAP HANA auf Basis von Linux LVM in Abschnitt link:hana-asa-fc-host-setup.html#create-lvm-volume-groups-and-logical-volumes["Host-Setup"].
+Es wird empfohlen, 1000 MB/s als maximalen Durchsatz für eine bestimmte LUN zu verwenden.  Wenn eine Anwendung mehr Durchsatz erfordert, müssen mehrere LUNs mit LUN-Striping verwendet werden, um die erforderliche Bandbreite bereitzustellen.  Dieses Handbuch enthält im Abschnitt ein Beispiel für SAP HANA basierend auf Linux LVMlink:hana-asa-fc-host-setup.html["Host-Setup"] .
 
 
 NOTE: Das Limit gilt auch für Lesevorgänge. Daher genügend LUNs verwenden, um die erforderlichen SLAs für die Startzeit der SAP HANA-Datenbank und für Backups zu erfüllen.
