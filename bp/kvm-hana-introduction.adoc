@@ -1,0 +1,40 @@
+---
+sidebar: sidebar 
+permalink: bp/kvm-hana-introduction.html 
+keywords: introduction,KVM, SAP HANA, tailored data center integration, FCP, NFS 
+summary: Dieser Leitfaden enthält Informationen zur Konfiguration von SUSE KVM für SAP HANA unter Verwendung von NetApp -Speicher. 
+---
+= SAP HANA mit SUSE KVM und NetApp Storage
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dieser Leitfaden enthält Informationen zur Konfiguration von SUSE KVM für SAP HANA unter Verwendung von NetApp -Speicher.
+
+Marco Schoen, NetApp
+
+
+
+== Einführung
+
+Dieses Dokument beschreibt zusätzliche Schritte, die für die Bereitstellung von SAP HANA Single-Host auf SUSE KVM mit NetApp -Speicher erforderlich sind.  Es basiert auf dem https://documentation.suse.com/sbp/sap-15/pdf/SBP-SLES4SAP-HANAonKVM-SLES15SP5_en.pdf["SUSE Best Practices für SAP HANA auf KVM"] Die
+
+Es zeigt hauptsächlich, wie man Netzwerkschnittstellen für SR-IOV (Single Root I/O Virtualization) auf dem KVM-Host konfiguriert, wie man diese virtuellen Schnittstellen (VF) einer VM zuweist und wie man die Schnittstellen innerhalb der VM so konfiguriert, dass sie über NFS auf den Speicher für SAP HANA zugreifen können.  Darüber hinaus wird beschrieben, wie FCP für die SAP HANA-Nutzung innerhalb der VM eingerichtet wird.
+
+
+NOTE: SR-IOV muss für die SAP HANA-Netzwerkkommunikation und für den Speicherzugriff über NFS verwendet werden.  Die physischen FCP-HBA-Ports müssen der VM als PCI-Geräte zugewiesen werden, damit FCP-LUNs verwendet werden können.  SAP HANA-Mehrhostsysteme werden nicht unterstützt.
+
+
+
+== Voraussetzungen
+
+Diese Anleitung gilt für Linux Enterprise Server für SAP Applications 15 SP5/SP6 als KVM-Host.  + Es müssen zertifizierte SAP HANA-Server und NetApp Speicher verwendet werden.  Im SAP HANA Hardware Directory finden Sie die verfügbaren Optionen. https://www.sap.com/dmc/exp/2014-09-02-hana-hardware/enEN[]
+
+Die Einrichtung und Konfiguration der KVM-Hosts und der VM muss gemäß den Anweisungen erfolgen. https://documentation.suse.com/sbp/sap-15/pdf/SBP-SLES4SAP-HANAonKVM-SLES15SP5_en.pdf["SUSE Best Practices für SAP HANA auf KVM"] Die
+
+Aktuelle Informationen, einschließlich unterstützter CPU-Architekturen und Einschränkungen, finden Sie im SAP-Hinweis +https://me.sap.com/notes/3538596["3538596 - SAP HANA auf SUSE KVM-Virtualisierung mit SLES 15 SP5 - SAP für mich"]

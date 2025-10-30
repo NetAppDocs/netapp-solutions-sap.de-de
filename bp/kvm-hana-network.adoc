@@ -1,0 +1,338 @@
+---
+sidebar: sidebar 
+permalink: bp/kvm-hana-network.html 
+keywords: Ethernet,KVM, SAP HANA, tailored data center integration,  NFS 
+summary: Dieser Leitfaden enthält Informationen zur Konfiguration von SUSE KVM für SAP HANA unter Verwendung von NetApp -Speicher. 
+---
+= Konfiguration des Ethernet-Netzwerks
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dieser Abschnitt enthält Informationen zur Konfiguration von SR-IOV in SUSE KVM für SAP HANA unter Verwendung von NetApp -Speicher.
+
+
+
+== Einrichtung von SR-IOV
+
+Dieser Abschnitt zeigt, wie SR-IOV mit Mellanox Connect-X NICs eingerichtet wird.  Es basiert auf https://enterprise-support.nvidia.com/s/article/HowTo-Configure-SR-IOV-for-ConnectX-4-ConnectX-5-ConnectX-6-with-KVM-Ethernet["NVIDIA Enterprise Support Portal | Anleitung zur Konfiguration von SR-IOV für ConnectX-4/ConnectX-5/ConnectX-6 mit KVM (Ethernet)"] Die  Im SUSE SAP HANA KVM-Leitfaden wird dies anhand einer INTEL-Netzwerkkarte beschrieben.  + Es wird empfohlen, redundante Ethernet-Verbindungen zu nutzen, indem zwei physische Ports als Trunk/Bond kombiniert werden.  Die der VM zugewiesenen virtuellen Ports (VF) müssen auch innerhalb der VM als Trunks konfiguriert werden.
+
+image:kvm-hana-image1.png["Breite=493, Höhe=409"]
+
+Voraussetzungen:
+
+* KVM ist installiert
+* SR-IOV ist im BIOS des Servers aktiviert.
+* PCI-Passthrough wird aktiviert, indem „intel_iommu=on“ und „iommu=pt“ als Optionen im Bootloader hinzugefügt werden.
+* Auf den KVM-Hosts und VMs sind die neuesten MLNX_OFED-Treiber installiert.
+
+
+
+
+== SR-IOV aktivieren und Anzahl der VF festlegen
+
+In diesem Kapitel wird die SR-IOV-Funktionalität aktiviert, die maximale Anzahl von VFs (virtuellen Schnittstellen) pro physischem Port wird in der Firmware des Adapters festgelegt und die Anzahl der verwendeten VFs pro physischem Port (100GbE) wird festgelegt, in diesem Beispiel vier.
+
+
+NOTE: Jede einer VM zugewiesene VF benötigt eine Bandbreite von mindestens 10 Gbit/s.  Beispielsweise sollten Sie nicht mehr als zwei virtuelle Funktionen (VFs) für einen physischen 25GbE-Port erstellen und zuweisen.
+
+. Führen Sie MFT (Mellanox Firmware Tools) aus:
+
+
+....
+# mst start
+Starting MST (Mellanox Software Tools) driver set
+Loading MST PCI module – Success
+Loading MST PCI configuration module – Success
+Create devices
+Unloading MST PCI module (unused) – Success
+....
+. Gerät lokalisieren:
+
+
+....
+# mst status
+MST modules:
+------------
+MST PCI module is not loaded
+MST PCI configuration module loaded
+
+MST devices:
+
+------------
+
+/dev/mst/mt4125_pciconf0 - PCI configuration cycles access.
+domain:bus:dev.fn=0000:ab:00.0 addr.reg=88 data.reg=92 cr_bar.gw_offset=-1
+
+Chip revision is: 00
+....
+. Überprüfen Sie den Gerätestatus:
+
+
+....
+mlxconfig -d /dev/mst/mt4125_pciconf0 q |grep -e SRIOV_EN -e NUM_OF_VFS
+NUM_OF_VFS 8
+SRIOV_EN True(1)_
+....
+. Aktivieren Sie gegebenenfalls SR-IOV:
+
+
+....
+mlxconfig -d /dev/mst/mt4125_pciconf0 set SRIOV_EN=1
+....
+. Maximale Anzahl an VFs festlegen:
+
+
+....
+mlxconfig -d /dev/mst/mt4125_pciconf0 set  NUM_OF_VFS=4
+....
+. Starten Sie den Server neu, falls die Funktion aktiviert werden musste oder die maximale Anzahl virtueller Funktionen geändert wurde.
+
+
+
+
+=== Erstellung virtueller Schnittstellen
+
+In diesem Abschnitt werden pro physischem Port 4 VFs erstellt.
+
+. Gerät finden:
+
+
+....
+# ibstat
+
+CA 'mlx5_0'
+CA type: MT4125
+Number of ports: 1
+Firmware version: 22.36.1010
+Hardware version: 0
+Node GUID: 0xa088c20300a6f6fc
+System image GUID: 0xa088c20300a6f6fc
+Port 1:
+State: Active
+Physical state: LinkUp
+Rate: 100
+Base lid: 0
+LMC: 0
+SM lid: 0
+Capability mask: 0x00010000
+Port GUID: 0xa288c2fffea6f6fd
+Link layer: Ethernet
+CA 'mlx5_1'
+CA type: MT4125
+Number of ports: 1
+Firmware version: 22.36.1010
+Hardware version: 0
+Node GUID: 0xa088c20300a6f6fd
+System image GUID: 0xa088c20300a6f6fc
+Port 1:
+State: Active
+Physical state: LinkUp
+Rate: 100
+Base lid: 0
+LMC: 0
+SM lid: 0
+Capability mask: 0x00010000
+Port GUID: 0xa288c2fffea6f6fd
+Link layer: Ethernet
+....
+. Wenn eine Anleihe erstellt wurde, sähe die Ausgabe wie folgt aus:
+
+
+....
+# ibstat
+CA 'mlx5_bond_0'
+CA type: MT4125
+Number of ports: 1
+Firmware version: 22.36.1010
+Hardware version: 0
+Node GUID: 0xa088c20300a6f6fc
+System image GUID: 0xa088c20300a6f6fc
+Port 1:
+State: Active
+Physical state: LinkUp
+Rate: 100
+Base lid: 0
+LMC: 0
+SM lid: 0
+Capability mask: 0x00010000
+Port GUID: 0xa288c2fffea6f6fc
+Link layer: Ethernet
+#:/etc/sysconfig/network # cat /sys/class/infiniband/mlx5_bond_0/device/
+aerdevcorrectable iommugroup/ resetmethod
+aerdevfatal irq resource
+aerdevnonfatal link/ resource0
+arienabled localcpulist resource0wc
+brokenparitystatus localcpus revision
+class maxlinkspeed rom
+config maxlinkwidth sriovdriversautoprobe
+consistentdmamaskbits mlx5_core.eth.0/ sriovnumvfs
+urrentlinkspeed mlx5_core.rdma.0/ sriovoffset
+currentlinkwidth modalias sriovstride
+d3coldallowed msibus sriovtotalvfs
+device msiirqs/ sriovvfdevice
+dmamaskbits net/ sriovvftotalmsix
+driver/ numanode subsystem/
+driveroverride pools subsystemdevice
+enable power/ subsystemvendor
+firmwarenode/ powerstate uevent
+infiniband/ ptp/ vendor
+infinibandmad/ remove vpd
+infinibandverbs/ rescan
+iommu/ reset
+....
+....
+# ibdev2netdev
+mlx5_0 port 1 ==> eth4 (Up)
+mlx5_1 port 1 ==> eth5 (Up)
+....
+. Ermitteln Sie die Gesamtzahl der in der Firmware zulässigen und konfigurierten VFs:
+
+
+....
+# cat /sys/class/net/eth4/device/sriov_totalvfs
+4
+# cat /sys/class/net/eth5/device/sriov_totalvfs
+4
+....
+. Ermitteln Sie die aktuelle Anzahl der VFs auf diesem Gerät:
+
+
+....
+# cat /sys/class/infiniband/mlx5_0/device/sriov_numvfs
+0
+# cat /sys/class/infiniband/mlx5_1/device/sriov_numvfs
+0
+....
+. Die gewünschte Anzahl an VFs einstellen:
+
+
+....
+# echo 4 > /sys/class/infiniband/mlx5_0/device/sriov_numvfs
+# echo 4 > /sys/class/infiniband/mlx5_1/device/sriov_numvfs
+....
+
+NOTE: Wenn Sie bereits eine Verbindung über diese beiden Ports konfiguriert haben, muss der erste Befehl zur Verbindung ausgeführt werden:
+
+....
+# echo 4 > /sys/class/infiniband/mlx5_bond_0/device/sriov_numvfs
+....
+. Überprüfen Sie den PCI-Bus:
+
+
+....
+# lspci -D | grep Mellanox
+
+0000:ab:00.0 Ethernet controller: Mellanox Technologies MT2892 Family [ConnectX-6 Dx]
+0000:ab:00.1 Ethernet controller: Mellanox Technologies MT2892 Family [ConnectX-6 Dx]
+0000:ab:00.2 Ethernet controller: Mellanox Technologies ConnectX Family mlx5Gen Virtual Function
+0000:ab:00.3 Ethernet controller: Mellanox Technologies ConnectX Family mlx5Gen Virtual Function
+0000:ab:00.4 Ethernet controller: Mellanox Technologies ConnectX Family mlx5Gen Virtual Function
+0000:ab:00.5 Ethernet controller: Mellanox Technologies ConnectX Family mlx5Gen Virtual Function
+0000:ab:01.2 Ethernet controller: Mellanox Technologies ConnectX Family mlx5Gen Virtual Function
+0000:ab:01.3 Ethernet controller: Mellanox Technologies ConnectX Family mlx5Gen Virtual Function
+0000:ab:01.4 Ethernet controller: Mellanox Technologies ConnectX Family mlx5Gen Virtual Function
+0000:ab:01.5 Ethernet controller: Mellanox Technologies ConnectX Family mlx5Gen Virtual Function
+....
+....
+# ibdev2netdev -v
+
+0000:ab:00.0 mlx5_0 (MT4125 - 51TF3A5000XV3) Mellanox ConnectX-6 Dx 100GbE QSFP56 2-port PCIe 4 Ethernet Adapter fw 22.36.1010 port 1 (ACTIVE) ==> eth4 (Up)
+0000:ab:00.1 mlx5_1 (MT4125 - 51TF3A5000XV3) Mellanox ConnectX-6 Dx 100GbE QSFP56 2-port PCIe 4 Ethernet Adapter fw 22.36.1010 port 1 (ACTIVE) ==> eth6 (Up)
+0000:ab:00.2 mlx523 (MT4126 - NA) fw 22.36.1010 port 1 (DOWN ) ==> eth6 (Down)
+0000:ab:00.3 mlx5_3 (MT4126 - NA) fw 22.36.1010 port 1 (DOWN ) ==> eth7 (Down)
+0000:ab:00.4 mlx5_4 (MT4126 - NA) fw 22.36.1010 port 1 (DOWN ) ==> eth8 (Down)
+0000:ab:00.5 mlx5_5 (MT4126 - NA) fw 22.36.1010 port 1 (DOWN ) ==> eth9 (Down)
+0000:ab:01.2 mlx5_6 (MT4126 - NA) fw 22.36.1010 port 1 (DOWN ) ==> eth10 (Down)
+0000:ab:01.3 mlx5_7 (MT4126 - NA) fw 22.36.1010 port 1 (DOWN ) ==> eth11 (Down)
+0000:ab:01.4 mlx5_8 (MT4126 - NA) fw 22.36.1010 port 1 (DOWN ) ==> eth12 (Down)
+0000:ab:01.5 mlx5_9 (MT4126 - NA) fw 22.36.1010 port 1 (DOWN ) ==> eth13 (Down)
+....
+. Überprüfen Sie die VF-Konfiguration mithilfe des IP-Tools:
+
+
+....
+# ip link show
+…
+6: eth4: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 9000 qdisc mq master bond0 state UP mode DEFAULT group default qlen 1000
+
+link/ether a0:88:c2:a6:f6:fd brd ff:ff:ff:ff:ff:ff permaddr a0:88:c2:a6:f6:fc
+vf 0 link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+vf 1 link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+vf 2 link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+vf 3 link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+
+altname enp171s0f0np0
+altname ens3f0np0
+
+7: eth5: <BROADCAST,MULTICAST,SLAVE,UP,LOWER_UP> mtu 9000 qdisc mq master bond0 state UP mode DEFAULT group default qlen 1000
+
+link/ether a0:88:c2:a6:f6:fd brd ff:ff:ff:ff:ff:ff
+vf 0 link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+vf 1 link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+vf 2 link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+vf 3 link/ether 00:00:00:00:00:00 brd ff:ff:ff:ff:ff:ff, spoof checking off, link-state auto, trust off, query_rss off
+
+altname enp171s0f1np1
+altname ens3f1np1
+…
+....
+
+
+=== VFs während des Bootvorgangs aktivieren
+
+Die obige Konfiguration bleibt nach einem Neustart nicht erhalten.  Um die Änderungen dauerhaft zu speichern, muss eine _systemd_-Unit-Datei _/etc/systemd/system/after.local_ mit folgendem Inhalt erstellt werden:
+
+....
+[Unit]
+Description=/etc/init.d/after.local Compatibility
+After=libvirtd.service Requires=libvirtd.service
+
+[Service]
+Type=oneshot
+ExecStart=/etc/init.d/after.local
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
+....
+Erstellen Sie anschließend das Skript _/etc/init.d/after.local_:
+
+....
+#! /bin/sh
+#
+#
+# ...
+echo 4 > /sys/class/infiniband/mlx5_bond_0/device/sriov_numvfs
+echo 4 > /sys/class/infiniband/mlx5_1/device/sriov_numvfs
+....
+Nach der Erstellung muss sichergestellt werden, dass die Datei ausgeführt werden kann:
+
+....
+# cd /etc/init.d/
+# chmod 750 after.local
+....
+
+
+== Die virtuellen Schnittstellen der VM zuweisen
+
+Dieses Kapitel beschreibt, wie man der VM mithilfe von _virt-manager_ virtuelle Schnittstellen zuweist.
+
+. Starten Sie virt-manager. + image:kvm-hana-image2.png["Breite=601, Höhe=385"]
+. Öffnen Sie die gewünschte VM. + image:kvm-hana-image3.png["Breite=300, Höhe=385"]
+. Klicken Sie auf „Hardware hinzufügen“. + image:kvm-hana-image4.png["Virtmanager Hardware hinzufügen, Breite=601, Höhe=443"]
+. Wählen Sie die gewünschte virtuelle Netzwerkkarte aus dem ersten physischen Port in der Liste der PCI-Hostgeräte aus und klicken Sie auf „Fertigstellen“.  + In diesem Beispiel gehören 0000.AB:00:2 - 0000.AB:00:4 zum ersten physischen Port und 0000.AB:01:2 - 0000.AB:01:4 zum zweiten physischen Port. + image:kvm-hana-image5.png["Breite=601, Höhe=442"]
+. Wählen Sie den nächsten virtuellen NIC-Port aus der Liste der PCI-Hostgeräte aus, verwenden Sie einen virtuellen Port vom zweiten physischen Port und klicken Sie auf Fertigstellen. + image:kvm-hana-image6.png["Breite=601, Höhe=441"]
+. Anschließend werden die virtuellen Schnittstellen der VM zugewiesen und die VM kann gestartet werden. + image:kvm-hana-image7.png["Breite=601, Höhe=443"]
+
+
+
+
+== Konfigurieren der Netzwerkschnittstellen innerhalb der VM
+
+Melden Sie sich in der VM an und konfigurieren Sie die beiden VFs als Bond.  Wählen Sie entweder Modus 0 oder Modus 2.  Verwenden Sie LACP nicht, da LACP nur an physischen Ports verwendet werden kann.  Die folgende Abbildung zeigt eine Modus-2-Konfiguration mit YAST.  + +image:kvm-hana-image8.png["Breite=601, Höhe=335"]
