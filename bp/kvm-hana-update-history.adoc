@@ -22,4 +22,7 @@ An dieser Lösung wurden seit ihrer ersten Veröffentlichung folgende technische
 
 
 | Oktober 2025 | Ausgangsversion 
+
+
+| November 2025 | Layout-Aktualisierung. 
 |===
