@@ -4,7 +4,7 @@ permalink: whats-new.html
 keywords: 'netapp, solutions, sap, sap hana, what"s new, updates, change log' 
 summary: Protokoll der letzten Änderungen an den NetApp -Lösungen für SAP-Sicherheiten. 
 ---
-= Was gibt es Neues bei NetApp Virtualisierungslösungen?
+= Was ist neu bei den NetApp -Lösungen für SAP?
 :allow-uri-read: 
 :icons: font
 :imagesdir: ./media/

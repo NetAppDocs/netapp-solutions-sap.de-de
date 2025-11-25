@@ -595,7 +595,6 @@
   <block id="39cf4ec35983fa721c6b420b210c0675" category="admonition">Die Beispielbefehle für mehrere Hosts zeigen ein 2+1-HANA-System mit mehreren Hosts.</block>
   <block id="f698665f2a88873767fbe21e3908ef17" category="admonition">Die XFS-Dateisysteme für die Daten- und Protokoll-LUNs müssen mit dem gemountet werden<block ref="c947784f4ae64e8b5d145360be8a793e" prefix=" " category="inline-code"></block> Und<block ref="215a5778551b14fe571525c26ffc2211" prefix=" " category="inline-code"></block> Mount-Optionen:</block>
   <block id="54720e6c9a787dee1a825e4ea3505728" category="admonition">Alle Daten- und Protokolldateisysteme sind über den SAP HANA Storage Connector gemountet.</block>
-  <block id="5a3bf297b3cbbda0eaa792a3fc9aa696" category="paragraph">Führen Sie zum Mounten der Dateisysteme den aus<block ref="86e32ba5e4c9ee3025482cd68628bc59" prefix=" " category="inline-code"></block> Befehl an jedem Host.</block>
   <block id="d39f50075dc9ec7266b5156c1d0ce319" category="paragraph">Die folgenden Abschnitte enthalten Installations- und Konfigurationsrichtlinien für die SAP HANA-Infrastruktur.</block>
   <block id="088c8c258db90c09658a39d2839f52b0" category="doc">TR-4384: SAP HANA on NetApp FAS Systems with Fibre Channel Protocol Configuration Guide</block>
   <block id="e4509a748ae3ce7cb528662f2f9f7e10" category="paragraph">Die Zertifizierung gilt für folgende Modelle:</block>
@@ -5289,7 +5288,6 @@ Zentrale Plug-in-Implementierung für Linux auf IBM Power</block>
   <block id="2769a82040d53d42eadf3bec6f97136d" category="doc">Einzelhost-Setup</block>
   <block id="4d0dd5bf85707730b1a1b706c12b2e73" category="paragraph">In diesem Kapitel wird die Einrichtung eines einzelnen SAP HANA-Hosts beschrieben.</block>
   <block id="94ebdd04c5726b33d92db91c2cfa34f4" category="paragraph">Erstellen Sie das XFS-Dateisystem auf allen logischen Daten- und Protokollvolumes und der gemeinsam genutzten Hana-LUN.</block>
-  <block id="b68bdc5f6c4af520ce42995c3c60f1d0" category="paragraph">Um die Dateisysteme zu mounten, führen Sie den <block ref="86e32ba5e4c9ee3025482cd68628bc59" prefix=" " category="inline-code"></block> Befehl beim Host.</block>
   <block id="69cf65aac7e60a91062a6b558c083ef3" category="list-text">HANA-System mit SID=FC5</block>
   <block id="20b674149670813ea625bde00479e3f4" category="summary">Die NetApp ASA Produktfamilie ist für die Verwendung mit SAP HANA in TDI Projekten zertifiziert. Dieser Leitfaden enthält Best Practices für SAP HANA auf dieser Plattform.</block>
   <block id="21e0a2aad39a01380645381043e9d955" category="doc">Technischer Bericht: SAP HANA on NetApp ASA Systems with Fibre Channel Protocol</block>
@@ -5631,7 +5629,6 @@ Zentrale Plug-in-Implementierung für Linux auf IBM Power</block>
   <block id="6a9c098947d8b811552347f2ed990ebd" category="inline-link-macro"><block ref="6a9c098947d8b811552347f2ed990ebd" category="inline-link-rx"></block></block>
   <block id="702c9bfa6d3b8d8b923fbeba4db3625f" category="paragraph"><block ref="702c9bfa6d3b8d8b923fbeba4db3625f" category="inline-link-macro-rx"></block></block>
   <block id="225b42e7cb6036e97607adda6dcca1c3" category="summary">Protokoll der letzten Änderungen an den NetApp -Lösungen für SAP-Sicherheiten.</block>
-  <block id="4a2fff3ce5a292ada8e788cd34005db8" category="doc">Was gibt es Neues bei NetApp Virtualisierungslösungen?</block>
   <block id="2ca0fa0a322d6c31c3d0906a34c85e6c" category="paragraph">Informieren Sie sich über Neuigkeiten zu Lösungen für SAP.</block>
   <block id="bab52961b58c502c7991d35556c25367" category="section-title">18. August 2025</block>
   <block id="47e26e0d5bbeef43c544dd9ae72e66b0" category="inline-link-macro">NetApp Lösungsfamilie</block>
@@ -5826,4 +5823,7 @@ Zentrale Plug-in-Implementierung für Linux auf IBM Power</block>
   <block id="be9795993b0f7ea6e032752c428deb13" category="sidebar">Ethernet-Netzwerk konfigurieren</block>
   <block id="6ea13559c46e38e3cf3559ec91659a75" category="sidebar">Fibre-Channel-Netzwerk konfigurieren</block>
   <block id="b3cb0a0b8107b0dbcf00b7ef366e3fa1" category="sidebar">Speicher konfigurieren</block>
+  <block id="1d34e524e547228bbc972b1e3e9959dd" category="paragraph">Um die Dateisysteme einzubinden, führen Sie folgenden Befehl aus:<block ref="9f7a2b0acd2325ca01c92df6a9e32ef7" prefix=" " category="inline-code"></block> Befehl auf jedem Host.</block>
+  <block id="e38bdf2f2c158270debf7ee7f12f1356" category="paragraph">Um die Dateisysteme einzubinden, führen Sie folgenden Befehl aus:<block ref="9f7a2b0acd2325ca01c92df6a9e32ef7" prefix=" " category="inline-code"></block> Befehl auf dem Host.</block>
+  <block id="4fef2ff68dffba6c16f0aed5de1fb55c" category="doc">Was ist neu bei den NetApp -Lösungen für SAP?</block>
 </blocks>
