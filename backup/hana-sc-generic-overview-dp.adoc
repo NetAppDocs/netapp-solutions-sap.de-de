@@ -1,0 +1,106 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-generic-overview-dp.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, Azure NetApp Files, FSx for NetApp ONTAP 
+summary:  
+---
+= Erfahren Sie mehr über den SAP HANA-Datenschutz mit der NetApp Snapshot-Technologie.
+:allow-uri-read: 
+
+
+[role="lead"]
+Erfahren Sie, wie die NetApp Snapshot-Technologie SAP HANA-Datenbanken mit Backups schützt, die unabhängig von der Datenbankgröße in wenigen Minuten abgeschlossen sind. Lernen Sie Backup- und Wiederherstellungsstrategien kennen, die Snapshot-Kopien, SnapRestore für eine schnelle Wiederherstellung und die Replikation mit SnapVault oder Azure NetApp Files -Backup für einen sekundären Schutz nutzen.
+
+Unternehmen benötigen heutzutage eine kontinuierliche und unterbrechungsfreie Verfügbarkeit ihrer SAP-Anwendungen. Sie erwarten ein gleichbleibendes Leistungsniveau und benötigen angesichts stetig wachsender Datenmengen und des Bedarfs an routinemäßigen Wartungsarbeiten, wie z. B. Systemsicherungen, einen automatisierten täglichen Betrieb. Die Durchführung von Backups von SAP-Datenbanken ist eine kritische Aufgabe und kann erhebliche Auswirkungen auf die Leistung des produktiven SAP-Systems haben.
+
+Die Backup-Fenster werden immer kleiner, während die Menge der zu sichernden Daten immer größer wird. Daher ist es schwierig, einen Zeitpunkt zu finden, an dem man Datensicherungen durchführen kann, ohne die Geschäftsprozesse wesentlich zu beeinträchtigen. Die für die Wiederherstellung und den Betrieb von SAP-Systemen benötigte Zeit ist ein Grund zur Sorge, da Ausfallzeiten für SAP-Produktions- und Nichtproduktionssysteme minimiert werden müssen, um die Kosten für das Unternehmen zu reduzieren.
+
+
+
+== Datensicherung und Wiederherstellung mithilfe von Snapshot-Backups
+
+Mit der NetApp Snapshot-Technologie können Sie innerhalb von Minuten Datenbank-Backups erstellen. Die zum Erstellen einer Snapshot-Kopie benötigte Zeit ist unabhängig von der Größe der Datenbank, da bei einer Snapshot-Kopie keine physischen Datenblöcke auf der Speicherplattform verschoben werden. Darüber hinaus hat die Verwendung der Snapshot-Technologie keine Auswirkungen auf die Leistung des laufenden SAP-Systems, da alle Operationen im Speichersystem ausgeführt werden. Daher können Sie die Erstellung von Snapshot-Kopien planen, ohne Spitzenzeiten für Dialoge oder Batch-Aktivitäten berücksichtigen zu müssen. SAP-on- NetApp -Kunden planen typischerweise mehrere Online-Snapshot-Backups über den Tag verteilt; beispielsweise ist ein Abstand von sechs Stunden üblich. Diese Snapshot-Backups werden in der Regel drei bis fünf Tage lang auf dem primären Speichersystem aufbewahrt, bevor sie entfernt oder zur Langzeitarchivierung auf einen günstigeren Speicher ausgelagert werden.
+
+Snapshot-Kopien bieten auch entscheidende Vorteile bei Wiederherstellungs- und Reparaturvorgängen. Bei einer Wiederherstellungsoperation werden die Daten im Dateisystem auf Basis des Zustands einer Sicherung wiederhergestellt. Bei einer Wiederherstellungsoperation wird der Datenbankzustand mithilfe von Datenbankprotokollsicherungen auf einen bestimmten Zeitpunkt zurückgesetzt.
+
+Die NetApp SnapRestore Technologie ermöglicht die Wiederherstellung einer gesamten Datenbank oder alternativ nur eines Teils der Datenbank auf Basis der aktuell verfügbaren Snapshot-Backups. Der Wiederherstellungsprozess ist unabhängig von der Größe der Datenbank in wenigen Sekunden abgeschlossen. Da im Laufe des Tages mehrere Online-Snapshot-Backups erstellt werden können, verkürzt sich die für den Wiederherstellungsprozess benötigte Zeit im Vergleich zu einem herkömmlichen Backup-Ansatz, der nur einmal täglich durchgeführt wird, erheblich. Da Sie eine Wiederherstellung mit einer Snapshot-Kopie durchführen können, die höchstens nur wenige Stunden alt ist (statt bis zu 24 Stunden), müssen bei der Vorwärtswiederherstellung weniger Transaktionsprotokolle angewendet werden. Der Zeitaufwand für Wiederherstellung und Datenrettung wird im Vergleich zu herkömmlichen Streaming-Backups deutlich reduziert.
+
+Da Snapshot-Backups auf demselben Datenträgersystem wie die aktiven Online-Daten gespeichert werden, empfiehlt NetApp, Snapshot-Kopien-Backups eher als Ergänzung denn als Ersatz für Backups an einem sekundären Speicherort zu verwenden. Die meisten Wiederherstellungs- und Reparaturvorgänge werden mithilfe von SnapRestore auf dem primären Speichersystem verwaltet. Die Wiederherstellung von einem sekundären Speicherort ist nur dann erforderlich, wenn das primäre Speichersystem, das die Snapshot-Kopien enthält, nicht verfügbar ist. Sie können die sekundäre Sicherung auch dann verwenden, wenn es notwendig ist, eine Sicherung wiederherzustellen, die auf dem primären Speicher nicht mehr verfügbar ist.
+
+Eine Datensicherung an einem sekundären Speicherort basiert auf Snapshot-Kopien, die auf dem primären Speicher erstellt wurden. Die Daten werden daher direkt aus dem primären Speichersystem gelesen, ohne dass dadurch eine Last auf dem SAP-Datenbankserver und seinem Netzwerk entsteht. Der primäre Speicher kommuniziert direkt mit dem sekundären Speicher und repliziert die Sicherungsdaten mithilfe der SnapVault oder ANF-Sicherungsfunktionalität an das Ziel.
+
+SnapVault und ANF-Backups bieten im Vergleich zu herkömmlichen Backups erhebliche Vorteile. Nach einer ersten Datenübertragung, bei der alle Daten von der Quelle zum Ziel übertragen werden, werden bei allen nachfolgenden Backups nur die geänderten Blöcke auf den Sekundärspeicher repliziert. Dadurch werden die Belastung des primären Speichersystems und die für eine vollständige Datensicherung benötigte Zeit deutlich reduziert. Da am Zielort nur die geänderten Blöcke gespeichert werden, benötigt jede zusätzliche vollständige Datenbanksicherung deutlich weniger Speicherplatz.
+
+
+
+== Laufzeit von Snapshot-Backup- und -Restore-Vorgängen
+
+Die folgende Abbildung zeigt HANA Studio eines Kunden, der Snapshot-Backup-Operationen durchführt. Das Bild zeigt, dass die HANA-Datenbank (ca. 4 TB groß) mit der Snapshot-Backup-Technologie in 1 Minute und 20 Sekunden gesichert wird, während eine dateibasierte Sicherung mehr als 4 Stunden dauert.
+
+Den größten Teil der gesamten Laufzeit des Backup-Workflows entfällt auf die Zeit, die für die Ausführung des HANA-Datenbank-Snapshot-Vorgangs benötigt wird. Die Sicherung des Speicher-Snapshots selbst ist unabhängig von der Größe der HANA-Datenbank in wenigen Sekunden abgeschlossen.
+
+image:hana-sc-generic-image-001.png["Breite=624, Höhe=267"]
+
+
+
+== Vergleich der Recovery-Zeitvorgaben
+
+Dieser Abschnitt bietet einen Vergleich der Wiederherstellungszeitziele (RTO) von dateibasierten und speicherbasierten Snapshot-Backups. Die RTO (Recovery Time Out) ist definiert als die Summe der Zeit, die für die Wiederherstellung, die Wiederherstellung und den anschließenden Start der Datenbank benötigt wird.
+
+
+
+=== Benötigte Zeit zum Wiederherstellen der Datenbank
+
+Bei einem dateibasierten Backup hängt die Restore-Zeit von der Größe der Datenbank und der Backup-Infrastruktur ab, die die Restore-Geschwindigkeit in Megabyte pro Sekunde festlegt. Wenn die Infrastruktur beispielsweise einen Restore-Vorgang mit einer Geschwindigkeit von 250 MB/s unterstützt, dauert es etwa 4.5 Stunden, um eine Datenbank mit einer Größe von 4 TB auf der Persistenz wiederherzustellen.
+
+Bei NetApp Snapshot-Backups ist die Wiederherstellungszeit unabhängig von der Größe der Datenbank und liegt immer im Bereich von wenigen Sekunden.
+
+
+
+=== Benötigte Zeit für das Recovery von Datenbanken
+
+Die Wiederherstellungszeit hängt von der Anzahl der Protokolle ab, die nach der Wiederherstellung angewendet werden müssen. Diese Zahl hängt von der Häufigkeit ab, mit der Daten-Backups erstellt werden.
+
+Bei dateibasierten Daten-Backups wird der Backup-Zeitplan normalerweise einmal pro Tag erstellt. Eine höhere Backup-Frequenz ist normalerweise nicht möglich, da das Backup die Produktions-Performance beeinträchtigt. Daher müssen im schlimmsten Fall alle Protokolle, die während des Tages geschrieben wurden, während der Forward Recovery angewendet werden.
+
+Snapshot-Backups werden typischerweise in höherer Frequenz geplant, da sie keinen Einfluss auf die Leistung der SAP HANA-Datenbank haben. Wenn beispielsweise Snapshot-Backups alle sechs Stunden geplant sind, müssten im schlimmsten Fall Protokolle für die letzten sechs Stunden angewendet werden, wenn der Fehler unmittelbar vor der Erstellung des nächsten Snapshots auftritt. Für eine tägliche dateibasierte Datensicherung müssten im schlimmsten Fall die Protokolle der letzten 24 Stunden angewendet werden.
+
+
+
+=== Benötigte Zeit zum Starten der Datenbank
+
+Die Startzeit der Datenbank hängt von der Größe der Datenbank und der Zeit ab, die zum Laden der Daten in den Arbeitsspeicher erforderlich ist. In den folgenden Beispielen wird davon ausgegangen, dass die Daten mit 1000 MBit/s geladen werden können. Das Laden von 4 TB in den Speicher dauert etwa 1 Stunde und 10 Minuten. Die Startzeit ist bei dateibasierten und Snapshot-basierten Restore- und Recovery-Vorgängen gleich.
+
+
+
+=== Wiederherstellungs- und Recovery-Beispielberechnung
+
+Die folgende Abbildung zeigt einen Vergleich zwischen Wiederherstellungs- und Recovery-Operationen mit einer täglichen dateibasierten Datensicherung und Snapshot-Datensicherungen mit unterschiedlichen Zeitplänen.
+
+Die ersten beiden Balken zeigen, dass sich auch bei einem einzelnen Snapshot Backup pro Tag die Wiederherstellung und Wiederherstellung dank der Geschwindigkeit des Restore-Vorgangs aus einem Snapshot Backup auf 43 % reduziert. Wenn pro Tag mehrere Snapshot Backups erstellt werden, kann die Laufzeit weiter reduziert werden, da während der Wiederherstellung weniger Protokolle angewendet werden müssen.
+
+Die folgende Abbildung zeigt außerdem, dass vier bis sechs Snapshot Backups pro Tag am sinnvollsten sind, da eine höhere Frequenz keine großen Auswirkungen mehr auf die Gesamtlaufzeit hat.
+
+image:hana-sc-generic-image-002.png["Breite=624, Höhe=326"]
+
+
+
+== Anwendungsfälle und Vorteile beschleunigter Backup- und Klonvorgänge
+
+Die Ausführung von Backups ist ein wichtiger Bestandteil jeder Datensicherungsstrategie. Die Backups werden regelmäßig geplant, um sicherzustellen, dass Sie nach Systemausfällen wiederherstellen können. Dies ist der naheliegende Anwendungsfall, aber auch andere SAP Lifecycle Management-Aufgaben, von denen Beschleunigung von Backup- und Recovery-Vorgängen entscheidend ist.
+
+Ein SAP-HANA-System-Upgrade ist ein Beispiel dafür, wie eine bedarfsgesteuerte Datensicherung vor dem Upgrade und eine mögliche Wiederherstellung im Falle eines Upgrade-Fehlers einen erheblichen Einfluss auf die gesamte geplante Ausfallzeit haben. Am Beispiel einer 4-TB-Datenbank lässt sich die geplante Ausfallzeit um 8 Stunden reduzieren, oder man hat 8 weitere Stunden Zeit für die Analyse und Behebung von Fehlern durch die Verwendung von Snapshot-basierten Sicherungs- und Wiederherstellungsvorgängen.
+
+Ein weiterer Anwendungsfall wäre ein typischer Testzyklus, bei dem die Tests über mehrere Iterationen mit unterschiedlichen Datensätzen oder Parametern durchgeführt werden müssen. Durch die Nutzung der schnellen Sicherungs- und Wiederherstellungsfunktionen können Sie innerhalb Ihres Testzyklus problemlos Speicherpunkte erstellen und das System auf einen dieser vorherigen Speicherpunkte zurücksetzen, falls ein Test fehlschlägt oder wiederholt werden muss. Dadurch können die Tests früher abgeschlossen werden oder es können mehr Tests gleichzeitig durchgeführt werden, was die Testergebnisse verbessert.
+
+image:hana-sc-generic-image-003.png["Breite=618, Höhe=279"]
+
+Sobald Snapshot-Backups implementiert sind, können sie für zahlreiche weitere Anwendungsfälle genutzt werden, die Kopien einer HANA-Datenbank erfordern. Sie können ein neues Volume auf Basis des Inhalts einer beliebigen verfügbaren Snapshot-Sicherung erstellen. Die Laufzeit dieses Vorgangs beträgt wenige Sekunden, unabhängig von der Größe des Volumens.
+
+Der häufigste Anwendungsfall ist die SAP-Systemaktualisierung, bei der Daten aus dem Produktivsystem in das Test- oder QA-System kopiert werden müssen. Durch die Nutzung der ONTAP oder ANF-Klonfunktion können Sie das Volume für das Testsystem innerhalb weniger Sekunden aus einer beliebigen Snapshot-Kopie des Produktionssystems bereitstellen. Anschließend muss das neue Volume an das Testsystem angebunden und die HANA-Datenbank wiederhergestellt werden.
+
+Der zweite Anwendungsfall ist die Schaffung eines Reparatursystems, das dazu dient, logische Fehler im Produktionssystem zu beheben. In diesem Fall wird ein älteres Snapshot-Backup des Produktionssystems verwendet, um ein Reparatursystem zu starten, das eine identische Kopie des Produktionssystems mit den Daten vor dem Auftreten der Beschädigung darstellt. Anschließend wird das Reparatursystem verwendet, um das Problem zu analysieren und die benötigten Daten zu exportieren, bevor sie beschädigt wurden.
+
+Der letzte Anwendungsfall ist die Möglichkeit, einen Failover-Test im Rahmen der Notfallwiederherstellung durchzuführen, ohne die Replikation zu unterbrechen und somit die RTO und den Recovery Point Objective (RPO) der Notfallwiederherstellungskonfiguration zu beeinflussen. Wenn die Replikation von ONTAP SnapMirror oder die regionsübergreifende Replikation von ANF zur Replikation der Daten an den Disaster-Recovery-Standort verwendet wird, stehen die Produktions-Snapshot-Backups auch am Disaster-Recovery-Standort zur Verfügung und können dann zur Erstellung eines neuen Volumes für Disaster-Recovery-Tests verwendet werden.
+
+image:hana-sc-generic-image-004.png["Breite=627, Höhe=328"]

@@ -1,0 +1,363 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-generic-restore.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, Azure NetApp Files, FSx for NetApp ONTAP 
+summary:  
+---
+= Wiederherstellung und Datenrettung von SAP HANA-Datenbanken mit SnapCenter
+:allow-uri-read: 
+
+
+[role="lead"]
+Wiederherstellung und Instandsetzung von SAP HANA-Systemen mit SnapCenter mittels automatisierter oder manueller Wiederherstellungsoptionen. Dies umfasst vollständige Systemwiederherstellungen, Wiederherstellungen einzelner Mandanten für HANA-Datenbanken auf ONTAP, Azure NetApp Files und FSx für ONTAP.
+
+SnapCenter unterstützt die folgenden Wiederherstellungs- und Reparaturvorgänge.
+
+* SAP HANA MDC-Systeme mit einem einzigen Mandanten
++
+** Vollständig automatisierte Wiederherstellung und Datenrettung
+** Vollständig automatisierte Wiederherstellung und manuelle Wiederherstellung (auswählbar)
+
+
+* SAP HANA MDC-Systeme mit mehreren Mandanten
++
+** Die durchgängige automatisierte Wiederherstellung muss manuell durchgeführt werden.
+
+
+* Wiederherstellung eines einzelnen Mandanten
++
+** Die durchgängige automatisierte Wiederherstellung muss manuell durchgeführt werden.
+
+
+
+
+
+NOTE: Die automatische Wiederherstellung wird nur unterstützt, wenn das HANA-Plug-in auf dem HANA-Datenbankhost bereitgestellt ist und das HANA-System von SnapCenter automatisch erkannt wurde. Bei einer zentralen Plug-in-Host-Konfiguration muss die Wiederherstellung nach dem Wiederherstellungsvorgang mit SnapCenter manuell durchgeführt werden.
+
+
+NOTE: Die Wiederherstellung vom primären ANF-Volume wird unterstützt. Die Wiederherstellung aus einem ANF-Backup wird noch nicht unterstützt. Eine Wiederherstellung direkt am Speicherort oder eine Wiederherstellung auf ein neues Volume aus einer ANF-Sicherung muss manuell über das Azure-Portal oder die CLI durchgeführt werden.
+
+
+
+== Automatisierte Wiederherstellung und Recovery für SAP HANA MDC-Systeme mit einem einzigen Mandanten
+
+Ein Wiederherstellungsvorgang wird eingeleitet, indem in der Ressourcentopologieansicht eine Snapshot-Sicherung ausgewählt und anschließend auf „Wiederherstellen“ geklickt wird.
+
+image:hana-sc-generic-image-098.png["Breite=601, Höhe=294"]
+
+Bei HANA-Systemen mit NFS on ANF, FSx for ONTAP oder ONTAP -Speichersystemen können Sie die vollständige Wiederherstellung mit oder ohne Wiederherstellung der primären Volume-Snapshots auswählen.
+
+* Die vollständige Ressourcenwiederherstellung ohne Volumenrücksetzung verwendet Single File SnapRestore (SFSR), um alle Dateien der Datenbank wiederherzustellen.
+* Die vollständige Ressource mit Volume-Wiederherstellung verwendet eine volumebasierte Wiederherstellungsoperation (VBSR), um das gesamte Volume auf den Zustand des ausgewählten Snapshots zurückzusetzen.
+
+
+
+NOTE: Die Funktion „Volume-Revert“ kann nicht verwendet werden, wenn Sie einen Snapshot wiederherstellen müssen, der älter ist als der aktive SnapVault oder SnapMirror -Replikations-Snapshot.
+
+
+NOTE: Bei einer Volume-Wiederherstellung werden alle Snapshot-Backups gelöscht, die neuer sind als der für die Wiederherstellung ausgewählte Snapshot.
+
+
+NOTE: Eine Wiederherstellung mit SFSR ist fast so schnell wie eine Volume-Wiederherstellung, blockiert jedoch alle Snapshot-Operationen, bis der Hintergrundprozess die Metadatenoperationen abgeschlossen hat.
+
+image:hana-sc-generic-image-099.png["Breite=300"]
+
+Bei HANA-Systemen auf Bare-Metal-Hosts mit FC-SAN wird ein Volume Revert (VBSR) nicht unterstützt; stattdessen wird für den Wiederherstellungsvorgang immer SFSR verwendet. Für HANA-Systeme, die auf VMware mit VMFS laufen, wird ein Klon-, Mount- und Kopiervorgang verwendet.
+
+image:hana-sc-generic-image-100.png["Breite=345, Höhe=325"]
+
+Für eine Wiederherstellung aus einer sekundären Sicherung müssen Sie den Archivspeicherort auswählen.
+
+image:hana-sc-generic-image-101.png["Breite=345, Höhe=323"]
+
+Mit dem Wiederherstellungsbereich können Sie eine Wiederherstellung „zum letzten Zustand“, „zu einem bestimmten Zeitpunkt“ oder „zu einem Sicherungspunkt“ auswählen, ohne Protokollsicherungen zu verwenden. Wenn Sie „Keine Wiederherstellung“ auswählen, führt SnapCenter lediglich den Wiederherstellungsvorgang aus, die eigentliche Wiederherstellung muss jedoch wie beschrieben manuell durchgeführt werden. link:hana-sc-generic-restore.html#manual-recovery-with-hana-studio["Manuelle Wiederherstellung mit HANA Studio"]Die
+
+
+NOTE: SnapCenter verwendet die in SAP HANA konfigurierten Pfade für die Speicherorte der Protokollsicherung und der Katalogsicherung. Wenn Sie gestaffelte Backups an einem zusätzlichen Speicherort haben, können Sie diese zusätzlichen Pfade hinzufügen.
+
+image:hana-sc-generic-image-102.png["Breite=346, Höhe=324"]
+
+Optional können Sie Skripte für die Zeit vor und nach der Wiederherstellung hinzufügen.
+
+image:hana-sc-generic-image-103.png["Breite=348, Höhe=326"]
+
+image:hana-sc-generic-image-104.png["Breite=359, Höhe=335"]
+
+Durch Klicken auf „Fertigstellen“ im Übersichtsbildschirm wird der Wiederherstellungs- und Instandsetzungsvorgang gestartet.
+
+image:hana-sc-generic-image-105.png["Breite=361, Höhe=336"]
+
+Der Wiederherstellungs- und Instandsetzungsprozess lässt sich in drei Hauptabschnitte unterteilen.
+
+* Herunterfahren des HANA-Systems
+* Wiederherstellungsvorgang
++
+** Dateisystemspezifische Vorbereitungen, z. B. Aushängevorgang
+** Snapshot-Wiederherstellungsvorgang
+** Dateisystemspezifische Nachbearbeitungsoperationen, z. B. Mount-Operationen
+
+
+* HANA-Wiederherstellung
++
+** Recovery der Systemdatenbank
+** Recovery von Mandanten-Datenbanken
+
+
+
+
+image:hana-sc-generic-image-106.png["Breite=357, Höhe=439"]
+
+
+
+== Manuelle Wiederherstellung mit HANA Studio
+
+Um ein SAP HANA MDC-System mit einem oder mehreren Mandanten mithilfe von SAP HANA Studio und SnapCenter wiederherzustellen und zu sichern, führen Sie die folgenden Schritte aus:
+
+. Vorbereitung des Restore- und Recovery-Prozesses mit SAP HANA Studio:
++
+.. Wählen Sie Recover System Database und bestätigen Sie das Herunterfahren des SAP HANA-Systems.
+.. Wählen Sie den Wiederherstellungstyp aus und geben Sie den Speicherort des Sicherungskatalogs an.
+.. Es wird eine Liste der Daten-Backups angezeigt. Wählen Sie Backup, um die externe Backup-ID anzuzeigen.
+
+
+. Führen Sie den Wiederherstellungsprozess mit SnapCenter aus:
++
+.. Wählen Sie in der Topologieansicht der Ressource „Lokale Kopien“ aus, um Daten vom primären Speicher wiederherzustellen, oder „Vault-Kopien“, wenn Sie Daten von einem sekundären Sicherungsspeicher wiederherstellen möchten.
+.. Wählen Sie das SnapCenter Backup aus, das mit der externen Backup-ID oder dem Kommentarfeld aus SAP HANA Studio übereinstimmt.
+.. Starten Sie den Wiederherstellungsprozess.
+
+
+. Führen Sie den Recovery-Prozess für die Systemdatenbank mit SAP HANA Studio aus:
++
+.. Klicken Sie in der Backup-Liste auf Aktualisieren, und wählen Sie das verfügbare Backup für die Recovery aus (wird durch ein grünes Symbol angezeigt).
+.. Starten Sie den Wiederherstellungsprozess. Nach Abschluss des Wiederherstellungsprozesses wird die Systemdatenbank gestartet.
+
+
+. Führen Sie den Recovery-Prozess für die Mandantendatenbank mit SAP HANA Studio aus:
++
+.. Wählen Sie die Option „Tenant Database wiederherstellen“ und wählen Sie den Mieter aus, der wiederhergestellt werden soll.
+.. Wählen Sie den Wiederherstellungstyp und den Speicherort für die Protokollsicherung aus.
+.. Es wird eine Liste der Daten-Backups angezeigt. Da das Daten-Volume bereits wiederhergestellt ist, wird das Mandanten-Backup als verfügbar angezeigt (in grün).
+.. Wählen Sie dieses Backup aus, und starten Sie den Wiederherstellungsprozess. Nach Abschluss des Recovery-Prozesses wird die Mandantendatenbank automatisch gestartet.
+
+
+. Bei einem HANA-System mit mehreren Mandanten wiederholen Sie Schritt 4 für jeden Mandanten.
+
+
+
+NOTE: Eine manuelle Wiederherstellung mit SAP HANA Cockpit erfolgt mit den gleichen Schritten.
+
+Im folgenden Abschnitt werden die Schritte der Wiederherstellungs- und Recovery-Operationen eines SAP HANA MDC-Systems mit einem einzelnen Mandanten beschrieben.
+
+Wählen Sie in HANA Studio „Sicherung und Wiederherstellung“ und anschließend „Systemdatenbank wiederherstellen“.
+
+image:hana-sc-generic-image-107.png["Breite=450, Höhe=368"]
+
+Bestätigen Sie den Herunterfahrvorgang; dies ist nur erforderlich, wenn das HANA-System noch läuft.
+
+image:hana-sc-generic-image-108.png["Breite=349, Höhe=83"]
+
+Wiederherstellungsvorgang auswählen. In diesem Beispiel möchten wir zum letzten vorherigen Zustand zurückkehren.
+
+image:hana-sc-generic-image-109.png["Breite=345, Höhe=359"]
+
+Geben Sie einen alternativen Speicherort für den Katalog an.
+
+image:hana-sc-generic-image-110.png["Breite=343, Höhe=356"]
+
+HANA Studio listet die aktuellsten im HANA-Backup-Katalog gespeicherten Backups auf.
+
+Es wird eine Liste der verfügbaren Backups basierend auf dem Inhalt des Backup-Katalogs angezeigt. Wählen Sie das gewünschte Backup aus und notieren Sie sich die externe Backup-ID: in diesem Beispiel das aktuellste Backup.
+
+image:hana-sc-generic-image-111.png["Breite=391, Höhe=283"]
+
+Wählen Sie in der SnapCenter Benutzeroberfläche die Ressourcentopologieansicht und anschließend die wiederherzustellende Sicherung aus, in diesem Beispiel die aktuellste primäre Sicherung. Klicken Sie auf das Symbol „Wiederherstellen“, um die Wiederherstellung zu starten.
+
+image:hana-sc-generic-image-112.png["Breite=601, Höhe=294"]
+
+Der SnapCenter -Wiederherstellungsassistent wird gestartet. Wählen Sie als Wiederherstellungstyp „Vollständige Ressourcen- und Volumenwiederherstellung“, um eine volumenbasierte Wiederherstellung durchzuführen.
+
+image:hana-sc-generic-image-113.png["Breite=346, Höhe=325"]
+
+Wählen Sie „Keine Wiederherstellung“, um die Wiederherstellungsvorgänge vom SnapCenter -Workflow auszuschließen.
+
+image:hana-sc-generic-image-114.png["Breite=358, Höhe=336"]
+
+Klicken Sie auf Fertigstellen, um den Wiederherstellungsvorgang zu starten.
+
+image:hana-sc-generic-image-115.png["Breite=361, Höhe=339"]
+
+SnapCenter führt jetzt den Wiederherstellungsvorgang aus.
+
+* Dateisystemspezifische Vorbereitungen, z. B. Aushängevorgang
+* Snapshot-Wiederherstellungsvorgang
+* Dateisystemspezifische Nachbearbeitungsoperationen, z. B. Mount-Operationen
+
+
+image:hana-sc-generic-image-116.png["Breite=322, Höhe=398"]
+
+Wenn der Snapshot von SnapCenter wiederhergestellt wurde, ist eine snapshot_databackup_0_1-Datei im Unterverzeichnis system and tenant database des HANA-Datenvolumes verfügbar. Diese Datei wurde von der HANA-Datenbank während der Erstellung des HANA-Datenbank-Snapshots erstellt. HANA löscht die Datei, sobald der Sicherungsvorgang abgeschlossen ist, sodass die Dateien nur noch innerhalb der Snapshot-Sicherung sichtbar sind. Diese Dateien werden für jede Wiederherstellungsoperation benötigt. Nach der Wiederherstellung werden die Dateien von der HANA-Datenbank gelöscht.
+
+....
+
+hana-1:~ # cd /hana/data/SS1/mnt00001/
+hana-1:/hana/data/SS1/mnt00001 # ls -al *
+-rw-r--r-- 1 ss1adm sapsys 16 Aug 26 06:00 nameserver.lck
+hdb00001:
+total 4992236
+drwxr-x--- 2 ss1adm sapsys 4096 Aug 26 06:00 .
+drwxr-x--- 5 ss1adm sapsys 4096 Aug 26 06:00 ..
+-rw-r----- 1 ss1adm sapsys 0 Nov 3 2020 __DO_NOT_TOUCH_FILES_IN_THIS_DIRECTORY__
+-rw-r----- 1 ss1adm sapsys 5100273664 Aug 26 06:00 datavolume_0000.dat
+-rw-r----- 1 ss1adm sapsys 36 Aug 25 10:30 landscape.id
+-rw-r----- 1 ss1adm sapsys 163840 Aug 26 06:00 snapshot_databackup_0_1
+hdb00002.00003:
+total 201420
+drwxr-xr-- 2 ss1adm sapsys 4096 Nov 3 2020 .
+drwxr-x--- 5 ss1adm sapsys 4096 Aug 26 06:00 ..
+-rw-r--r-- 1 ss1adm sapsys 0 Nov 3 2020 __DO_NOT_TOUCH_FILES_IN_THIS_DIRECTORY__
+-rw-r--r-- 1 ss1adm sapsys 335544320 Aug 26 06:00 datavolume_0000.dat
+hdb00003.00003:
+total 4803140
+drwxr-xr-- 2 ss1adm sapsys 4096 Aug 26 06:00 .
+drwxr-x--- 5 ss1adm sapsys 4096 Aug 26 06:00 ..
+-rw-r--r-- 1 ss1adm sapsys 0 Nov 3 2020 __DO_NOT_TOUCH_FILES_IN_THIS_DIRECTORY__
+-rw-r--r-- 1 ss1adm sapsys 4898947072 Aug 26 06:00 datavolume_0000.dat
+-rw-r----- 1 ss1adm sapsys 159744 Aug 26 06:00 snapshot_databackup_0_1
+hana-1:/hana/data/SS1/mnt00001 #
+
+....
+Gehen Sie zu SAP HANA Studio und klicken Sie auf Aktualisieren, um die Liste der verfügbaren Backups zu aktualisieren. Das mit SnapCenter wiederhergestellte Backup wird nun in der Backup-Liste mit einem grünen Symbol angezeigt. Wählen Sie die Sicherung aus und klicken Sie auf Weiter.
+
+image:hana-sc-generic-image-117.png["Breite=400, Höhe=290"]
+
+Stellen Sie den Speicherort der Protokoll-Backups bereit. Klicken Sie Auf Weiter.
+
+
+NOTE: SAP HANA Studio verwendet die in SAP HANA konfigurierten Pfade für die Speicherorte der Protokollsicherung und der Katalogsicherung. Wenn Sie gestaffelte Backups an einem zusätzlichen Speicherort haben, können Sie diese zusätzlichen Pfade hinzufügen.
+
+image:hana-sc-generic-image-118.png["Breite=465, Höhe=296"]
+
+Wählen Sie je nach Bedarf andere Einstellungen aus. Stellen Sie sicher, dass Delta-Backups verwenden nicht ausgewählt ist. Klicken Sie Auf Weiter.
+
+image:hana-sc-generic-image-119.png["Breite=466, Höhe=296"]
+
+Überprüfen Sie die Wiederherstellungseinstellungen, und klicken Sie auf Fertig stellen.
+
+Durch Klicken auf „SQL-Anweisung anzeigen“ zeigt HANA Studio den SQL-Befehl an, der für den Wiederherstellungsvorgang ausgeführt wird.
+
+image:hana-sc-generic-image-120.png["Breite=464, Höhe=295"]
+
+Der Genesungsprozess beginnt. Warten Sie, bis die Wiederherstellung der Systemdatenbank abgeschlossen ist.
+
+image:hana-sc-generic-image-121.png["Breite=376, Höhe=239"]
+
+Wählen Sie in SAP HANA Studio den Eintrag für die Systemdatenbank aus, und starten Sie Backup Recovery - Rcover Tenant Database.
+
+image:hana-sc-generic-image-122.png["Breite=476, Höhe=315"]
+
+Wählen Sie den zu wiederherzuenden Mieter aus, und klicken Sie auf Weiter.
+
+image:hana-sc-generic-image-123.png["Breite=342, Höhe=355"]
+
+Geben Sie den Wiederherstellungstyp an, und klicken Sie auf Weiter.
+
+image:hana-sc-generic-image-124.png["Breite=343, Höhe=356"]
+
+Bestätigen Sie den Speicherort des Backup-Katalogs, und klicken Sie auf Weiter.
+
+image:hana-sc-generic-image-125.png["Breite=342, Höhe=355"]
+
+Bestätigen Sie, dass die Mandantendatenbank heruntergefahren wurde.
+
+image:hana-sc-generic-image-126.png["Breite=348, Höhe=85"]
+
+Da die Wiederherstellung des Datenvolumens vor der Wiederherstellung der Systemdatenbank erfolgte, ist die Mandantensicherung sofort verfügbar. Wählen Sie die grün markierte Sicherung aus und klicken Sie auf Weiter.
+
+image:hana-sc-generic-image-127.png["Breite=433, Höhe=349"]
+
+Stellen Sie den Speicherort der Protokoll-Backups bereit. Klicken Sie Auf Weiter.
+
+
+NOTE: SAP HANA Studio verwendet die in SAP HANA konfigurierten Pfade für die Speicherorte der Protokollsicherung und der Katalogsicherung. Wenn Sie gestaffelte Backups an einem zusätzlichen Speicherort haben, können Sie diese zusätzlichen Pfade hinzufügen.
+
+image:hana-sc-generic-image-128.png["Breite=384, Höhe=310"]
+
+Wählen Sie je nach Bedarf andere Einstellungen aus. Stellen Sie sicher, dass Delta-Backups verwenden nicht ausgewählt ist. Klicken Sie Auf Weiter.
+
+image:hana-sc-generic-image-129.png["Breite=384, Höhe=310"]
+
+Überprüfen Sie die Wiederherstellungseinstellungen, und klicken Sie auf Fertig stellen.
+
+Durch Klicken auf „SQL-Anweisung anzeigen“ zeigt HANA Studio den SQL-Befehl an, der für den Wiederherstellungsvorgang ausgeführt wird.
+
+image:hana-sc-generic-image-130.png["Breite=380, Höhe=307"]
+
+Warten Sie, bis die Wiederherstellung abgeschlossen ist und die Mandantendatenbank gestartet wird.
+
+image:hana-sc-generic-image-131.png["Breite=378, Höhe=305"]
+
+Sobald die Mandantenwiederherstellung abgeschlossen ist, ist das SAP HANA-System betriebsbereit.
+
+
+NOTE: Bei einem SAP HANA MDC-System mit mehreren Mandanten muss die Mandantenwiederherstellung für jeden Mandanten wiederholt werden.
+
+
+
+== Manuelle Wiederherstellung mit SQL-Befehlen
+
+Sie können auch SQL-Anweisungen zur Wiederherstellung des HANA-Systems verwenden.
+
+Zuerst müssen Sie die Systemdatenbank wiederherstellen.
+
+....
+
+HDBSettings.sh recoverSys.py --command="RECOVER DATABASE UNTIL TIMESTAMP '2026-08-26 10:55:49' USING CATALOG PATH ('mnt/log-backup/SYSTEMDB') USING LOG PATH ('mnt/log-backup/SYSTEMDB') USING SNAPSHOT"
+....
+Als zweiten Schritt müssen Sie eine Verbindung zur Systemdatenbank herstellen und die Wiederherstellung der Mandantendatenbank(en) starten. In diesem Beispiel ist die Mandantendatenbank SS1.
+
+....
+
+hdbsql SYSTEMDB=> RECOVER DATABASE FOR SS1 UNTIL TIMESTAMP '2026-08-26 10:55:49' USING CATALOG PATH ('mnt/log-backup/DB_SS1') USING LOG PATH ('mnt/log-backup/DB_SS1') USING SNAPSHOT
+....
+
+
+== Wiederherstellung und Recovery für einzelne Mandanten
+
+Die Wiederherstellung und der Recovery-Vorgang für einen einzelnen Mandanten mit SnapCenter ähneln sehr dem im vorherigen Thema beschriebenen Workflow. link:hana-sc-generic-restore.html#manual-recovery-with-hana-studio["Manuelle Wiederherstellung mit HANA Studio"]Die
+
+Gehen Sie wie folgt vor, um ein SAP HANA MDC-Einzelmandant-System mit SAP HANA Studio und SnapCenter wiederherzustellen:
+
+. Vorbereitung des Restore- und Recovery-Prozesses mit SAP HANA Studio:
++
+.. Wählen Sie „Mandantendatenbank wiederherstellen“ und bestätigen Sie das Herunterfahren der Mandantendatenbank.
+.. Wählen Sie den Wiederherstellungstyp aus und geben Sie den Speicherort des Sicherungskatalogs an.
+.. Es wird eine Liste der Daten-Backups angezeigt. Wählen Sie Backup, um die externe Backup-ID anzuzeigen.
+
+
+. Führen Sie den Wiederherstellungsprozess mit SnapCenter aus:
++
+.. Wählen Sie in der Topologieansicht der Ressource „Lokale Kopien“ aus, um Daten vom primären Speicher wiederherzustellen, oder „Vault-Kopien“, wenn Sie Daten von einem sekundären Sicherungsspeicher wiederherstellen möchten.
+.. Wählen Sie das SnapCenter Backup aus, das mit der externen Backup-ID oder dem Kommentarfeld aus SAP HANA Studio übereinstimmt.
+.. Starten Sie den Wiederherstellungsprozess des Mandanten.
+
+
+. Führen Sie den Recovery-Prozess für die Mandantendatenbank mit SAP HANA Studio aus:
++
+.. Klicken Sie in der Backup-Liste auf Aktualisieren, und wählen Sie das verfügbare Backup für die Recovery aus (wird durch ein grünes Symbol angezeigt).
+.. Starten Sie den Wiederherstellungsprozess. Nach Abschluss des Wiederherstellungsprozesses wird die Mandantendatenbank gestartet.
+
+
+
+
+
+
+== Wiederherstellung von Nicht-Datenvolumes
+
+Ein Wiederherstellungsvorgang für ein Nicht-Datenvolume wird gestartet, indem in der Topologieansicht der Nicht-Datenvolume-Ressource eine Snapshot-Sicherung ausgewählt und anschließend auf „Wiederherstellen“ geklickt wird.
+
+image:hana-sc-generic-image-132.png["Breite=601, Höhe=294"]
+
+Bei Nicht-Datenvolumes mit NFS kann eine vollständige Ressourcenwiederherstellung (VBSR) oder eine Wiederherstellung auf Dateiebene (SFSR) ausgewählt werden. Bei der Wiederherstellung auf Dateiebene können entweder alle oder einzelne Dateien für den Wiederherstellungsvorgang definiert werden.
+
+image:hana-sc-generic-image-133.png["Breite=369, Höhe=344"]

@@ -1,0 +1,18 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-generic-sc-architecture.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, Azure NetApp Files, FSx for NetApp ONTAP 
+summary:  
+---
+= Erfahren Sie mehr über die SnapCenter -Architektur.
+:allow-uri-read: 
+
+
+[role="lead"]
+Erfahren Sie mehr über die SnapCenter -Architektur für den SAP HANA-Datenschutz, einschließlich des SnapCenter -Servers, der Plug-in-Komponenten und der unterstützten Speicherplattformen. SnapCenter bietet eine zentrale Backup-, Wiederherstellungs- und Klonverwaltung für SAP HANA-Datenbanken auf ONTAP -Systemen, Azure NetApp Files und FSx für ONTAP.
+
+SnapCenter ist eine einheitliche Plattform für anwendungskonsistenten Datenschutz. SnapCenter bietet zentrale Steuerung und Überwachung und überlässt es gleichzeitig den Benutzern, anwendungsspezifische Sicherungs-, Wiederherstellungs- und Klonvorgänge selbst zu verwalten. NetApp SnapCenter ist ein einziges Tool, mit dem Datenbank- und Speicheradministratoren Backup-, Wiederherstellungs- und Klonvorgänge für eine Vielzahl von Anwendungen und Datenbanken verwalten können. SnapCenter unterstützt NetApp ONTAP -Speichersysteme sowie Azure NetApp Files und FSx für ONTAP. Mit SnapCenter können Sie außerdem Daten zwischen lokalen Umgebungen, zwischen lokalen Umgebungen und der Cloud sowie zwischen privaten, hybriden oder öffentlichen Clouds replizieren.
+
+SnapCenter umfasst den SnapCenter -Server und die SnapCenter -Plug-ins. Die Plug-ins sind für verschiedene Anwendungen und Infrastrukturkomponenten verfügbar. Der SnapCenter -Server kann entweder unter Windows oder unter Linux ausgeführt werden.
+
+image:hana-sc-generic-image-005.png["Breite=601, Höhe=275"]

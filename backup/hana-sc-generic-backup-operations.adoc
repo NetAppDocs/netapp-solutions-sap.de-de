@@ -1,0 +1,240 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-generic-backup-operations.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, Azure NetApp Files, FSx for NetApp ONTAP 
+summary:  
+---
+= Erfahren Sie mehr über Sicherungsvorgänge für SAP HANA Snapshots in SnapCenter.
+:allow-uri-read: 
+
+
+[role="lead"]
+Führen Sie SAP HANA Snapshot-Backups mit SnapCenter durch. Erfahren Sie mehr über Datenbank-Snapshot-Backups, Blockintegritätsprüfungen, Backups von Nicht-Datenvolumes und Backup-Replikation mit SnapVault oder Azure NetApp Files Backup.
+
+In SnapCenter werden Datenbank-Backups normalerweise mithilfe der Zeitpläne ausgeführt, die in der Ressourcenschutzkonfiguration der einzelnen HANA-Datenbanken definiert sind.
+
+Ein On-Demand-Datenbank-Backup kann entweder über die SnapCenter GUI, eine PowerShell Befehlszeile oder REST-APIs durchgeführt werden.
+
+SnapCenter unterstützt die folgenden Sicherungsvorgänge.
+
+* HANA-Datenbank-Snapshot-Sicherungsvorgänge
+* Blockintegritätsprüfungsoperationen
+* Snapshot-Backups von Nicht-Datenvolumes
+* Backup-Replikation mit SnapVault oder ANF-Backup für HANA-Datenbanken oder Nicht-Datenvolumen-Backups
+
+
+In den folgenden Abschnitten werden die verschiedenen Operationen für Einzelhost-HANA-Systeme beschrieben, die von SnapCenter (HANA-Plug-in, das auf dem HANA-Datenbankhost bereitgestellt wird) automatisch erkannt wurden.
+
+
+
+== SAP HANA Snapshot-Backups in SnapCenter
+
+Die SnapCenter -Ressourcentopologie zeigt die Liste der von SnapCenter erstellten Backups. Die folgende Abbildung zeigt die auf dem primären Speicher verfügbaren Backups und hebt das aktuellste Backup hervor.
+
+image:hana-sc-generic-image-064.png["Breite=601, Höhe=293"]
+
+Die Backups im Sekundärspeicher können durch Anklicken des Symbols „Vault-Kopien“ aufgelistet werden.
+
+image:hana-sc-generic-image-065.png["Breite=601, Höhe=294"]
+
+Der folgende Screenshot zeigt die Liste der Backups für das System SM1, für das manipulationssichere Snapshots konfiguriert wurden.
+
+image:hana-sc-generic-image-066.png["Breite=601, Höhe=293"]
+
+
+
+== SAP HANA Snapshot-Backups in SAP HANA Studio
+
+Bei der Durchführung einer Datensicherung mittels Speichersnapshots für ein SAP HANA MDC-System wird eine Snapshot-Kopie des Datenvolumes erstellt. Dieses Datenvolumen enthält die Daten der Systemdatenbank sowie die Daten aller Mandantendatenbanken. Um diese physische Architektur abzubilden, führt SAP HANA intern immer dann einen kombinierten internen Datenbank-Snapshot der Systemdatenbank sowie aller Mandantendatenbanken durch, wenn SnapCenter eine Snapshot-Sicherung auslöst. Dies führt zu mehreren separaten Backup-Einträgen im SAP HANA Backup-Katalog: einem für die Systemdatenbank und einem für jede Mandantendatenbank.
+
+Im SAP HANA Backup-Katalog wird der Name des SnapCenter -Backups als Kommentarfeld sowie als externe Backup-ID (EBID) gespeichert. Dies wird im folgenden Screenshot für die Systemdatenbank und im darauffolgenden Screenshot für die Mandantendatenbank SS1 gezeigt. In beiden Abbildungen werden der im Kommentarfeld gespeicherte SnapCenter -Backup-Name und die EBID hervorgehoben.
+
+image:hana-sc-generic-image-067.png["Breite=601, Höhe=289"]
+
+image:hana-sc-generic-image-068.png["Breite=601, Höhe=296"]
+
+
+NOTE: SnapCenter kennt nur seine eigenen Backups. Zusätzliche Backups, die beispielsweise mit SAP HANA Studio erstellt wurden, sind im SAP HANA-Katalog sichtbar, jedoch nicht in SnapCenter. Auch direkt auf dem Speichersystem erstellte Snapshots sind in SnapCenter nicht sichtbar.
+
+
+
+== SAP HANA Snapshot-Backups auf der Speicherschicht
+
+Um die Backups auf der Speicherebene anzuzeigen, können Sie den NetApp System Manager verwenden und das Datenbankvolume auswählen. Der folgende Screenshot zeigt die verfügbaren Backups für das Datenbankvolume SS1_data_mnt00001 auf dem primären Speicher. Das hervorgehobene Backup ist das Backup, das in SnapCenter und SAP HANA Studio in den vorherigen Bildern angezeigt wird und die gleiche Namenskonvention aufweist.
+
+image:hana-sc-generic-image-069.png["Breite=601, Höhe=294"]
+
+Der folgende Screenshot zeigt die verfügbaren Backups für das Replikationszielvolume hana_SS1_data_mnt00001_dest auf dem sekundären Speichersystem.
+
+image:hana-sc-generic-image-070.png["Breite=601, Höhe=294"]
+
+
+
+== SAP HANA Snapshot-Backups mit ANF
+
+Der folgende Screenshot zeigt die Topologieansicht eines HANA-Systems mit Azure NetApp Files. Für dieses HANA-System wurden sowohl lokale Snapshot-Backups als auch Backup-Replikation mittels ANF-Backup konfiguriert.
+
+image:hana-sc-generic-image-071.png["Breite=601, Höhe=303"]
+
+Die Snapshot-Backups auf dem ANF-Volume können über das Azure-Portal aufgelistet werden.
+
+image:hana-sc-generic-image-072.png["Breite=601, Höhe=258"]
+
+Durch Klicken auf das Sicherungssymbol können Sie die Sicherungen auflisten, die mit ANF Backup repliziert wurden.
+
+image:hana-sc-generic-image-073.png["Breite=601, Höhe=304"]
+
+ANF-Backups können auch im Azure-Portal aufgelistet werden.
+
+image:hana-sc-generic-image-074.png["Breite=601, Höhe=216"]
+
+
+
+== Snapshot-Backups von Nicht-Datenvolumes
+
+Die SnapCenter -Ressourcentopologie zeigt die Liste der Backups für Nicht-Datenvolumes an. In der folgenden Abbildung sind die Backups des gemeinsam genutzten HANA-Volumes aufgelistet.
+
+image:hana-sc-generic-image-075.png["Breite=601, Höhe=294"]
+
+
+
+== Backup-Workflow für HANA-Datenbanksicherungen
+
+Der Backup-Workflow für ein HANA-Datenbank-Snapshot-Backup besteht aus drei Hauptabschnitten.
+
+* Automatische Erkennung
++
+** Anwendungserkennung, z. B.
++
+*** SnapCenter erkennt alle Änderungen an der Mandantenkonfiguration.
+*** SnapCenter erkennt den primären Replikationsknoten des HANA-Systems.
+
+
+** Dateisystem- und Speichererkennung, z. B.
++
+*** SnapCenter erkennt jegliche Änderungen in der Volumenkonfiguration.
+*** SnapCenter erkennt HANA-Konfigurationen mit mehreren Partitionen
+
+
+
+
+* HANA- und Snapshot-Backup-Operationen
++
+** Trigger HANA-Datenbank-Snapshot
+** Speicher-Snapshot erstellen
+** Bestätigen Sie den HANA-Datenbank-Snapshot und registrieren Sie die Sicherung im HANA-Sicherungskatalog.
+
+
+* Retentionmanagement
++
+** Snapshot-Backups basierend auf der definierten Aufbewahrungsdauer löschen in
++
+*** SnapCenter -Repository
+*** Storage
+*** HANA-Backup-Katalog
+
+
+** Verwaltung der Aufbewahrung von Protokollsicherungen
++
+*** Protokollsicherungen im Dateisystem und im HANA-Sicherungskatalog löschen
+
+
+
+
+
+
+image:hana-sc-generic-image-076.png["Breite=339, Höhe=475"]
+
+
+
+== Backup-Workflow für Nicht-Datenvolumes
+
+Bei einem Nicht-Daten-Volume besteht der Backup-Workflow aus der Snapshot-Operation und der Aufbewahrungsverwaltungsoperation.
+
+image:hana-sc-generic-image-077.png["Breite=329, Höhe=404"]
+
+
+
+== Bereinigung sekundärer Backups
+
+Wie in beschrieben link:hana-sc-generic-concepts.html#retention-management-of-backups-at-the-secondary-storage-snapvault["Aufbewahrungsmanagement für sekundäre Backups"]Die Aufbewahrungsverwaltung von Datensicherungen auf einem sekundären Sicherungsspeicher wird von ONTAP übernommen. SnapCenter prüft regelmäßig, ob ONTAP Backups auf dem sekundären Backup-Speicher gelöscht hat, indem es wöchentlich einen Bereinigungsauftrag ausführt.
+
+Der SnapCenter -Bereinigungsjob löscht Backups sowohl im SnapCenter -Repository als auch im SAP HANA-Backup-Katalog, falls gelöschte Backups im sekundären Backup-Speicher identifiziert wurden.
+
+image:hana-sc-generic-image-078.png["Breite=601, Höhe=158"]
+
+image:hana-sc-generic-image-079.png["Breite=267, Höhe=330"]
+
+Bis zum Abschluss dieser planmäßigen Bereinigung werden in SAP HANA und SnapCenter weiterhin Backups angezeigt, die bereits aus dem sekundären Backup-Speicher gelöscht wurden. Dies führt dazu, dass zusätzliche Protokollsicherungen aufbewahrt werden, selbst wenn die entsprechenden speicherbasierten Snapshot-Sicherungen auf dem sekundären Sicherungsspeicher bereits gelöscht wurden. NetApp empfiehlt, den Zeitplan von wöchentlich auf täglich umzustellen, um die Aufbewahrung von Protokollsicherungen zu vermeiden, da diese nicht mehr erforderlich sind.
+
+
+
+=== Ändern Sie die Häufigkeit des SnapCenter-Bereinigungsjobs
+
+SnapCenter führt standardmäßig wöchentlich den Bereinigungsauftrag SnapCenter_RemoveSecondaryBackup für alle Ressourcen aus. Dies kann mithilfe eines SnapCenter PowerShell-Cmdlets geändert werden.
+
+....
+SnapCenterPS C:\> Open-SmConnection
+
+Enter username/password
+User: sapcc\scadmin
+Password for user sapcc\scadmin: **********
+
+SnapCenterPS C:\> Set-SmSchedule -ScheduleInformation @{"ScheduleType"="Daily";"StartTime"="03:45 AM";"DaysInterval"="1"} -TaskName SnapCenter_RemoveSecondaryBackup
+
+TaskName : SnapCenter_RemoveSecondaryBackup
+Hosts : {}
+StartTime : 8/25/2025 3:45:00 AM
+DaysoftheMonth :
+MonthsofTheYear :
+DaysInterval : 1
+DaysOfTheWeek :
+AllowDefaults : False
+ReplaceJobIfExist : False
+UserName :
+Password :
+SchedulerType : Daily
+RepeatTask_Every_Hour : 1
+IntervalDuration :
+EndTime :
+LocalScheduler : False
+AppType : False
+AuthMode :
+SchedulerSQLInstance : SMCoreContracts.SmObject
+MonthlyFrequency :
+Hour : 0
+Minute : 0
+NodeName :
+ScheduleID : 0
+RepeatTask_Every_Mins :
+CronExpression :
+CronOffsetInMinutes :
+StrStartTime :
+StrEndTime :
+ScheduleCategory :
+PolicyId : 0
+PolicyName :
+ProtectionGroupId : 0
+ProtectionGroupName :
+PluginCode : NONE
+PolicyType : None
+ReportTriggerName :
+PolicyScheduleId : 0
+HoursOfTheDay :
+DayStartTime :
+MinuteOffset : ZeroMinutes
+SnapMirrorLabel :
+BackupType :
+SnapCenterPS C:\>
+....
+Die Konfiguration kann auch in der Ansicht „Überwachung – Zeitpläne“ in der SnapCenter Benutzeroberfläche überprüft werden.
+
+image:hana-sc-generic-image-080.png["Breite=601, Höhe=257"]
+
+
+
+=== Manuelle Aktualisierung auf Ressourcenebene
+
+Bei Bedarf kann in der Topologieansicht einer Ressource auch eine manuelle Bereinigung der sekundären Backups durchgeführt werden. SnapCenter zeigt die Backups auf dem sekundären Backup-Speicher an, wenn die sekundären Backups ausgewählt werden, wie im folgenden Screenshot dargestellt. SnapCenter führt mit dem Symbol „Aktualisieren“ einen Bereinigungsvorgang durch, um die Backups für diese Ressource zu synchronisieren.
+
+image:hana-sc-generic-image-081.png["Breite=601, Höhe=291"]

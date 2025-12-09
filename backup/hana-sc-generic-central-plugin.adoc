@@ -1,0 +1,119 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-generic-central-plugin.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, Azure NetApp Files, FSx for NetApp ONTAP 
+summary:  
+---
+= SnapCenter Zentral-Plug-in-Host für SAP HANA konfigurieren
+:allow-uri-read: 
+
+
+[role="lead"]
+Setzen Sie das SnapCenter HANA-Plug-in auf einem zentralen Host ein, um SAP HANA-Mehrhostsysteme oder HANA-Systeme auf IBM Power zu unterstützen. Dieses Verfahren umfasst die Installation des Plug-ins auf einem Windows- oder Linux-Host, die Konfiguration des SAP HANA hdbsql-Clients und die Einrichtung von Benutzerspeicherschlüsseln für jedes geschützte HANA-System.
+
+Wie in link:hana-sc-generic-concepts.html#deployment-options-for-snapcenter-plug-in-for-sap-hana["Bereitstellungsoptionen für das SnapCenter -Plug-in für SAP HANA"]Das HANA-Plug-in kann außerhalb der HANA-Datenbank eingesetzt werden, um eine zentrale Plug-in-Konfiguration zu unterstützen, die für SAP HANA Multi-Host-Systeme oder SAP HANA on IBM Power-Umgebungen erforderlich ist.
+
+Als zentraler Plug-in-Host kann jeder Windows- oder Linux-Host verwendet werden, typischerweise wird jedoch der SnapCenter -Server selbst als zentraler Plug-in-Host eingesetzt.
+
+Die Konfiguration eines zentralen Plug-in-Hosts umfasst die folgenden Schritte:
+
+* SnapCenter HANA-Plug-in-Bereitstellung
+* SAP HANA hdbsql Client Installation und Konfiguration
+* Die SAP HANA-Benutzerspeicherkonfiguration für jedes HANA-System wird durch den zentralen Plug-in-Host geschützt.
+
+
+
+
+== SnapCenter HANA-Plug-in-Bereitstellung
+
+Die Anforderungen an den Host sind aufgelistet unter https://docs.netapp.com/us-en/snapcenter/protect-hana/reference_host_requirements_to_install_snapcenter_plug_in_package_for_linux.html["Hostanforderungen für die Installation des SnapCenter Plug-Ins-Pakets für Linux"]Die
+
+Der zentrale Plug-in-Host wird als Host hinzugefügt, und das SAP HANA-Plug-in wird auf dem Host installiert. Der folgende Screenshot zeigt die Plug-in-Bereitstellung auf einem SnapCenter -Server unter Windows.
+
+. Gehen Sie zu Hosts und klicken Sie auf Hinzufügen.
+. Geben Sie die erforderlichen Hostinformationen ein. Klicken Sie Auf Senden.
+
+
+image:hana-sc-generic-image-060.png["Breite=601, Höhe=166"]
+
+
+
+== Installation und Konfiguration der SAP HANA hdbsql Client-Software
+
+Die SAP HANA hdbsql Client-Software muss auf demselben Host installiert sein, auf dem auch das SAP HANA Plug-in installiert ist. Die Software kann von folgender Webseite heruntergeladen werden: https://support.sap.com/en/index.html["SAP-Supportportal"]Die
+
+Der während der HANA-Ressourcenkonfiguration konfigurierte hdbsql-Betriebssystembenutzer muss in der Lage sein, die hdbsql-Executable auszuführen. Der Pfad zur ausführbaren Datei hdbsql muss in der Datei hana.properties oder in den Suchpfadparametern (%PATH%, $PATH) des Betriebssystembenutzers konfiguriert werden.
+
+Zentraler Plug-in-Host unter Windows:
+
+....
+C:\More C:\Program Files\NetApp\SnapCenter\Snapcenter Plug-in Creator\etc\hana.properties
+
+HANA_HDBSQL_CMD=C:\\Program Files\\sap\\hdbclient\\hdbsql.exe
+....
+Zentraler Plugin-Host unter Linux:
+
+....
+cat /opt/NetApp/snapcenter/scc/etc/hana.properties
+
+HANA_HDBSQL_CMD=/usr/sap/hdbclient/hdbsql
+....
+
+
+== SAP HANA-Benutzerspeicherkonfiguration für einen zentralen Plug-in-Host
+
+Für jedes HANA-System, das vom zentralen Plug-in-Host verwaltet wird, muss ein SAP HANA-Benutzerspeicherschlüssel konfiguriert werden. Bevor der Schlüssel auf dem zentralen Plug-in-Host konfiguriert werden kann, muss ein Datenbankbenutzer wie beschrieben erstellt werden. link:hana-sc-generic-sc-resource-config.html#sap-hana-backup-user-and-sap-hana-user-store-configuration["SAP HANA Backup-Benutzer- und SAP HANA Benutzerspeicherkonfiguration"]Die
+
+Wenn das SAP HANA-Plug-in und der SAP hdbsql-Client unter Windows installiert sind, führt der lokale Systembenutzer die hdbsql-Befehle aus und ist standardmäßig in der Ressourcenkonfiguration konfiguriert. Da der Systembenutzer kein Anmeldebenutzer ist, muss die Konfiguration des SAP HANA-Benutzerspeichers mit einem anderen Benutzer unter Verwendung der Option -u <Benutzer> durchgeführt werden.
+
+....
+hdbuserstore.exe -u SYSTEM set <key> <host>:<port> <database user> <password>
+....
+Bei einer SAP HANA-Umgebung mit mehreren Hosts müssen die SAP HANA-Benutzerspeicherschlüssel für alle Hosts konfiguriert werden. SnapCenter versucht, mit jedem der bereitgestellten Schlüssel eine Verbindung zur Datenbank herzustellen und kann daher unabhängig von einem Failover der Systemdatenbank (HANA-Namensserver) auf einen anderen Host funktionieren. Für alle Worker- und Standby-Hosts ist ein SAP HANA-Benutzerspeicherschlüssel konfiguriert. Der HANA-Datenbankbenutzer, in diesem Beispiel SNAPCENTER, ist der Benutzer, der in der Systemdatenbank konfiguriert wurde.
+
+....
+
+hdbuserstore.exe -u SYSTEM set MS1KEYHOST1 hana-4:30013 SNAPCENTER password
+hdbuserstore.exe -u SYSTEM set MS1KEYHOST2 hana-5:30013 SNAPCENTER password
+hdbuserstore.exe -u SYSTEM set MS1KEYHOST3 hana-6:30013 SNAPCENTER password
+C:\Program Files\sap\hdbclient>hdbuserstore.exe -u SYSTEM list
+DATA FILE : C:\ProgramData\.hdb\SNAPCENTER-61\S-1-5-18\SSFS_HDB.DAT
+KEY FILE : C:\ProgramData\.hdb\SNAPCENTER-61\S-1-5-18\SSFS_HDB.KEY
+KEY MS1KEYHOST1
+ENV : hana-4:30013
+USER: SNAPCENTER
+KEY MS1KEYHOST2
+ENV : hana-5:30013
+USER: SNAPCENTER
+KEY MS1KEYHOST3
+ENV : hana-6:30013
+USER: SNAPCENTER
+KEY SS2KEY
+ENV : hana-3:30013
+USER: SNAPCENTER
+
+C:\Program Files\sap\hdbclient>
+
+....
+
+
+== Manuelle HANA-Ressourcenkonfiguration
+
+Eine manuell konfigurierte HANA-Systemressource wird in SnapCenter erstellt, indem in der Ressourcenansicht auf die Schaltfläche „Hinzufügen“ geklickt wird.
+
+image:hana-sc-generic-image-061.png["Breite=601, Höhe=189"]
+
+Im nächsten Bildschirm müssen Sie einige Systemparameter angeben.
+
+* Plug-in-Host: Der zentrale Plug-in-Host muss ausgewählt werden.
+* SAP HANA Benutzerspeicherschlüssel: Bei einem HANA-System mit einem einzelnen Host muss der Schlüsselname angegeben werden, der auf dem zentralen Plug-in-Host vorbereitet wurde. Bei einem HANA-System mit mehreren Hosts muss eine durch Kommas getrennte Liste aller Schlüssel für das System angegeben werden.
+* HDBSQL-Betriebssystembenutzer: Wenn der zentrale Plug-in-Host unter Windows läuft, wird der Benutzer automatisch als SYSTEM-Benutzer vorausgewählt. Andernfalls muss der Benutzer angegeben werden, der für den SAP HANA-Benutzerspeicherschlüssel verwendet wurde.
+
+
+image:hana-sc-generic-image-062.png["Breite=384, Höhe=357"]
+
+Als nächstes muss der Speicherbedarf konfiguriert werden. Alle ONTAP oder ANF-Volumes, die zum HANA-System gehören, müssen hier hinzugefügt werden.
+
+image:hana-sc-generic-image-063.png["Breite=385, Höhe=359"]
+
+Die Konfiguration des Ressourcenschutzes kann nun auf die gleiche Weise wie bei automatisch erkannten HANA-Systemen erfolgen.

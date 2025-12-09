@@ -1,0 +1,82 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-generic-sc-backup-solution.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, Azure NetApp Files, FSx for NetApp ONTAP 
+summary:  
+---
+= Erfahren Sie mehr über SnapCenter -Backup und -Wiederherstellung für SAP HANA.
+:allow-uri-read: 
+
+
+[role="lead"]
+SnapCenter bietet umfassende Backup- und Wiederherstellungsfunktionen für SAP HANA-Datenbanken mithilfe von speicherbasierten Snapshot-Kopien, automatisiertem Aufbewahrungsmanagement und Integration mit NetApp ONTAP, Azure NetApp Files und FSx für NetApp ONTAP. Die Lösung unterstützt anwendungskonsistente Datenbanksicherungen, den Schutz von Nicht-Datenvolumes, Blockintegritätsprüfungen und die Replikation auf Sekundärspeicher mittels SnapVault oder ANF-Backup.
+
+Die SnapCenter Backup-Lösung für SAP HANA umfasst folgende Bereiche:
+
+* Backup-Vorgänge, Planung und Aufbewahrungsmanagement
+* SAP HANA Daten-Backup mit Storage-basierten Snapshot Kopien
+* Datensicherung ohne Datenvolumen mit speicherbasierten Snapshot-Kopien (z. B. /hana/shared)
+* Datenbankblock-Integritätsprüfungsoperationen
++
+** Verwendung einer dateibasierten Datensicherung
+** mit dem SAP HANA hdbpersdiag-Tool
+
+
+* Replikation der Snapshot-Sicherung an einen sekundären Sicherungsort
++
+** Verwendung von SnapVault/ SnapMirror
+** Sicherung mit Azure NetApp Files ANF
+
+
+* Allgemeine Ordnung und Sauberkeit des SAP HANA Backup-Katalogs
++
+** für HANA-Datensicherungen (Snapshot und dateibasiert)
+** für HANA-Protokollsicherungen
+
+
+* Restore- und Recovery-Vorgänge
++
+** Automatisiertes Restore und Recovery
+** Wiederherstellungsmaßnahmen für einzelne Mandanten
+
+
+
+
+Die Datensicherung der Datenbank erfolgt durch SnapCenter in Kombination mit dem SnapCenter -Plug-in für SAP HANA. Das Plug-in löst einen internen SAP HANA-Datenbank-Snapshot aus, sodass die auf dem Speichersystem erstellten Snapshots auf einem anwendungskonsistenten Abbild der SAP HANA-Datenbank basieren.
+
+SnapCenter ermöglicht die Replikation konsistenter Datenbankabbilder an einen sekundären Sicherungs- oder Notfallwiederherstellungsort mithilfe von SnapVault oder der SnapMirror-Funktion. Typischerweise werden für Backups auf dem primären und dem sekundären Speicher unterschiedliche Aufbewahrungsrichtlinien definiert. SnapCenter übernimmt die Aufbewahrung im primären Speicher, und ONTAP übernimmt die Aufbewahrung im sekundären Backup-Speicher.
+
+Für ein vollständiges Backup aller mit SAP HANA verbundenen Ressourcen ermöglicht SnapCenter auch das Backup aller nicht datenbezogenen Volumes über das SAP HANA Plug-in mit Storage-basierten Snapshot Kopien. Sie können nicht-Daten-Volumes unabhängig vom Datenbank-Daten-Backup planen, um individuelle Aufbewahrungs- und Sicherungsrichtlinien zu aktivieren.
+
+SAP empfiehlt, speicherbasierte Snapshot-Backups mit einer wöchentlichen Konsistenzprüfung der Persistenzschicht zu kombinieren. Sie können die Blockkonsistenzprüfung innerhalb von SnapCenter entweder durch Ausführen einer dateibasierten Sicherung oder durch Ausführen des SAP hdbpersdiag-Tools durchführen.
+
+Basierend auf Ihren konfigurierten Aufbewahrungsrichtlinien verwaltet SnapCenter die Verwaltung von Datendateisicherungen im primären Speicher, Protokolldateisicherungen und des SAP HANA-Sicherungskatalogs.
+
+SnapCenter übernimmt die Aufbewahrung im Primärspeicher, während ONTAP die sekundäre Backup-Aufbewahrung managt.
+
+Die folgende Abbildung bietet einen Überblick über die SnapCenter Backup- und Aufbewahrungsvorgänge.
+
+Beim Ausführen eines Storage-basierten Snapshot Backups der SAP HANA Datenbank führt SnapCenter die folgenden Aufgaben durch:
+
+* Sicherungsvorgang:
++
+** Löst einen internen HANA-Datenbank-Snapshot aus, um ein anwendungskonsistentes Abbild auf der Persistenzschicht zu erhalten.
+** Erstellt eine speicherbasierte Snapshot-Sicherung des Datenvolumens
+** Schließt den internen HANA-Datenbank-Snapshot, bestätigt oder bricht den Sicherungsvorgang ab. Dieser Schritt registriert das Backup im HANA-Backup-Katalog.
+
+
+* Kundenbindungsmanagement:
++
+** Löscht Speicher-Snapshot-Backups basierend auf der definierten Aufbewahrungsfrist.
+** Löscht Snapshots auf der Speicherebene
+** Löscht Einträge aus dem SAP HANA-Backup-Katalog
+** Löscht alle Protokollsicherungen, die älter als die älteste Datensicherung sind. Protokollsicherungen werden im Dateisystem und im SAP HANA-Sicherungskatalog gelöscht.
+
+
+
+
+image:hana-sc-generic-image-006.png["Breite=601, Höhe=285"]
+
+Wenn eine sekundäre Datensicherung konfiguriert ist, entweder mit SnapVault/ SnapMirror oder mit ANF-Datensicherung, wird der auf dem primären Datenträger erstellte Snapshot auf den sekundären Datensicherungsspeicher repliziert. SnapCenter verwaltet den HANA-Backup-Katalog sowie die Aufbewahrung von Protokoll-Backups entsprechend der Verfügbarkeit sekundärer Backups.
+
+image:hana-sc-generic-image-007.png["Breite=601, Höhe=278"]

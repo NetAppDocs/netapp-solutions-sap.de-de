@@ -1,0 +1,43 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-generic-sc-config-non-data-vols.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, Azure NetApp Files, FSx for NetApp ONTAP 
+summary:  
+---
+= Konfigurieren Sie SnapCenter so, dass es Nicht-Datenvolumes sichert.
+:allow-uri-read: 
+
+
+[role="lead"]
+Konfigurieren Sie SnapCenter so, dass auch Nicht-Datenvolumes wie ausführbare Dateien, Konfigurationsdateien, Protokolldateien und Anwendungsserverdaten gesichert werden.
+
+Der Schutz des Datenbank-Daten-Volumes reicht aus, um die SAP HANA Datenbank auf einen bestimmten Zeitpunkt wiederherzustellen, vorausgesetzt, die Ressourcen für die Datenbankinstallation und die erforderlichen Protokolle sind weiterhin verfügbar.
+
+Für die Wiederherstellung von Daten, die nicht mit der Datenverarbeitung zusammenhängen, empfiehlt NetApp die Entwicklung einer zusätzlichen Backup-Strategie für Nicht-Daten-Volumes, um das Backup der SAP HANA-Datenbank zu ergänzen. Je nach Ihren spezifischen Anforderungen können sich die Sicherungsintervalle und Aufbewahrungseinstellungen für Nicht-Datenvolumes unterscheiden. Sie sollten außerdem berücksichtigen, wie häufig Nicht-Datendateien geändert werden. Das HANA-Volume /hana/shared enthält beispielsweise ausführbare Dateien, Konfigurationsdateien, aber auch SAP HANA-Tracedateien. Während sich die ausführbaren Dateien nur bei einem Upgrade der SAP HANA-Datenbank ändern, benötigen die SAP HANA-Konfigurations- und Trace-Dateien möglicherweise eine höhere Sicherungsfrequenz. Auch SAP-Anwendungsserver-Volumes können mit SnapCenter durch die Verwendung von Nicht-Daten-Volume-Backups geschützt werden.
+
+Mit der SnapCenter Funktion zur Sicherung von Nicht-Daten-Volumes können Snapshot-Kopien aller relevanten Volumes in wenigen Sekunden erstellt werden, und zwar mit der gleichen Speicherplatzeffizienz wie bei SAP HANA-Datenbanksicherungen. Der Unterschied besteht darin, dass keine Interaktion mit der SAP HANA-Datenbank erforderlich ist.
+
+Wählen Sie auf der Registerkarte Ressource die Option nicht-Daten-Volume aus, und klicken Sie auf SAP HANA-Datenbank hinzufügen.
+
+image:hana-sc-generic-image-055.png["Breite=601, Höhe=173"]
+
+image:hana-sc-generic-image-056.png["Breite=601, Höhe=112"]
+
+Wählen Sie in Schritt 1 des Dialogfelds SAP HANA-Datenbank hinzufügen in der Liste Ressourcentyp die Option nicht-Daten-Volumes aus. Geben Sie einen Namen für die Ressource und den zugehörigen SID und den SAP HANA Plug-in-Host an, den Sie für die Ressource verwenden möchten, und klicken Sie dann auf Weiter.
+
+image:hana-sc-generic-image-057.png["Breite=332, Höhe=310"]
+
+Wählen Sie für ONTAP -Systeme und FSx für ONTAP den Speichertyp ONTAP aus und fügen Sie die SVM(s) und das/die Speichervolumen als Speicher-Footprint hinzu. Klicken Sie anschließend auf Weiter.
+
+image:hana-sc-generic-image-058.png["Breite=332, Höhe=312"]
+
+Wählen Sie für ANF den Speichertyp Azure NetApp Files aus, wählen Sie das NetApp -Konto und den Kapazitätspool aus und fügen Sie die ANF-Volumes als Speicherfläche hinzu. Klicken Sie anschließend auf Weiter.
+
+image:hana-sc-generic-image-059.png["Breite=350, Höhe=337"]
+
+Klicken Sie im Übersichtsschritt auf Fertig stellen, um die Einstellungen zu speichern.
+
+Wiederholen Sie diese Schritte für alle benötigten Nicht-Datenvolumes. Fahren Sie mit der Schutzkonfiguration der neuen Ressource fort.
+
+
+NOTE: Die Konfiguration des Datenschutzes für Nicht-Datenvolumenressourcen ist identisch mit dem Workflow für SAP HANA-Datenbankressourcen und kann auf Ebene einer einzelnen Ressource definiert werden.

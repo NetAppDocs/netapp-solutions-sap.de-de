@@ -1,0 +1,290 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-generic-concepts.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, Azure NetApp Files, FSx for NetApp ONTAP 
+summary:  
+---
+= Erfahren Sie mehr über die Datenschutzkonzepte und Best Practices von SnapCenter.
+:allow-uri-read: 
+
+
+[role="lead"]
+Erfahren Sie mehr über die Bereitstellungsoptionen von SnapCenter , Strategien zum Datenschutz und die Verwaltung der Backup-Aufbewahrung für SAP HANA-Umgebungen. SnapCenter unterstützt die Bereitstellung von Plug-ins auf Datenbank-Hosts oder zentralen Hosts, die automatische Erkennung und manuelle Konfiguration, Konsistenzprüfungen von Blöcken mithilfe dateibasierter Backups oder hdbpersdiag sowie ein umfassendes Aufbewahrungsmanagement über primären und sekundären Speicher hinweg.
+
+
+
+== Bereitstellungsoptionen für das SnapCenter -Plug-in für SAP HANA
+
+Die folgende Abbildung zeigt die logische Sicht der Kommunikation zwischen dem SnapCenter -Server, der SAP HANA-Datenbank und dem Speichersystem. Der SnapCenter -Server nutzt die HANA- und Linux-Plug-ins zur Kommunikation mit der HANA-Datenbank und den Linux-Betriebssystemen.
+
+image:hana-sc-generic-image-008.png["Breite=601, Höhe=199"]
+
+Die empfohlene und standardmäßige Bereitstellungsoption für die SnapCenter -Plug-ins ist die Installation auf dem HANA-Datenbankhost. Bei dieser Bereitstellungsoption sind alle im Kapitel „Von SnapCenter unterstützte Konfigurationen“ beschriebenen Konfigurationen und Funktionen gültig. Es gibt einige Ausnahmen, bei denen die SnapCenter -Plug-ins nicht auf dem HANA-Datenbankhost installiert werden können, sondern auf einem zentralen Plug-in-Host konfiguriert werden müssen, bei dem es sich beispielsweise um den SnapCenter -Server selbst handeln kann. Für HANA-Mehrhostsysteme oder HANA-Systeme, die auf der IBM Power-Plattform laufen, ist ein zentraler Plug-in-Host erforderlich. Beide Bereitstellungsoptionen können auch kombiniert werden, z. B. durch die Verwendung des SnapCenter -Servers als zentralen Plug-in-Host für ein System mit mehreren Hosts und die Bereitstellung der Plug-ins auf den HANA-Datenbankhosts für alle anderen HANA-Systeme mit einem einzelnen Host.
+
+In SnapCenter kann eine HANA-Ressource entweder automatisch erkannt oder manuell konfiguriert werden. Ein HANA-System wird standardmäßig automatisch erkannt, sobald die HANA- und Linux-Plug-ins auf dem Datenbankhost bereitgestellt sind. Die automatische Erkennung SnapCenter unterstützt keine mehreren HANA-Installationen auf demselben Host. HANA-Systeme, die über einen zentralen Plug-in-Host verwaltet werden, müssen in SnapCenter manuell konfiguriert werden. Auch Nicht-Datenvolumes sind standardmäßig manuell konfigurierte Ressourcen.
+
+[cols="29%,34%,37%"]
+|===
+|  | Plug-in bereitgestellt am | SnapCenter Ressource 
+
+
+| HANA-Datenbank | Datenbankhost | Automatisch erkannt 
+
+
+| HANA-Datenbank | Zentraler Plug-in-Host | Manuell konfiguriert 
+
+
+| Nicht-Datenvolumen | K. A. | Manuell konfiguriert 
+|===
+SnapCenter unterstützt zwar die zentrale Bereitstellung von Plug-ins für HANA-Systeme, es gibt jedoch Einschränkungen hinsichtlich Plattform- und Funktionsunterstützung. Die folgenden Infrastrukturkonfigurationen und -vorgänge werden für HANA-Systeme, die mit einem zentralen Plug-in-Host konfiguriert sind, nicht unterstützt:
+
+* VMware mit FC-Datenspeichern
+* SnapMirror aktive Synchronisierung
+* SnapCenter Server hohe Verfügbarkeit bei Verwendung als zentraler Plug-in-Host
+* Automatische Erkennung von HANA-Systemen
+* Automatisierte Wiederherstellung der HANA-Datenbank
+* Automatisierte SAP-Systemaktualisierung
+* Wiederherstellung für Einzelmandanten
+
+
+
+
+=== SnapCenter Plug-in für HANA, bereitgestellt auf dem SAP HANA-Datenbankhost
+
+Der SnapCenter Server kommuniziert über das HANA-Plug-in mit den HANA-Datenbanken. Das HANA-Plug-in verwendet die HANA hdbsql-Clientsoftware, um SQL-Befehle an die HANA-Datenbanken auszuführen. Der HANA hdb-Benutzerspeicher dient zur Bereitstellung der Benutzeranmeldeinformationen, des Hostnamens und der Portinformationen für den Zugriff auf die HANA-Datenbanken. Das SnapCenter Linux-Plug-in dient zur Abdeckung aller Host-Dateisystemoperationen sowie zur automatischen Erkennung von Dateisystem- und Speicherressourcen.
+
+Wenn das HANA-Plug-in auf dem HANA-Datenbankhost bereitgestellt wird, wird das HANA-System von SnapCenter automatisch erkannt und in SnapCenter als automatisch erkannte Ressource gekennzeichnet.
+
+image:hana-sc-generic-image-009.png["Breite=601, Höhe=304"]
+
+
+
+=== Hochverfügbarkeit mit SnapCenter Server
+
+SnapCenter kann in einer HA-Konfiguration mit zwei Knoten eingerichtet werden. Bei einer solchen Konfiguration wird ein Load Balancer (z. B. F5) verwendet, um auf die SnapCenter -Hosts zuzugreifen. Das SnapCenter Repository (die MySQL-Datenbank) wird von SnapCenter zwischen den beiden Hosts repliziert, sodass die SnapCenter -Daten immer synchron sind.
+
+SnapCenter Server HA wird nicht unterstützt, wenn das HANA-Plug-in auf dem SnapCenter Server installiert ist. Weitere Details zu SnapCenter HA finden Sie unter https://docs.netapp.com/us-en/snapcenter/install/concept_configure_snapcenter_servers_for_high_availabiity_using_f5.html["Konfigurieren Sie SnapCenter -Server für hohe Verfügbarkeit"]Die
+
+image:hana-sc-generic-image-010.png["Breite=601, Höhe=307"]
+
+
+
+=== Zentraler Plug-in-Host
+
+Wie im vorangegangenen Kapitel bereits erläutert, ist ein zentrales Plug-in erforderlich für
+
+* HANA-Mehrhostsysteme
+* HANA-Systeme, die auf IBM Power laufen
+
+
+Bei Verwendung eines zentralen Plug-in-Hosts müssen das HANA-Plug-in und der SAP HANA hdbsql-Client auf einem Host außerhalb der HANA-Datenbankhosts installiert werden. Bei diesem Host kann es sich um einen beliebigen Windows- oder Linux-Host handeln, beispielsweise den SnapCenter -Server.
+
+
+NOTE: Wenn Sie Ihren SnapCenter -Server unter Windows betreiben, können Sie Ihr Windows-System als zentralen Plug-in-Host verwenden. Wenn Sie Ihren SnapCenter -Server unter Linux betreiben, müssen Sie einen anderen Host als zentralen Plug-in-Host verwenden.
+
+Bei einem HANA-Mehrhostsystem müssen die SAP HANA-Benutzerspeicherschlüssel für alle Worker- und Standby-Hosts auf dem zentralen Plug-in-Host konfiguriert werden. SnapCenter versucht, mit jedem der bereitgestellten Schlüssel eine Verbindung zur Datenbank herzustellen und kann daher unabhängig von einem Failover der Systemdatenbank (HANA-Namensserver) auf einen anderen Host funktionieren.
+
+image:hana-sc-generic-image-011.png["Breite=601, Höhe=314"]
+
+Bei mehreren HANA-Systemen auf einem einzigen Host, die von einem zentralen Plug-in-Host verwaltet werden, müssen alle individuellen SAP HANA-Benutzerspeicherschlüssel der HANA-Systeme auf dem zentralen Plug-in-Host konfiguriert werden.
+
+image:hana-sc-generic-image-012.png["Breite=601, Höhe=338"]
+
+
+
+== SAP HANA Blockkonsistenzprüfung
+
+SAP empfiehlt, regelmäßige HANA-Blockkonsistenzprüfungen in die gesamte Backup-Strategie aufzunehmen. Bei herkömmlichen dateibasierten Backups wird diese Prüfung bei jedem Backup-Vorgang durchgeführt. Bei Snapshot-Backups muss zusätzlich zu den Snapshot-Backup-Operationen auch die Konsistenzprüfung durchgeführt werden, zum Beispiel einmal pro Woche.
+
+Technisch gesehen gibt es zwei Möglichkeiten, die Blockkonsistenzprüfung durchzuführen.
+
+* Ausführen einer standardmäßigen dateibasierten oder backint-basierten Datensicherung
+* Ausführung des HANA-Tools hdbpersdiag, siehe auch https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/60e110ea8f9e457095210115487e11a6.html?locale=en-US&state=PRODUCTION&version=2.0.08&q=hdbpersdiag["Konsistenzprüfung der Persistenz | SAP-Hilfeportal"]
+
+
+Das HANA-Tool hdbpersdiag ist Bestandteil der HANA-Installation und ermöglicht die Durchführung von Blockkonsistenzprüfungen an einer Offline-HANA-Datenbank. Daher eignet es sich perfekt für die Verwendung in Kombination mit Snapshot-Backups, bei denen vorhandene Snapshot-Backups hdbpersdiag präsentiert werden können.
+
+Beim Vergleich der beiden Ansätze bietet hdbpersdiag deutliche Vorteile gegenüber der dateibasierten Sicherung für HANA-Blockkonsistenzprüfungen. Eine Dimension ist die benötigte Speicherkapazität. Bei dateibasierten Backups muss mindestens die Größe eines Backups für jedes HANA-System verfügbar sein. Wenn Sie beispielsweise 15 HANA-Systeme mit einer Persistenzgröße von 3 TB haben, benötigen Sie zusätzlich 45 TB allein für die Konsistenzprüfungen. Für hdbpersdiag wird keine zusätzliche Speicherkapazität benötigt, da der Vorgang auf einem vorhandenen Snapshot-Backup oder einem FlexClone eines vorhandenen Snapshot-Backups ausgeführt wird. Die zweite Dimension ist die CPU-Auslastung des HANA-Hosts während der Konsistenzprüfung. Eine dateibasierte Datensicherung benötigt CPU-Zyklen auf dem HANA-Datenbankhost, während die hdbpersdiag-Verarbeitung vollständig vom HANA-Host ausgelagert werden kann, wenn sie in Kombination mit einem zentralen Verifizierungshost verwendet wird. Die wichtigsten Merkmale sind in der folgenden Tabelle zusammengefasst.
+
+[cols="34%,^33%,^33%"]
+|===
+|  | Erforderliche Speicherkapazität | CPU- und Netzwerklast auf dem HANA-Host 
+
+
+| Dateibasierte Datensicherung | Minimale Datensicherungsgröße 1 x für jedes HANA-System | Hoch 
+
+
+| hdbpersdiag verwendet das Snapshot-Verzeichnis auf dem HANA-Host (nur NFS) | Keine | Medium 
+
+
+| Zentraler Verifizierungshost, der hdbpersdiag mit FlexClone -Volumes ausführt | Keine | Keine 
+|===
+NetApp empfiehlt die Verwendung von hdbpersdiag zur Durchführung von HANA-Blockkonsistenzprüfungen. Weitere Einzelheiten zur Umsetzung finden sich in Kapitel link:hana-sc-generic-block-check.html["Blockkonsistenzprüfungen mit SnapCenter"]Die
+
+
+
+== Datensicherung Strategie
+
+Vor der Konfiguration von SnapCenter und dem SAP HANA Plug-in muss die Datensicherungsstrategie auf Grundlage der RTO- und RPO-Anforderungen der verschiedenen SAP Systeme definiert werden.
+
+Ein gemeinsamer Ansatz besteht in der Definition von Systemtypen wie Systemen für Produktion, Entwicklung, Test oder Sandbox. Alle SAP-Systeme des gleichen Systemtyps haben typischerweise die gleichen Datenschutzparameter.
+
+Folgende Parameter müssen definiert werden:
+
+* Wie oft sollte ein Snapshot Backup ausgeführt werden?
+* Wie lange sollten Snapshot Kopien Backups auf dem Primärspeichersystem aufbewahrt werden?
+* Wie oft sollte eine Blockintegritätsprüfung ausgeführt werden?
+* Sollen die primären Backups auf einen sekundären Backup-Standort repliziert werden?
+* Wie lange sollten die Backups auf dem sekundären Backup-Speicher aufbewahrt werden?
+
+
+Die folgende Tabelle zeigt ein Beispiel für Datenschutzparameter für die Systemtypen Produktion, Entwicklung und Test. Für das Produktionssystem wurde eine hohe Backup-Frequenz festgelegt, und die Backups werden einmal täglich auf einen sekundären Backup-Standort repliziert. Die Testsysteme haben geringere Anforderungen und es findet keine Replikation der Backups statt.
+
+[cols="25%,25%,25%,25%"]
+|===
+| Parameter | Produktionssysteme auszuführen | Entwicklungssysteme | Testsysteme 
+
+
+| Sicherungshäufigkeit | Alle 6 Stunden | Alle 6 Stunden | Alle 12 Stunden 
+
+
+| Primäre Aufbewahrung | 3 Tage | 3 Tage | 6 Tage 
+
+
+| Block-Integritätsprüfung | Einmal in der Woche | Einmal in der Woche | Nein 
+
+
+| Replikation auf sekundären Backup-Standort | Einmal am Tag | Einmal am Tag | Nein 
+
+
+| Aufbewahrung der sekundären Datensicherung | 2 Wochen | 2 Wochen | Nein 
+|===
+Die folgende Tabelle zeigt die Richtlinien und Zeitpläne, die für die oben genannten Datenschutzparameter konfiguriert werden müssten.
+
+[cols="24%,23%,13%,12%,14%,14%"]
+|===
+| Politik | Backup-Typ | Zeitplanhäufigkeit | Primäre Aufbewahrung | SnapVault Replizierung | Sekundäre Retention 
+
+
+| LocalSnap | Auf Snapshot-Basis | Alle 6 Stunden | Anzahl=12 | Nein | NA 
+
+
+| LocalSnap und SnapVault | Auf Snapshot-Basis | Einmal am Tag | Anzahl=2 | Ja. | Anzahl=14 
+
+
+| SnapAndCallHdbpersdiag | Auf Snapshot-Basis | Einmal in der Woche | Anzahl=2 | Nein | NA 
+|===
+
+NOTE: Für ONTAP Systeme oder FSx für ONTAP muss in ONTAP eine Datensicherungsbeziehung für die SnapVault Replikation konfiguriert werden, bevor SnapCenter SnapVault Aktualisierungsvorgänge ausführen kann. Die sekundäre Aufbewahrung ist in der ONTAP Schutzrichtlinie definiert.
+
+
+NOTE: Für die ANF-Sicherung ist keine zusätzliche Konfiguration außerhalb von SnapCenter erforderlich. Die sekundäre Aufbewahrung der ANF-Backups wird von SnapCenter verwaltet.
+
+
+NOTE: In dieser Beispielkonfiguration wird hdbpersdiag für die Blockintegritätsprüfung verwendet. Weitere Einzelheiten finden Sie in Kapitel link:hana-sc-generic-block-check.html["Blockkonsistenzprüfungen mit SnapCenter"]Die
+
+Die folgende Abbildung fasst die Zeitpläne und die Aufbewahrungsfristen der Backups zusammen. Wird SnapCenter zur Verwaltung der Aufbewahrung von Protokollsicherungen verwendet, werden alle Protokollsicherungen gelöscht, die älter als die älteste Snapshot-Sicherung sind. Mit anderen Worten: Protokollsicherungen werden so lange aufbewahrt, wie es erforderlich ist, um für jede verfügbare Sicherung eine zeitgerechte Wiederherstellung auf den aktuellen Stand zu ermöglichen.
+
+image:hana-sc-generic-image-013.png["Breite=601, Höhe=192"]
+
+
+
+== Sicherung der Verschlüsselungs-Root-Schlüssel
+
+Bei Verwendung der HANA-Persistenzverschlüsselung ist es unerlässlich, zusätzlich zu den Standard-Datensicherungen auch Sicherungskopien der Stammschlüssel zu erstellen. Zur Wiederherstellung der HANA-Datenbank im Falle eines Datenverlusts und des Verlusts des HANA-Installationsdateisystems werden Root-Key-Backups benötigt. Weitere Informationen finden Sie unter https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e7c3fd56/b1e7562e2c704c19bd86f2f9f4feedc4.html["SAP HANA Administration Guide"]Die
+
+
+NOTE: Beachten Sie, dass, wenn ein Stammschlüssel geändert wird, der neue Stammschlüssel nicht zur Wiederherstellung alter HANA-Datenbanksicherungen verwendet werden kann, die zuvor erstellt wurden. Sie benötigen stets den Stammschlüssel, der zum Zeitpunkt der Erstellung des Backups aktiv war.
+
+
+
+== Backup-Vorgänge
+
+SnapCenter unterstützt Snapshot-Backup-Operationen von HANA MDC-Systemen mit einem oder mehreren Mandanten. SnapCenter unterstützt außerdem zwei verschiedene Wiederherstellungsvorgänge eines HANA MDC-Systems. Sie können entweder das gesamte System, die Systemdatenbank und alle Mandanten wiederherstellen oder nur einen Mandanten. Es gibt einige Voraussetzungen, damit SnapCenter diese Operationen ausführen kann.
+
+In einem MDC-System ist die Mandantenkonfiguration nicht unbedingt statisch. Mieter können hinzugefügt oder gelöscht werden. SnapCenter kann sich nicht auf die Konfiguration verlassen, die beim Hinzufügen der HANA-Datenbank zu SnapCenter ermittelt wird. Um eine Wiederherstellung für einen einzelnen Mandanten zu ermöglichen, muss SnapCenter wissen, welche Mandanten in den einzelnen Snapshot-Backups enthalten sind. Darüber hinaus muss es wissen, welche Dateien und Verzeichnisse zu jedem Mandanten gehören, der in der Snapshot-Sicherung enthalten ist.
+
+Daher ermittelt SnapCenter bei jedem Backup-Vorgang die Mandanteninformationen. Dies umfasst die Mandantennamen und die entsprechenden Datei- und Verzeichnisinformationen. Diese Daten müssen in den Snapshot-Backup-Metadaten gespeichert werden, um eine Wiederherstellung durch einen einzelnen Mandanten zu ermöglichen.
+
+Ein weiterer Schritt der automatischen Anwendungserkennung ist die Erkennung des primären oder sekundären Knotens der HANA-Systemreplikation (HSR). Wenn ein HANA-System mit HSR konfiguriert ist, muss SnapCenter bei jedem Sicherungsvorgang den primären Knoten identifizieren, damit die Backup-SQL-Befehle auf dem primären HSR-Knoten ausgeführt werden. Siehe auch https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sr-scs-system-replication-overview.html["SAP HANA System Replication – Backup und Recovery mit SnapCenter"]Die
+
+SnapCenter erkennt außerdem die HANA-Datenvolumenkonfiguration und ordnet sie Dateisystem- und Speicherressourcen zu. Mit diesem Ansatz kann SnapCenter Änderungen an der HANA-Volume-Konfiguration verarbeiten, z. B. mehrere Partitionen oder Änderungen an der Speicherkonfiguration wie die Migration von Volumes.
+
+Der nächste Schritt ist die eigentliche Snapshot-Sicherungsoperation. Dieser Schritt umfasst den SQL-Befehl zum Auslösen des HANA-Datenbank-Snapshots, die Sicherung des Speicher-Snapshots und den SQL-Befehl zum Beenden des HANA-Snapshot-Vorgangs. Durch die Verwendung des Befehls „close“ aktualisiert die HANA-Datenbank den Sicherungskatalog der Systemdatenbank und jedes Mandanten.
+
+
+NOTE: SAP unterstützt keine Snapshot Backup-Vorgänge für MDC-Systeme, wenn ein oder mehrere Mandanten angehalten werden.
+
+Für das Aufbewahrungsmanagement von Daten-Backups und das HANA-Backup-Katalogmanagement muss SnapCenter die Kataloglösch-Operationen für die Systemdatenbank und alle Mandantendatenbanken ausführen, die im ersten Schritt identifiziert wurden. Auf dieselbe Weise für die Log-Backups muss der SnapCenter-Workflow auf jedem Mandanten laufen, der Teil des Backup-Vorgangs war.
+
+Die folgende Abbildung zeigt einen Überblick über den Backup-Workflow.
+
+image:hana-sc-generic-image-014.png["Breite=601, Höhe=237"]
+
+
+
+== Backup-Aufbewahrungsverwaltung
+
+Das Management der Daten-Backup-Aufbewahrung und die allgemeine Ordnung der Backup-Protokollierung können in fünf Hauptbereiche unterteilt werden, einschließlich Aufbewahrungsmanagement von:
+
+* Lokale Backups im primären Storage
+* Dateibasierten Backups
+* Datensicherungen auf dem Sekundärspeicher (SnapVault oder ANF-Backup)
+* Daten-Backups im SAP HANA Backup-Katalog
+* Protokollsicherungen im SAP HANA-Sicherungskatalog und im Dateisystem
+
+
+Die folgende Abbildung bietet einen Überblick über die verschiedenen Workflows und die Abhängigkeiten jedes einzelnen Vorgangs. In den folgenden Abschnitten werden die verschiedenen Operationen im Detail beschrieben.
+
+image:hana-sc-generic-image-015.png["Breite=601, Höhe=309"]
+
+
+
+=== Aufbewahrungsmanagement von lokalen Backups auf dem Primärstorage
+
+SnapCenter übernimmt die Verwaltung von SAP HANA-Datenbanksicherungen und Nicht-Datenvolumensicherungen, indem es Snapshot-Kopien auf dem primären Speicher und im SnapCenter Repository gemäß einer in der SnapCenter -Sicherungsrichtlinie definierten Aufbewahrungsfrist löscht. Die Aufbewahrungsverwaltung ist in jedem Backup-Workflow von SnapCenter enthalten. Lokale Backups auf dem primären Speicher können auch manuell in SnapCenter gelöscht werden.
+
+
+
+=== Aufbewahrungsmanagement von dateibasierten Backups
+
+SnapCenter übernimmt die Verwaltung dateibasierter Backups, indem es die Backups im Dateisystem gemäß einer in der SnapCenter -Backup-Richtlinie definierten Aufbewahrungsfrist löscht. Die Aufbewahrungslogik wird bei jedem Backup-Workflow in SnapCenter ausgeführt.
+
+
+
+=== Aufbewahrungsverwaltung von Backups im Sekundärspeicher (SnapVault)
+
+Die Aufbewahrungsverwaltung der Backups im Sekundärspeicher (SnapVault) wird von ONTAP auf Basis der in der ONTAP Schutzbeziehung definierten Aufbewahrungsfristen übernommen. Um diese Änderungen auf dem Sekundärspeicher im SnapCenter -Repository zu synchronisieren, verwendet SnapCenter einen geplanten Bereinigungsjob. Dieser Bereinigungsvorgang synchronisiert alle Backups des Sekundärspeichers mit dem SnapCenter Repository für alle SnapCenter -Plug-ins und alle Ressourcen.
+
+Die Bereinigung erfolgt standardmäßig einmal pro Woche. Dieser wöchentliche Zeitplan führt zu einer Verzögerung beim Löschen von Backups in SnapCenter und SAP HANA Studio im Vergleich zu den Backups, die bereits im Sekundärspeicher gelöscht wurden. Um diese Unstimmigkeit zu vermeiden, können Kunden den Zeitplan auf eine höhere Frequenz ändern, zum Beispiel einmal täglich. Einzelheiten zur Anpassung des Zeitplans des Bereinigungsauftrags oder zum Auslösen einer manuellen Aktualisierung finden Sie im entsprechenden Kapitel. link:hana-sc-generic-backup-operations.html#cleanup-of-secondary-backups["Bereinigung sekundärer Backups"]Die
+
+
+
+=== Aufbewahrungsverwaltung von Backups auf dem Sekundärspeicher (ANF-Backup)
+
+Die Aufbewahrung von ANF-Backups wird von SnapCenter konfiguriert und verwaltet. SnapCenter übernimmt die Verwaltung der ANF-Backup-Backups, indem es die Backups gemäß einer in der SnapCenter -Backup-Richtlinie definierten Aufbewahrungsfrist löscht. Die Aufbewahrungsverwaltung ist in jedem Backup-Workflow von SnapCenter enthalten.
+
+
+
+=== Aufbewahrungsmanagement von Daten-Backups im SAP HANA Backup-Katalog
+
+Wenn SnapCenter eine Sicherung, einen lokalen Snapshot oder eine dateibasierte Sicherung gelöscht hat oder wenn SnapCenter eine Löschung einer Sicherung auf dem Sekundärspeicher festgestellt hat, wird diese Datensicherung auch im SAP HANA-Sicherungskatalog gelöscht. Bevor SnapCenter den SAP HANA-Katalogeintrag für ein lokales Snapshot-Backup im primären Speicher löscht, prüft es, ob das Backup im sekundären Speicher noch vorhanden ist.
+
+
+
+=== Aufbewahrungsmanagement von Protokoll-Backups
+
+Die SAP HANA-Datenbank erstellt automatisch Log-Backups. Diese Vorgänge erstellen Sicherungsdateien für jeden einzelnen SAP HANA-Dienst in einem in SAP HANA konfigurierten Sicherungsverzeichnis. Protokollsicherungen, die älter als die letzte Datensicherung sind, werden für die zukünftige Wiederherstellung nicht mehr benötigt und können daher gelöscht werden. SnapCenter übernimmt die Verwaltung der Logdateisicherungen sowohl auf Dateisystemebene als auch im SAP HANA-Sicherungskatalog durch die Ausführung der folgenden Schritte:
+
+. SnapCenter liest den SAP HANA-Backup-Katalog, um die Backup-ID des ältesten erfolgreichen Daten-Backups zu ermitteln.
+. SnapCenter löscht alle Log-Backups im SAP HANA-Katalog und das Filesystem, die älter als diese Backup-ID sind.
+
+
+
+NOTE: SnapCenter kümmert sich nur um die allgemeine Ordnung und Sauberkeit der Backups, die von SnapCenter erstellt wurden. Falls zusätzliche dateibasierte Backups außerhalb von SnapCenter erstellt werden, müssen Sie sicherstellen, dass die dateibasierten Backups aus dem Backup-Katalog gelöscht werden. Wird eine solche Datensicherung nicht manuell aus dem Backup-Katalog gelöscht, kann sie zur ältesten Datensicherung werden, und ältere Log-Backups werden erst gelöscht, wenn diese dateibasierte Sicherung gelöscht wird.
+
+
+NOTE: Obwohl in der Richtlinienkonfiguration eine Aufbewahrungsdauer für On-Demand-Backups definiert ist, wird die Aufräumarbeit nur dann durchgeführt, wenn ein weiteres On-Demand-Backup ausgeführt wird. Daher müssen On-Demand-Backups in SnapCenter in der Regel manuell gelöscht werden, um sicherzustellen, dass diese Backups auch im SAP HANA-Backup-Katalog gelöscht werden und die Protokoll-Backup-Bereinigung nicht auf einem alten On-Demand-Backup basiert.
+
+
+NOTE: Die Aufbewahrungsverwaltung für Protokollsicherungen ist standardmäßig aktiviert. Bei Bedarf kann diese Funktion wie im Abschnitt „Automatische Protokollsicherungsverwaltung deaktivieren“ beschrieben deaktiviert werden.
