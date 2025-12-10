@@ -167,8 +167,8 @@ hana-1:/install #
 hana-1:/ # mkdir -p /hana/data/SMA/mnt00001
 hana-1:/ # mkdir -p /hana/log/SMA/mnt00001
 hana-1:/ # mkdir -p /hana/shared
-hana-1:/ # chmod –R 777 /hana/log/SMA
-hana-1:/ # chmod –R 777 /hana/data/SMA
+hana-1:/ # chmod -R 777 /hana/log/SMA
+hana-1:/ # chmod -R 777 /hana/data/SMA
 hana-1:/ # chmod -R 777 /hana/shared
 ....
 
@@ -234,7 +234,7 @@ NOTE: Bei der beschriebenen Konfiguration befindet sich das Verzeichnis /usr/sap
 
 Es muss ein Benutzerspeicher für einen Systemdatenbankbenutzer erstellt werden, der von SnapCenter verwendet werden soll. Die HANA-Instanznummer muss für den Kommunikations-Port entsprechend festgelegt werden. In unserem Setup wird die Instanznummer „00“ verwendet.
 
-Eine ausführlichere Beschreibung finden Sie unter link:hana-br-scs-resource-config-hana-database-backups.html#sap-hana-backup-user-and-hdbuserstore-configuration["Ressourcenspezifische SnapCenter Konfiguration für SAP HANA Datenbank-Backups"]
+Eine detailliertere Beschreibung finden Sie unter link:hana-sc-generic-sc-resource-config.html#sap-hana-backup-user-and-sap-hana-user-store-configuration["Ressourcenspezifische SnapCenter Konfiguration für SAP HANA Datenbank-Backups"]
 
 ....
 smaadm@hana-1:/usr/sap/SMA/HDB00> hdbuserstore set SMAKEY hana-1:30013 SNAPCENTER <password>

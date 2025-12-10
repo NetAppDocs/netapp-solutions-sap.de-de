@@ -61,7 +61,7 @@ Storage-basierte Snapshot Backups bieten im Vergleich zu herkömmlichen dateibas
 
 
 
-NOTE: Detaillierte Informationen zur Backup- und Recovery-Lösung von SAP HANA finden Sie unter link:../backup/hana-br-scs-overview.html["TR-4614: SAP HANA Backup and Recovery with SnapCenter"^].
+NOTE: Detaillierte Informationen zur SAP HANA Backup- und Recovery-Lösung finden Sie unter link:../backup/hana-sc-generic-scope.html["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"^]Die
 
 
 

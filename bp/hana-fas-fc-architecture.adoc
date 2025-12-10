@@ -58,7 +58,7 @@ Storage-basierte Snapshot Backups bieten im Vergleich zu dateibasierten Backups 
 * Platzsparende und bandbreiteneffiziente Replizierung auf Basis von Blockänderungen auf sekundärem Storage
 
 
-Weitere Informationen zur Backup- und Recovery-Lösung SAP HANA mit SnapCenter finden Sie unter link:../backup/hana-br-scs-overview.html["TR-4614: SAP HANA Backup and Recovery with SnapCenter"^].
+Detaillierte Informationen zur SAP HANA-Backup- und -Wiederherstellungslösung mit SnapCenter finden Sie unter link:../backup/hana-sc-generic-scope.html["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"^]Die
 
 
 

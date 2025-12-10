@@ -123,7 +123,7 @@ image:amazon-fsx-image69.png["Die Abbildung zeigt den Input/Output-Dialog oder d
 
 . Wählen Sie den Umfang und den Typ der Wiederherstellung aus.
 +
-Das Standardszenario für HANA MDC-Einzelmandant-Systeme besteht darin, komplette Ressourcen mit Zurücksetzen des Volumes zu nutzen. Bei einem HANA MDC-System mit mehreren Mandanten möchten Sie möglicherweise nur einen einzelnen Mandanten wiederherstellen. Weitere Informationen zur Wiederherstellung einzelner Mandanten finden Sie unter link:hana-br-scs-restore-recovery.html["Restore und Recovery (netapp.com)"^].
+Das Standard-Szenario für HANA MDC Single-Tenant-Systeme ist die Nutzung vollständiger Ressourcen mit Volumenrücksetzung. Bei einem HANA MDC-System mit mehreren Mandanten möchten Sie möglicherweise nur einen einzigen Mandanten wiederherstellen. Weitere Informationen zur Wiederherstellung eines einzelnen Mandanten finden Sie unter link:hana-sc-generic-restore.html["Restore und Recovery (netapp.com)"^]Die
 
 +
 image:amazon-fsx-image70.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]

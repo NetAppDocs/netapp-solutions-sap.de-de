@@ -25,7 +25,7 @@ Die Konfiguration einer HANA-Datenbank in SnapCenter erfolgt in folgenden Schrit
 . Der HANA-Ressourcenschutz muss für die neu hinzugefügte HANA-Ressource konfiguriert werden.
 
 
-Die anfängliche SnapCenter -Konfiguration, wie im vorherigen Thema beschrieben. link:hana-sc-generic-initial.html["Erstkonfiguration von SnapCenter"] Dies muss zuerst erfolgen, da während der Konfiguration der HANA-Datenbankressourcen Anmeldeinformationen, Speichersysteme und Richtlinien benötigt werden. Die folgende Abbildung fasst die Schritte und Abhängigkeiten zusammen.
+Die anfängliche SnapCenter -Konfiguration, wie im vorherigen Thema beschrieben. link:hana-sc-generic-sc-initial-config.html["Erstkonfiguration von SnapCenter"] Dies muss zuerst erfolgen, da während der Konfiguration der HANA-Datenbankressourcen Anmeldeinformationen, Speichersysteme und Richtlinien benötigt werden. Die folgende Abbildung fasst die Schritte und Abhängigkeiten zusammen.
 
 Die folgende Abbildung veranschaulicht die verschiedenen Konfigurationskomponenten und Abhängigkeiten.
 

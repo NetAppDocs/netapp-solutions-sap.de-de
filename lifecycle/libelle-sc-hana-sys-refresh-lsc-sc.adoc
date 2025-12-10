@@ -24,7 +24,7 @@ In diesem Abschnitt wird die Integration zwischen LSC und SnapCenter anhand eine
 * *Eine SnapCenter-Installation mit zentralem Kommunikationshost.* ein zentraler Kommunikationhost wird mit dem SnapCenter-Agent, dem SAP HANA-Plug-in und dem HANA-Datenbankclient installiert, der alle datenbankbezogenen Operationen verarbeitet, die zum Sichern und Wiederherstellen einer SAP HANA-Datenbank für mehrere SAP HANA-Systeme in der Landschaft erforderlich sind. Daher muss ein zentraler Kommunikationshost kein vollständiges SAP HANA Datenbanksystem installieren.
 
 
-Weitere Informationen zu diesen verschiedenen SnapCenter-Agenten und den Installationsoptionen für das SAP HANA-Datenbank-Plug-in finden Sie im technischen Bericht link:../backup/hana-br-scs-overview.html["TR-4614: SAP HANA Backup und Recovery mit SnapCenter"^].
+Weitere Details zu den verschiedenen SnapCenter Agenten und den Installationsoptionen für das SAP-HANA-Datenbank-Plug-in finden Sie im technischen Bericht. link:../backup/hana-sc-generic-scope.html["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"^]Die
 
 In den folgenden Abschnitten werden die Unterschiede zwischen der Integration von LSC in SnapCenter unter Verwendung der Standardinstallation oder des zentralen Kommunikations-Hosts deutlich. Insbesondere sind alle nicht hervorgehobenen Konfigurationsschritte unabhängig von der Installationsoption und der verwendeten Datenbank identisch.
 
@@ -89,9 +89,8 @@ Dokumentationsressourcen:
 
 * https://docs.netapp.com/us-en/snapcenter/["SnapCenter Documentation Center"^]
 * https://www.netapp.com/pdf.html?item=/media/12403-tr4700.pdf["TR-4700: SnapCenter Plug-in für Oracle Database"^]
-* https://www.netapp.com/pdf.html?item=/media/12405-tr4614pdf.pdf["TR-4614: SAP HANA Backup and Recovery with SnapCenter"^]
+* link:../backup/hana-sc-generic-scope.html["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"^]
 * link:sc-copy-clone-introduction.html["TR-4667: Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"^]
-* https://fieldportal.netapp.com/content/883721["TR-4769 -SnapCenter Best Practices und Sizing Guidelines"^]
 * https://library.netapp.com/ecm/ecm_download_file/ECMLP2880726["SnapCenter 4.6 Cmdlet Referenzhandbuch"^]
 
 
