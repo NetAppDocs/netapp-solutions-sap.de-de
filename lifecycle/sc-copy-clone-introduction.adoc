@@ -4,7 +4,7 @@ permalink: lifecycle/sc-copy-clone-introduction.html
 keywords: tr4667, 4667, SAP HANA, cloning, system refresh 
 summary: NetApp Lösungen zur Optimierung des SAP Lifecycle Managements sind in SAP HANA Datenbank- und Lifecycle Management-Tools integriert und verbinden effiziente applikationsintegrierte Datensicherung mit der flexiblen Bereitstellung von SAP Testsystemen. 
 ---
-= TR-4667: Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter
+= Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter
 :hardbreaks:
 :allow-uri-read: 
 :nofooter: 
@@ -65,9 +65,9 @@ NetApp SnapCenter mit dem Plug-in für SAP HANA wird verwendet, um die erforderl
 
 Eine vollautomatisierte End-to-End-Bereitstellung von SAP Testsystemen kann unter Verwendung von Tools anderer Anbieter und durch die Integration von NetApp Funktionen durchgeführt werden. Weitere Informationen finden Sie unter:
 
-link:lama-ansible-introduction.html["TR-4953: NetApp SAP Landscape Management Integration Using Ansible"]
+link:lama-ansible-introduction.html["NetApp Integration des SAP Landscape Managements mit Ansible"]
 
-link:libelle-sc-overview.html["TR-4929: SAP-Systemkopien automatisieren mit Libelle SystemCopy (netapp.com)"]
+link:libelle-sc-overview.html["Automatisierung von SAP-Systemkopiervorgängen mit Libelle SystemCopy (netapp.com)"]
 
 link:../briefs/sap-alpaca-automation.html#solution-overview["Automatisierung von SAP System copy, Refresh, und Klonen von Workflows mit ALPACA und NetApp SnapCenter"]
 

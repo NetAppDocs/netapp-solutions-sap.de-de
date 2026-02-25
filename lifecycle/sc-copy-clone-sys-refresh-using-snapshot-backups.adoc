@@ -29,15 +29,25 @@ Eine Ausnahme von dieser Regel ist ein SAP HANA-System mit einem einzelnen Manda
 
 NOTE: Sobald ein Mandant im Quellsystem erstellt, umbenannt oder abgelegt wird, wird dieses Konfigurationskennzeichen von der SAP HANA-Datenbank gelöscht. Somit ist auch dann, wenn die Konfiguration an Mandant = SID zurückgebracht wurde, das Flag nicht mehr verfügbar und die Ausnahme hinsichtlich der Mandantenwiederherstellung mit Workflow 3 ist nicht mehr möglich. In diesem Fall ist Option 2 der erforderliche Workflow.
 
-image:sc-copy-clone-image10.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:sc-copy-clone-image10.png[""]
 
-image:sc-copy-clone-image11.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:sc-copy-clone-image11.png[""]
 
 
 
 == Workflow zur Systemaktualisierung mit aktivierter SAP HANA-Verschlüsselung
 
-Wenn die Persistenz-Verschlüsselung von SAP HANA aktiviert ist, sind weitere Schritte erforderlich, bevor Sie die SAP HANA-Datenbank im Zielsystem wiederherstellen können.
+Wenn die SAP HANA-Persistenzverschlüsselung aktiviert ist und abhängig vom verwendeten sicheren Speicher für die Verschlüsselungs-Root-Schlüssel, Instanz SFSS oder lokaler sicherer Speicher LSS, sind zusätzliche Schritte erforderlich, bevor die SAP HANA-Datenbank auf dem Zielsystem wiederhergestellt werden kann.
+
+Bei SFSS werden die Root-Schlüssel im Dateisystem gespeichert und müssen zusätzlich zur HANA Datenbank separat gesichert werden. Die Root-Schlüssel-Backups müssen anschließend auf dem Zielsystem importiert werden, um die Wiederherstellung der HANA Datenbank zu ermöglichen. Dies ist nur einmal erforderlich, sofern die Root-Schlüssel nicht geändert wurden.
+
+Mit LSS werden die Root-Schlüssel zusammen mit der HANA Datenbank in einem einzigen Vorgang gesichert und wiederhergestellt. Um die HANA Datenbank wiederherstellen zu können, benötigen Sie das Passwort, das für die Sicherung der Root-Schlüssel verwendet wurde.
+
+Die erforderlichen Arbeitsschritte werden in den folgenden Kapiteln detaillierter beschrieben.
+
+
+
+=== Sicherer Speicher SFSS
 
 Im Quellsystem müssen Sie eine Sicherung der Verschlüsselungsroot-Schlüssel für die Systemdatenbank sowie für alle Mandantendatenbanken erstellen. Die Sicherungsdateien müssen auf das Zielsystem kopiert und die Stammschlüssel müssen aus dem Backup importiert werden, bevor der Wiederherstellungsvorgang ausgeführt wird.
 
@@ -45,7 +55,7 @@ Siehe auch https://help.sap.com/docs/SAP_HANA_PLATFORM/6b94445c94ae495c83a19646e
 
 
 
-=== Sicherung von Stammschlüsseln
+==== Sicherung von Stammschlüsseln
 
 Wenn Änderungen an den Stammschlüsseln vorgenommen wurden, ist immer eine Sicherung der Stammschlüssel erforderlich. Der Backup-Befehl erfordert den dbid als CLI-Parameter. Die dbid's können mit der unten stehenden SQL-Anweisung identifiziert werden.
 
@@ -96,7 +106,7 @@ done.
 ....
 
 
-=== Import von Root-Schlüsseln auf dem Zielsystem
+==== Import von Root-Schlüsseln auf dem Zielsystem
 
 Der Import der Stammschlüssel ist zunächst für die erste Systemaktualisierung erforderlich. Wenn die Stammschlüssel im Quellsystem nicht geändert werden, ist kein zusätzlicher Import erforderlich. Der Import-Befehl erfordert den dbid als CLI-Parameter. Die dbid's können in der gleichen Weise identifiziert werden wie für die Root-Key-Backup beschrieben.
 
@@ -125,10 +135,40 @@ qs1adm@hana-7:/usr/sap/QS1/HDB11>
 ....
 
 
-=== Root-Schlüssel importieren, wenn dbid nicht am Ziel vorhanden ist
+==== Root-Schlüssel importieren, wenn dbid nicht am Ziel vorhanden ist
 
 Wie im vorherigen Kapitel beschrieben, ist das dbid erforderlich, um den Stammschlüssel für das System und alle Mandantendatenbanken zu importieren. Während die Systemdatenbank immer dbid=0 hat, können die Mandantendatenbanken unterschiedliche dbid's haben.
 
-image:sc-copy-clone-image13.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+image:sc-copy-clone-image13.png[""]
 
 Die obige Ausgabe zeigt zwei Mandanten mit dbid=3 und dbid=4. Wenn das Zielsystem noch keinen Mandanten mit dbid=4 gehostet hat, schlägt der Import des Stammschlüssels fehl. In diesem Fall müssen Sie zuerst die Systemdatenbank wiederherstellen und dann den Schlüssel für den Mandanten mit dbid=4 importieren.
+
+
+
+=== Sicherer Speicher LSS
+
+
+NOTE: Sie benötigen mindestens HANA Version 2.00.088, andernfalls funktioniert das beschriebene Verfahren nicht, siehe auch SAP note 3613110.
+
+Um ein HANA-System wiederherzustellen, das Verschlüsselung und LSS verwendet, benötigen Sie das Passwort, das zum Sichern der root keys verwendet wurde.
+
+Die SQL-Anweisung
+
+....
+alter system set encryption root keys backup password <backup-pw-of-source-system>;
+....
+Kann verwendet werden, um das Passwort des Quellsystems in der LSS-Konfiguration des Zielsystems festzulegen. Dieselbe Anweisung muss für das System und die Mandantendatenbank verwendet werden.
+
+Falls das Passwort nicht im Voraus festgelegt wurde, können Sie das Passwort während des Wiederherstellungsvorgangs angeben.
+
+Systemdatenbank:
+
+....
+./exe/Python/bin/python /usr/sap/QM1/HDB22/exe/python_support/recoverSys.py --command "RECOVER DATA USING SNAPSHOT CLEAR LOG ENCRYPTION ROOT KEYS BACKUP PASSWORD '<backup-pw-of-source-system>'"
+....
+Mandantendatenbank:
+
+....
+hdbsql SYSTEMDB=> RECOVER DATA for QM1 USING SNAPSHOT CLEAR LOG ENCRYPTION ROOT KEYS BACKUP PASSWORD '<backup-pw-of-source-system>';
+
+....

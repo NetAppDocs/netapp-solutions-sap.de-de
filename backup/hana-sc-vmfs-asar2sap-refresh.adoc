@@ -8,7 +8,7 @@ summary:
 :allow-uri-read: 
 
 
-Detaillierte Informationen zu SAP System Refresh-Operationen mit SnapCenter finden Sie unter  https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["TR-4667: Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"] .
+Detaillierte Informationen zu SAP-Systemaktualisierungsvorgängen mit SnapCenter finden Sie unter https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"].
 
 Das zweite HANA-System QFS wurde auf die gleiche Weise provisioniert wie im Kapitel link:hana-sc-vmfs-asar2-hana-prov.html["„Bereitstellung und Installation des HANA-Systems“"] .
 
@@ -16,7 +16,7 @@ Das zweite HANA-System QFS wurde auf die gleiche Weise provisioniert wie im Kapi
 
 === Voraussetzungen
 
-Die aktuelle Version von SnapCenter (6.1P1) weist einige Einschränkungen auf, die mit den nächsten Versionen behoben werden sollen.
+Für SnapCenter Releases < 6.2 gibt es Einschränkungen, die berücksichtigt werden müssen.
 
 . Es ist erforderlich, den SPL-Prozess nach jedem „Clone Create“- und „Clone Delete“-Workflow mit dem Befehl „systemctl restart spl“ auf dem Ziel-HANA-Host neu zu starten.
 . Die als Quelle und Ziel des SAP-Systemaktualisierungsvorgangs verwendeten HANA-VMs müssen auf demselben ESX-Host ausgeführt werden.
@@ -174,4 +174,4 @@ Der folgende Screenshot zeigt die von SnapCenter ausgeführten Jobschritte.
 
 image:sc-hana-asrr2-vmfs-image39.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
-Wie im Abschnitt „Voraussetzungen“ erwähnt, muss der SnapCenter -SPL-Dienst auf dem HANA-Host mit dem Befehl „systemctl restart spl“ neu gestartet werden, um eine ordnungsgemäße Bereinigung einzuleiten.
+Wie im Abschnitt „Voraussetzungen“ erwähnt, muss für SnapCenter-Versionen < 6.2 der SnapCenter spl-Dienst auf dem HANA-Host mit dem Befehl „systemctl restart spl“ neu gestartet werden, um eine ordnungsgemäße Bereinigung zu initiieren.

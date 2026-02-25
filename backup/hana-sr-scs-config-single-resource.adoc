@@ -54,7 +54,7 @@ In der HANA-Datenbank wurde ein Benutzer erstellt, um Backup-Vorgänge durchzuf�
 ....
 hdbuserstore.exe -u SYSTEM set SSRKEY ssr-vip:31013 SNAPCENTER <password>
 ....
-Weitere Informationen zu den Bereitstellungsoptionen für SAP HANA-Plug-ins und zur Konfiguration des Benutzerspeichers finden Sie im technischen Bericht TR-4614: link:hana-sc-generic-scope.html["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"^]Die
+Weitere Informationen zu den Bereitstellungsoptionen für SAP HANA Plug-in und zur Konfiguration des Benutzerspeichers finden Sie in link:hana-sc-generic-scope.html["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"^].
 
 In SnapCenter wird die Ressource wie in der folgenden Abbildung dargestellt mit dem Benutzer-Speicherschlüssel konfiguriert, vorher konfiguriert, und dem SnapCenter-Server als der konfiguriert `hdbsql` Kommunikations-Host.
 

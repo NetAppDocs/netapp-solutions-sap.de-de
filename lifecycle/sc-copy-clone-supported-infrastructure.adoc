@@ -23,20 +23,21 @@ Im Rahmen dieses Dokuments verwenden wir eine SAP HANA-Landschaft, die auf lokal
 |  | *On-Premises NetApp Systeme* | *AWS FSX for NetApp ONTAP* | *Azure NetApp Files* 
 
 
-| Storage-Protokoll | NFS, Fibre Channel | NFS | NFS 
+| Speicherprotokoll und Dateisystem | Bare metal: NFS, FC mit XFS VMware: NFS-Einbindungen im Gastsystem, FC mit VMDKs und XFS | NFS | NFS 
 
 
-| Thin-Klon (FlexClone) | Ja. | Ja. | Nein, in der aktuellen ANF-Version wird das geklonte Volume immer aufgeteilt 
+| Thin-Klon (FlexClone) | Ja. | Ja. | Ja, aber nicht in SnapCenter integriert 
 
 
-| Klonteilvorgang | Ja. | Ja. | K. A. 
+| Klonteilvorgang | Ja. | Ja. | Ja, aber nicht in SnapCenter integriert 
 
 
 | Klonen von Primär | Ja. | Ja. | Ja. 
 
 
-| Klonen von Backups an externen Standorten | Ja. | Ja. | Nein 
+| Klonen von Backups an externen Standorten | Ja. | Ja. | Ja, Wiederherstellung auf neuem Volume aus dem ANF-Backup 
 
 
 | Klonen am DR-Standort | Ja. | Ja. | Ja, aber nicht in SnapCenter integriert 
 |===
+Weitere Informationen zu SAP-Systemaktualisierungsvorgängen für HANA mit VMware VMFS und NetApp ASAr2-Systemen finden Sie unter  https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-vmfs-asar2sap-refresh.html["SAP-Systemaktualisierung"].

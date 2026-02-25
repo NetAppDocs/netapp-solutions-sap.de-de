@@ -28,7 +28,7 @@ Weitere Details zu den verschiedenen SnapCenter Agenten und den Installationsopt
 
 In den folgenden Abschnitten werden die Unterschiede zwischen der Integration von LSC in SnapCenter unter Verwendung der Standardinstallation oder des zentralen Kommunikations-Hosts deutlich. Insbesondere sind alle nicht hervorgehobenen Konfigurationsschritte unabhängig von der Installationsoption und der verwendeten Datenbank identisch.
 
-Um ein automatisches Backup auf Basis von Snapshot Kopien aus der Quelldatenbank durchzuführen und einen Klon für die neue Zieldatenbank zu erstellen, verwendet die beschriebene Integration zwischen LSC und SnapCenter die in beschriebenen Konfigurationsoptionen und Skriptelink:sc-copy-clone-introduction.html["TR-4667: Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"^].
+Um eine automatisierte Snapshot-basierten Sicherung aus der Quelldatenbank durchzuführen und einen Klon für die neue Zieldatenbank zu erstellen, verwendet die beschriebene Integration zwischen LSC und SnapCenter die in link:sc-copy-clone-introduction.html["Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"^] beschriebenen Konfigurationsoptionen und Skripte.
 
 
 
@@ -88,9 +88,9 @@ Der LSC-Master und der LSC-Worker müssen in der SAP-Umgebung installiert sein. 
 Dokumentationsressourcen:
 
 * https://docs.netapp.com/us-en/snapcenter/["SnapCenter Documentation Center"^]
-* https://www.netapp.com/pdf.html?item=/media/12403-tr4700.pdf["TR-4700: SnapCenter Plug-in für Oracle Database"^]
+* https://www.netapp.com/pdf.html?item=/media/12403-tr4700.pdf["SnapCenter Plug-In für Oracle Database"^]
 * link:../backup/hana-sc-generic-scope.html["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"^]
-* link:sc-copy-clone-introduction.html["TR-4667: Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"^]
+* link:sc-copy-clone-introduction.html["Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"^]
 * https://library.netapp.com/ecm/ecm_download_file/ECMLP2880726["SnapCenter 4.6 Cmdlet Referenzhandbuch"^]
 
 

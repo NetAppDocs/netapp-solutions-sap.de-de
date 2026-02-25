@@ -28,7 +28,7 @@ Je nach Konfiguration der SAP HANA-Datenbank werden weitere Schritte ausgeführt
 | MDC Einzelmandant + SID = Mandantenname | Standardkonfiguration | SnapCenter-Klonvorgang und optionale Ausführung von Wiederherstellungsskripten. 
 
 
-|  | SAP HANA-Verschlüsselung mit Persistenz | Zunächst oder wenn die Stammschlüssel im Quellsystem geändert wurden, müssen die Stammschlüsselsicherungen auf dem Zielsystem importiert werden, bevor die Wiederherstellung ausgeführt werden kann. 
+|  | SAP HANA-Verschlüsselung mit Persistenz | SFSS: Zunächst, oder wenn die Root-Schlüssel im Quellsystem geändert wurden, müssen die Root-Schlüssel-Backups im Zielsystem importiert werden, bevor die Wiederherstellung durchgeführt werden kann. LSS: Zunächst, oder wenn das Passwort für das Root-Schlüssel-Backup geändert wurde, muss das Passwort in der LSS-Konfiguration festgelegt werden. 
 
 
 |  | Quelle für die SAP HANA-Systemreplizierung | Weitere Schritte sind nicht erforderlich. Wenn für das Zielsystem kein HSR konfiguriert ist, bleibt es ein eigenständiges System. 
@@ -44,7 +44,7 @@ Oder MDC Einzelmandant + mit SID <> Mandantenname
 | Standardkonfiguration | SnapCenter-Klonvorgang und optionale Ausführung von Wiederherstellungsskripten. Skript stellt alle Mandanten wieder her. Wenn bei den Zielsystemnamen keine Mandanten- oder Mandantennamen vorhanden sind, werden erforderliche Verzeichnisse automatisch während der SAP HANA-Wiederherstellung erstellt. Die Mandantennamen entsprechen der Quelle und müssen bei Bedarf nach der Wiederherstellung umbenannt werden. 
 
 
-|  | SAP HANA-Verschlüsselung mit Persistenz | Wenn zuvor auf dem Zielsystem keine DBID des Quellsystems vorhanden ist, muss die Systemdatenbank zuerst wiederhergestellt werden, bevor die Stammschlüsselsicherung dieses Mandanten importiert werden kann. 
+|  | SAP HANA-Verschlüsselung mit Persistenz | SFSS: Wenn eine DBID des Quellsystems im Zielsystem noch nicht existiert, muss die Systemdatenbank zuerst wiederhergestellt werden, bevor die Sicherung des Stammschlüssels dieses Mandanten importiert werden kann. LSS: Die LSS-Topologie wird während der Wiederherstellung der Mandantendatenbank(en) automatisch mit der HANA-Topologie synchronisiert. 
 
 
 |  | Quelle für HANA-Systemreplizierung | Weitere Schritte sind nicht erforderlich. Wenn für das Zielsystem kein HSR konfiguriert ist, bleibt es ein eigenständiges System. 
@@ -196,7 +196,7 @@ NOTE: Es ist wichtig, dass die Zielsystemressource und der Host vor dem Starten 
 
 image:sc-copy-clone-image19.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
 
-Bei einer Fibre-Channel-SAN-Einrichtung ist keine Export-IP-Adresse erforderlich, Sie müssen jedoch im nächsten Bildschirm das verwendete Protokoll angeben.
+In einer Fibre Channel SAN-Konfiguration müssen Sie im nächsten Bildschirm das verwendete Protokoll angeben.
 
 
 NOTE: Die Screenshots zeigen ein anderes Lab-Setup mit einer FibreChannel-Konnektivität.

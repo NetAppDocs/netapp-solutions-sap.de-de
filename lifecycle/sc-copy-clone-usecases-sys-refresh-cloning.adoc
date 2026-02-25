@@ -32,7 +32,7 @@ Der Workflow für Systemaktualisierungen wird im Abschnitt beschrieben link:sc-c
 
 == Beseitigung logischer Beschädigungen
 
-Logische Beschädigungen können durch Softwarefehler, menschliche Fehler oder Sabotage verursacht werden. Leider können logische Beschädigungen oft nicht mit standardmäßigen Hochverfügbarkeits- und Disaster Recovery-Lösungen behoben werden. Daher können abhängig von Schicht, Applikation, Filesystem oder Storage mit einer logischen Beschädigung minimale Ausfallzeiten und maximale Datenverluste nicht erfüllt werden.
+Logische Datenbeschädigung kann durch Softwarefehler, menschliche Fehler oder Sabotage verursacht werden. Leider kann logische Datenbeschädigung häufig nicht mit Standardlösungen für Hochverfügbarkeit und Notfallwiederherstellung behoben werden. Daher können je nach Ebene, Anwendung, Dateisystem oder Speicher, in dem die logische Datenbeschädigung aufgetreten ist, die Anforderungen an maximale Ausfallzeit und Datenverlust manchmal nicht erfüllt werden.
 
 Schlimmstenfalls ist die SAP-Anwendung logisch beschädigt. SAP Applikationen laufen oft in einer Landschaft, in der verschiedene Applikationen miteinander kommunizieren und Daten austauschen. Daher wird die Wiederherstellung eines SAP-Systems, bei dem eine logische Beschädigung aufgetreten ist, nicht empfohlen. Wenn Sie das System auf einen Zeitpunkt vor der Beschädigung wiederherstellen, führt dies zu Datenverlust. Außerdem würde die SAP-Landschaft nicht mehr synchron sein und eine zusätzliche Nachbearbeitung erfordern.
 
@@ -56,6 +56,6 @@ Disaster Recovery-Tests für asynchronen und synchronen SnapMirror verwenden Sna
 
 image:sc-copy-clone-image6.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"] Eine detaillierte Schritt-für-Schritt-Beschreibung finden Sie in den technischen Berichten
 
-https://www.netapp.com/pdf.html?item=/media/8584-tr4646pdf.pdf["TR-4646: SAP HANA Disaster Recovery with Storage Replication (netapp.com)"]
+https://www.netapp.com/pdf.html?item=/media/8584-tr4646pdf.pdf["Technischer Bericht: SAP HANA Disaster Recovery with Storage Replication"]
 
-link:../backup/hana-dr-anf-data-protection-overview.html["TR-4891: SAP HANA Disaster Recovery mit Azure NetApp Files"]
+link:../backup/hana-dr-anf-data-protection-overview.html["Disaster Recovery für SAP HANA mit Azure NetApp Files"]

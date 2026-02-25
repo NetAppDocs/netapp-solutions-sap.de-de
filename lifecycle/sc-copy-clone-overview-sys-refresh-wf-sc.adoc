@@ -54,7 +54,7 @@ In den meisten Fällen werden Zieltests/QA-Systeme mindestens einige Wochen lang
 NOTE: Bei der Aufteilung des FlexClone Volume löscht SnapCenter alle Backups, die auf dem Zielsystem erstellt wurden.
 
 
-NOTE: Bei SnapCenter und Azure NetApp Files ist der Klonaufteilungsvorgang nicht verfügbar, da Azure NetApp Files den Klon nach der Erstellung immer teilt.
+NOTE: Mit SnapCenter und Azure NetApp Files ist die Klon-Teilung nicht verfügbar, der Klon wird immer nach der Erstellung aufgeteilt.
 
 Der Aktualisierungsvorgang einschließlich der Klonaufteilung besteht aus den folgenden Schritten.
 

@@ -224,25 +224,25 @@ NOTE: Nur Spalte 1 (NFS-Mounts) der folgenden Tabelle ist für FSx für ONTAP re
 | *Sichern und Wiederherstellen von Nicht-Datenvolumes* |  |  
 
 
-| Snapshot-Backup | Ja (*) | Ja (*) 
+| Snapshot-Backup | Ja. | Ja (*) 
 
 
-| Wiederherstellen aus Snapshot | SFSR der gesamten LUN (*) | SFSR der gesamten LUN (*) 
+| Wiederherstellen aus Snapshot | SFSR der vollständigen LUN | SFSR der gesamten LUN (*) 
 
 
-| SnapVault Replizierung | Ja (*) | Ja (*) 
+| SnapVault Replizierung | Ja. | Ja (*) 
 
 
-| Wiederherstellung aus SnapVault -Ziel | Ja (*) | Ja (*) 
+| Wiederherstellung aus SnapVault -Ziel | Ja. | Ja (*) 
 
 
 | *SAP-Systemaktualisierung* |  |  
 
 
-| Aus dem primären Snapshot | Ja (**) | Ja (**) 
+| Aus dem primären Snapshot | Ja. | Ja (**) 
 
 
-| Vom SnapVault -Ziel | Ja (**) | Ja (**) 
+| Vom SnapVault -Ziel | Ja. | Ja (**) 
 
 
 | *HA und DR* |  |  
