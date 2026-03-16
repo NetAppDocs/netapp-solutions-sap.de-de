@@ -37,6 +37,9 @@ Das Linux LVM wird verwendet, um die Leistung zu steigern und LUN-Größenbeschr
 NOTE: Mit der beschriebenen Konfiguration wird die  `/usr/sap/FC5` Das Verzeichnis, in dem das Standard-Home-Verzeichnis des Benutzers FC5adm gespeichert ist, befindet sich auf der lokalen Festplatte. In einem Disaster Recovery-Setup mit festplattenbasierter Replikation empfiehlt NetApp die Erstellung einer zusätzlichen LUN für die  `/usr/sap/FC5` Verzeichnis, sodass sich alle Dateisysteme auf dem zentralen Speicher befinden.
 
 
+NOTE: Wenn der SAP Local Secure Store Service (LSS) verwendet wird, befindet sich das  `/lss/shared/SID` Verzeichnis, das Standardinstallationsverzeichnis von LSS, auf der lokalen Festplatte. In einer Disaster-Recovery-Umgebung mit festplattenbasierter Replikation empfiehlt NetApp, eine zusätzliche LUN für das  `/lss/shared/SID` Verzeichnis zu erstellen, sodass sich alle Dateisysteme auf dem zentralen Speicher befinden.
+
+
 
 === Erstellen von LVM-Volume-Gruppen und logischen Volumes
 

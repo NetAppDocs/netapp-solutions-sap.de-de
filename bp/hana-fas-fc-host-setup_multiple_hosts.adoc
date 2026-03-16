@@ -43,6 +43,9 @@ Beim SAP HANA-Host müssen Volume-Gruppen und logische Volumes erstellt und eing
 NOTE: Mit der beschriebenen Konfiguration wird die `/usr/sap/FC5` Das Verzeichnis, in dem das Standard-Home-Verzeichnis des Benutzers FC5adm gespeichert ist, befindet sich auf der lokalen Festplatte jedes HANA-Hosts.  In einem Disaster Recovery-Setup mit festplattenbasierter Replikation empfiehlt NetApp die Erstellung von vier zusätzlichen Unterverzeichnissen im `FC5_shared` Volumen für die `/usr/sap/FC5` Dateisystem, sodass jeder Datenbankhost alle seine Dateisysteme auf dem zentralen Speicher hat.
 
 
+NOTE: Wenn der SAP Local Secure Store Service (LSS) verwendet wird, muss das  `/lss/shared/SID` Verzeichnis auf allen Hosts zugänglich sein. NetApp empfiehlt, ein Volume für das  `/lss/shared/SID` Verzeichnis zu erstellen und es auf allen Hosts per NFS einzubinden.
+
+
 
 === Erstellen von LVM-Volume-Gruppen und logischen Volumes
 

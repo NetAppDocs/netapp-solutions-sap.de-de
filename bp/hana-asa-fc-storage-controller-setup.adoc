@@ -24,6 +24,14 @@ In einer SSD-Konfiguration werden Inline-Deduplizierung, Inline-Deduplizierung, 
 
 
 
+== ONTAP Autonomous Ransomware Protection
+
+Die von ONTAP Autonomous Ransomware Protection erstellten Snapshots können nicht für die Forward Recovery der SAP HANA Datenbank verwendet werden. Daher wird empfohlen, sie nicht für SAP HANA Daten- und Log-Volumes zu verwenden und die Funktion für diese Volumes zu deaktivieren. Verwenden Sie stattdessen den auf SnapCenter basierenden Datenschutz mit manipulationssicheren Snapshots zum Schutz vor Ransomware: link:../backup/hana-sc-generic-scope.html["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"]. ONTAP Autonomous Ransomware Protection kann für andere Volumes wie /hana/shared von Vorteil sein.
+
+Es ist möglich, die automatische Aktivierung dieser Funktion während der Volume-Erstellung für einen ONTAP Cluster zu deaktivieren, jedoch wird empfohlen, die Standardeinstellung beizubehalten und sie für Volumes zu deaktivieren, bei denen diese Funktionalität nicht benötigt wird.
+
+
+
 == Quality of Service
 
 QoS kann verwendet werden, um den Storage-Durchsatz für bestimmte SAP HANA Systeme oder nicht-SAP Applikationen auf einem Shared Controller zu begrenzen.
