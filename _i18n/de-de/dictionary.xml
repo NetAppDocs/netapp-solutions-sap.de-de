@@ -240,8 +240,6 @@
   <block id="c28f239d8c4b11cfe19d1dcf078100b9" category="section-title">SAP HANA Tailored Datacenter Integration</block>
   <block id="5d75848b6169b06c4cd7d6a8c2ec2337" category="paragraph">NetApp AFF Storage Controller sind im SAP HANA TDI Programm unter Verwendung von NFS- (NAS) und FC (SAN) Protokollen zertifiziert. Sie können in allen aktuellen SAP HANA-Szenarien, wie SAP Business Suite on HANA, S/4HANA, BW/4HANA oder SAP Business Warehouse on HANA, entweder in Konfigurationen mit einem Host oder mehreren Hosts implementiert werden. Alle Server, die für den Einsatz mit SAP HANA zertifiziert sind, können mit von NetApp zertifizierten Storage-Lösungen kombiniert werden. In der folgenden Abbildung finden Sie einen Überblick über die Architektur von SAP HANA TDI.</block>
   <block id="1ad4402d015b30446fdee11f5a31f55b" category="paragraph">Weitere Informationen zu den Voraussetzungen und Empfehlungen für die produsti SAP HANA Systeme finden Sie in der folgenden Ressource:</block>
-  <block id="14a31d6554fa48b10cc86d1aaf656a07" category="inline-link">SAP HANA Tailored Data Center Integration Häufig gestellte Fragen</block>
-  <block id="9282f2106e2ecc166cf241e78c58163e" category="list-text"><block ref="9282f2106e2ecc166cf241e78c58163e" category="inline-link-rx"></block></block>
   <block id="4769b140b92a70ffdab406be16d30122" category="paragraph">Für die Verbindung von Storage mit Virtual Machines (VMs) gibt es verschiedene Optionen. Die bevorzugte Option ist, die Storage Volumes mit NFS direkt aus dem Gastbetriebssystem zu verbinden. Bei Verwendung dieser Option unterscheidet sich die Konfiguration von Hosts und Storage nicht zwischen physischen Hosts und VMs.</block>
   <block id="f7fbf8be79b2dbbf7cca7d63ea2aaa3e" category="paragraph">In diesem Dokument wird das empfohlene Setup mit direkten NFS-Mounts vom Gastbetriebssystem beschrieben.</block>
   <block id="7db55fece99cd60241eaadd5b0b310da" category="summary">Der folgende Abschnitt bietet einen Überblick über die Performance- und Kapazitätsüberlegungen für die Dimensionierung eines Storage-Systems für SAP HANA.</block>
@@ -2905,8 +2903,6 @@ Legen Sie „Admin“ fest</block>
   <block id="0a961d2cbb588be1d5a93b4774cf6ef1" category="cell">Neue Storage-Systeme (AFF A-Series)</block>
   <block id="f31f11743f1dfba18e9f008e2956d24e" category="cell">September 2024</block>
   <block id="e4a9c264a13e2ec5faac7a73cf8d0e8c" category="cell">Kleinere Updates</block>
-  <block id="44fee80ab2b2a3105ec17b94b206cc8f" category="inline-link"><block ref="44fee80ab2b2a3105ec17b94b206cc8f" category="inline-link-rx"></block></block>
-  <block id="55162df4eaa40993b4b04219f5dd5e87" category="paragraph"><block ref="55162df4eaa40993b4b04219f5dd5e87" category="inline-link-rx"></block></block>
   <block id="e5e2a6bf28307550240d9ed91bbb0fa0" category="paragraph"><block ref="e5e2a6bf28307550240d9ed91bbb0fa0" category="inline-link-rx"></block></block>
   <block id="a36cfc2690f8671748f584abb16bdd04" category="cell">Neue Storage-Systeme</block>
   <block id="0fba9f2a3fbb4cfbaed44806cd9933a2" category="cell">Neue Storage-Systeme (ASA A-Series)</block>
@@ -5895,4 +5891,8 @@ Legen Sie „Admin“ fest</block>
   <block id="3d4f8b4b1b1faa02f0aa9e9f49fe9088" category="paragraph">Die von ONTAP Autonomous Ransomware Protection erstellten Snapshots können nicht für die Forward-Recovery der SAP HANA Datenbank verwendet werden. Daher wird empfohlen, sie nicht für SAP HANA Daten- und Log-Volumes zu verwenden und die Funktion für diese Volumes zu deaktivieren. Verwenden Sie stattdessen den auf SnapCenter basierenden Datenschutz mit Tamperproof Snapshots zum Schutz vor Ransomware: <block ref="f7a9a89a273a9d57fcd022d94d56f53f" category="inline-link-macro-rx"></block>. ONTAP Autonomous Ransomware Protection kann für andere Volumes wie /hana/shared von Vorteil sein.</block>
   <block id="5c9e36a122daafc35d852512bd535596" category="admonition">Wenn der SAP Local Secure Store Service (LSS) verwendet wird, ist das<block ref="1d7604fd1dd9d655c19ff0843bcd1cab" prefix=" " category="inline-code"></block>-Verzeichnis, das Standardinstallationsverzeichnis von LSS, auf der lokalen Festplatte. In einer Disaster-Recovery-Umgebung mit festplattenbasierter Replikation empfiehlt NetApp, ein Verzeichnis innerhalb des<block ref="07fe7fc9aa3cd33458708758a4a5854e" prefix=" " category="inline-code"></block>-Volumes für das<block ref="1d7604fd1dd9d655c19ff0843bcd1cab" prefix=" " category="inline-code"></block>-Verzeichnis anzulegen, sodass sich alle Dateisysteme auf dem zentralen Speicher befinden.</block>
   <block id="3ee7f42a5f57f42357faa6066ecfb5d8" category="cell">/lss/shared/</block>
+  <block id="e72900b6484d9e136f9baaf67301d38d" category="paragraph"><block ref="8878a31e958f2f4fbc2f0cb5299a88fc" category="inline-link-rx"></block>]</block>
+  <block id="b0b3e68761dd70d0fa49b725910dc993" category="list-text">SAP HANA Tailored Data Center Integration</block>
+  <block id="37716fa00dd641976ad10af0418c9f93" category="inline-link">SAP HANA Tailored Data Center Integration</block>
+  <block id="74e5a15645e2d65a375593199e01c962" category="list-text"><block ref="74e5a15645e2d65a375593199e01c962" category="inline-link-rx"></block></block>
 </blocks>
