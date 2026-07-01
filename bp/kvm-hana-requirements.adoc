@@ -31,14 +31,14 @@ Stellen Sie sicher, dass die folgenden Komponenten und Konfigurationen vorhanden
 * SR-IOV-fähige Netzwerkadapter (z. B. Mellanox ConnectX-Serie)
 * Fibre Channel HBA-Adapter für FCP-Speicherzugriff
 * Netzwerkinfrastruktur zur Unterstützung der erforderlichen VLANs und Netzwerksegmente
-* Die VM ist gemäß der https://documentation.suse.com/sbp/sap-15/pdf/SBP-SLES4SAP-HANAonKVM-SLES15SP5_en.pdf["SUSE Best Practices für SAP HANA auf KVM"^]
+* VM gemäß der  https://documentation.suse.com/sbp/sap-15/html/SBP-SLES4SAP-HANAonKVM-SLES15SP7/["SUSE Best Practices für SAP HANA auf KVM"^]
 
 
 
 
 == Wichtige Überlegungen
 
-* SR-IOV muss für die SAP HANA-Netzwerkkommunikation und für den Speicherzugriff über NFS verwendet werden. Jede einer VM zugewiesene virtuelle Funktion (VF) benötigt eine Bandbreite von mindestens 10 Gbit/s.
+* SR-IOV soll für die SAP HANA Netzwerkkommunikation und den Speicherzugriff über NFS verwendet werden, sofern möglich, aber auch Bridged Networking wird unterstützt. Jede einer VM zugewiesene virtuelle Funktion (VF) benötigt mindestens 10 Gbit/s Bandbreite.
 * Physische FCP-HBA-Ports müssen der VM als PCI-Geräte zugewiesen werden, damit FCP-LUNs verwendet werden können.  Ein physischer Port kann nur einer VM zugewiesen werden.
 * SAP HANA Multi-Host-Systeme werden in dieser Konfiguration nicht unterstützt.
 
@@ -47,7 +47,7 @@ Stellen Sie sicher, dass die folgenden Komponenten und Konfigurationen vorhanden
 
 == Zusätzliche Ressourcen
 
-* Aktuelle Informationen, einschließlich unterstützter CPU-Architekturen und Einschränkungen, finden Sie im SAP-Hinweis. https://me.sap.com/notes/3538596["3538596 - SAP HANA auf SUSE KVM-Virtualisierung mit SLES 15 SP5 - SAP für mich"] Die
+* Für die aktuellsten Informationen, einschließlich der unterstützten CPU-Architektur und Einschränkungen, siehe den SAP Note https://me.sap.com/notes/3741904["3741904 - SAP HANA auf SUSE KVM Virtualisierung mit SLES 15 SP7 - SAP for Me"].
 * Informationen zur Konfiguration von ONTAP Speichersystemen finden Sie in der https://docs.netapp.com/us-en/ontap["ONTAP 9 Dokumentation"] Die
 * Informationen zur SAP HANA-Speicherkonfiguration mit NetApp -Systemen finden Sie unter https://docs.netapp.com/us-en/netapp-solutions-sap/["NetApp SAP-Lösungsdokumentation"] Die
 

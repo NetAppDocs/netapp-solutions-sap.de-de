@@ -24,5 +24,8 @@ An dieser Lösung wurden seit ihrer ersten Veröffentlichung folgende technische
 | Oktober 2025 | Ausgangsversion 
 
 
-| November 2025 | Layout-Aktualisierung. 
+| November 2025 | Layout-Aktualisierung 
+
+
+| Juni 2026 | SUSE SLES 15SP7 Update 
 |===

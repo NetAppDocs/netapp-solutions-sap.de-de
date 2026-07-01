@@ -14,7 +14,7 @@ summary: Konfigurieren Sie SR-IOV-Netzwerkschnittstellen auf SUSE KVM für SAP H
 
 
 [role="lead"]
-Konfigurieren Sie SR-IOV-Netzwerkschnittstellen auf SUSE KVM für SAP HANA.  Richten Sie virtuelle Funktionen (VFs) ein, weisen Sie diese virtuellen Maschinen (VMs) zu und konfigurieren Sie redundante Netzwerkverbindungen für optimale Leistung und optimalen Speicherzugriff.
+SR-IOV-Netzwerkschnittstellen auf SUSE KVM für SAP HANA konfigurieren. Virtuelle Funktionen (VFs) einrichten, diesen virtuellen Maschinen (VMs) zuweisen und redundante Netzwerkverbindungen für optimale Leistung und Speicherzugriffe konfigurieren. Bridged Networking wird ebenfalls unterstützt.
 
 
 
