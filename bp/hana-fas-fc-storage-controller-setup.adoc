@@ -18,6 +18,7 @@ In diesem Abschnitt wird die Konfiguration des NetApp Storage-Systems beschriebe
 
 
 
+[[storage-efficiency]]
 == Storage-Effizienz
 
 Inline-Deduplizierung, Inline-Deduplizierung, Inline-Komprimierung und Inline-Data-Compaction werden von SAP HANA in einer SSD-Konfiguration unterstützt.
@@ -26,18 +27,21 @@ Die Aktivierung von Storage-Effizienzfunktionen in einer HDD-Konfiguration wird 
 
 
 
+[[netapp-flexgroup-volumes]]
 == NetApp FlexGroup Volumes
 
 Die Verwendung von NetApp FlexGroup Volumes wird für SAP HANA nicht unterstützt. Aufgrund der Architektur von SAP HANA bietet die Verwendung von FlexGroup Volumes keinen Vorteil und kann zu Performance-Problemen führen.
 
 
 
+[[netapp-volume-and-aggregate-encryption]]
 == NetApp Volume- und Aggregatverschlüsselung
 
 Die Verwendung von NetApp Volume Encryption (NVE) und NetApp Aggregate Encryption (NAE) wird bei SAP HANA unterstützt.
 
 
 
+[[ontap-autonomous-ransomware-protection]]
 == ONTAP Autonomous Ransomware Protection
 
 Die von ONTAP Autonomous Ransomware Protection erstellten Snapshots können nicht für die Forward Recovery der SAP HANA Datenbank verwendet werden. Daher wird empfohlen, sie nicht für SAP HANA Daten- und Log-Volumes zu verwenden und die Funktion für diese Volumes zu deaktivieren. Verwenden Sie stattdessen den auf SnapCenter basierenden Datenschutz mit manipulationssicheren Snapshots zum Schutz vor Ransomware: link:../backup/hana-sc-generic-scope.html["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"]. ONTAP Autonomous Ransomware Protection kann für andere Volumes wie /hana/shared von Vorteil sein.
@@ -46,18 +50,21 @@ Es ist möglich, die automatische Aktivierung dieser Funktion während der Volum
 
 
 
+[[quality-of-service]]
 == Quality of Service
 
 QoS kann verwendet werden, um den Storage-Durchsatz für bestimmte SAP HANA Systeme oder nicht-SAP Applikationen auf einem Shared Controller zu begrenzen.
 
 
 
+[[production-and-devtest]]
 === Produktion und Entwicklung/Test
 
 Ein Anwendungsfall wäre, den Durchsatz von Entwicklungs- und Testsystemen zu begrenzen, damit sie bei einem gemischten Setup keinen Einfluss auf die Produktionssysteme haben. Während des Dimensionierungsprozesses sollten Sie die Performance-Anforderungen eines nicht für die Produktion verwendeten Systems ermitteln. Entwicklungs- und Testsysteme können mit niedrigeren Leistungswerten dimensioniert werden, typischerweise im Bereich von 20 % bis 50 % eines von SAP definierten Produktionssystems-KPI. Ein großer I/O-Schreibvorgang wirkt sich am stärksten auf die Performance des Storage-Systems aus. Daher sollte die QoS-Durchsatzbegrenzung auf einen Prozentsatz der entsprechenden KPI-Werte für die SAP HANA-Speicherleistung in den Daten- und Protokoll-Volumes gesetzt werden.
 
 
 
+[[shared-environments]]
 === Shared-Umgebungen
 
 Ein weiterer Anwendungsfall ist die Einschränkung des Durchsatzes bei umfangreichen Schreib-Workloads, insbesondere um zu vermeiden, dass diese Workloads Auswirkungen auf andere latenzempfindliche Schreib-Workloads haben. In solchen Umgebungen empfiehlt es sich, eine QoS-Gruppenrichtlinie ohne gemeinsam genutzten Durchsatz auf jede LUN innerhalb jeder SVM (Storage Virtual Machine) anzuwenden, um den maximalen Durchsatz jedes einzelnen Storage-Objekts auf den angegebenen Wert zu beschränken. So besteht weniger Gefahr, dass ein einzelner Workload andere Workloads negativ beeinflussen kann.
@@ -84,6 +91,7 @@ NOTE: Das Limit gilt auch für Lesevorgänge. Daher genügend LUNs verwenden, um
 
 
 
+[[netapp-fabricpool]]
 == NetApp FabricPool
 
 NetApp FabricPool darf nicht für aktive primäre Filesysteme in SAP HANA Systemen verwendet werden. Dazu gehören die Dateisysteme für den Daten- und Protokollbereich sowie die `/hana/shared` File-System. Dies führt zu unvorhersehbarer Performance, insbesondere beim Start eines SAP HANA Systems.
@@ -97,6 +105,7 @@ FabricPool ist eine gute Option, um Log-Backups auf eine andere Storage Tier zu 
 
 
 
+[[configure-storage]]
 == Speicher konfigurieren
 
 In der folgenden Übersicht sind die erforderlichen Schritte zur Storage-Konfiguration zusammengefasst. Jeder Schritt wird in den nachfolgenden Abschnitten näher beschrieben. Bevor Sie diese Schritte initiieren, sollten Sie das Setup der Storage-Hardware, die Installation der ONTAP Software und die Verbindung der Speicher-FCP-Ports mit dem SAN Fabric abschließen.
@@ -111,6 +120,7 @@ In der folgenden Übersicht sind die erforderlichen Schritte zur Storage-Konfigu
 
 
 
+[[disk-shelf-connections]]
 == Festplatten-Shelf-Verbindungen
 
 Mit HDDs können maximal zwei DS2246 Festplatten-Shelfs oder vier DS224C Festplatten-Shelfs mit einem SAS-Stack verbunden werden, um die erforderliche Performance für die SAP HANA-Hosts zu liefern, wie in der folgenden Abbildung dargestellt. Die Festplatten in jedem Shelf müssen gleichmäßig auf beide Controller des HA-Paars verteilt werden.
@@ -123,6 +133,7 @@ image:saphana_fas_fc_image11.png["Die Abbildung zeigt den Input/Output-Dialog od
 
 
 
+[[nvme-disk-shelves]]
 === NVMe-Festplatten-Shelves
 
 Jedes NS224 NVMe-Festplatten-Shelf ist, wie in der folgenden Abbildung dargestellt, mit zwei 100-GbE-Ports pro Controller verbunden. Die Festplatten in jedem Shelf müssen gleichmäßig auf beide Controller des HA-Paars verteilt werden.
@@ -131,12 +142,14 @@ image:saphana_fas_ns224.png["MVMe Platten-Shelf-Verbindungen"]
 
 
 
+[[aggregate-configuration]]
 == Konfiguration von Aggregaten
 
 Im Allgemeinen müssen zwei Aggregate pro Controller konfiguriert werden, unabhängig davon, welches Platten-Shelf oder Festplattentechnologie (SSD oder HDD) zum Einsatz kommt. Dieser Schritt ist notwendig, damit Sie alle verfügbaren Controller-Ressourcen nutzen können. Für Systeme der FAS 2000 Serie genügt ein Daten-Aggregat.
 
 
 
+[[aggregate-configuration-with-hdds]]
 === Aggregatkonfiguration mit HDDs
 
 Die folgende Abbildung zeigt eine Konfiguration für acht SAP HANA-Hosts. Vier SAP HANA-Hosts sind mit jedem Storage-Controller verbunden. Zwei separate Aggregate, eines an jedem Storage Controller, sind konfiguriert. Jedes Aggregat ist mit 4 × 10 = 40 Datenfestplatten (HDDs) konfiguriert.
@@ -145,6 +158,7 @@ image:saphana_fas_fc_image12.png["Die Abbildung zeigt den Input/Output-Dialog od
 
 
 
+[[aggregate-configuration-with-sdd-only-systems]]
 === Aggregat-Konfiguration mit nur SDD-Systemen
 
 Im Allgemeinen müssen zwei Aggregate pro Controller konfiguriert werden, unabhängig davon, welches Platten-Shelf oder Festplattentechnologie (SSDs oder HDDs) zum Einsatz kommt.
@@ -155,12 +169,14 @@ image:saphana_fas_fc_image13.png["Die Abbildung zeigt den Input/Output-Dialog od
 
 
 
+[[storage-virtual-machine-configuration]]
 == Konfiguration von Storage Virtual Machines
 
 SAP Landschaften mit SAP HANA Datenbanken aus mehreren Hosts können eine einzige SVM verwenden. Falls erforderlich, kann jeder SAP-Landschaft auch eine SVM zugewiesen werden, falls diese von verschiedenen Teams innerhalb eines Unternehmens gemanagt werden. Die Screenshots und die Befehlsausgaben in diesem Dokument verwenden eine SVM mit dem Namen `hana`.
 
 
 
+[[logical-interface-configuration]]
 == Konfiguration der logischen Schnittstelle
 
 Innerhalb der Storage-Cluster-Konfiguration muss eine Netzwerkschnittstelle (LIF) erstellt und einem dedizierten FCP-Port zugewiesen werden. Wenn beispielsweise vier FCP-Ports aus Performance-Gründen erforderlich sind, müssen vier LIFs erstellt werden. Die folgende Abbildung zeigt einen Screenshot der acht LIFs, die auf der SVM konfiguriert wurden.
@@ -175,6 +191,7 @@ image:saphana_fas_fc_image15a.png["SVM-Erstellung"]
 
 
 
+[[initiator-groups]]
 == Initiatorgruppen
 
 Eine Initiatorgruppe kann für jeden Server oder für eine Gruppe von Servern konfiguriert werden, die Zugriff auf eine LUN benötigen. Für die iGroup Konfiguration sind die weltweiten Port-Namen (WWPNs) der Server erforderlich.

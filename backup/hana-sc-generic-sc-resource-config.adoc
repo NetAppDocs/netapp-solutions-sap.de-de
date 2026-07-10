@@ -33,6 +33,7 @@ image:hana-sc-generic-image-041.png["Breite=601, Höhe=315"] In den folgenden Ab
 
 
 
+[[sap-hana-backup-user-and-sap-hana-user-store-configuration]]
 == SAP HANA Backup-Benutzer- und SAP HANA Benutzerspeicherkonfiguration
 
 NetApp empfiehlt, in der HANA-Datenbank einen dedizierten Benutzer zu konfigurieren, der die Backup-Vorgänge mit SnapCenter ausführt. Im zweiten Schritt wird für diesen Backup-Benutzer ein SAP HANA-Benutzerspeicherschlüssel konfiguriert, und der SAP HANA-Benutzerspeicherschlüssel wird in der SnapCenter -Konfiguration bereitgestellt.
@@ -49,6 +50,7 @@ image:hana-sc-generic-image-042.png["Breite=601, Höhe=382"]
 
 
 
+[[sap-hana-user-store-configuration-on-the-hana-database-host]]
 === SAP HANA-Benutzerspeicherkonfiguration auf dem HANA-Datenbankhost
 
 SnapCenter verwendet den Benutzer <sid>adm zur Kommunikation mit der HANA-Datenbank. Daher muss der SAP HANA-Benutzerspeicherschlüssel mit dem Benutzer <sid>adm auf dem Datenbankhost konfiguriert werden.
@@ -59,6 +61,7 @@ Bei einem SAP HANA MDC-System ist der Port der HANA-Systemdatenbank 3<instanceNo
 
 
 
+[[sap-hana-user-store-configuration-examples]]
 === SAP HANA Benutzerspeicherkonfigurationsbeispiele
 
 Die Ausgabe zeigt den Schlüssel SS1KEY an, der für das HANA-System mit der Instanznummer = 00 konfiguriert wurde.
@@ -102,6 +105,7 @@ sm1adm@hana-2:/usr/sap/SM1/HDB12>
 ....
 
 
+[[storage-replication-configuration]]
 == Speicherreplikationskonfiguration
 
 Die Konfiguration der Datensicherungsbeziehung sowie der anfängliche Datentransfer müssen ausgeführt werden, bevor Replizierungs-Updates von SnapCenter gemanagt werden können.
@@ -127,6 +131,7 @@ image:hana-sc-generic-image-044.png["Breite=601, Höhe=180"]
 
 
 
+[[anf-backup-configuration]]
 == ANF-Backup-Konfiguration
 
 Für die ANF-Datensicherung sind keine besonderen Vorbereitungen erforderlich. Sobald die erste Sicherung mit aktiviertem ANF-Backup ausgeführt wird, erstellt SnapCenter einen Azure-Sicherungstresor mit dem Namen snapcenter-vault. Dieser Backup-Tresor wird dann von allen nachfolgenden ANF-Backup-Operationen verwendet, die von SnapCenter ausgeführt werden.
@@ -135,6 +140,7 @@ image:hana-sc-generic-image-045.png["Breite=601, Höhe=227"]
 
 
 
+[[deployment-of-snapcenter-plug-in-for-sap-hana]]
 == Bereitstellung des SnapCenter -Plug-ins für SAP HANA
 
 Die Anforderungen an den Host sind aufgelistet unter https://docs.netapp.com/us-en/snapcenter/protect-hana/reference_host_requirements_to_install_snapcenter_plug_in_package_for_linux.html["Hostanforderungen für die Installation des SnapCenter Plug-Ins-Pakets für Linux"]Die
@@ -152,6 +158,7 @@ image:hana-sc-generic-image-047.png["Breite=601, Höhe=154"]
 
 
 
+[[hana-auto-discovery]]
 == HANA-Autoerkennung
 
 Sobald die Bereitstellung des HANA-Plug-ins abgeschlossen ist, wird der automatische Erkennungsprozess gestartet. In der ersten Phase werden nur die Grundeinstellungen ermittelt und SnapCenter erstellt eine neue Ressource, die im Ressourcenbereich der Benutzeroberfläche mit einem roten Vorhängeschloss gekennzeichnet wird.
@@ -171,6 +178,7 @@ image:hana-sc-generic-image-050.png["Breite=601, Höhe=219"]
 
 
 
+[[resource-protection-configuration]]
 == Konfiguration für Ressourcenschutz
 
 Der Bildschirm zur Konfiguration des Ressourcenschutzes wird durch Anklicken einer Ressource geöffnet, nachdem der automatische Erkennungsprozess abgeschlossen ist. Die Screenshots in dieser Dokumentation zeigen die Schutzkonfiguration einer bestehenden Ressource.

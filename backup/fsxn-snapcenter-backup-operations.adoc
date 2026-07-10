@@ -18,6 +18,7 @@ Sie können ein On-Demand-Snapshot-Backup und eine On-Demand-Blockintegritätspr
 
 
 
+[[create-an-on-demand-snapshot-backup]]
 == Erstellen Sie ein Snapshot Backup nach Bedarf
 
 Führen Sie die folgenden Schritte aus, um On-Demand Snapshot Backups zu erstellen.
@@ -78,6 +79,7 @@ sapcc-hana-svm::>
 ....
 
 
+[[create-an-on-demand-block-integrity-check-operation]]
 == Erstellung einer bedarfsgerechten Blockintegritätsprüfung
 
 Ein on-Demand Block Integrity Check Vorgang wird auf dieselbe Weise wie ein Snapshot Backup Job ausgeführt, indem die Richtlinie BlockIntegrtyCheck ausgewählt wird. Bei der Planung von Backups mithilfe dieser Richtlinie erstellt SnapCenter eine standardmäßige SAP HANA Datei-Backup für das System und die Mandantendatenbanken.

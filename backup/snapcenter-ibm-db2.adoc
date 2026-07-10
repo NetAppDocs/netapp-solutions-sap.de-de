@@ -18,6 +18,7 @@ In diesem Dokument werden die Besonderheiten der SnapCenter-Integration für die
 
 
 
+[[introduction]]
 == Einführung
 
 Das Dokument soll keine Schritt-für-Schritt-Beschreibung der Einrichtung der gesamten Umgebung sein, sondern umfasst Konzepte und relevante Details zu:
@@ -32,6 +33,7 @@ Autor: Michael Schlosser, NetApp
 
 
 
+[[example-configuration-overview]]
 == Beispiel für eine Konfigurationsübersicht
 
 Beispiel für eine Implementierung für das SnapCenter DB2 Plug-in für ein SAP-System auf der Azure Plattform.
@@ -45,10 +47,12 @@ image:sc-ibm-db2-image01.png["Diagramm der Beispielimplementierung mit IBM DB2"]
 
 
 
+[[demo-environment]]
 == Demo-Umgebung
 
 
 
+[[software-versions]]
 === Softwareversionen
 
 [cols="50%, 50%"]
@@ -69,6 +73,7 @@ image:sc-ibm-db2-image01.png["Diagramm der Beispielimplementierung mit IBM DB2"]
 |===
 
 
+[[db2-volume-design]]
 === DB2-Volume-Design
 
 Das folgende Least-Volume-Layout muss verwendet werden, um Backup-/Recovery- und Klonfälle für die DB2-Datenbank zu ermöglichen. Die Beispielkonfiguration verwendet <SID>: D01.
@@ -146,6 +151,7 @@ image:sc-ibm-db2-image02.png["Screenshot der Datenbankdateipfade"]
 
 
 
+[[steps-to-protect-database-d01]]
 === Schritte zum Schutz von Datenbank D01
 
 * Prüfen Sie die Dateiverteilung gemäß dem Beispiellayout
@@ -157,6 +163,7 @@ image:sc-ibm-db2-image02.png["Screenshot der Datenbankdateipfade"]
 
 
 
+[[prerequisites-on-host]]
 === Voraussetzungen auf Host
 
 Weitere aktuelle Informationen finden Sie hier:
@@ -179,6 +186,7 @@ Bevor Sie einen Host hinzufügen und das Plug-in-Paket für Linux installieren, 
 
 
 
+[[prerequisites-for-the-database-enable-logging-and-backups]]
 === Voraussetzungen für die Datenbank – Aktivieren Sie Protokollierung und Backups
 
 
@@ -202,6 +210,7 @@ NOTE: Um Offline-Protokolle zu aktivieren, ist ein vollständiges Offline-Backup
 
 
 
+[[deploy-snapcenter-agent-to-host-vm-d01]]
 === Bereitstellen des SnapCenter-Agenten auf der Host-vm-d01
 
 Weitere Informationen finden Sie im link:https://docs.netapp.com/us-en/snapcenter/protect-scu/task_add_hosts_and_install_the_snapcenter_plug_ins_package_for_linux.html["SnapCenter-Dokumentation"].
@@ -217,6 +226,7 @@ image:sc-ibm-db2-image04.png["Screenshot der Datenbankerkennung auf dem Host"]
 
 
 
+[[create-resource-configuration-for-database-d01]]
 === Ressourcenkonfiguration für Datenbank D01 erstellen
 
 Wählen Sie erkannte Ressource D01
@@ -252,6 +262,7 @@ Und beenden Sie die Konfiguration.
 
 
 
+[[recover-database-d01]]
 === Datenbank D01 wiederherstellen
 
 * Beenden Sie SAP System + DB D01 auf Host vm-d01
@@ -304,6 +315,7 @@ NOTE: „Db2inidb D01 als Spiegel“ wird im Rahmen des SnapCenter-Wiederherstel
 
 
 
+[[additional-information-and-version-history]]
 == Zusätzliche Informationen und Versionsverlauf
 
 Folgende neu kodierte Demos stehen zur Unterstützung der Dokumentation zur Verfügung.
@@ -330,6 +342,7 @@ Sehen Sie sich die folgenden Dokumente und/oder Websites an, um mehr über die i
 
 
 
+[[version-history]]
 === Versionsverlauf
 
 [cols="25 %, 25%, 50%"]

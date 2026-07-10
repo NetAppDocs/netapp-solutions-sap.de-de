@@ -22,6 +22,7 @@ In diesem Kapitel werden die Installation und Konfiguration des für eine VMware
 
 
 
+[[storage-configuration]]
 == Storage-Konfiguration
 
 Die Abbildung unten zeigt die Storage- und Datastore-Konfiguration für das HANA-System. Sie müssen für jedes Dateisystem des HANA-Systems ein dediziertes Volume, eine LUN oder einen Datastore konfigurieren. Datastores dürfen nicht über mehrere HANA-Systeme oder andere Workloads hinweg freigegeben werden.
@@ -39,6 +40,7 @@ Eine Initiatorgruppe muss konfiguriert werden und die oben genannten LUNs müsse
 
 
 
+[[datastore-provisioning]]
 == Datastore-Bereitstellung
 
 Wir haben drei Datastores für das HANA-System mit den drei LUNs erstellt, die wir zuvor bereitgestellt haben. Darüber hinaus haben wir mit der Infrastruktur-LUN einen Infrastruktur-Datastore erstellt.
@@ -47,12 +49,14 @@ image:sc-saphana-vmware-smas-image7.png["Abbildung zeigt den Inhalt, der besproc
 
 
 
+[[vm-provisioning-and-os-installation]]
 == VM-Bereitstellung und Betriebssysteminstallation
 
 In unserem Lab-Setup haben wir eine neue VM implementiert und die VMDK für das Linux Betriebssystem im Infrastruktur-Datenspeicher platziert.
 
 
 
+[[vm-disk-configuration]]
 == Konfiguration von VM-Festplatten
 
 Der HANA VM wurden drei neue Festplatten hinzugefügt, jede Festplatte in einem der Datenspeicher, die für das HANA-System erstellt wurden.
@@ -61,6 +65,7 @@ image:sc-saphana-vmware-smas-image8.png["Abbildung zeigt den Inhalt, der besproc
 
 
 
+[[vm-parameter-setting]]
 == VM-Parametereinstellung
 
 Der Parameter Disk.EnableUUID muss hinzugefügt und auf TRUE gesetzt werden. Der Parameter wird von SnapCenter benötigt. Wenn nicht festgelegt, schlägt der SnapCenter-Vorgang „Ermittlung der virtuellen Ressource“ fehl.
@@ -87,10 +92,12 @@ Unit serial number: 6000c293fecf25ac6bc457af67fe1f54
 ....
 
 
+[[file-system-preparation-at-linux-host]]
 == Vorbereitung des Dateisystems auf Linux-Host
 
 
 
+[[creation-of-xfs-filesystem-on-new-disks]]
 === Erstellung des xfs-Dateisystems auf neuen Platten
 
 Die Gerätenamen der neuen Festplatten können mit dem folgenden Befehl überprüft werden.
@@ -161,6 +168,7 @@ hana-1:/install #
 ....
 
 
+[[creation-of-mount-points]]
 === Erstellung von Bereitstellungspunkten
 
 ....
@@ -173,6 +181,7 @@ hana-1:/ # chmod -R 777 /hana/shared
 ....
 
 
+[[configuration-of-etcfstab]]
 === Konfiguration von /etc/fstab
 
 ....
@@ -221,6 +230,7 @@ hana-1:/install #
 ....
 
 
+[[hana-installation]]
 == HANA-Installation
 
 Die HANA-Installation kann nun ausgeführt werden.
@@ -230,6 +240,7 @@ NOTE: Bei der beschriebenen Konfiguration befindet sich das Verzeichnis /usr/sap
 
 
 
+[[userstore-key-for-snapcenter]]
 == Userstore-Schlüssel für SnapCenter
 
 Es muss ein Benutzerspeicher für einen Systemdatenbankbenutzer erstellt werden, der von SnapCenter verwendet werden soll. Die HANA-Instanznummer muss für den Kommunikations-Port entsprechend festgelegt werden. In unserem Setup wird die Instanznummer „00“ verwendet.

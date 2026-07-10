@@ -40,6 +40,7 @@ NOTE: Abhängig von der Anzahl der SAP HANA-Hosts und der verwendeten Verbindung
 
 
 
+[[vmware-specific-network-setup]]
 == VMware-spezifische Netzwerk-Einrichtung
 
 Richtiges Netzwerkdesign und richtige Konfiguration sind entscheidend, da alle Daten für SAP HANA Instanzen, einschließlich Performance-kritischer Daten und Protokoll-Volumes für die Datenbank, in dieser Lösung über NFS bereitgestellt werden. Über ein dediziertes Storage-Netzwerk wird der NFS-Traffic von der Kommunikation und der Datenverkehr mit Benutzerzugriffsrechten zwischen SAP HANA-Knoten getrennt. Jeder SAP HANA Node benötigt eine redundante, dedizierte Netzwerkverbindung mit mindestens 10 GB Bandbreite. Es wird auch eine höhere Bandbreite unterstützt. Dieses Netzwerk muss sich End-to-End von der Storage-Ebene über Netzwerk-Switching und Computing bis hin zum auf VMware vSphere gehosteten Gastbetriebssystem erstrecken. Neben der physischen Switching-Infrastruktur wird ein VMware Distributed Switch (VdS) eingesetzt, um eine ausreichende Performance und Managebarkeit des Netzwerkverkehrs auf der Hypervisor-Ebene zu gewährleisten.

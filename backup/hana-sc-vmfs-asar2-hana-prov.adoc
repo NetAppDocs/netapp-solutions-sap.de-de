@@ -17,6 +17,7 @@ In diesem Kapitel werden die Installation und Konfiguration des für eine VMware
 
 
 
+[[storage-configuration]]
 == Storage-Konfiguration
 
 Um die von SAP definierten Speicherleistungs-KPIs für HANA-Produktionssysteme zu erfüllen, müssen dedizierte LUNs und Datenspeicher für die Daten- und Protokolldateisysteme des HANA-Systems konfiguriert werden. Datenspeicher dürfen nicht von mehreren HANA-Systemen oder anderen Workloads gemeinsam genutzt werden.
@@ -39,6 +40,7 @@ image:sc-hana-asrr2-vmfs-image3.png["Abbildung zeigt den Inhalt, der besprochen 
 
 
 
+[[vm-disk-configuration]]
 == Konfiguration von VM-Festplatten
 
 Der HANA-VM müssen drei neue Datenträger (VMDK) hinzugefügt werden. Jeder Datenträger befindet sich in einem der zuvor erstellten Datenspeicher, wie in der Abbildung unten dargestellt.
@@ -76,6 +78,7 @@ sr0 11:0 1 17.1G 0 rom
 ....
 
 
+[[vm-parameter-disk-enableuuid]]
 == VM-Parameter disk.EnableUUID
 
 Dieser Parameter muss entsprechend eingestellt werden, sonst schlägt die automatische Erkennung der SnapCenter Datenbank fehl.
@@ -89,10 +92,12 @@ image:sc-hana-asrr2-vmfs-image7.png["Abbildung zeigt den Inhalt, der besprochen 
 
 
 
+[[file-system-preparation-at-linux-host]]
 == Vorbereitung des Dateisystems auf Linux-Host
 
 
 
+[[creation-of-xfs-filesystem-on-new-disks]]
 === Erstellung des xfs-Dateisystems auf neuen Platten
 
 Auf jedem der drei neuen Festplatten wurde ein xfs-Dateisystem erstellt.
@@ -141,6 +146,7 @@ hana-8:~ #
 ....
 
 
+[[creation-of-mount-points]]
 === Erstellung von Bereitstellungspunkten
 
 ....
@@ -153,6 +159,7 @@ hana-8:/ # chmod -R 777 /hana/shared
 ....
 
 
+[[configuration-of-etcfstab]]
 === Konfiguration von /etc/fstab
 
 ....
@@ -213,6 +220,7 @@ hana-8:/ #
 ....
 
 
+[[hana-installation]]
 == HANA-Installation
 
 Die HANA-Installation kann nun ausgeführt werden.

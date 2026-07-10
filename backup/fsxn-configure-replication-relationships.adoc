@@ -24,6 +24,7 @@ Weitere Informationen zur SnapMirror Konfigurationsoptionen finden Sie in der ON
 
 
 
+[[peer-fsx-for-ontap-file-systems]]
 == Peer-FSX für ONTAP-Filesysteme
 
 ....
@@ -74,6 +75,7 @@ FsxId05f7f00af49dc7a3e    1-80-000011           Available      ok
 ....
 
 
+[[peer-svms]]
 == Peer-SVMs
 
 ....
@@ -96,6 +98,7 @@ sapcc-backup-target-zone5
 ....
 
 
+[[create-a-target-volume]]
 == Erstellen eines Ziel-Volumes
 
 Sie müssen das Ziel-Volume mit dem Typ erstellen `DP` So markieren Sie es als Replikationsziel.
@@ -106,6 +109,7 @@ FsxId05f7f00af49dc7a3e::> volume create -vserver sapcc-backup-target-zone5  -vol
 ....
 
 
+[[create-a-snapmirror-policy]]
 == SnapMirror-Richtlinie erstellen
 
 Die SnapMirror-Richtlinie und die hinzugefügte Regel definieren die Aufbewahrung und das SnapMirror-Etikett, um die zu replizierenden Snapshots zu identifizieren. Wenn Sie die SnapCenter-Richtlinie später erstellen, müssen Sie dasselbe Etikett verwenden.
@@ -127,6 +131,7 @@ FsxId00fa9e3c784b6abbb
 ....
 
 
+[[create-snapmirror-relationship]]
 == SnapMirror Beziehung erstellen
 
 Jetzt wird die Beziehung zwischen dem Quell- und dem Ziel-Volume sowie der Typ XDP und der zuvor erstellten Richtlinie definiert.
@@ -137,6 +142,7 @@ Operation succeeded: snapmirror create for the relationship with destination "sa
 ....
 
 
+[[initialize-snapmirror]]
 == SnapMirror initialisieren
 
 Mit diesem Befehl wird die erste Replikation gestartet. Bei diesem Vorgang werden alle Daten vom Quell-Volume auf das Ziel-Volume übertragen.

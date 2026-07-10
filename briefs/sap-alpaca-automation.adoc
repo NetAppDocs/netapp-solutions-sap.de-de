@@ -18,6 +18,7 @@ Dieses Dokument konzentriert sich auf die Integration von NetApp® Snapshot™ u
 
 
 
+[[solution-overview]]
 == Lösungsüberblick
 
 Der Betrieb von SAP Systemen und Lösungen ist sehr komplex. Für Unternehmen, die SAP einsetzen, sind die Systeme und Services jedoch zentral für ihre Geschäftsprozesse. Durch die Automatisierung wiederkehrender täglicher Betriebsaufgaben, wie zum Beispiel beim Kopieren und Aktualisieren von Systemen, können SAP-Systemadministratoren mehr Systeme mit weniger Aufwand managen, wiederholbare Ergebnisse liefern und menschliche Fehler reduzieren.
@@ -32,12 +33,14 @@ In diesem Dokument wird beschrieben, wie ALPACA in NetApp SnapCenter integriert 
 
 
 
+[[target-audience]]
 === Zielgruppe
 
 Dieses Dokument richtet sich an SAP-Systemadministratoren, die SAP-Systemkopien manuell durchgeführt haben und diese Aktivität mit ALPACA automatisieren möchten. Das beabsichtigte Ziel, die Technologien von NetApp Snapshot und FlexClone, orchestriert durch NetApp SnapCenter, mit ALPACA Workflows zu kombinieren, ist es, die Dauer von vollständig automatisierten SAP Systemkopien zu verringern.
 
 
 
+[[sap-system-clone-copy-and-refresh-scenarios]]
 === SAP Szenarien für Klonen, Kopieren und Aktualisieren von Systemen
 
 Der Begriff SAP-Systemkopie wird oft als Synonym für drei verschiedene Prozesse verwendet: SAP-Systemklon, SAP-Systemkopie und SAP-Systemaktualisierung. Es ist wichtig, zwischen diesen Vorgängen zu unterscheiden, da die Workflows und Anwendungsfälle unterschiedlich sind.
@@ -61,6 +64,7 @@ Obwohl es sich hier um drei verschiedene Anwendungsfälle handelt, bleibt der Da
 
 
 
+[[solution-technology]]
 === Lösungstechnologie
 
 Die Gesamtlösung besteht aus den folgenden Hauptkomponenten:
@@ -90,6 +94,7 @@ image:sap-alpaca-image5.png["Bild: ALPACA-Server, NetApp SnapCenter-Server, NetA
 
 
 
+[[use-case-summary]]
 === Zusammenfassung des Anwendungsfalls
 
 Es gibt mehrere Szenarien, in denen Daten aus einem Quellsystem einem Zielsystem zu Test- oder Schulungszwecken zur Verfügung gestellt werden müssen. Diese Test- und Trainingssysteme müssen regelmäßig mit Daten aus dem Quellsystem aktualisiert werden, um sicherzustellen, dass Tests und Trainings mit dem aktuellen Datensatz durchgeführt werden. Diese Vorgänge für die Systemaktualisierung umfassen mehrere Aufgaben auf der Infrastruktur-, Datenbank- und Applikationsebene und können je nach Grad der Automatisierung mehrere Tage dauern.
@@ -102,12 +107,14 @@ image:sap-alpaca-image6.png["Abbildung mit möglichen Verbesserungen der betrieb
 
 
 
+[[integrating-the-technology-components]]
 === Integration der Technologiekomponenten
 
 Die eigentliche Integration von SnapCenter in einen ALPACA-Workflow besteht aus der Verwendung von Shell-Skripten für den Zugriff auf die NetApp SnapCenter-REST-API. Durch diese REST API-basierte Integration wird eine Snapshot Kopie des SAP Quellsystems erstellt, ein FlexClone Volume erstellt und im SAP Zielsystem gemountet. Storage- und SAP-Administratoren wissen, wie sie Skripte entwickeln, die von SnapCenter ausgelöst und vom SnapCenter-Agenten ausgeführt werden, um Routineaufgaben des täglichen Betriebs zu automatisieren. Diese lose gekoppelte Architektur, die SnapCenter-Aufgaben über Shell-Skripte auslöst, ermöglicht es ihnen, ihre bestehenden Automatisierungsverfahren wiederzuverwenden, um die gewünschten Ergebnisse schneller zu erreichen, indem sie ALPACA als Workflow-Engine für die End-to-End-Automatisierung verwendet.
 
 
 
+[[conclusion]]
 == Schlussfolgerung
 
 Die Kombination aus ALPACA und NetApp Datenmanagement-Technologie bietet eine leistungsstarke Lösung, die den Zeit- und Arbeitsaufwand für die komplexesten und zeitaufwendigsten Aufgaben im Zusammenhang mit der SAP-Systemadministration erheblich reduzieren kann. Diese Kombination kann auch helfen, Konfigurationsabweichungen zu vermeiden, die durch menschliches Versagen zwischen den Systemen verursacht werden können.
@@ -116,6 +123,7 @@ Da Systemaktualisierungen, Kopien, Klone und Disaster-Recovery-Tests sehr sensit
 
 
 
+[[where-to-find-additional-information]]
 == Wo Sie weitere Informationen finden
 
 Weitere Informationen zu den in diesem Dokument enthaltenen Informationen finden Sie in den folgenden Dokumenten und auf den folgenden Websites:
@@ -127,6 +135,7 @@ Weitere Informationen zu den in diesem Dokument enthaltenen Informationen finden
 
 
 
+[[version-history]]
 == Versionsverlauf
 
 [cols="25,25,50"]

@@ -21,6 +21,7 @@ NOTE: Wenden Sie sich an Ihren Vertriebsmitarbeiter von NetApp oder einen NetApp
 
 
 
+[[performance-considerations]]
 == Überlegungen zur Performance
 
 SAP hat einen statischen Satz von Storage Key Performance-Indikatoren definiert. Diese KPIs sind für alle produktiven SAP HANA-Umgebungen gültig, unabhängig von der Speichergröße der Datenbank-Hosts und der Anwendungen, die die SAP HANA-Datenbank nutzen. Diese KPIs gelten für Single-Host-, mehrere Hosts-, Business Suite on HANA-, Business Warehouse on HANA-, S/4HANA- und BW/4HANA-Umgebungen. Daher hängt der aktuelle Ansatz zur Performance-Dimensionierung nur von der Anzahl aktiver SAP HANA-Hosts ab, die an das Storage-System angeschlossen sind.
@@ -36,6 +37,7 @@ Mit dem SAP Performance-Testtool wurde die maximale Anzahl an SAP HANA Hosts erm
 
 
 
+[[sas-disk-shelf]]
 === SAS-Festplatten-Shelf
 
 Das 12-GB-SAS-Festplatten-Shelf (DS224C) sorgt für das Performance-Sizing mit festen Festplatten-Shelf-Konfigurationen:
@@ -62,6 +64,7 @@ NOTE: Diese Berechnung erfolgt unabhängig vom eingesetzten Storage Controller. 
 
 
 
+[[ns224-nvme-shelf]]
 === NS224 NVMe-Shelf
 
 Eine NVMe-SSD (Daten) unterstützt bis zu 2/5 SAP HANA-Hosts, je nachdem, welche NVMe-Festplatte verwendet wird. Die SSDs und SAP HANA-Hosts müssen auf beide Storage-Controller verteilt sein. Gleiches gilt für die internen NVMe-Festplatten von AFF und ASA Systemen.
@@ -71,6 +74,7 @@ NOTE: Durch das Hinzufügen weiterer Platten-Shelves wird nicht die maximale Anz
 
 
 
+[[mixed-workloads]]
 == Heterogenen Workloads
 
 SAP HANA und andere Applikations-Workloads werden auf demselben Storage Controller oder im selben Storage-Aggregat unterstützt. Es ist jedoch eine NetApp Best Practice, SAP HANA-Workloads von allen anderen Applikations-Workloads zu trennen.
@@ -81,6 +85,7 @@ Das SAP HCMT-Testtool muss verwendet werden, um zu prüfen, ob zusätzliche SAP 
 
 
 
+[[capacity-considerations]]
 == Überlegungen zur Kapazität
 
 Eine detaillierte Beschreibung der Kapazitätsanforderungen für SAP HANA ist im https://launchpad.support.sap.com/#/notes/1900823["SAP-Hinweis 1900823"^] Whitepaper:
@@ -90,6 +95,7 @@ NOTE: Das Kapazitätsdimensionieren der gesamten SAP Landschaft mit mehreren SAP
 
 
 
+[[configuration-of-performance-test-tool]]
 == Konfiguration des Performance-Testtool
 
 Ab SAP HANA 1.0 SPS10 führte SAP Parameter ein, um das I/O-Verhalten anzupassen und die Datenbank für das verwendete Datei- und Speichersystem zu optimieren. Diese Parameter müssen auch für das Performance-Test-Tool von SAP eingestellt werden, wenn die Storage-Performance mit dem SAP-Testtool getestet wird.
@@ -205,6 +211,7 @@ Diese Variablen müssen für die Testkonfiguration verwendet werden. Dies ist in
 ....
 
 
+[[storage-sizing-process-overview]]
 == Übersicht über den Prozess zur Storage-Größenbemessung
 
 Die Anzahl der Festplatten pro HANA Host und die Host-Dichte für jedes Storage-Modell von SAP HANA wurden mithilfe des Test-Tools ermittelt.

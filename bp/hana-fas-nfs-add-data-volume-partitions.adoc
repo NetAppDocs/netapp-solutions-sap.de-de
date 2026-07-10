@@ -21,6 +21,7 @@ NOTE: Für SAP HANA sind zwei oder mehr einzelne Volumes für das Daten-Volume v
 
 
 
+[[enabling-additional-data-volume-partitions]]
 == Aktivieren von zusätzlichen Partitionen für Volumes
 
 . Um zusätzliche Datenträgers Partitionen zu aktivieren, fügen Sie den folgenden Eintrag in hinzu `global.ini` Verwendung von SAP HANA Studio oder Cockpit in der SYSTEMDB Konfiguration.
@@ -35,6 +36,7 @@ NOTE: Manuelles Hinzufügen des Parameters zum `global.ini` Datei erfordert den 
 
 
 
+[[volume-configuration-for-a-single-host-sap-hana-system]]
 == Volume-Konfiguration für ein SAP HANA System mit einem Host
 
 Das Layout von Volumes für ein SAP HANA System mit mehreren Partitionen mit nur einem Host ist ähnlich wie das Layout eines Systems mit einer Datenträgers, aber mit einem zusätzlichen Datenvolumen gespeichert auf einem anderen Aggregat als das Protokoll-Volume und das andere Datenvolumen. Die folgende Tabelle zeigt eine Beispielkonfiguration eines SAP HANA Einzelhostsystems mit zwei Daten-Volume-Partitionen.
@@ -66,6 +68,7 @@ Erstellen Sie das neue Daten-Volume und mounten Sie es mit ONTAP System Manager 
 
 
 
+[[volume-configuration-for-multiple-host-sap-hana-system]]
 == Volume-Konfiguration für SAP HANA System mit mehreren Hosts
 
 Das Layout von Volumes für ein SAP HANA System mit mehreren Hosts mit mehreren Partitionen ist wie das Layout eines Systems mit einer Daten-Volume-Partition, aber mit einem zusätzlichen Datenvolumen gespeichert auf einem anderen Aggregat als das Protokoll-Volume und das andere Datenvolumen. Die folgende Tabelle zeigt eine Beispielkonfiguration eines SAP HANA Multihost-Systems mit zwei Daten-Volume-Partitionen.
@@ -151,6 +154,7 @@ Erstellen Sie das neue Daten-Volume und mounten Sie es mit ONTAP System Manager 
 
 
 
+[[host-configuration]]
 == Host-Konfiguration
 
 Zusätzlich zu den im Abschnitt beschriebenen Aufgaben link:hana-fas-nfs-host-setup.html["„Host-Einrichtung“,"]müssen Sie die zusätzlichen Mount-Punkte und fstab-Einträge für die neuen zusätzlichen Daten-Volumes erstellen und die neuen Volumes mounten.
@@ -205,6 +209,7 @@ NOTE: Verwenden Sie eine andere virtuelle Storage-Schnittstelle für die Verbind
 
 
 
+[[adding-an-additional-data-volume-partition]]
 == Hinzufügen einer zusätzlichen Daten-Volume-Partition
 
 Führen Sie die folgende SQL-Anweisung für die Mandantendatenbank aus, um Ihrer Mandantendatenbank eine zusätzliche Partition für das Datenvolumen hinzuzufügen. Verwenden Sie den Pfad zu zusätzlichen Volumes:

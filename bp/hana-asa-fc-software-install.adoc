@@ -18,12 +18,14 @@ In diesem Abschnitt wird die Vorbereitung für die Installation von SAP HANA auf
 
 
 
+[[installation-on-single-host-system]]
 == Installation auf Single-Host-System
 
 Die Installation der SAP HANA-Software erfordert keine zusätzliche Vorbereitung auf ein Single-Host-System.
 
 
 
+[[installation-on-multiple-host-system]]
 == Installation auf Systemen mit mehreren Hosts
 
 Erstellen Sie vor Beginn der Installation einen `global.ini` Datei, um die Verwendung des SAP-Speicheranschlusses während des Installationsprozesses zu ermöglichen. Der SAP-Speicheranschluss montiert die erforderlichen Dateisysteme während des Installationsprozesses an den Worker-Hosts. Der `global.ini` Die Datei muss in einem Dateisystem verfügbar sein, auf das über alle Hosts zugegriffen werden kann, z. B. die `/hana/shared` File-System.

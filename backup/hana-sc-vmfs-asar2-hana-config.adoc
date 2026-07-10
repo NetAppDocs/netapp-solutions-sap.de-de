@@ -15,6 +15,7 @@ summary:
 
 
 
+[[configure-snapcenter-database-user]]
 == Konfigurieren des SnapCenter -Datenbankbenutzers
 
 Es muss ein Benutzerspeicher für einen Systemdatenbankbenutzer erstellt werden, der von SnapCenter verwendet werden soll.
@@ -23,6 +24,7 @@ image:sc-hana-asrr2-vmfs-image8.png["Abbildung zeigt den Inhalt, der besprochen 
 
 
 
+[[configure-hdb-userstore-key]]
 == Konfigurieren des HDB-Benutzerspeicherschlüssels
 
 Für den Benutzer vfsadm muss ein User Store Key angelegt werden. Für die Kommunikation mit dem Port muss die HANA-Instanznummer entsprechend gesetzt werden. In unserem Setup wird die Instanznummer „45“ verwendet.

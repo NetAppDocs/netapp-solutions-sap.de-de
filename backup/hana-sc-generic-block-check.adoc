@@ -46,6 +46,7 @@ In den folgenden Kapiteln werden die Konfiguration und Ausführung der verschied
 
 
 
+[[consistency-checks-with-hdbpersdiag-using-the-local-snapshot-directory]]
 == Konsistenzprüfungen mit hdbpersdiag unter Verwendung des lokalen Snapshot-Verzeichnisses
 
 Innerhalb von SnapCenter wird eine spezielle Richtlinie für hdbpersdiag-Operationen mit einem Tagesplan und einer Aufbewahrungsfrist von zwei Tagen erstellt. Wir verwenden keinen wöchentlichen Zeitplan, da wir dann mindestens 2 Snapshot-Backups hätten (minimale Aufbewahrungsdauer = 2), von denen eines bis zu zwei Wochen alt wäre.
@@ -179,6 +180,7 @@ LobFileIDMap OK
 ....
 
 
+[[consistency-checks-with-hdbpersdiag-using-a-central-verification-host]]
 == Konsistenzprüfungen mit hdbpersdiag unter Verwendung eines zentralen Verifizierungshosts
 
 Die folgende Abbildung zeigt eine Übersicht über die Lösungsarchitektur und den Arbeitsablauf. Mit einem zentralen Verifizierungshost kann die Konsistenz mehrerer unterschiedlicher HANA-Systeme überprüft werden. Die Lösung nutzt die SnapCenter -Workflows zum Erstellen und Löschen von Klonen, um ein geklontes Volume aus dem HANA-System, das überprüft werden soll, an den Verifizierungshost anzuhängen. Ein Post-Clone-Skript wird verwendet, um das HANA hdbpersdiag-Tool auszuführen. Im zweiten Schritt wird der SnapCenter -Workflow zum Löschen von Klonen verwendet, um das geklonte Volume auszuhängen und zu löschen.
@@ -220,6 +222,7 @@ NOTE: Das Beispielskript call-hdbpersdiag-flexclone.sh wird ohne Gewährleistung
 
 
 
+[[manual-workflow-execution]]
 === Manuelle Workflow-Ausführung
 
 In den meisten Fällen wird die Konsistenzprüfung als geplanter Vorgang ausgeführt, wie im nächsten Kapitel beschrieben. Kenntnisse über den manuellen Arbeitsablauf sind jedoch hilfreich, um die Parameter zu verstehen, die für den automatisierten Prozess verwendet werden.
@@ -369,6 +372,7 @@ SnapCenter wird nun das geklonte Volume vom Verifizierungshost aushängen und da
 
 
 
+[[snapcenter-workflow-automation-using-powershell-scripts]]
 === SnapCenter Workflow-Automatisierung mithilfe von PowerShell-Skripten
 
 Im vorherigen Abschnitt wurden die Workflows zum Erstellen und Löschen von Klonen mithilfe der SnapCenter -Benutzeroberfläche ausgeführt. Alle Workflows können auch mit PowerShell-Skripten oder REST-API-Aufrufen ausgeführt werden, was eine weitere Automatisierung ermöglicht. Im folgenden Abschnitt wird ein einfaches PowerShell-Skriptbeispiel zur Ausführung der SnapCenter -Workflows zum Erstellen und Löschen von Klonen beschrieben.
@@ -510,6 +514,7 @@ hana-7:/mnt/sapcc-share/hdbpersdiag #
 ....
 
 
+[[file-based-backup]]
 == Dateibasierte Datensicherung
 
 SnapCenter unterstützt die Durchführung einer Blockintegritätsprüfung mithilfe einer Richtlinie, bei der dateibasierte Sicherung als Sicherungstyp ausgewählt ist.

@@ -15,12 +15,14 @@ summary: Der Schwerpunkt dieses Dokuments liegt auf der Notfallwiederherstellung
 
 
 
+[[the-challenge]]
 == Die Herausforderung
 
 Geschäftskontinuität ist in IT-Organisationen von entscheidender Bedeutung.  Sie müssen in der Lage sein, Hochverfügbarkeitsdienste für die unternehmenskritischen Anwendungen bereitzustellen, die ihre Kunden für den Betrieb ihrer Geschäfte benötigen.  Andernfalls müssen ihre Kunden mit Produktivitätseinbußen rechnen und bei E-Commerce-Unternehmen kann es zu direkten Umsatzeinbußen kommen.
 
 
 
+[[the-solution]]
 == Die Lösung
 
 NetApp hat ein umfassendes Portfolio an Technologien und Tools entwickelt, die IT-Organisationen dabei unterstützen, ihre Disaster Recovery-Pläne zu erstellen oder anzupassen, um allen Geschäftsanforderungen gerecht zu werden:

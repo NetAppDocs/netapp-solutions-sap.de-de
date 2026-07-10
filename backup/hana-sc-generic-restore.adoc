@@ -42,6 +42,7 @@ NOTE: Wenn die Datenträgerverschlüsselung aktiviert ist und der SAP Local Secu
 
 
 
+[[automated-restore-and-recovery-for-sap-hana-mdc-systems-with-a-single-tenant]]
 == Automatisierte Wiederherstellung und Recovery für SAP HANA MDC-Systeme mit einem einzigen Mandanten
 
 Ein Wiederherstellungsvorgang wird eingeleitet, indem in der Ressourcentopologieansicht eine Snapshot-Sicherung ausgewählt und anschließend auf „Wiederherstellen“ geklickt wird.
@@ -112,6 +113,7 @@ image:hana-sc-generic-image-106.png["Breite=357, Höhe=439"]
 
 
 
+[[manual-recovery-with-hana-studio]]
 == Manuelle Wiederherstellung mit HANA Studio
 
 Um ein SAP HANA MDC-System mit einem oder mehreren Mandanten mithilfe von SAP HANA Studio und SnapCenter wiederherzustellen und zu sichern, führen Sie die folgenden Schritte aus:
@@ -307,6 +309,7 @@ NOTE: Bei einem SAP HANA MDC-System mit mehreren Mandanten muss die Mandantenwie
 
 
 
+[[manual-recovery-with-sql-commands]]
 == Manuelle Wiederherstellung mit SQL-Befehlen
 
 Sie können auch SQL-Anweisungen zur Wiederherstellung des HANA-Systems verwenden.
@@ -325,6 +328,7 @@ hdbsql SYSTEMDB=> RECOVER DATABASE FOR SS1 UNTIL TIMESTAMP '2026-08-26 10:55:49'
 ....
 
 
+[[single-tenant-restore-and-recovery]]
 == Wiederherstellung und Recovery für einzelne Mandanten
 
 Die Wiederherstellung und der Recovery-Vorgang für einen einzelnen Mandanten mit SnapCenter ähneln sehr dem im vorherigen Thema beschriebenen Workflow. link:hana-sc-generic-restore.html#manual-recovery-with-hana-studio["Manuelle Wiederherstellung mit HANA Studio"]Die
@@ -355,6 +359,7 @@ Gehen Sie wie folgt vor, um ein SAP HANA MDC-Einzelmandant-System mit SAP HANA S
 
 
 
+[[restore-of-non-data-volumes]]
 == Wiederherstellung von Nicht-Datenvolumes
 
 Ein Wiederherstellungsvorgang für ein Nicht-Datenvolume wird gestartet, indem in der Topologieansicht der Nicht-Datenvolume-Ressource eine Snapshot-Sicherung ausgewählt und anschließend auf „Wiederherstellen“ geklickt wird.

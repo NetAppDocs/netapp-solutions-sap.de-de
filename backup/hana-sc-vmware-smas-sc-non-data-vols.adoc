@@ -15,6 +15,7 @@ Bei nicht-Daten-Volumes wie HANA Shared könnten Backup- und Restore-Vorgänge u
 
 
 
+[[failure-of-the-storage-system-configured-in-snapcenter]]
 == Ausfall des in SnapCenter konfigurierten Storage-Systems
 
 Bei einem Ausfall des in SnapCenter konfigurierten Storage-Systems wechselt SnapCenter nicht automatisch zu dem anderen Storage-System. Die nicht datenbezogene Volume-Ressource muss manuell angepasst werden, damit die gespiegelte Kopie des Volumes für Backup- und Restore-Vorgänge verwendet wird.
@@ -23,6 +24,7 @@ image:sc-saphana-vmware-smas-image39.png["Abbildung zeigt den Inhalt, der bespro
 
 
 
+[[backup-operations]]
 == Backup-Vorgänge
 
 Obwohl SnapCenter die SnapMirror Active Sync Konfiguration für das HANA Shared Volume nicht kennt, werden Snapshots an beiden Standorten repliziert.
@@ -33,6 +35,7 @@ image:sc-saphana-vmware-smas-image41.png["Abbildung zeigt den Inhalt, der bespro
 
 
 
+[[restore-operation]]
 == Wiederherstellungsvorgang
 
 Im Falle einer Wiederherstellung würde SnapCenter einfach eine Volume-Wiederherstellung ohne irgendwelche VMware spezifischen Schritte durchführen. Normalerweise müssten Sie das HANA Shared Volume auf dem Linux Host abmounten, den Datastore trennen und dann die Volume-Wiederherstellung durchführen, den Datastore erneut verbinden und dann das Filesystem auf dem Linux Host mounten. Als manuelle Operation könnten Sie die HANA VM stoppen, das HANA Shared Volume mit SnapCenter wiederherstellen und dann die VM erneut starten.

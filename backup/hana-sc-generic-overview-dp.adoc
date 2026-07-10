@@ -17,6 +17,7 @@ Die Backup-Fenster werden immer kleiner, während die Menge der zu sichernden Da
 
 
 
+[[backup-and-recovery-using-snapshot-backups]]
 == Datensicherung und Wiederherstellung mithilfe von Snapshot-Backups
 
 Mit der NetApp Snapshot-Technologie können Sie innerhalb von Minuten Datenbank-Backups erstellen. Die zum Erstellen einer Snapshot-Kopie benötigte Zeit ist unabhängig von der Größe der Datenbank, da bei einer Snapshot-Kopie keine physischen Datenblöcke auf der Speicherplattform verschoben werden. Darüber hinaus hat die Verwendung der Snapshot-Technologie keine Auswirkungen auf die Leistung des laufenden SAP-Systems, da alle Operationen im Speichersystem ausgeführt werden. Daher können Sie die Erstellung von Snapshot-Kopien planen, ohne Spitzenzeiten für Dialoge oder Batch-Aktivitäten berücksichtigen zu müssen. SAP-on- NetApp -Kunden planen typischerweise mehrere Online-Snapshot-Backups über den Tag verteilt; beispielsweise ist ein Abstand von sechs Stunden üblich. Diese Snapshot-Backups werden in der Regel drei bis fünf Tage lang auf dem primären Speichersystem aufbewahrt, bevor sie entfernt oder zur Langzeitarchivierung auf einen günstigeren Speicher ausgelagert werden.
@@ -33,6 +34,7 @@ SnapVault und ANF-Backups bieten im Vergleich zu herkömmlichen Backups erheblic
 
 
 
+[[runtime-of-snapshot-backup-and-restore-operations]]
 == Laufzeit von Snapshot-Backup- und -Restore-Vorgängen
 
 Die folgende Abbildung zeigt HANA Studio eines Kunden, der Snapshot-Backup-Operationen durchführt. Das Bild zeigt, dass die HANA-Datenbank (ca. 4 TB groß) mit der Snapshot-Backup-Technologie in 1 Minute und 20 Sekunden gesichert wird, während eine dateibasierte Sicherung mehr als 4 Stunden dauert.
@@ -43,12 +45,14 @@ image:hana-sc-generic-image-001.png["Breite=624, Höhe=267"]
 
 
 
+[[recovery-time-objective-comparison]]
 == Vergleich der Recovery-Zeitvorgaben
 
 Dieser Abschnitt bietet einen Vergleich der Wiederherstellungszeitziele (RTO) von dateibasierten und speicherbasierten Snapshot-Backups. Die RTO (Recovery Time Out) ist definiert als die Summe der Zeit, die für die Wiederherstellung, die Wiederherstellung und den anschließenden Start der Datenbank benötigt wird.
 
 
 
+[[time-needed-to-restore-database]]
 === Benötigte Zeit zum Wiederherstellen der Datenbank
 
 Bei einem dateibasierten Backup hängt die Restore-Zeit von der Größe der Datenbank und der Backup-Infrastruktur ab, die die Restore-Geschwindigkeit in Megabyte pro Sekunde festlegt. Wenn die Infrastruktur beispielsweise einen Restore-Vorgang mit einer Geschwindigkeit von 250 MB/s unterstützt, dauert es etwa 4.5 Stunden, um eine Datenbank mit einer Größe von 4 TB auf der Persistenz wiederherzustellen.
@@ -57,6 +61,7 @@ Bei NetApp Snapshot-Backups ist die Wiederherstellungszeit unabhängig von der G
 
 
 
+[[time-needed-to-recover-database]]
 === Benötigte Zeit für das Recovery von Datenbanken
 
 Die Wiederherstellungszeit hängt von der Anzahl der Protokolle ab, die nach der Wiederherstellung angewendet werden müssen. Diese Zahl hängt von der Häufigkeit ab, mit der Daten-Backups erstellt werden.
@@ -67,12 +72,14 @@ Snapshot-Backups werden typischerweise in höherer Frequenz geplant, da sie kein
 
 
 
+[[time-needed-to-start-database]]
 === Benötigte Zeit zum Starten der Datenbank
 
 Die Startzeit der Datenbank hängt von der Größe der Datenbank und der Zeit ab, die zum Laden der Daten in den Arbeitsspeicher erforderlich ist. In den folgenden Beispielen wird davon ausgegangen, dass die Daten mit 1000 MBit/s geladen werden können. Das Laden von 4 TB in den Speicher dauert etwa 1 Stunde und 10 Minuten. Die Startzeit ist bei dateibasierten und Snapshot-basierten Restore- und Recovery-Vorgängen gleich.
 
 
 
+[[restore-and-recovery-sample-calculation]]
 === Wiederherstellungs- und Recovery-Beispielberechnung
 
 Die folgende Abbildung zeigt einen Vergleich zwischen Wiederherstellungs- und Recovery-Operationen mit einer täglichen dateibasierten Datensicherung und Snapshot-Datensicherungen mit unterschiedlichen Zeitplänen.
@@ -85,6 +92,7 @@ image:hana-sc-generic-image-002.png["Breite=624, Höhe=326"]
 
 
 
+[[use-cases-and-values-of-accelerated-backup-and-cloning-operations]]
 == Anwendungsfälle und Vorteile beschleunigter Backup- und Klonvorgänge
 
 Die Ausführung von Backups ist ein wichtiger Bestandteil jeder Datensicherungsstrategie. Die Backups werden regelmäßig geplant, um sicherzustellen, dass Sie nach Systemausfällen wiederherstellen können. Dies ist der naheliegende Anwendungsfall, aber auch andere SAP Lifecycle Management-Aufgaben, von denen Beschleunigung von Backup- und Recovery-Vorgängen entscheidend ist.

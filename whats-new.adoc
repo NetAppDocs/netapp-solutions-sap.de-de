@@ -15,6 +15,7 @@ Informieren Sie sich über Neuigkeiten zu Lösungen für SAP.
 
 
 
+[[26-february-2026]]
 == 26. Februar 2026
 
 Aktualisierte https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"] Lösung zur Abdeckung der SAP HANA-Volume-Verschlüsselung mit Local Secure Store (LSS).
@@ -23,6 +24,7 @@ Aktualisierte https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-
 
 
 
+[[02-december-2025]]
 == 2. Dezember 2025
 
 Neue Lösung:link:https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-generic-scope.html["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"^]
@@ -31,6 +33,7 @@ Diese Lösung bietet Best Practices für den SAP HANA-Datenschutz mit NetApp Sna
 
 
 
+[[12-november-2025]]
 == 12. November 2025
 
 Neue Lösunglink:https://docs.netapp.com/us-en/netapp-solutions-sap/bp/kvm-hana-introduction.html["SAP HANA mit SUSE KVM und NetApp Storage"^] :
@@ -39,6 +42,7 @@ Bereitstellung von SAP HANA Single-Host auf SUSE KVM unter Verwendung von NetApp
 
 
 
+[[18-august-2025]]
 == 18. August 2025
 
 Die NetApp Solutions-Site ist jetzt dielink:https://docs.netapp.com/us-en/netapp-solutions-family/index.html["NetApp Lösungsfamilie"^] , das die folgenden Websites umfasst:

@@ -27,6 +27,7 @@ In den folgenden Abschnitten werden die verschiedenen Operationen für Einzelhos
 
 
 
+[[sap-hana-snapshot-backups-in-snapcenter]]
 == SAP HANA Snapshot-Backups in SnapCenter
 
 Die SnapCenter -Ressourcentopologie zeigt die Liste der von SnapCenter erstellten Backups. Die folgende Abbildung zeigt die auf dem primären Speicher verfügbaren Backups und hebt das aktuellste Backup hervor.
@@ -43,6 +44,7 @@ image:hana-sc-generic-image-066.png["Breite=601, Höhe=293"]
 
 
 
+[[sap-hana-snapshot-backups-in-sap-hana-studio]]
 == SAP HANA Snapshot-Backups in SAP HANA Studio
 
 Bei der Durchführung einer Datensicherung mittels Speichersnapshots für ein SAP HANA MDC-System wird eine Snapshot-Kopie des Datenvolumes erstellt. Dieses Datenvolumen enthält die Daten der Systemdatenbank sowie die Daten aller Mandantendatenbanken. Um diese physische Architektur abzubilden, führt SAP HANA intern immer dann einen kombinierten internen Datenbank-Snapshot der Systemdatenbank sowie aller Mandantendatenbanken durch, wenn SnapCenter eine Snapshot-Sicherung auslöst. Dies führt zu mehreren separaten Backup-Einträgen im SAP HANA Backup-Katalog: einem für die Systemdatenbank und einem für jede Mandantendatenbank.
@@ -58,6 +60,7 @@ NOTE: SnapCenter kennt nur seine eigenen Backups. Zusätzliche Backups, die beis
 
 
 
+[[sap-hana-snapshot-backups-on-storage-layer]]
 == SAP HANA Snapshot-Backups auf der Speicherschicht
 
 Um die Backups auf der Speicherebene anzuzeigen, können Sie den NetApp System Manager verwenden und das Datenbankvolume auswählen. Der folgende Screenshot zeigt die verfügbaren Backups für das Datenbankvolume SS1_data_mnt00001 auf dem primären Speicher. Das hervorgehobene Backup ist das Backup, das in SnapCenter und SAP HANA Studio in den vorherigen Bildern angezeigt wird und die gleiche Namenskonvention aufweist.
@@ -70,6 +73,7 @@ image:hana-sc-generic-image-070.png["Breite=601, Höhe=294"]
 
 
 
+[[sap-hana-snapshot-backups-with-anf]]
 == SAP HANA Snapshot-Backups mit ANF
 
 Der folgende Screenshot zeigt die Topologieansicht eines HANA-Systems mit Azure NetApp Files. Für dieses HANA-System wurden sowohl lokale Snapshot-Backups als auch Backup-Replikation mittels ANF-Backup konfiguriert.
@@ -90,6 +94,7 @@ image:hana-sc-generic-image-074.png["Breite=601, Höhe=216"]
 
 
 
+[[snapshot-backups-of-non-data-volumes]]
 == Snapshot-Backups von Nicht-Datenvolumes
 
 Die SnapCenter -Ressourcentopologie zeigt die Liste der Backups für Nicht-Datenvolumes an. In der folgenden Abbildung sind die Backups des gemeinsam genutzten HANA-Volumes aufgelistet.
@@ -98,6 +103,7 @@ image:hana-sc-generic-image-075.png["Breite=601, Höhe=294"]
 
 
 
+[[backup-workflow-for-hana-database-backups]]
 == Backup-Workflow für HANA-Datenbanksicherungen
 
 Der Backup-Workflow für ein HANA-Datenbank-Snapshot-Backup besteht aus drei Hauptabschnitten.
@@ -147,6 +153,7 @@ image:hana-sc-generic-image-076.png["Breite=339, Höhe=475"]
 
 
 
+[[backup-workflow-for-non-data-volumes]]
 == Backup-Workflow für Nicht-Datenvolumes
 
 Bei einem Nicht-Daten-Volume besteht der Backup-Workflow aus der Snapshot-Operation und der Aufbewahrungsverwaltungsoperation.
@@ -155,6 +162,7 @@ image:hana-sc-generic-image-077.png["Breite=329, Höhe=404"]
 
 
 
+[[cleanup-of-secondary-backups]]
 == Bereinigung sekundärer Backups
 
 Wie in beschrieben link:hana-sc-generic-concepts.html#retention-management-of-backups-at-the-secondary-storage-snapvault["Aufbewahrungsmanagement für sekundäre Backups"]Die Aufbewahrungsverwaltung von Datensicherungen auf einem sekundären Sicherungsspeicher wird von ONTAP übernommen. SnapCenter prüft regelmäßig, ob ONTAP Backups auf dem sekundären Backup-Speicher gelöscht hat, indem es wöchentlich einen Bereinigungsauftrag ausführt.
@@ -169,6 +177,7 @@ Bis zum Abschluss dieser planmäßigen Bereinigung werden in SAP HANA und SnapCe
 
 
 
+[[change-the-frequency-of-the-snapcenter-cleanup-job]]
 === Ändern Sie die Häufigkeit des SnapCenter-Bereinigungsjobs
 
 SnapCenter führt standardmäßig wöchentlich den Bereinigungsauftrag SnapCenter_RemoveSecondaryBackup für alle Ressourcen aus. Dies kann mithilfe eines SnapCenter PowerShell-Cmdlets geändert werden.
@@ -233,6 +242,7 @@ image:hana-sc-generic-image-080.png["Breite=601, Höhe=257"]
 
 
 
+[[manual-refresh-on-resource-level]]
 === Manuelle Aktualisierung auf Ressourcenebene
 
 Bei Bedarf kann in der Topologieansicht einer Ressource auch eine manuelle Bereinigung der sekundären Backups durchgeführt werden. SnapCenter zeigt die Backups auf dem sekundären Backup-Speicher an, wenn die sekundären Backups ausgewählt werden, wie im folgenden Screenshot dargestellt. SnapCenter führt mit dem Symbol „Aktualisieren“ einen Bereinigungsvorgang durch, um die Backups für diese Ressource zu synchronisieren.

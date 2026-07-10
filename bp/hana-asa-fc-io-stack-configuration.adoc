@@ -10,6 +10,7 @@ summary: Ab SAP HANA 1.0 SPS10 führte SAP Parameter ein, um das I/O-Verhalten a
 
 
 
+[[io-stack-configuration-for-sap-hana]]
 == I/O-Stack-Konfiguration für SAP HANA
 
 Ab SAP HANA 1.0 SPS10 führte SAP Parameter ein, um das I/O-Verhalten anzupassen und die Datenbank für das verwendete Datei- und Speichersystem zu optimieren.

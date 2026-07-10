@@ -26,6 +26,7 @@ Es gibt zwei primäre Anwendungsfälle, die miteinander kombiniert werden könne
 
 
 
+[[high-availability-with-an-rpo-of-zero-and-a-minimal-rto]]
 == Hochverfügbarkeit ohne RPO und mit minimalem RTO-Aufwand
 
 System Replication ist mit synchroner Replizierung konfiguriert und verwendet Tabellen, die auf dem sekundären SAP HANA-Host vorab in den Speicher geladen sind. Diese Hochverfügbarkeitslösung lässt sich bei Hardware- oder Softwareausfällen einsetzen und reduziert zudem geplante Ausfallzeiten während SAP HANA Software-Upgrades (Betrieb fast ohne Ausfallzeit).
@@ -40,6 +41,7 @@ image:saphana-sr-scs-image1.png["Die Abbildung zeigt den Input/Output-Dialog ode
 
 
 
+[[disaster-recovery-over-a-large-distance]]
 == Disaster Recovery über große Entfernungen
 
 Die Systemreplizierung kann mit asynchroner Replizierung konfiguriert werden, ohne dass Tabelle auf dem sekundären Host vorab in den Speicher geladen wird. Diese Lösung dient der Behebung von Datacenter-Ausfällen. Failover-Vorgänge werden normalerweise manuell durchgeführt.

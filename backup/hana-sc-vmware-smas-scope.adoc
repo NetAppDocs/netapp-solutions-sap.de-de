@@ -24,6 +24,7 @@ Autor: Nils Bauer, NetApp
 
 
 
+[[scope-of-this-document]]
 == Inhalt des vorliegenden Dokuments
 
 Das Dokument soll keine Schritt-für-Schritt-Beschreibung der Einrichtung der gesamten Umgebung sein, sondern umfasst Konzepte und relevante Details zu:

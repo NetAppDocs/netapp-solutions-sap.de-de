@@ -40,6 +40,7 @@ image:saphana_aff_nfs_image4b.png["Zusätzliches HA-Paar hinzugefügt"]
 
 
 
+[[sap-hana-backup]]
 == SAP HANA Backup
 
 Die auf allen NetApp Storage-Controllern vorhandene ONTAP Software bietet einen integrierten Mechanismus zur Sicherung von SAP HANA Datenbanken, ohne die Performance zu beeinträchtigen. Storage-basierte NetApp Snapshot-Backups sind eine vollständig unterstützte und integrierte Backup-Lösung, die für einzelne SAP HANA Container sowie für SAP HANA Multitenant Database Container (MDC) Systeme mit einem einzelnen Mandanten oder mehreren Mandanten verfügbar ist.
@@ -65,6 +66,7 @@ NOTE: Detaillierte Informationen zur SAP HANA Backup- und Recovery-Lösung finde
 
 
 
+[[sap-hana-disaster-recovery]]
 == Disaster Recovery für SAP HANA
 
 SAP HANA Disaster-Recovery (DR) kann mithilfe von SAP HANA-Systemreplizierung auf der Datenbankebene oder auf der Storage-Ebene mithilfe von Storage-Replizierungstechnologien durchgeführt werden. Der folgende Abschnitt bietet einen Überblick über Disaster-Recovery-Lösungen basierend auf der Storage-Replizierung.
@@ -73,6 +75,7 @@ Weitere Informationen zu Disaster-Recovery-Lösungen für SAP HANA finden Sie un
 
 
 
+[[storage-replication-based-on-snapmirror]]
 === Storage-Replizierung basierend auf SnapMirror
 
 Die folgende Abbildung zeigt eine Disaster Recovery-Lösung für drei Standorte mit synchroner SnapMirror Replizierung am lokalen DR-Datacenter und asynchroner SnapMirror Replizierung der Daten in das Remote-DR-Datacenter.
@@ -93,6 +96,7 @@ Die synchrone Replizierung bietet den StrictSync-Modus. Wenn der Schreibvorgang 
 
 
 
+[[storage-replication-based-on-metrocluster]]
 === Storage-Replizierung basierend auf MetroCluster
 
 Die folgende Abbildung bietet einen allgemeinen Überblick über die Lösung. Das Storage-Cluster an jedem Standort bietet lokale Hochverfügbarkeit und wird für den Produktions-Workload verwendet. Die Daten aller Standorte werden synchron zum anderen Standort repliziert und sind im Fall eines Disaster Failovers verfügbar.

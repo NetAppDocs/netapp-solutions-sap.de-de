@@ -22,6 +22,7 @@ Die Vorbereitung des Ziel-Hosts umfasst auch das Herunterfahren des HANA QA- ode
 
 
 
+[[target-server-host-name-and-ip-address]]
 == Hostname und IP-Adresse des Zielservers
 
 Der Hostname des Zielservers muss mit dem Hostnamen des Quellsystems identisch sein. Die IP-Adresse kann unterschiedlich sein.
@@ -31,6 +32,7 @@ NOTE: Ein ordnungsgemäßes Fechten des Zielservers muss eingerichtet werden, da
 
 
 
+[[install-required-software]]
 == Installieren Sie die erforderliche Software
 
 Die SAP-Hostagent-Software muss auf dem Zielserver installiert sein. Ausführliche Informationen finden Sie im https://help.sap.com/viewer/9f03f1852ce94582af41bb49e0a667a7/103/en-US["SAP Host Agent"^] Im SAP-Hilfeportal.
@@ -40,6 +42,7 @@ NOTE: Wenn der Host als HANA QA- oder Testsystem verwendet wird, ist die SAP-Hos
 
 
 
+[[configure-users-ports-and-sap-services]]
 == Konfiguration von Benutzern, Ports und SAP-Diensten
 
 Die erforderlichen Anwender und Gruppen für die SAP HANA-Datenbank müssen auf dem Zielserver verfügbar sein. In der Regel wird die zentrale Benutzerverwaltung verwendet. Daher sind keine Konfigurationsschritte auf dem Zielserver erforderlich. Die erforderlichen Ports für die HANA-Datenbank müssen auf den Ziel-Hosts konfiguriert sein. Die Konfiguration kann durch Kopieren des aus dem Quellsystem kopiert werden `/etc/services` Datei auf dem Zielserver.
@@ -54,6 +57,7 @@ limit.descriptors=1048576
 ....
 
 
+[[prepare-hana-log-volume]]
 == HANA-Protokollvolumen vorbereiten
 
 Da das HANA-Protokoll-Volume nicht Teil der Replikation ist, muss auf dem Ziel-Host ein leeres Protokoll-Volume vorhanden sein. Das Protokoll-Volume muss dieselben Unterverzeichnisse enthalten wie das Quell-HANA-System.
@@ -70,6 +74,7 @@ vm-pr1:~ #
 ....
 
 
+[[prepare-log-backup-volume]]
 == Erstellen des Backup-Volumes für das Protokoll
 
 Da das Quellsystem für die HANA-Protokoll-Backups mit einem separaten Volume konfiguriert ist, muss auch ein Protokoll-Backup-Volume auf dem Zielhost verfügbar sein. Ein Volume für die Protokoll-Backups muss konfiguriert und auf dem Ziel-Host gemountet werden.
@@ -78,6 +83,7 @@ Wenn die Protokollsicherung Teil der Disaster Recovery-Einrichtung ist, wird das
 
 
 
+[[prepare-file-system-mounts]]
 == Bereiten Sie Dateisystemeinhängungen vor
 
 In der folgenden Tabelle sind die Namenskonventionen aufgeführt, die für das Lab-Setup verwendet werden. Die Volume-Namen am Disaster-Recovery-Standort sind in enthalten `/etc/fstab`.

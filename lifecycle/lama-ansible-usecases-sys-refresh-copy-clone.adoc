@@ -26,6 +26,7 @@ image:lama-ansible-image3.png["Das Bild zeigt einen Vergleich des Klonprozesses 
 
 
 
+[[address-logical-corruption]]
 == Beseitigung logischer Beschädigungen
 
 Logische Beschädigungen können durch Softwarefehler, menschliche Fehler oder Sabotage verursacht werden. Leider können logische Beschädigungen oft nicht mit standardmäßigen Hochverfügbarkeits- und Disaster Recovery-Lösungen behoben werden. Daher können abhängig von der Schicht, Applikation, dem File-System oder dem Storage mit der logischen Beschädigung minimale Ausfallzeiten und akzeptable Datenverluste in manchen Fällen nicht erfüllt werden.
@@ -40,6 +41,7 @@ image:lama-ansible-image4.png["Dieses Bild zeigt einen Schritt-für-Schritt-Proz
 
 
 
+[[disaster-recovery-testing]]
 == Disaster Recovery-Tests
 
 Für eine effiziente Disaster Recovery-Strategie müssen die erforderlichen Workflows getestet werden. Die Tests zeigen, ob die Strategie funktioniert und ob die interne Dokumentation ausreichend ist. Darüber hinaus können Administratoren die erforderlichen Verfahren Schulen.

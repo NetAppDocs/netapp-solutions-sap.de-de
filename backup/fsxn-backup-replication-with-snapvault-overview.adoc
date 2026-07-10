@@ -22,6 +22,7 @@ image:amazon-fsx-image8.png["Die Abbildung zeigt den Input/Output-Dialog oder di
 
 
 
+[[overview-of-configuration-steps]]
 === Übersicht über die Konfigurationsschritte
 
 Es gibt einige Konfigurationsschritte, die auf der FSX für ONTAP-Ebene ausgeführt werden müssen. Dies lässt sich entweder mit NetApp Cloud Manager oder über die Befehlszeile des FSX für ONTAP durchführen.

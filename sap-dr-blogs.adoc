@@ -18,4 +18,5 @@ Diese Blogs zeigen einen Überblick über die Highlights zum Thema SAP Backup, R
 
 
 
+[[sap-backup-restore-and-disaster-recovery-blogs]]
 === SAP Blogs für Backup, Restore und Disaster Recovery

@@ -18,6 +18,7 @@ NetApp Lösungen zur Optimierung des SAP Lifecycle Managements sind in SAP HANA 
 
 
 
+[[tenant-names-at-target-system]]
 == Mandantenname(n) im Zielsystem
 
 Die zur Aktualisierung des SAP HANA-Systems erforderlichen Schritte hängen von der Mandantenkonfiguration des Quellsystems und dem erforderlichen Mandantennamen auf dem Zielsystem ab, wie in der folgenden Abbildung dargestellt.
@@ -35,6 +36,7 @@ image:sc-copy-clone-image11.png[""]
 
 
 
+[[system-refresh-workflow-with-enabled-sap-hana-encryption]]
 == Workflow zur Systemaktualisierung mit aktivierter SAP HANA-Verschlüsselung
 
 Wenn die SAP HANA-Persistenzverschlüsselung aktiviert ist und abhängig vom verwendeten sicheren Speicher für die Verschlüsselungs-Root-Schlüssel, Instanz SFSS oder lokaler sicherer Speicher LSS, sind zusätzliche Schritte erforderlich, bevor die SAP HANA-Datenbank auf dem Zielsystem wiederhergestellt werden kann.
@@ -47,6 +49,7 @@ Die erforderlichen Arbeitsschritte werden in den folgenden Kapiteln detaillierte
 
 
 
+[[secure-store-sfss]]
 === Sicherer Speicher SFSS
 
 Im Quellsystem müssen Sie eine Sicherung der Verschlüsselungsroot-Schlüssel für die Systemdatenbank sowie für alle Mandantendatenbanken erstellen. Die Sicherungsdateien müssen auf das Zielsystem kopiert und die Stammschlüssel müssen aus dem Backup importiert werden, bevor der Wiederherstellungsvorgang ausgeführt wird.
@@ -145,6 +148,7 @@ Die obige Ausgabe zeigt zwei Mandanten mit dbid=3 und dbid=4. Wenn das Zielsyste
 
 
 
+[[secure-store-lss]]
 === Sicherer Speicher LSS
 
 

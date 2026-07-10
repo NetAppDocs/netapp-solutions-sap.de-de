@@ -28,6 +28,7 @@ SnapVault bietet im Vergleich zu herkömmlichen Backups deutliche Vorteile. Nach
 
 
 
+[[runtime-of-snapshot-backup-and-restore-operations]]
 == Laufzeit von Snapshot-Backup- und -Restore-Vorgängen
 
 Die folgende Abbildung zeigt HANA Studio eines Kunden, das Snapshot-Backup-Vorgänge verwendet. Das Bild zeigt, dass die HANA-Datenbank (ca. 4 TB groß) mithilfe der Snapshot Backup-Technologie in 1 Minute und 20 Sekunden und mehr als 4 Stunden bei einem dateibasierten Backup-Vorgang gesichert wird.
@@ -38,12 +39,14 @@ image:amazon-fsx-image1.png["Die Abbildung zeigt den Input/Output-Dialog oder di
 
 
 
+[[recovery-time-objective-comparison]]
 == Vergleich der Recovery-Zeitvorgaben
 
 Dieser Abschnitt enthält einen RTO-Vergleich (Recovery Time Objective) von Datei- und Storage-basierten Snapshot Backups. Das RTO wird durch die Summe der Zeit definiert, die für das Wiederherstellen, Wiederherstellen und Starten der Datenbank benötigt wird.
 
 
 
+[[time-needed-to-restore-database]]
 === Benötigte Zeit zum Wiederherstellen der Datenbank
 
 Bei einem dateibasierten Backup hängt die Restore-Zeit von der Größe der Datenbank und der Backup-Infrastruktur ab, die die Restore-Geschwindigkeit in Megabyte pro Sekunde festlegt. Wenn die Infrastruktur beispielsweise einen Restore-Vorgang mit einer Geschwindigkeit von 250 MB/s unterstützt, dauert es etwa 4.5 Stunden, um eine Datenbank mit einer Größe von 4 TB auf der Persistenz wiederherzustellen.
@@ -52,12 +55,14 @@ Bei den Backups der Storage Snapshot-Kopien ist die Wiederherstellungszeit unabh
 
 
 
+[[time-needed-to-start-database]]
 === Benötigte Zeit zum Starten der Datenbank
 
 Die Startzeit der Datenbank hängt von der Größe der Datenbank und der Zeit ab, die zum Laden der Daten in den Arbeitsspeicher erforderlich ist. In den folgenden Beispielen wird davon ausgegangen, dass die Daten mit 1000 MBit/s geladen werden können. Das Laden von 4 TB in den Speicher dauert etwa 1 Stunde und 10 Minuten. Die Startzeit ist bei dateibasierten und Snapshot-basierten Restore- und Recovery-Vorgängen gleich.
 
 
 
+[[time-needed-to-recover-database]]
 === Benötigte Zeit für das Recovery von Datenbanken
 
 Die Wiederherstellungszeit hängt von der Anzahl der Protokolle ab, die nach der Wiederherstellung angewendet werden müssen. Diese Zahl hängt von der Häufigkeit ab, mit der Daten-Backups erstellt werden.
@@ -76,6 +81,7 @@ image:amazon-fsx-image2.png["Die Abbildung zeigt den Input/Output-Dialog oder di
 
 
 
+[[use-cases-and-values-of-accelerated-backup-and-cloning-operations]]
 == Anwendungsfälle und Vorteile beschleunigter Backup- und Klonvorgänge
 
 Die Ausführung von Backups ist ein wichtiger Bestandteil jeder Datensicherungsstrategie. Die Backups werden regelmäßig geplant, um sicherzustellen, dass Sie nach Systemausfällen wiederherstellen können. Dies ist der naheliegende Anwendungsfall, aber auch andere SAP Lifecycle Management-Aufgaben, von denen Beschleunigung von Backup- und Recovery-Vorgängen entscheidend ist.

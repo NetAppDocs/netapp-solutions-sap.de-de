@@ -18,24 +18,28 @@ In diesem Abschnitt wird die Konfiguration des NetApp Storage-Systems beschriebe
 
 
 
+[[storage-efficiency]]
 == Storage-Effizienz
 
 In einer SSD-Konfiguration werden Inline-Deduplizierung, Inline-Deduplizierung, Inline-Komprimierung und Inline-Data-Compaction unterstützt.
 
 
 
+[[netapp-flexgroup-volumes]]
 == NetApp FlexGroup Volumes
 
 Die Verwendung von NetApp FlexGroup Volumes wird für SAP HANA nicht unterstützt. Aufgrund der Architektur von SAP HANA bietet die Verwendung von FlexGroup Volumes keinen Vorteil und kann zu Performance-Problemen führen.
 
 
 
+[[netapp-volume-and-aggregate-encryption]]
 == NetApp Volume- und Aggregatverschlüsselung
 
 Die Verwendung von NetApp Volume Encryption (NVE) und NetApp Aggregate Encryption (NAE) wird bei SAP HANA unterstützt.
 
 
 
+[[ontap-autonomous-ransomware-protection]]
 == ONTAP Autonomous Ransomware Protection
 
 Die von ONTAP Autonomous Ransomware Protection erstellten Snapshots können nicht für die Forward Recovery der SAP HANA Datenbank verwendet werden. Daher wird empfohlen, sie nicht für SAP HANA Daten- und Log-Volumes zu verwenden und die Funktion für diese Volumes zu deaktivieren. Verwenden Sie stattdessen den auf SnapCenter basierenden Datenschutz mit manipulationssicheren Snapshots zum Schutz vor Ransomware: link:../backup/hana-sc-generic-scope.html["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"]. ONTAP Autonomous Ransomware Protection kann für andere Volumes wie /hana/shared von Vorteil sein.
@@ -44,6 +48,7 @@ Es ist möglich, die automatische Aktivierung dieser Funktion während der Volum
 
 
 
+[[quality-of-service]]
 == Quality of Service
 
 Mit QoS lässt sich der Storage-Durchsatz für bestimmte SAP HANA Systeme oder andere Applikationen auf einem gemeinsam genutzten Controller begrenzen. Ein Anwendungsfall wäre, den Durchsatz von Entwicklungs- und Testsystemen zu begrenzen, damit sie bei einem gemischten Setup keinen Einfluss auf die Produktionssysteme haben.
@@ -56,6 +61,7 @@ Ein großer I/O-Schreibvorgang wirkt sich am stärksten auf die Performance des 
 
 
 
+[[netapp-fabricpool]]
 == NetApp FabricPool
 
 NetApp FabricPool darf nicht für aktive primäre Filesysteme in SAP HANA Systemen verwendet werden. Dazu gehören die Dateisysteme für den Daten- und Protokollbereich sowie die `/hana/shared` File-System. Dies führt zu unvorhersehbarer Performance, insbesondere beim Start eines SAP HANA Systems.
@@ -69,6 +75,7 @@ FabricPool ist eine gute Option, um Log-Backups auf eine andere Storage Tier zu 
 
 
 
+[[storage-configuration]]
 == Storage-Konfiguration
 
 In der folgenden Übersicht sind die erforderlichen Schritte zur Storage-Konfiguration zusammengefasst. Jeder Schritt wird in den nachfolgenden Abschnitten näher beschrieben. In diesem Abschnitt wird die Storage-Hardware eingerichtet und die ONTAP Software bereits installiert. Außerdem müssen bereits die Verbindungen zwischen den Storage-Ports (10 GbE oder schneller) und dem Netzwerk vorhanden sein.
@@ -85,10 +92,12 @@ In der folgenden Übersicht sind die erforderlichen Schritte zur Storage-Konfigu
 
 
 
+[[disk-shelf-connection]]
 == Festplatten-Shelf-Verbindung
 
 
 
+[[sas-disk-shelves]]
 === SAS-Platten-Shelves
 
 Es kann maximal ein Platten-Shelf mit einem SAS-Stack verbunden werden, um die erforderliche Performance für die SAP HANA-Hosts zu liefern, wie in der folgenden Abbildung dargestellt. Die Festplatten in jedem Shelf müssen gleichmäßig auf beide Controller des HA-Paars verteilt werden. ADPv2 wird mit ONTAP 9 und DS224C Festplatten-Shelfs verwendet.
@@ -100,6 +109,7 @@ image:saphana_aff_nfs_image13.png["SAS Shelf-Verbindungen"]
 
 
 
+[[nvme-100gbe-disk-shelves]]
 === NVMe (100 GbE) Festplatten-Shelfs
 
 Jedes NS224 NVMe-Festplatten-Shelf ist, wie in der folgenden Abbildung dargestellt, mit zwei 100-GbE-Ports pro Controller verbunden. Die Festplatten in jedem Shelf müssen gleichmäßig auf beide Controller des HA-Paars verteilt werden. ADPv2, wie im Kapitel für die Aggregatkonfiguration beschrieben, wird auch für das NS224 Festplatten-Shelf verwendet.
@@ -108,6 +118,7 @@ image:saphana_aff_nfs_image14a.png["MVMe Platten-Shelf-Verbindungen"]
 
 
 
+[[aggregate-configuration]]
 == Konfiguration von Aggregaten
 
 Im Allgemeinen müssen Sie zwei Aggregate pro Controller konfigurieren, unabhängig vom verwendeten Festplatten-Shelf oder der Festplattentechnologie (SAS-SSDs oder NVMe-SSDs).
@@ -118,6 +129,7 @@ image:saphana_aff_nfs_image15a.png["Aggregatkonfiguration"]
 
 
 
+[[svm-configuration]]
 == SVM-Konfiguration
 
 Mehrere SAP Landschaften mit SAP HANA Datenbanken können eine einzige SVM nutzen. Darüber hinaus kann jeder SAP-Landschaft bei Bedarf eine SVM zugewiesen werden, falls diese von verschiedenen Teams innerhalb eines Unternehmens gemanagt werden.
@@ -129,6 +141,7 @@ vserver modify -vserver <svm-name> -qos-policy-group none
 ....
 
 
+[[lif-configuration]]
 == LIF-Konfiguration
 
 Für SAP HANA Produktionssysteme müssen unterschiedliche LIFs verwendet werden, um das Daten-Volume und das Protokoll-Volume vom SAP HANA-Host zu mounten. Daher sind mindestens zwei LIFs erforderlich.
@@ -152,6 +165,7 @@ Für Produktions-, Entwicklungs- und Testsysteme liefert `/hana/shared` Das File
 
 
 
+[[volume-configuration-for-sap-hana-single-host-systems]]
 == Volume-Konfiguration für SAP HANA Single-Host-Systeme
 
 Die folgende Abbildung zeigt die Volume-Konfiguration von vier SAP HANA-Systemen mit einem Host. Die Daten- und Protokoll-Volumes jedes SAP HANA Systems werden auf verschiedene Storage Controller verteilt. Beispiel: Volume `SID1_data_mnt00001` Wird auf Controller A und Volume konfiguriert `SID1_log_mnt00001` Ist auf Controller B konfiguriert
@@ -200,6 +214,7 @@ NOTE: Wenn der SAP Local Secure Store Service (LSS) verwendet wird, befindet sic
 |===
 
 
+[[volume-configuration-for-sap-hana-multiple-host-systems]]
 == Volume-Konfiguration für SAP HANA Multiple-Host-Systeme
 
 Die folgende Abbildung zeigt die Volume-Konfiguration eines 4+1 SAP HANA-Systems. Die Daten- und Protokoll-Volumes jedes SAP HANA-Hosts werden auf verschiedene Storage-Controller verteilt. Beispiel: Volume `SID1_data1_mnt00001` Wird auf Controller A und Volume konfiguriert `SID1_log1_mnt00001` Ist auf Controller B konfiguriert
@@ -287,6 +302,7 @@ NOTE: Wenn der SAP Local Secure Store Service (LSS) verwendet wird, muss das  `/
 |===
 
 
+[[volume-options]]
 == Volume-Optionen
 
 Sie müssen die in der folgenden Tabelle aufgeführten Volume-Optionen auf allen SVMs überprüfen und festlegen. Bei einigen Befehlen müssen Sie in den erweiterten Berechtigungsebene in ONTAP wechseln.
@@ -308,6 +324,7 @@ Sie müssen die in der folgenden Tabelle aufgeführten Volume-Optionen auf allen
 |===
 
 
+[[nfs-configuration-for-nfsv3]]
 == NFS-Konfiguration für NFSv3
 
 Die in der folgenden Tabelle aufgeführten NFS-Optionen müssen verifiziert und auf allen Storage Controllern eingestellt werden. Für einige der Befehle, die in dieser Tabelle aufgeführt sind, müssen Sie in den erweiterten Berechtigungsmodus wechseln.
@@ -326,6 +343,7 @@ NOTE: In gemeinsam genutzten Umgebungen mit unterschiedlichen Workloads wird die
 
 
 
+[[nfs-configuration-for-nfsv4]]
 == NFS-Konfiguration für NFSv4
 
 Die in der folgenden Tabelle aufgeführten NFS-Optionen müssen verifiziert und auf allen SVMs eingestellt werden.
@@ -391,6 +409,7 @@ Behalten Sie das standardmäßige Wiederholungsintervall von 10 Sekunden in dies
 |===
 
 
+[[mount-volumes-to-namespace-and-set-export-policies]]
 == Volumes werden in Namespace mounten und Richtlinien für den Export festlegen
 
 Wenn ein Volume erstellt wird, muss das Volume im Namespace gemountet werden. In diesem Dokument gehen wir davon aus, dass der Name des Verbindungspfads dem Namen des Volumes entspricht. Standardmäßig wird das Volume mit der Standardrichtlinie exportiert. Die Exportpolitik kann bei Bedarf angepasst werden.

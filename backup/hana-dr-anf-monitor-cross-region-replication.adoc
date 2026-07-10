@@ -34,6 +34,7 @@ image:saphana-dr-anf_image16.png["Die Abbildung zeigt den Input/Output-Dialog od
 
 
 
+[[replicated-snapshot-backups]]
 == Replizierte Snapshot Backups
 
 Bei jedem Replizierungs-Update vom Quell- zum Ziel-Volume werden alle Blockänderungen, die zwischen dem letzten und dem aktuellen Update stattgefunden haben, auf das Ziel-Volume repliziert. Dies umfasst auch die Snapshots, die auf dem Quell-Volume erstellt wurden. Der folgende Screenshot zeigt die Snapshots, die auf dem Zielvolume verfügbar sind. Wie bereits erwähnt, sind alle Snapshots, die vom Tool AzAcSnap erstellt wurden, applikationskonsistente Images der HANA Datenbank, die zur Ausführung eines Speicherpunktes oder einer vorwärts gerichteten Recovery verwendet werden können.

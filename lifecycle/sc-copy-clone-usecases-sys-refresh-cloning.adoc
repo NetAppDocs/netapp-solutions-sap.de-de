@@ -18,6 +18,7 @@ NetApp Lösungen zur Optimierung des SAP Lifecycle Managements sind in SAP HANA 
 
 
 
+[[data-refresh-of-qa-test-sandbox-or-training-systems]]
 == Datenaktualisierung von QA-, Test-, Sandboxsystemen- und Trainingssystemen
 
 Es gibt verschiedene Szenarien, in denen Daten aus einem Quellsystem zu Test- oder Schulungszwecken einem Zielsystem zur Verfügung gestellt werden müssen. Diese Test- und Trainingssysteme müssen regelmäßig mit Daten des Quellsystems aktualisiert werden, um sicherzustellen, dass die Test- und Schulungsmaßnahmen mit dem aktuellen Datensatz durchgeführt werden. Diese Systemaktualisierungen bestehen aus mehreren Aufgaben auf Infrastruktur-, Datenbank- und Applikationsebene und können je nach Automatisierungsgrad mehrere Tage dauern.
@@ -30,6 +31,7 @@ Der Workflow für Systemaktualisierungen wird im Abschnitt beschrieben link:sc-c
 
 
 
+[[address-logical-corruption]]
 == Beseitigung logischer Beschädigungen
 
 Logische Datenbeschädigung kann durch Softwarefehler, menschliche Fehler oder Sabotage verursacht werden. Leider kann logische Datenbeschädigung häufig nicht mit Standardlösungen für Hochverfügbarkeit und Notfallwiederherstellung behoben werden. Daher können je nach Ebene, Anwendung, Dateisystem oder Speicher, in dem die logische Datenbeschädigung aufgetreten ist, die Anforderungen an maximale Ausfallzeit und Datenverlust manchmal nicht erfüllt werden.
@@ -46,6 +48,7 @@ Der Arbeitsablauf der Erstellung des Reparatursystems wird im Abschnitt beschrie
 
 
 
+[[disaster-recovery-testing]]
 == Disaster Recovery-Tests
 
 Für eine effiziente Disaster-Recovery-Strategie muss der erforderliche Workflow getestet werden. Die Tests zeigen, ob die Strategie funktioniert und ob die interne Dokumentation ausreichend ist. Darüber hinaus können Administratoren die erforderlichen Verfahren Schulen.

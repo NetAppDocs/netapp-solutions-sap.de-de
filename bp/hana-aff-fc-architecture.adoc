@@ -38,6 +38,7 @@ image:saphana_aff_fc_image4b.png["Hinzufügen eines zusätzlichen Storage-HA-Paa
 
 
 
+[[sap-hana-backup]]
 == SAP HANA Backup
 
 Die auf allen NetApp Storage-Controllern vorhandene ONTAP Software bietet einen integrierten Mechanismus zur Sicherung von SAP HANA Datenbanken, ohne die Performance zu beeinträchtigen. Storage-basierte NetApp Snapshot-Backups sind eine vollständig unterstützte und integrierte Backup-Lösung, die für einzelne SAP HANA Container sowie für SAP HANA MDC-Systeme mit einem einzelnen Mandanten oder mehreren Mandanten verfügbar ist.
@@ -62,6 +63,7 @@ Detaillierte Informationen zur SAP HANA-Backup- und -Wiederherstellungslösung f
 
 
 
+[[sap-hana-disaster-recovery]]
 == Disaster Recovery für SAP HANA
 
 Das Disaster Recovery für SAP HANA ist entweder auf der Datenbankebene mithilfe von SAP HANA-Systemreplizierung oder auf der Storage-Ebene mithilfe von Storage-Replizierungstechnologien möglich. Der folgende Abschnitt bietet einen Überblick über Disaster-Recovery-Lösungen basierend auf der Storage-Replizierung.
@@ -70,6 +72,7 @@ Weitere Informationen zu den Disaster-Recovery-Lösungen für SAP HANA finden Si
 
 
 
+[[storage-replication-based-on-snapmirror]]
 === Storage-Replizierung basierend auf SnapMirror
 
 Die folgende Abbildung zeigt eine Disaster-Recovery-Lösung für drei Standorte mit synchroner SnapMirror Active Sync zum lokalen DR-Rechenzentrum und asynchroner SnapMirror zur Replikation der Daten in das Remote-DR-Rechenzentrum. SnapMirror Active Sync ermöglicht die Weiterführung von Geschäftsdiensten auch bei einem kompletten Standortausfall und unterstützt ein transparentes Failover von Anwendungen mithilfe einer sekundären Kopie (RPO=0 und RTO=0). Für die Auslösung eines Failover mit SnapMirror Active Sync sind keine manuellen Eingriffe oder benutzerdefinierten Skripts erforderlich. Ab ONTAP 9.15.1 unterstützt die SnapMirror Active Sync symmetrische aktiv/aktiv-Funktion. Symmetrische aktiv/aktiv-Konfiguration ermöglicht I/O-Vorgänge für Lese- und Schreibvorgänge von beiden Kopien einer geschützten LUN mit bidirektionaler synchroner Replizierung, sodass beide LUN-Kopien lokal für I/O-Vorgänge sorgen können.
@@ -86,6 +89,7 @@ image:saphana_aff_fc_image6a.png["SnapMirror-Lösung"]
 
 
 
+[[storage-replication-based-on-netapp-metrocluster]]
 === Storage-Replizierung basierend auf NetApp MetroCluster
 
 Die folgende Abbildung bietet einen allgemeinen Überblick über die Lösung. Das Storage-Cluster an jedem Standort bietet lokale Hochverfügbarkeit und wird für den Produktions-Workload verwendet. Die Daten aller Standorte werden synchron zum anderen Standort repliziert und sind im Fall eines Disaster Failovers verfügbar.

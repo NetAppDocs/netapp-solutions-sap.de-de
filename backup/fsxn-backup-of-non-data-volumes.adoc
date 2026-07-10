@@ -24,6 +24,7 @@ Dank des nicht-Daten-Volume-Backups von SnapCenter können Snapshot-Kopien aller
 
 
 
+[[configure-non-data-volume-resources]]
 === Konfiguration von Ressourcen, die nicht von Datenvolumen stammen
 
 Führen Sie die folgenden Schritte aus, um nicht-Daten-Volume-Ressourcen zu konfigurieren:

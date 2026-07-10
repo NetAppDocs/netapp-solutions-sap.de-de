@@ -18,6 +18,7 @@ Der Schwerpunkt dieses Dokuments liegt auf der Integration von NetApp® Storage-
 
 
 
+[[solution-overview]]
 == Lösungsüberblick
 
 SAP-Systeme sind sehr komplex. Aber für die Unternehmen, die SAP einsetzen, sind diese Systeme zentral für ihre Geschäftsprozesse. Durch die Automatisierung wiederkehrender täglicher Betriebsaufgaben können SAP-Systemadministratoren mehr Systeme mit weniger Aufwand managen, wiederholbare Ergebnisse liefern und menschliche Fehler minimieren.
@@ -26,12 +27,14 @@ Der Schwerpunkt dieses Dokuments liegt auf der Integration von NetApp® Storage-
 
 
 
+[[target-audience]]
 === Zielgruppe
 
 Dieses Dokument richtet sich an SAP-Systemadministratoren, die bisher noch nicht viel (oder keine) Erfahrung mit der Ansible-Automatisierung hatten. Es sollte Ihnen den Einstieg in Ansible erleichtern, Ihre ersten Playbooks ausführen und Ihren ersten SAP Lama-basierten Systemaktualisierungsvorgang konfigurieren und ausführen.
 
 
 
+[[sap-system-clone-copy-and-refresh-scenarios]]
 === SAP Szenarien für Klonen, Kopieren und Aktualisieren von Systemen
 
 Der Begriff SAP-Systemkopie wird oft als Synonym für drei verschiedene Prozesse verwendet: SAP-Systemklon, SAP-Systemkopie und SAP-Systemaktualisierung. Es ist wichtig, zwischen den verschiedenen Vorgängen zu unterscheiden, da sich Workflows und Anwendungsfälle unterscheiden.
@@ -47,6 +50,7 @@ image:sap-lama-image1.png["Bild mit den Schritten zum Klonen, Kopieren und Aktua
 
 
 
+[[solution-technology]]
 === Lösungstechnologie
 
 Die Gesamtlösung besteht aus den folgenden Hauptkomponenten:
@@ -72,6 +76,7 @@ image:sap-lama-image2.png["Abbildung: Integration von SAP Lama und NetApp-Storag
 
 
 
+[[use-case-summary]]
 === Zusammenfassung des Anwendungsfalls
 
 Es gibt mehrere Szenarien, in denen Daten aus einem Quellsystem einem Zielsystem zu Test- oder Schulungszwecken zur Verfügung gestellt werden müssen. Diese Test- und Trainingssysteme müssen regelmäßig mit Daten aus dem Quellsystem aktualisiert werden, um sicherzustellen, dass Tests und Trainings mit dem aktuellen Datensatz durchgeführt werden. Diese Vorgänge für die Systemaktualisierung umfassen mehrere Aufgaben auf der Infrastruktur-, Datenbank- und Applikationsebene und können je nach Grad der Automatisierung mehrere Tage dauern.
@@ -84,6 +89,7 @@ image:sap-lama-image3.png["Abbildung mit möglichen Verbesserungen der betriebli
 
 
 
+[[integrating-the-different-technology-components]]
 === Integration der verschiedenen Technologiekomponenten
 
 Um SAP Lama in NetApp-Storage-Systeme mithilfe von Ansible zu integrieren, benötigen Sie einen Node, auf dem Sie Ansible Playbooks ausführen können. Wir empfehlen den Einsatz der Ansible Automation Platform. Um Shell-Skripte und Ansible-Playbooks auf diesem Host auszuführen, die von SAP Lama gestartet wurden, benötigen Sie einen SAP-Host-Agent, der auf diesem Server ausgeführt wird. SAP Host Agent übernimmt die bidirektionale Kommunikation mit SAP Lama und führt Shell-Skripte aus, die die eigentlichen Playbooks auslösen.
@@ -92,6 +98,7 @@ Diese locker gekoppelte Architektur gibt Ihnen die Freiheit, Workflows von SAP L
 
 
 
+[[conclusion]]
 == Schlussfolgerung
 
 Die Kombination aus NetApp, SAP Lama und Ansible-Automatisierungsplattform bietet eine leistungsstarke Lösung, die den Zeit- und Arbeitsaufwand für die komplexesten und zeitaufwendigsten Aufgaben in Bezug auf die SAP-Systemadministration erheblich reduzieren kann. Diese Kombination kann auch helfen, Konfigurationsabweichungen zu vermeiden, die durch menschliches Versagen zwischen den Systemen verursacht werden können.
@@ -100,6 +107,7 @@ Da Systemaktualisierungen, Kopien, Klone und Disaster Recovery-Tests sehr sensib
 
 
 
+[[where-to-find-additional-information]]
 == Wo Sie weitere Informationen finden
 
 Sehen Sie sich die folgenden Dokumente und Websites an, um mehr über die in diesem Dokument beschriebenen Daten zu erfahren:
@@ -112,6 +120,7 @@ Sehen Sie sich die folgenden Dokumente und Websites an, um mehr über die in die
 
 
 
+[[version-history]]
 == Versionsverlauf
 
 [cols="25,25,50"]

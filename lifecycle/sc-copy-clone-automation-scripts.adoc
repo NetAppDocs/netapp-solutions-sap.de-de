@@ -26,6 +26,7 @@ NOTE: Die Beispielskripte werden wie IS bereitgestellt und von NetApp nicht unte
 
 
 
+[[script-sc-system-refresh-sh]]
 == Skript sc-system-refresh.sh
 
 Das Beispielskript `sc-system-refresh.sh` wird verwendet, um Recovery- und Shutdown-Vorgänge auszuführen. Das Skript wird mit spezifischen Befehlszeilenoptionen innerhalb der SnapCenter-Workflows zum Erstellen und Löschen von Klonen aufgerufen, wie in der Abbildung unten dargestellt.
@@ -41,6 +42,7 @@ image:sc-copy-clone-image14.png["Die Abbildung zeigt den Input/Output-Dialog ode
 
 
 
+[[supported-tenant-recovery-operations]]
 === Unterstützte Mandanten-Recovery-Vorgänge
 
 Wie im Abschnitt „SAP HANA System Refresh Operation Workflows using Storage Snapshot“ beschrieben, hängen die möglichen Mandanten-Recovery-Operationen am Zielsystem von der Mandantenkonfiguration des Quellsystems ab. Das Skript `sc-system-refresh.sh` unterstützt alle Wiederherstellungsvorgänge für Mandanten, die je nach Konfiguration des Quellsystems möglich sind, wie in der Tabelle unten gezeigt.
@@ -62,6 +64,7 @@ Wenn auf dem Zielsystem ein anderer Mandantenname benötigt wird, muss der Manda
 |===
 
 
+[[script-sc-mount-volume-sh]]
 == Skript sc-mount-volume.sh
 
 Das Beispielskript `sc-mount-volume.sh` wird zum Ausführen von Mount und Unmounten für ein beliebiges Volume verwendet. Das Skript wird verwendet, um das gemeinsam genutzte SAP HANA-Volume bei der Klonoperation des SAP HANA-Systems zu mounten. Das Skript wird mit spezifischen Befehlszeilenoptionen innerhalb der SnapCenter-Workflows zum Erstellen und Löschen von Klonen aufgerufen, wie in der Abbildung unten dargestellt.
@@ -73,6 +76,7 @@ image:sc-copy-clone-image15.png["Die Abbildung zeigt den Input/Output-Dialog ode
 
 
 
+[[snapcenter-environment-variables]]
 === SnapCenter-Umgebungsvariablen
 
 SnapCenter bietet einen Satz von Umgebungsvariablen, die innerhalb des Skripts verfügbar sind, die auf dem Ziel-Host ausgeführt werden. Das Skript verwendet diese Variablen, um die entsprechenden Konfigurationseinstellungen zu bestimmen.
@@ -85,6 +89,7 @@ SnapCenter bietet einen Satz von Umgebungsvariablen, die innerhalb des Skripts v
 
 
 
+[[script-to-get-snapcenter-environment-variables]]
 == Skript zum Abrufen von SnapCenter Umgebungsvariablen
 
 Wenn keine Automatisierungsskripts verwendet werden und die Schritte manuell ausgeführt werden sollten, müssen Sie den Verbindungspfad des FlexClone Volume zum Storage-System kennen. Der Verbindungspfad ist in SnapCenter nicht sichtbar. Sie müssen also entweder den Verbindungspfad direkt am Storage-System nachschlagen oder ein einfaches Skript verwenden, das die SnapCenter Umgebungsvariablen auf dem Ziel-Host bereitstellt. Dieses Skript muss als Mount-Operation-Skript innerhalb der SnapCenter Clone Erstellungsvorgang hinzugefügt werden.

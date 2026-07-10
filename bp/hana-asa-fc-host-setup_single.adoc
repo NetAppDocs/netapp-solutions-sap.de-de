@@ -10,6 +10,7 @@ summary: Vor dem Einrichten des Hosts müssen NetApp SAN Host Utilities von der 
 
 
 
+[[single-host-setup]]
 == Einzelhost-Setup
 
 [role="lead"]
@@ -17,6 +18,7 @@ In diesem Kapitel wird die Einrichtung eines einzelnen SAP HANA-Hosts beschriebe
 
 
 
+[[lun-configuration-for-sap-hana-single-host-systems]]
 == LUN-Konfiguration für SAP HANA Single-Host-Systeme
 
 Das Linux LVM wird verwendet, um die Leistung zu steigern und LUN-Größenbeschränkungen zu beheben. Beim SAP HANA-Host müssen Volume-Gruppen und logische Volumes erstellt und eingebunden werden, wie in der folgenden Tabelle angegeben.
@@ -41,6 +43,7 @@ NOTE: Wenn der SAP Local Secure Store Service (LSS) verwendet wird, befindet sic
 
 
 
+[[create-lvm-volume-groups-and-logical-volumes]]
 === Erstellen von LVM-Volume-Gruppen und logischen Volumes
 
 . Initialisieren Sie alle LUNs als ein physisches Volume.
@@ -82,6 +85,7 @@ vgchange -a y
 ....
 
 
+[[create-file-systems]]
 === Erstellen von Dateisystemen
 
 Erstellen Sie das XFS-Dateisystem auf allen logischen Daten- und Protokollvolumes und der gemeinsam genutzten Hana-LUN.
@@ -96,6 +100,7 @@ NOTE: Die Beispielbefehle für mehrere Hosts zeigen ein 2+1-HANA-System mit mehr
 
 
 
+[[create-mount-points]]
 === Erstellen von Bereitstellungspunkten
 
 Erstellen Sie die erforderlichen Mount-Point-Verzeichnisse und legen Sie die Berechtigungen auf dem Datenbankhost fest:
@@ -110,6 +115,7 @@ sapcc-hana-tst:/ # chmod 777 /hana/shared
 ....
 
 
+[[mount-file-systems]]
 === Mounten Sie File-Systeme
 
 Um Dateisysteme während des Systemstarts mit dem  `/etc/fstab` Konfigurationsdatei, fügen Sie die erforderlichen Dateisysteme zum  `/etc/fstab` Konfigurationsdatei:

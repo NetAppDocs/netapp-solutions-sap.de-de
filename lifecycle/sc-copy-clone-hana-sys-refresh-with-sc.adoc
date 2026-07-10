@@ -66,6 +66,7 @@ In diesem Abschnitt werden die folgenden Szenarien behandelt.
 
 
 
+[[prerequisites-and-limitations]]
 == Voraussetzungen und Einschränkungen
 
 Die in den folgenden Abschnitten beschriebenen Workflows weisen einige Voraussetzungen und Einschränkungen hinsichtlich der SAP HANA-Systemarchitektur und der SnapCenter-Konfiguration auf.
@@ -78,6 +79,7 @@ Die in den folgenden Abschnitten beschriebenen Workflows weisen einige Vorausset
 
 
 
+[[lab-setup]]
 == Laboreinrichtung
 
 Die Abbildung unten zeigt das Lab-Setup, das für die verschiedenen Optionen zur Systemaktualisierung verwendet wurde.
@@ -110,6 +112,7 @@ image:sc-copy-clone-image16.png["Die Abbildung zeigt den Input/Output-Dialog ode
 
 
 
+[[initial-one-time-preparation-steps]]
 == Erste, einmalige Vorbereitungsschritte
 
 In einem ersten Schritt muss das SAP HANA Zielsystem innerhalb von SnapCenter konfiguriert sein.
@@ -142,6 +145,7 @@ hana-7:/opt/NetApp/snapcenter/scc/etc #
 ....
 
 
+[[cloning-from-primary-storage-with-tenant-name-equal-to-sid]]
 == Klonen vom primären Storage mit dem Mandantennamen SID
 
 In diesem Abschnitt wird der Workflow zur Systemaktualisierung von SAP HANA beschrieben, bei dem der Mandantenname am Quell- und Zielsystem mit der SID identisch ist. Das Klonen des Storage wird im Primärspeicher durchgeführt und die Recovery wird mit dem Skript automatisiert `sc-system-refresh.sh`.
@@ -285,6 +289,7 @@ image:sc-copy-clone-image28.png["Die Abbildung zeigt den Input/Output-Dialog ode
 
 
 
+[[cloning-from-off-site-backup-storage]]
 == Klonen aus standortexternen Backup-Storage
 
 In diesem Abschnitt wird der Workflow zur Systemaktualisierung von SAP HANA beschrieben, bei dem der Mandantenname am Quell- und Zielsystem mit der SID identisch ist. Das Klonen von Speichern wird im externen Backup-Speicher ausgeführt und wird mithilfe des Skripts sc-System-refresh.sh weiter automatisiert.
@@ -301,6 +306,7 @@ Alle nachfolgenden Schritte sind mit dem Workflow zum Klonen aus dem Primärspei
 
 
 
+[[cloning-a-sap-hana-system-with-multiple-tenants]]
 == Klonen eines SAP HANA Systems mit mehreren Mandanten
 
 In diesem Abschnitt wird der Workflow zur Aktualisierung des SAP HANA-Systems mit mehreren Mandanten beschrieben. Das Klonen von Storage wird im Primär-Storage durchgeführt und weitere automatisiert mithilfe des Skripts `sc-system-refresh.sh`.
@@ -365,6 +371,7 @@ TENANT1) and starting recovery
 ....
 
 
+[[clone-delete-operation]]
 == Klonvorgang
 
 Ein neuer Vorgang zur Systemaktualisierung von SAP HANA wird gestartet, indem das Zielsystem mithilfe des SnapCenter-Klonlösch-Vorgangs gereinigt wird.
@@ -417,6 +424,7 @@ OK
 
 
 
+[[sap-hana-system-refresh-with-clone-split-operation]]
 == SAP HANA Systemaktualisierung mit Klonteilvorgang
 
 Ist die Verwendung des Zielsystems für die Systemaktualisierung über einen längeren Zeitraum geplant, ist es sinnvoll, das FlexClone Volume im Rahmen der Systemaktualisierung zu teilen.
@@ -457,6 +465,7 @@ Der Workflow besteht aus den folgenden Schritten:
 
 
 
+[[snapcenter-workflow-automation-with-powershell-scripts]]
 == SnapCenter Workflow-Automatisierung mit PowerShell Skripten
 
 In den vorherigen Abschnitten wurden die verschiedenen Workflows über die UI von SnapCenter ausgeführt. Alle Workflows können auch mit PowerShell-Skripten oder REST-API-Aufrufen ausgeführt werden, was eine weitere Automatisierung ermöglicht. In den folgenden Abschnitten werden die grundlegenden Beispiele für PowerShell-Skripts für die folgenden Workflows beschrieben.
@@ -473,6 +482,7 @@ Alle Skripte müssen in einem PowerShell Befehlsfenster ausgeführt werden. Bevo
 
 
 
+[[create-clone]]
 === Erstellen von Klonen
 
 Das einfache Skript unten zeigt, wie eine SnapCenter Klonerstellung mithilfe von PowerShell Befehlen ausgeführt werden kann. Das SnapCenter `New-SmClone` Der Befehl wird mit der erforderlichen Befehlszeilenoption für die Lab-Umgebung und dem zuvor erläuterten Automatisierungsskript ausgeführt.
@@ -535,6 +545,7 @@ Clone create job has been finshed.
 ....
 
 
+[[delete-clone]]
 === Klon löschen
 
 Das einfache Skript unten zeigt, wie eine SnapCenter Klonlösch-Operation mit PowerShell Befehlen ausgeführt werden kann. Das SnapCenter `Remove-SmClone` Der Befehl wird mit der erforderlichen Befehlszeilenoption für die Lab-Umgebung und dem zuvor erläuterten Automatisierungsskript ausgeführt.

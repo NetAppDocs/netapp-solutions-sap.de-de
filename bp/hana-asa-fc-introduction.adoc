@@ -20,6 +20,7 @@ Marco Schoen, NetApp
 
 
 
+[[introduction]]
 == Einführung
 
 Die Produktfamilien NetApp ASA A-Series und ASA C-Series wurden für den Einsatz mit SAP HANA in Tailored Datacenter Integration-Projekten (TDI) zertifiziert. In diesem Handbuch werden die Best Practices für die folgenden zertifizierten Modelle beschrieben:
@@ -39,6 +40,7 @@ In einer SAP HANA Umgebung mit mehreren Hosts wird der standardmäßige SAP HANA
 
 
 
+[[sap-hana-tailored-data-center-integration]]
 == SAP HANA Tailored Datacenter Integration
 
 NetApp ASA-Speichersysteme sind im SAP HANA TDI-Programm unter Verwendung von FC (SAN)-Protokollen zertifiziert. Sie können in allen aktuellen SAP HANA-Szenarien eingesetzt werden, beispielsweise in SAP Business Suite auf HANA, S/4HANA, BW/4HANA oder SAP Business Warehouse auf HANA, entweder in Einzelhost- oder Mehrhostkonfigurationen. Alle Server, die für den Einsatz mit SAP HANA zertifiziert sind, können mit von NetApp zertifizierten Storage-Lösungen kombiniert werden. Die folgende Abbildung bietet einen Überblick über die Architektur.

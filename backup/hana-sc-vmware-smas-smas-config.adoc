@@ -18,6 +18,7 @@ In diesem Artikel werden die für diese Lösung erforderlichen Konfigurationssch
 
 
 
+[[pre-requisites]]
 == Voraussetzungen
 
 Storage-Cluster und relevante SVMs müssen aktiviert werden.
@@ -30,6 +31,7 @@ image:sc-saphana-vmware-smas-image11.png["Abbildung zeigt den Inhalt, der bespro
 
 
 
+[[storage-layout-and-consistency-group-configuration]]
 == Konfiguration von Storage-Layout und Konsistenzgruppen
 
 In der ONTAP-Dokumentation https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html#key-concepts["Übersicht über die aktive SnapMirror-Synchronisierung in ONTAP"] wird das Konzept der Konsistenzgruppen mit SnapMirror Active Sync wie folgt beschrieben:
@@ -44,6 +46,7 @@ image:sc-saphana-vmware-smas-image12.png["Abbildung zeigt den Inhalt, der bespro
 
 
 
+[[initiator-group-configuration]]
 == Konfiguration der Initiatorgruppe
 
 In unserem Lab-Setup haben wir eine Initiatorgruppe erstellt, die beide Storage-SVMs für die aktive synchrone Replizierung mit SnapMirror verwendet. In der später beschriebenen Konfiguration für aktive SnapMirror-Synchronisierung wird festgelegt, dass die Initiatorgruppe Teil der Replizierung ist.
@@ -59,12 +62,14 @@ NOTE: In einem nicht einheitlichen Access Setup darf die Initiatorgruppe im prim
 
 
 
+[[configure-protection-with-ontap-system-manager]]
 == Konfigurieren Sie den Schutz mit ONTAP System Manager
 
 image:sc-saphana-vmware-smas-image15.png["Abbildung zeigt den Inhalt, der besprochen wird"]
 
 
 
+[[consistency-group-and-initiator-group-replication]]
 === Replizierung von Konsistenzgruppen und Initiatorgruppen
 
 Eine neue Konsistenzgruppe muss erstellt werden, und alle drei LUNs des HANA-Systems müssen der Konsistenzgruppe hinzugefügt werden.
@@ -84,6 +89,7 @@ Der Ziel-Storage-Cluster muss konfiguriert und die „Initialisierungsbeziehung�
 
 
 
+[[synchronisation]]
 === Synchronisierung
 
 Bei dem A700 Storage-Cluster (Quelle) ist die neue Beziehung jetzt aufgelistet.
@@ -96,12 +102,14 @@ image:sc-saphana-vmware-smas-image19.png["Abbildung zeigt den Inhalt, der bespro
 
 
 
+[[infrastructure-datastore]]
 == Infrastrukturdatenspeicher
 
 Der Datastore, in dem die OS-Images des HANA-Systems, SnapCenter und das vSphere Plug-in gespeichert werden, wird in der gleichen Weise repliziert wie bei den HANA-Datenbankdatenspeichern beschrieben.
 
 
 
+[[primary-site]]
 == Primärer Standort
 
 Das aktive Synchronisierungsverhalten von SnapMirror ist symmetrisch, mit einer wichtigen Ausnahme: Konfiguration des primären Standorts.

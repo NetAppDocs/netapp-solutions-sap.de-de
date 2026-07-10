@@ -20,6 +20,7 @@ image:sc-saphana-vmware-smas-image31.png["Abbildung zeigt den Inhalt, der bespro
 
 
 
+[[topology-view]]
 == Topologieansicht
 
 In der Topologieansicht zeigt SnapCenter die Backups sowohl des Quell- als auch des Ziel-Storage-Clusters.
@@ -34,6 +35,7 @@ image:sc-saphana-vmware-smas-image34.png["Abbildung zeigt den Inhalt, der bespro
 
 
 
+[[snapshots-at-storage-systems]]
 == Snapshots auf Storage-Systemen
 
 Die von SnapCenter erstellten Snapshot Backups sind bei beiden HANA Daten-Volumes auf beiden Storage-Systemen verfügbar. ONTAP erstellt zusätzliche Snapshots auf Konsistenzgruppenebene, die auch für alle anderen HANA-Volumes verfügbar sind.

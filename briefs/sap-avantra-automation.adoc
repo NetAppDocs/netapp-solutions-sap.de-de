@@ -13,6 +13,7 @@ In diesem Dokument wird beschrieben, wie Avantra mit der NetApp SnapCenter® Pla
 
 
 
+[[solution-overview]]
 == Lösungsüberblick
 
 Der Betrieb von SAP Systemen und Lösungen ist sehr komplex. Für Unternehmen, die SAP einsetzen, sind diese Systeme und Services jedoch zentral für ihre Geschäftsprozesse. Durch die Automatisierung wiederkehrender täglicher Betriebsaufgaben, wie zum Beispiel beim Kopieren und Aktualisieren von Systemen, können SAP-Systemadministratoren mehr Systeme mit weniger Aufwand managen, wiederholbare Ergebnisse liefern und menschliche Fehler reduzieren.
@@ -23,12 +24,14 @@ In diesem Dokument wird beschrieben, wie Avantra mit der NetApp SnapCenter® Pla
 
 
 
+[[target-audience]]
 === Zielgruppe
 
 Dieses Dokument richtet sich an SAP-Systemadministratoren, die zuvor SAP-Systemkopien manuell durchgeführt haben und diese Aktivität mit Avantra automatisieren möchten. Das beabsichtigte Ziel, die Technologie von NetApp Snapshot und FlexClone, orchestriert durch NetApp SnapCenter, mit Avantra Workflows zu kombinieren, ist es, SAP Systemkopien durch vollständige Automatisierung zu beschleunigen.
 
 
 
+[[sap-system-clone-copy-and-refresh-scenarios]]
 === SAP Szenarien für Klonen, Kopieren und Aktualisieren von Systemen
 
 Der Begriff SAP Systemkopie wird häufig als Oberbegriff für drei verschiedene Prozesse verwendet: SAP-Systemklon, SAP-Systemkopie und SAP-Systemaktualisierung. Es ist wichtig, zwischen den verschiedenen Vorgängen zu unterscheiden, da sich Workflows und Anwendungsfälle unterscheiden.
@@ -52,6 +55,7 @@ Obwohl wir drei verschiedene Anwendungsfälle kennen, bleibt der Datenmanagement
 
 
 
+[[solution-technology]]
 === Lösungstechnologie
 
 Die Gesamtlösung besteht aus den folgenden Hauptkomponenten:
@@ -81,6 +85,7 @@ image:sap-avantra-image4.png["Bild: Avantra Server, NetApp SnapCenter Server, Ne
 
 
 
+[[use-case-summary]]
 === Zusammenfassung des Anwendungsfalls
 
 Es gibt mehrere Szenarien, in denen Daten aus einem Quellsystem einem Zielsystem zu Test- oder Schulungszwecken zur Verfügung gestellt werden müssen. Diese Test- und Trainingssysteme müssen regelmäßig mit Daten aus dem Quellsystem aktualisiert werden, um sicherzustellen, dass Tests und Trainings mit dem aktuellen Datensatz durchgeführt werden. Diese Vorgänge für die Systemaktualisierung umfassen mehrere Aufgaben auf der Infrastruktur-, Datenbank- und Applikationsebene und können je nach Grad der Automatisierung mehrere Tage dauern.
@@ -93,6 +98,7 @@ image:sap-avantra-image5.png["Abbildung mit möglichen Verbesserungen der betrie
 
 
 
+[[integrating-the-different-technology-components]]
 === Integration der verschiedenen Technologiekomponenten
 
 Die eigentliche Integration von SnapCenter in einen Avantra Workflow besteht aus dem Zugriff über JavaScript auf die NetApp SnapCenter REST API. Durch diese REST API-basierte Integration wird eine Snapshot Kopie des SAP Quellsystems erstellt, ein FlexClone Volume erstellt und im SAP Zielsystem gemountet.
@@ -101,6 +107,7 @@ Storage- und SAP-Administratoren haben Zeit und Know-how in die Entwicklung von 
 
 
 
+[[conclusion]]
 == Schlussfolgerung
 
 Die Kombination aus Avantra und der NetApp Datenmanagement-Technologie bietet eine leistungsstarke Lösung, die den Zeit- und Arbeitsaufwand für die komplexesten und zeitaufwendigsten Aufgaben im Zusammenhang mit der SAP Systemadministration deutlich reduzieren kann. Diese Kombination kann auch helfen, Konfigurationsabweichungen zu vermeiden, die durch menschliches Versagen zwischen den Systemen verursacht werden können.
@@ -109,6 +116,7 @@ Da Systemaktualisierungen, Kopien, Klone und Disaster-Recovery-Tests sehr sensit
 
 
 
+[[where-to-find-additional-information]]
 == Wo Sie weitere Informationen finden
 
 Sehen Sie sich die folgenden Dokumente und Websites an, um mehr über die in diesem Dokument beschriebenen Daten zu erfahren:
@@ -120,6 +128,7 @@ Sehen Sie sich die folgenden Dokumente und Websites an, um mehr über die in die
 
 
 
+[[version-history]]
 == Versionsverlauf
 
 [cols="25,25,50"]

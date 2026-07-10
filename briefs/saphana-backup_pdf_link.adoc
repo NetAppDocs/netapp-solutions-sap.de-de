@@ -15,12 +15,14 @@ summary: Der Schwerpunkt dieses Dokuments liegt auf der Sicherung und Wiederhers
 
 
 
+[[the-challenge]]
 == Die Herausforderung
 
 Bei Sicherungs- und Wiederherstellungsvorgängen für SAP HANA steht Ihr Unternehmen vor den folgenden Herausforderungen: • Lange Sicherungsvorgänge mit Leistungseinbußen bei SAP-Produktionssystemen • Inakzeptable Systemausfallzeiten aufgrund langer Wiederherstellungsvorgänge • Schrumpfende Sicherungsfenster aufgrund der Kritikalität der Anwendungen • Die Notwendigkeit einer flexiblen Lösung zur Minderung logischer Beschädigungen
 
 
 
+[[the-solution]]
 == Die Lösung
 
 Mit NetApp®-Speicherlösungen, auf denen die Datenverwaltungssoftware NetApp ONTAP® ausgeführt wird, in Kombination mit der Datensicherungssoftware NetApp SnapCenter ® können Sie all diese Herausforderungen meistern.  Und mit der in der ONTAP -Software enthaltenen NetApp Snapshot™-Technologie können Sie in Sekundenschnelle Backups erstellen oder Wiederherstellungsvorgänge für Datensätze beliebiger Größe ausführen.  SAP HANA unterstützt die Verwendung speicherbasierter Snapshot-Kopien als gültigen Sicherungsvorgang.

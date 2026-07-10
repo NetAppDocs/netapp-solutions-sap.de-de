@@ -20,6 +20,7 @@ Nachdem die VM mit SR-IOV-Netzwerkschnittstellen oder FCP-HBA-Ports konfiguriert
 
 
 
+[[configure-nfs-storage-for-sap-hana]]
 == Konfigurieren Sie NFS-Speicher für SAP HANA
 
 Verwenden Sie die zuvor erstellten SR-IOV-Netzwerkschnittstellen, wenn das NFS-Protokoll für den SAP HANA-Speicher verwendet werden soll.
@@ -36,6 +37,7 @@ Wichtige Konfigurationsüberlegungen für KVM-Umgebungen:
 
 
 
+[[configure-fcp-storage-for-sap-hana]]
 == FCP-Speicher für SAP HANA konfigurieren
 
 Verwenden Sie die der VM zugewiesenen physischen HBA-Ports als PCI-Geräte, wenn das FCP-Protokoll für den SAP HANA-Speicher verwendet werden soll.

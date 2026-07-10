@@ -17,12 +17,14 @@ In diesem Artikel werden die Failover-Szenarien für diese Lösung hervorgehoben
 
 
 
+[[uniform-access-setup]]
 == Einheitliche Zugriffseinrichtung
 
 In einer einheitlichen Zugriffskonfiguration ist das Fibre-Channel-SAN auf beide Standorte verteilt. Die ESX Hosts an beiden Standorten könnten auf beide Kopien der Datensätze zugreifen. Während des normalen Betriebs greift der ESX Host, auf dem das HANA-System ausgeführt wird, basierend auf den Annäherungseinstellungen in der Konfiguration der Initiatorgruppe auf die lokale Kopie der Daten zu. Jeder ESX Host verfügt über einen aktiv optimierten Pfad zur lokalen Kopie und einen aktiven, nicht optimierten Pfad zur gespiegelten Kopie.
 
 
 
+[[normal-operation]]
 === Normaler Betrieb
 
 Im normalen Betrieb liest und schreibt das HANA-System basierend auf dem aktiv optimierten Pfad von ESX-Host ESX-1 von/auf die lokale Kopie. Bei jedem Backup-Vorgang erkennt SnapCenter den aktuellen primären Standort der Replizierungsbeziehung und führt die Backup-Vorgänge am primären Standort aus. Die Snapshots werden auf die gespiegelte Kopie repliziert und sind an beiden Standorten verfügbar. Am primären Standort würde eine SnapCenter-Wiederherstellung ausgeführt werden.
@@ -31,6 +33,7 @@ image:sc-saphana-vmware-smas-image42.png["Abbildung zeigt den Inhalt, der bespro
 
 
 
+[[storage-failure]]
 === Storage-Ausfall
 
 Fällt das Storage-System an Standort 1 aus, greifen die HANA-Systeme auf die gespiegelte Kopie an Standort 2 zu und setzen den Betrieb fort. Der primäre Standort schaltet auf den sekundären Standort um und SnapCenter führt nun Backup- und Restore-Vorgänge am neuen primären Standort aus.
@@ -39,6 +42,7 @@ image:sc-saphana-vmware-smas-image43.png["Abbildung zeigt den Inhalt, der bespro
 
 
 
+[[site-failure]]
 === Standortausfall
 
 Im Falle eines Standortausfalls werden sowohl die HANA VM als auch SnapCenter und das SnapCenter für VMware Plugin VM über vSphere HA auf den ESX-Host am sekundären Standort umschlagen. Die HANA-Datenbank muss gestartet werden und greift dann auf die gespiegelte Kopie am zweiten Standort zu. Der primäre Standort schaltet auf den sekundären Standort um und SnapCenter führt nun Backup- und Restore-Vorgänge am neuen primären Standort aus.
@@ -47,12 +51,14 @@ image:sc-saphana-vmware-smas-image44.png["Abbildung zeigt den Inhalt, der bespro
 
 
 
+[[non-uniform-access-setup]]
 == Uneinheitliche Zugriffseinrichtung
 
 In einer nicht einheitlichen Zugriffskonfiguration wird das Fibre-Channel-SAN nicht auf beide Standorte ausgedehnt. Jeder ESX Host an jedem Standort kann nur auf die lokale Kopie der Datensätze zugreifen.
 
 
 
+[[normal-operation]]
 === Normaler Betrieb
 
 Im normalen Betrieb liest und schreibt das HANA-System von/auf die lokale Kopie. Bei jedem Backup-Vorgang erkennt SnapCenter den aktuellen primären Standort der Replizierungsbeziehung und führt die Backup-Vorgänge am primären Standort aus. Die Snapshots werden auf die gespiegelte Kopie repliziert und sind an beiden Standorten verfügbar. Am primären Standort würde eine SnapCenter-Wiederherstellung ausgeführt werden.
@@ -61,6 +67,7 @@ image:sc-saphana-vmware-smas-image45.png["Abbildung zeigt den Inhalt, der bespro
 
 
 
+[[storage-failure]]
 === Storage-Ausfall
 
 Im Falle eines Storage-Ausfalls werden sowohl die HANA VM als auch SnapCenter und das SnapCenter für VMware Plugin VM mithilfe von vSphere HA auf den ESX-Host am sekundären Standort umschlagen. Die HANA-Datenbank muss gestartet werden und greift dann auf die gespiegelte Kopie am zweiten Standort zu. Der primäre Standort schaltet auf den sekundären Standort um und SnapCenter führt nun Backup- und Restore-Vorgänge am neuen primären Standort aus.
@@ -69,6 +76,7 @@ image:sc-saphana-vmware-smas-image46.png["Abbildung zeigt den Inhalt, der bespro
 
 
 
+[[site-failure]]
 === Standortausfall
 
 Das gleiche gilt für Storage-Ausfälle.
@@ -77,6 +85,7 @@ image:sc-saphana-vmware-smas-image47.png["Abbildung zeigt den Inhalt, der bespro
 
 
 
+[[relocation-of-hana-vm-or-primary-site]]
 === Verlagerung der HANA-VM oder des primären Standorts
 
 Wenn die HANA VM auf den anderen ESX Host umgezogen wird und der primäre Standort des Storage unverändert bleibt, schlägt ein Wiederherstellungsvorgang mit SnapCenter fehl. Da SnapCenter zur Durchführung der Wiederherstellung den primären Standort nutzt, wird der Klon auf der linken Seite erstellt, während die HANA VM auf der rechten Seite ausgeführt wird. Da es keinen Datenpfad zwischen den Standorten gibt, wird SnapCenter die Daten nicht kopieren.

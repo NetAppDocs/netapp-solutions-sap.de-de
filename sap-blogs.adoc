@@ -18,18 +18,22 @@ keywords: netapp, solutions, SAP, blogs
 
 
 
+[[sap-solution-blogs]]
 == Blogs der SAP Lösung
 
 
 
+[[sap-configuration-best-practices-blogs]]
 == Blogs zu Best Practices bei der SAP-Konfiguration
 
 
 
+[[sap-backup-restore-and-disaster-recovery-blogs]]
 === SAP Blogs für Backup, Restore und Disaster Recovery
 
 
 
+[[sap-lifecycle-management-blogs]]
 == SAP Lifecycle Management-Blogs
 
 * link:https://blogs.sap.com/2021/10/27/whitepaper-sap-landscape-management-with-netapp/["SAP Landscape Management mit NetApp"]

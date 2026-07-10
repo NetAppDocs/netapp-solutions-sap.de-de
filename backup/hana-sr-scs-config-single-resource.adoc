@@ -41,6 +41,7 @@ image:saphana-sr-scs-image29.png["Die Abbildung zeigt den Input/Output-Dialog od
 
 
 
+[[snapcenter-configuration]]
 == SnapCenter-Konfiguration
 
 Die folgende Abbildung zeigt das Lab-Setup und eine Übersicht über die erforderliche SnapCenter-Konfiguration.
@@ -73,6 +74,7 @@ image:saphana-sr-scs-image33.png["Die Abbildung zeigt den Input/Output-Dialog od
 
 
 
+[[snapcenter-backup-operation]]
 == SnapCenter Backup-Vorgang
 
 Backup-Vorgänge werden jetzt wie gewohnt ausgeführt. Die allgemeine Ordnung und Sauberkeit der Daten und Log-Backups wird unabhängig davon durchgeführt, welcher SAP HANA-Host primärer oder sekundärer ist.
@@ -96,6 +98,7 @@ image:saphana-sr-scs-image36.png["Die Abbildung zeigt den Input/Output-Dialog od
 
 
 
+[[restore-and-recovery]]
 == Restore und Recovery
 
 Wie bereits besprochen, müssen Sie feststellen können, wo das ausgewählte Backup erstellt wurde, um den erforderlichen Wiederherstellungsvorgang zu definieren. Wenn die SAP HANA Datenbank noch online ist, kann mit SAP HANA Studio der Host identifiziert werden, auf dem das Backup erstellt wurde. Wenn die Datenbank offline ist, sind die Informationen nur im SnapCenter-Backup-Jobprotokoll verfügbar.
@@ -124,6 +127,7 @@ image:saphana-sr-scs-image38.png["Die Abbildung zeigt den Input/Output-Dialog od
 
 
 
+[[snapcenter-restore-of-the-valid-backup-only]]
 === SnapCenter Restore nur für gültige Backups
 
 Die folgende Abbildung zeigt einen Überblick über das in diesem Abschnitt beschriebene Wiederherstellungsszenario.
@@ -167,6 +171,7 @@ image:saphana-sr-scs-image44.png["Die Abbildung zeigt den Input/Output-Dialog od
 
 
 
+[[snapcenter-restore-of-valid-backup-and-crash-image]]
 === SnapCenter Restore von gültigem Backup- und Crash-Image
 
 Die folgende Abbildung zeigt einen Überblick über das in diesem Abschnitt beschriebene Wiederherstellungsszenario.

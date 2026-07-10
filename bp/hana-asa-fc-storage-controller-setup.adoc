@@ -18,12 +18,14 @@ In diesem Abschnitt wird die Konfiguration des NetApp Storage-Systems beschriebe
 
 
 
+[[storage-efficiency]]
 == Storage-Effizienz
 
 In einer SSD-Konfiguration werden Inline-Deduplizierung, Inline-Deduplizierung, Inline-Komprimierung und Inline-Data-Compaction unterstützt.
 
 
 
+[[ontap-autonomous-ransomware-protection]]
 == ONTAP Autonomous Ransomware Protection
 
 Die von ONTAP Autonomous Ransomware Protection erstellten Snapshots können nicht für die Forward Recovery der SAP HANA Datenbank verwendet werden. Daher wird empfohlen, sie nicht für SAP HANA Daten- und Log-Volumes zu verwenden und die Funktion für diese Volumes zu deaktivieren. Verwenden Sie stattdessen den auf SnapCenter basierenden Datenschutz mit manipulationssicheren Snapshots zum Schutz vor Ransomware: link:../backup/hana-sc-generic-scope.html["Technischer Bericht: SAP HANA Backup and Recovery with SnapCenter"]. ONTAP Autonomous Ransomware Protection kann für andere Volumes wie /hana/shared von Vorteil sein.
@@ -32,18 +34,21 @@ Es ist möglich, die automatische Aktivierung dieser Funktion während der Volum
 
 
 
+[[quality-of-service]]
 == Quality of Service
 
 QoS kann verwendet werden, um den Storage-Durchsatz für bestimmte SAP HANA Systeme oder nicht-SAP Applikationen auf einem Shared Controller zu begrenzen.
 
 
 
+[[production-and-devtest]]
 === Produktion und Entwicklung/Test
 
 Ein Anwendungsfall wäre, den Durchsatz von Entwicklungs- und Testsystemen zu begrenzen, damit sie bei einem gemischten Setup keinen Einfluss auf die Produktionssysteme haben. Während des Dimensionierungsprozesses sollten Sie die Performance-Anforderungen eines nicht für die Produktion verwendeten Systems ermitteln. Entwicklungs- und Testsysteme können mit niedrigeren Leistungswerten dimensioniert werden, typischerweise im Bereich von 20 % bis 50 % eines von SAP definierten Produktionssystems-KPI. Ein großer I/O-Schreibvorgang wirkt sich am stärksten auf die Performance des Storage-Systems aus. Daher sollte die QoS-Durchsatzbegrenzung auf einen Prozentsatz der entsprechenden KPI-Werte für die SAP HANA-Speicherleistung in den Daten- und Protokoll-Volumes gesetzt werden.
 
 
 
+[[shared-environments]]
 === Shared-Umgebungen
 
 Ein weiterer Anwendungsfall ist die Einschränkung des Durchsatzes bei umfangreichen Schreib-Workloads, insbesondere um zu vermeiden, dass diese Workloads Auswirkungen auf andere latenzempfindliche Schreib-Workloads haben. In solchen Umgebungen empfiehlt es sich, eine QoS-Gruppenrichtlinie ohne gemeinsam genutzten Durchsatz auf jede LUN innerhalb jeder SVM (Storage Virtual Machine) anzuwenden, um den maximalen Durchsatz jedes einzelnen Storage-Objekts auf den angegebenen Wert zu beschränken. So besteht weniger Gefahr, dass ein einzelner Workload andere Workloads negativ beeinflussen kann.
@@ -70,6 +75,7 @@ NOTE: Das Limit gilt auch für Lesevorgänge. Daher genügend LUNs verwenden, um
 
 
 
+[[configure-storage]]
 == Speicher konfigurieren
 
 In der folgenden Übersicht sind die erforderlichen Schritte zur Storage-Konfiguration zusammengefasst. Jeder Schritt wird in den nachfolgenden Abschnitten näher beschrieben. In diesem Abschnitt wird die Storage-Hardware eingerichtet und die ONTAP Software bereits installiert. Außerdem muss die Verbindung der Storage FCP-Ports zur SAN-Fabric bereits vorhanden sein.
@@ -81,6 +87,7 @@ In der folgenden Übersicht sind die erforderlichen Schritte zur Storage-Konfigu
 
 
 
+[[nvme-based-disk-shelves]]
 === NVMe-basierte Festplattenregale
 
 Jedes NS224 NVMe-Festplatten-Shelf ist, wie in der folgenden Abbildung dargestellt, mit zwei 100-GbE-Ports pro Controller verbunden. Die Platten werden automatisch auf die beiden Controller des HA-Paares verteilt.
@@ -89,6 +96,7 @@ image:saphana_asa_fc_image11a.png["NS224 NVMe-Festplatten-Shelf-Verbindung"]
 
 
 
+[[initiator-groups]]
 === Initiatorgruppen
 
 Eine Initiatorgruppe kann für jeden Server oder für eine Gruppe von Servern konfiguriert werden, die Zugriff auf eine LUN benötigen. Für die iGroup Konfiguration sind die weltweiten Port-Namen (WWPNs) der Server erforderlich.

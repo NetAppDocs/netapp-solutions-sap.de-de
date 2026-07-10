@@ -23,6 +23,7 @@ image:saphana-dr-anf_image2.png["Die Abbildung zeigt den Input/Output-Dialog ode
 
 
 
+[[business-application-requirements]]
 == Anforderungen von Business-Applikationen
 
 Für Geschäftsanwendungen gibt es zwei wichtige Indikatoren:
@@ -35,6 +36,7 @@ Diese Anforderungen werden durch die Art der verwendeten Applikation und die Art
 
 
 
+[[high-availability]]
 == Hochverfügbarkeit
 
 Die Infrastruktur für SAP HANA wie Virtual Machines, Netzwerk und Storage muss über redundante Komponenten verfügen, um sicherzustellen, dass es keinen Single Point of Failure gibt. MS Azure bietet Redundanz für die verschiedenen Infrastrukturkomponenten.
@@ -45,6 +47,7 @@ Wenn eine Applikationsausfallzeit im Falle eines Server- oder Applikationsausfal
 
 
 
+[[logical-corruption]]
 == Logische Beschädigung
 
 Logische Beschädigungen können durch Softwarefehler, menschliche Fehler oder Sabotage verursacht werden. Leider können logische Beschädigungen oft nicht mit standardmäßigen Hochverfügbarkeits- und Disaster Recovery-Lösungen behoben werden. Daher können in manchen Fällen RTO- und RPO-Anforderungen in Abhängigkeit von der Ebene, der Applikation, dem File-System oder dem Storage mit der logischen Beschädigung nicht erfüllt werden.
@@ -58,6 +61,7 @@ NOTE: Die zum Einrichten eines Reparatursystems erforderlichen Schritte sind mit
 
 
 
+[[backups]]
 == Backups
 
 Backups werden erstellt, um Restores und Recovery von unterschiedlichen zeitpunktgenauen Datensätzen zu ermöglichen. In der Regel werden diese Backups einige Tage bis einige Wochen aufbewahrt.
@@ -70,6 +74,7 @@ Eine Backup-Lösung muss dagegen die logische Beschädigung beheben, da Datenrep
 
 
 
+[[synchronous-or-asynchronous-data-replication]]
 == Synchrone oder asynchrone Datenreplizierung
 
 Der RPO bestimmt hauptsächlich, welche Datenreplizierungsmethode Sie verwenden sollten. Bei einem RPO von null muss auch bei einem Ausfall des primären und des Backup-Storage die Daten synchron repliziert werden. Allerdings gibt es technische Einschränkungen bei der synchronen Replizierung, beispielsweise die Entfernung zwischen zwei Azure Regionen. In den meisten Fällen ist synchrone Replizierung aufgrund von Latenz bei Entfernungen von mehr als 100 km nicht geeignet. Daher ist diese Lösung keine Option für die Datenreplizierung zwischen Azure Regionen.
@@ -78,6 +83,7 @@ Wenn ein größerer RPO-Wert akzeptabel ist, kann die asynchrone Replizierung ü
 
 
 
+[[hana-system-replication-with-or-without-data-preload]]
 == HANA System-Replizierung mit oder ohne vorab geladen
 
 Die Startzeit einer SAP HANA-Datenbank ist wesentlich länger als die von herkömmlichen Datenbanken, da eine große Datenmenge in den Arbeitsspeicher geladen werden muss, bevor die Datenbank die erwartete Performance liefern kann. Daher ist ein großer Teil der RTO die Zeit, die zum Starten der Datenbank benötigt wird. Mit jeder Storage-basierten Replizierung sowie mit HANA System Replication ohne vorab geladen werden, muss die SAP HANA-Datenbank für den Failover zum Disaster-Recovery-Standort gestartet werden.

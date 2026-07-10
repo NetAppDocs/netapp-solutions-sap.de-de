@@ -35,6 +35,7 @@ In den folgenden Abschnitten wird der Recovery-Prozess mit und ohne Forward Reco
 
 
 
+[[recovery-to-latest-hana-data-volume-backup-savepoint]]
 == Recovery zum aktuellen Backup-Speicherpunkt für das HANA-Datenvolumen
 
 Die Wiederherstellung zum neuesten Backup savepoint wird mit folgenden Befehlen als User pr1adm ausgeführt:
@@ -57,6 +58,7 @@ Die folgende Befehlsausgabe zeigt die Ausführung der Wiederherstellung.
 
 
 
+[[system-database-recovery]]
 === Recovery der Systemdatenbank
 
 ....
@@ -87,6 +89,7 @@ pr1adm@vm-pr1:/usr/sap/PR1/HDB01>
 ....
 
 
+[[tenant-database-recovery]]
 === Recovery von Mandanten-Datenbanken
 
 Wenn für den Benutzer pr1adm am Quellsystem kein Benutzerspeicherschlüssel erstellt wurde, muss auf dem Zielsystem ein Schlüssel erstellt werden. Der im Schlüssel konfigurierte Datenbankbenutzer muss über Berechtigungen zur Ausführung von Mandanten-Recovery-Vorgängen verfügen.
@@ -109,6 +112,7 @@ Die HANA-Datenbank ist jetzt betriebsbereit, und der Disaster-Recovery-Workflow 
 
 
 
+[[recovery-with-forward-recovery-using-logcatalog-backups]]
 == Recovery mit vorwärtsgerichteten Recovery mithilfe von Log-/Katalog-Backups
 
 Log-Backups und der HANA-Backup-Katalog werden aus dem Quellsystem repliziert.
@@ -136,6 +140,7 @@ Die folgende Befehlsausgabe zeigt die Ausführung der Wiederherstellung.
 
 
 
+[[system-database-recovery]]
 === Recovery der Systemdatenbank
 
 ....
@@ -165,6 +170,7 @@ recoverSys finished successfully: 2021-02-19 16:07:20
 ....
 
 
+[[tenant-database-recovery]]
 === Recovery von Mandanten-Datenbanken
 
 ....
@@ -182,6 +188,7 @@ Die HANA-Datenbank ist jetzt betriebsbereit, und der Disaster-Recovery-Workflow 
 
 
 
+[[check-consistency-of-latest-log-backups]]
 == Überprüfen Sie die Konsistenz der neuesten Protokoll-Backups
 
 Da die Volume-Replizierung für das Protokoll unabhängig vom von dem von der SAP HANA Datenbank ausgeführten Backup-Prozess durchgeführt wird, können am Disaster Recovery-Standort inkonsistente Backup-Dateien für Protokolle vorhanden sein. Nur die letzten Backup-Dateien für Protokolle sind möglicherweise inkonsistent und diese Dateien sollten überprüft werden, bevor eine Weiterleitung der Recovery am Disaster Recovery-Standort mithilfe der erfolgt `hdbbackupcheck` Werkzeug.

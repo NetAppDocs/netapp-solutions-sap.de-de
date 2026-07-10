@@ -26,6 +26,7 @@ Sie können jederzeit weitere Daten-Volume-Partitionen hinzufügen, jedoch ist m
 
 
 
+[[enabling-additional-data-volume-partitions]]
 == Aktivieren von zusätzlichen Partitionen für Volumes
 
 Führen Sie folgende Schritte aus, um zusätzliche Datenträger-Partitionen zu aktivieren:
@@ -41,6 +42,7 @@ persistence_datavolume_partition_multipath = true
 
 
 
+[[volume-and-lun-configuration]]
 == Konfiguration von Volume und LUN
 
 Das Layout von Volumes und LUNs ähnelt dem Layout eines einzelnen Hosts mit einer Daten-Volume-Partition, doch mit einem zusätzlichen Daten-Volume und einer anderen LUN, die auf einem anderen Aggregat als Protokoll-Volume und dem anderen Daten-Volume gespeichert sind. Die folgende Tabelle zeigt eine Beispielkonfiguration eines SAP HANA Einzelhost-Systems mit zwei Daten-Volume-Partitionen.
@@ -72,6 +74,7 @@ Erstellen Sie die neuen Daten-LUNs entweder mit ONTAP System Manager oder mit de
 
 
 
+[[host-configuration]]
 == Host-Konfiguration
 
 Gehen Sie wie folgt vor, um einen Host zu konfigurieren:
@@ -106,6 +109,7 @@ stlrx300s8-6:/ # chmod –R 777 /hana/data2/FC5
 
 
 
+[[adding-an-additional-datavolume-partition]]
 == Hinzufügen einer zusätzlichen datavolume-Partition
 
 Gehen Sie wie folgt vor, um Ihrer Mandanten-Datenbank eine zusätzliche Datavolume-Partition hinzuzufügen:
