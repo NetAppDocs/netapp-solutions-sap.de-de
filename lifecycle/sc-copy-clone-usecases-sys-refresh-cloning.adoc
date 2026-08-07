@@ -59,6 +59,6 @@ Disaster Recovery-Tests für asynchronen und synchronen SnapMirror verwenden Sna
 
 image:sc-copy-clone-image6.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"] Eine detaillierte Schritt-für-Schritt-Beschreibung finden Sie in den technischen Berichten
 
-https://www.netapp.com/pdf.html?item=/media/8584-tr4646pdf.pdf["Technischer Bericht: SAP HANA Disaster Recovery with Storage Replication"]
+https://www.netapp.com/pdf.html?item=/media/8584-tr4646.pdf["Technischer Bericht: SAP HANA Disaster Recovery with Storage Replication"]
 
 link:../backup/hana-dr-anf-data-protection-overview.html["Disaster Recovery für SAP HANA mit Azure NetApp Files"]

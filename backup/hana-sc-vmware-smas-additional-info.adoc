@@ -29,8 +29,6 @@ Aktive SnapMirror-Synchronisierung:
 
 https://docs.netapp.com/us-en/ontap/snapmirror-active-sync/index.html["Übersicht über die aktive SnapMirror-Synchronisierung in ONTAP"]
 
-https://knowledge.broadcom.com/external/article?legacyId=83370["NetApp ONTAP mit NetApp SnapMirror Active Sync mit VMware vSphere Metro Storage Cluster (vMSC)."]
-
 https://docs.netapp.com/us-en/netapp-solutions/vmware/vmware-vmsc-with-smas.html["VMware vSphere Metro Storage-Cluster mit SnapMirror Active Sync"]
 
 https://www.vmware.com/docs/vmware-vsphere-metro-storage-cluster-vmsc["VMware vSphere Metro Storage-Cluster (vMSC)"]

@@ -23,6 +23,9 @@ indexpage:
       url: bp/hana-fas-fc-introduction.html
   - title: SAP HANA vor Ort
     links:
+    - title: SAP HANA Datenschutz mit SnapCenter auf Bare-Metal-Servern und NetApp
+        ASA Systemen
+      url: backup/hana-sc-bare-metal-asar2-scope.html
     - title: SAP HANA Datensicherung und Hochverfügbarkeit mit SnapCenter, SnapMirror
         Active Sync und VMware Metro Storage Cluster
       url: backup/hana-sc-vmware-smas-scope.html
