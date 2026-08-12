@@ -13,6 +13,7 @@ summary: Ein Storage Connector ist nur in Umgebungen mit mehreren Hosts mit Fail
 :imagesdir: ../media/
 
 
+[role="lead"]
 Ein Storage Connector ist nur in Umgebungen mit mehreren Hosts mit Failover-Funktionen erforderlich. SAP HANA bietet bei der Einrichtung mehrerer Hosts eine Hochverfügbarkeitsfunktionen, mit der ein Failover eines SAP HANA-Datenbankhosts auf einen Standby-Host möglich ist.
 
 In diesem Fall wird auf die LUNs des ausgefallenen Hosts zugegriffen und vom Standby-Host verwendet. Der Speicher-Connector wird verwendet, um sicherzustellen, dass eine Speicherpartition von jeweils nur einem Datenbank-Host aktiv zugegriffen werden kann.

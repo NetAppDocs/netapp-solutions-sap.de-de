@@ -1,0 +1,42 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmfs-asar2-smas-sc-br-syscopy.html 
+keywords: SAP HANA, SnapCenter, backup and recovery, system copy 
+summary:  
+---
+= SnapCenter Backup & Recovery und SAP HANA Systemkopie
+:allow-uri-read: 
+
+
+
+
+[[snapcenter-backup-recovery-and-sap-hana-system-copy]]
+== SnapCenter Backup & Recovery und SAP HANA Systemkopie
+
+[role="lead"]
+NetApp SnapCenter optimiert SAP HANA Lifecycle-Aufgaben wie Backup & Recovery und SAP HANA System Copy und ist in SAP HANA Datenbank- und Lifecycle-Management-Tools integriert, wobei effizienter applikationsintegrierter Datenschutz mit der flexiblen Bereitstellung von SAP-Testsystemen kombiniert wird, wie in der folgenden Abbildung gezeigt.
+
+image:hana-sc-vmfs-asar2-smas-image-080.png["Die Abbildung zeigt den Input/Output-Dialog oder die Darstellung des schriftlichen Inhalts"]
+
+Dieses Kapitel enthält Informationen darüber, wo weitere Informationen zu SnapCenter Backup & Recovery und SAP HANA Systemkopiervorgängen zu finden sind.
+
+
+
+[[backup-operations]]
+=== Backup-Vorgänge
+
+Die Sicherungsvorgänge werden auf die gleiche Weise wie in  https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-generic-backup-operations.html["Erfahren Sie mehr über Sicherungsvorgänge für SAP HANA Snapshots in SnapCenter."] beschrieben ausgeführt.
+
+
+
+[[restore-and-recovery]]
+=== Restore und Recovery
+
+Wiederherstellungs- und Instandsetzungsvorgänge werden auf die gleiche Weise durchgeführt wie beschrieben https://docs.netapp.com/us-en/netapp-solutions-sap/backup/hana-sc-generic-restore.html["Wiederherstellung und Datenrettung von SAP HANA-Datenbanken mit SnapCenter"].
+
+
+
+[[sap-system-refresh]]
+=== SAP-Systemaktualisierung
+
+Detailliertere Informationen zu SAP-Systemaktualisierungs- und Klonvorgängen mit SnapCenter sind unter  https://docs.netapp.com/us-en/netapp-solutions-sap/lifecycle/sc-copy-clone-introduction.html["Automatisierung von SAP HANA Systemkopie und Klonvorgängen mit SnapCenter"] zu finden.

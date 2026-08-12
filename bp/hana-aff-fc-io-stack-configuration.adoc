@@ -1,8 +1,8 @@
 ---
 sidebar: sidebar 
 permalink: bp/hana-aff-fc-io-stack-configuration.html 
-keywords: io, i/o, stack, configuration, database 
-summary: Ab SAP HANA 1.0 SPS10 führte SAP Parameter ein, um das I/O-Verhalten anzupassen und die Datenbank für das verwendete Datei- und Speichersystem zu optimieren. 
+keywords: io, io, stack, configuration, database 
+summary: Ab SAP HANA 1.0 SPS10 führte SAP Parameter ein, um das IO-Verhalten anzupassen und die Datenbank für das verwendete Datei- und Speichersystem zu optimieren. 
 ---
 = I/O-Stack-Konfiguration für SAP HANA
 :hardbreaks:

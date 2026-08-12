@@ -1,0 +1,135 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmfs-asar2-smas-sc_config.html 
+keywords: SAP HANA, VMware, SnapCenter, backup and recovery, SnapMirror active sync, symmetric active-active, NetApp ASA R2 
+summary:  
+---
+= SnapCenter Konfiguration
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+
+
+[[snapcenter-configuration]]
+== SnapCenter Konfiguration
+
+[role="lead"]
+Dieses Kapitel beschreibt, wie SnapCenter für die SAP HANA-Datensicherung eingerichtet wird:
+
+* Hinzufügen der NetApp ASA Storage Cluster zu SnapCenter
+* Erstellung von SAP HANA Backup-Richtlinien
+* Erstellen eines Datenbankbenutzers für SnapCenter
+* Registrierung des SAP HANA Hosts bei SnapCenter
+* Konfiguration der SAP HANA Instanz bei SnapCenter
+
+
+
+
+[[add-storage-clusters-to-snapcenter]]
+=== Speichercluster zu SnapCenter hinzufügen
+
+Die NetApp ASA Storage Cluster werden zu SnapCenter hinzugefügt.
+
+
+NOTE: Die Verwaltung und Überwachung von SnapMirror active sync erfordert REST-API-Zugriff. Daher muss SnapCenter so konfiguriert werden, dass REST-APIs für die Speicherkommunikation verwendet werden. Der Parameter ""IsRestEnabledForStorageConnection"" in der Konfigurationsdatei C:++\++Program Files++\++NetApp++\++SMCore++\++SMCoreServiceHost.dll.config muss auf true gesetzt werden: _++<++add key="IsRestEnabledForStorageConnection" value="true"++>++_
+
+. Anmeldung an der SnapCenter GUI. + image:hana-sc-vmfs-asar2-smas-image-044.jpeg["Bild"]
+. Navigieren Sie im linken Menü zu „Speichersysteme“. + image:hana-sc-vmfs-asar2-smas-image-045.png["Bild"]
+. „ONTAP Clusters“ als Typ auswählen + image:hana-sc-vmfs-asar2-smas-image-046.png["Bild"]
+. Drücken Sie auf „Neu“, um Ihr Speichersystem hinzuzufügen image:hana-sc-vmfs-asar2-smas-image-047.png["Bild"]
+. Geben Sie die Verbindungsdetails Ihres Systems ein und drücken Sie auf „Absenden“. + image:hana-sc-vmfs-asar2-smas-image-048.png["Bild"]
+. Das Speichersystem wurde erfolgreich hinzugefügt. + image:hana-sc-vmfs-asar2-smas-image-049.png["Bild"]
+
+
+
+NOTE: Selbst wenn der Cluster als Ganzes hinzugefügt wurde, benötigen alle zu verwaltenden SVMs eine zugewiesene Management-IP-Adresse. Andernfalls schlagen die verschiedenen Workflows fehl.
+
+
+
+[[add-vmware-plugin-to-snapcenter]]
+=== VMware-Plugin zu SnapCenter hinzufügen
+
+Bevor der Host in SnapCenter hinzugefügt werden kann, muss das SnapCenter Plug-in für VMware vSphere in der VMware Umgebung implementiert werden. Siehe auch https://docs.netapp.com/us-en/sc-plugin-vmware-vsphere/scpivs44_deploy_snapcenter_plug-in_for_vmware_vsphere.html["Implementieren Sie das SnapCenter Plug-in für VMware vSphere"].
+
+Hinweis: Die Anmeldeinformationen müssen während des Workflows zum Hinzufügen des Hosts festgelegt werden, wobei vSphere als Hosttyp ausgewählt werden kann.
+
+image:hana-sc-vmfs-asar2-smas-image-050.png["Abbildung zur Veranschaulichung des besprochenen Inhalts, width=604, height=307"]
+
+
+
+[[create-sap-hana-backup-policies]]
+=== SAP HANA Backup-Richtlinien erstellen
+
+In diesem Kapitel wird beschrieben, wie Backup-Richtlinien für SAP HANA mit SMas für synchrone Replikation und SnapVault/SnapMirror für Backup-Zwecke definiert werden.
+
+. Navigieren Sie im linken Menü zu „Einstellungen“ und wählen Sie den Tab „Richtlinien“. Auf das Pluszeichen klicken, um eine neue Richtlinie hinzuzufügen image:hana-sc-vmfs-asar2-smas-image-051.png["Bild"]
+. Geben Sie einen Namen für die neue Richtlinie ein, z. B. SMAS HANA – Stündlich, und bei Bedarf Details. „Weiter“ auswählen, um fortzufahren. image:hana-sc-vmfs-asar2-smas-image-052.png["Bild"]
+. Die Standardeinstellungen bleiben erhalten, anschließend auf „Weiter“ klicken, um fortzufahren.image:hana-sc-vmfs-asar2-smas-image-053.png["Bild"]
+. „Stündlich“ als Zeitplanfrequenz auswählen, die Anzahl oder den Zeitraum der aufzubewahrenden Snapshots festlegen und „SnapMirror nach Erstellung einer lokalen Snapshot-Kopie aktualisieren“ auswählen, da dies SnapCenter ermöglicht, die Snapshots auch am SMaS-Ziel zu erkennen. „Weiter“ auswählen. image:hana-sc-vmfs-asar2-smas-image-054.png["Bild"]
+. Die Zusammenfassung prüfen und auf „Fertigstellen“ klicken, um die neue Richtlinie zu erstellen.image:hana-sc-vmfs-asar2-smas-image-055.png["Bild"]
+. Nachdem die stündliche Richtlinie für die SnapMirror Active Sync-Replikation erstellt wurde, wird eine zusätzliche tägliche Richtlinie für die Backup-Replikation mit SnapVault erstellt. image:hana-sc-vmfs-asar2-smas-image-056.png["Bild"]
+. Geben Sie einen Namen für die neue Richtlinie an, z. B. SMAS HANA – Täglich, und Details, falls gewünscht. „Weiter“ auswählen, um fortzufahren. image:hana-sc-vmfs-asar2-smas-image-057.png["Bild"]
+. Die Standardeinstellungen bleiben erhalten, anschließend auf „Weiter“ klicken, um fortzufahren.image:hana-sc-vmfs-asar2-smas-image-053.png["Bild"]
+. „Täglich“ als Zeitplanfrequenz auswählen und die Anzahl oder den Zeitraum für die Aufbewahrung der Snapshots festlegen. „Update SnapVault after creating a local Snapshot copy“ auswählen. „Next“ drücken, um fortzufahren. image:hana-sc-vmfs-asar2-smas-image-058.png["Bild"]
+. Die Zusammenfassung prüfen und auf Fertigstellen klicken image:hana-sc-vmfs-asar2-smas-image-059.png["Bild"]
+. Es wurde eine tägliche und stündliche Datensicherungsrichtlinie definiert. Bei Bedarf können zusätzliche Richtlinien mit unterschiedlichen Zeitplantypen erstellt werden. image:hana-sc-vmfs-asar2-smas-image-060.png["Bild"]
+
+
+
+
+[[create-snapcenter-user-at-sap-hana-instance]]
+=== Erstellung eines SnapCenter Benutzers an der SAP HANA Instanz
+
+SnapCenter muss mit der SAP HANA-Instanz kommunizieren, um konsistente Backups erstellen zu können. Daher muss ein Benutzer in der Datenbank für SnapCenter angelegt werden:
+
+. Melden Sie sich an der Server-Shell an und wechseln Sie zum Benutzer SIDadm. + und verbinden Sie sich mit der systemdb Ihres SAP HANA Systems: + _hdbsql -i ++<++instance++_++number++>++ -d SYSTEMDB -u SYSTEM_
+. Den Benutzer erstellen und die Berechtigungen BACKUP ADMIN, CATALOG READ, DATABASE BACKUP ADMIN und DATABASE RECOVERY OPERATOR zuweisen: + + __CREATE USER SNAPCENTER PASSWORD "++<++InitialPassword++>++" + NO FORCE++_++FIRST++_++PASSWORD++_++CHANGE; + ALTER USER SNAPCENTER2 DISABLE PASSWORD LIFETIME; + GRANT BACKUP ADMIN TO SNAPCENTER; + GRANT CATALOG READ TO SNAPCENTER; + GRANT DATABASE BACKUP ADMIN TO SNAPCENTER; + GRANT DATABASE RECOVERY OPERATOR TO SNAPCENTER;__
+. Der Benutzer für SnapCenter wurde erfolgreich erstellt.
+. Erstellen Sie den hdbuserstore-Schlüssel und melden Sie sich an der Shell Ihres Servers an, um zum Benutzer SIDadm zu wechseln. Führen Sie den folgenden Befehl aus, um den Schlüssel zu erstellen, der später von SnapCenter verwendet wird: _hdbuserstore set ++<++SIDKEY++>++ ++<++hana-server++>++:3++<++instance-number++>++13 ++<++USER++>++ ++<++password++>++_
+
+
+
+
+[[register-sap-hana-instance-at-snapcenter]]
+=== SAP HANA-Instanz bei SnapCenter registrieren
+
+Sobald der Datenbankbenutzer für SnapCenter erstellt wurde, wird die SAP HANA Instanz zu SnapCenter hinzugefügt.
+
+. Anmeldung an der SnapCenter GUI + image:hana-sc-vmfs-asar2-smas-image-061.png["Bild"]
+. Im Seitenmenü „Hosts“ auswählen und auf die Schaltfläche „Add“ (Pluszeichen) klicken. + image:hana-sc-vmfs-asar2-smas-image-062.png["Bild"]
+. Wählen Sie „Linux“ als „Hosttyp“, geben Sie den Hostnamen oder die IP-Adresse Ihres Hosts und die SID Ihres SAP HANA Systems an. Wählen Sie bereits verfügbare Anmeldeinformationen aus oder erstellen Sie neue, indem Sie auf das Pluszeichen neben „Anmeldeinformationen“ klicken. „SAP HANA“ ist als zu installierendes Plug-in auszuwählen. + image:hana-sc-vmfs-asar2-smas-image-063.png["Bild"]
++
+.. Wenn Sie neue Zugangsdaten erstellen möchten, geben Sie die erforderlichen Informationen ein und drücken Sie „OK“. image:hana-sc-vmfs-asar2-smas-image-064.png["Bild"]
+.. Sobald die Anmeldeinformationen ausgewählt wurden, auf „Absenden“ drücken.
+
+
+. Der Fingerabdruck ist zu überprüfen, danach ist die Schaltfläche „Bestätigen und Absenden“ zu betätigen. + image:hana-sc-vmfs-asar2-smas-image-065.png["Bild"]
+. Der Host wurde erfolgreich zu SnapCenter hinzugefügt. + image:hana-sc-vmfs-asar2-smas-image-066.png["Bild"]
+
+
+
+
+[[configuring-of-sap-hana-instance-at-snapcenter]]
+=== Konfiguration der SAP HANA Instanz bei SnapCenter
+
+Sobald der Datenbankhost zu SnapCenter hinzugefügt wurde, kann die Sicherung für die SAP HANA-Instanz konfiguriert werden.
+
+. Im linken Menü „Ressourcen“ und dann „SAP HANA“ als Ressource + image:hana-sc-vmfs-asar2-smas-image-067.png["Bild"] auswählen.
+. Die Ansicht kann auf den Typ Ihres Systems geändert werden, z. B. „Multitenant Database Container“. Anschließend auf die Zeile Ihrer Datenbank klicken+image:hana-sc-vmfs-asar2-smas-image-068.png["Bild"]
+. Geben Sie den zuvor erstellten HDB Secure User Store-Schlüssel ein und drücken Sie „OK“. + image:hana-sc-vmfs-asar2-smas-image-069.png["Bild"]
+. Den gewünschten Snapshot-Namen festlegen und anschließend auf „Weiter“ gehen. + image:hana-sc-vmfs-asar2-smas-image-070.png["Bild"]
+. Drücken Sie auf „Weiter“, da bei automatisch erkannten Systemen in der Regel keine Einstellungen vorgenommen werden müssen.image:hana-sc-vmfs-asar2-smas-image-071.png["Bild"]
+. Wählen Sie Ihre gewünschten Richtlinien aus oder erstellen und wählen Sie neue, z. B. eine tägliche und eine stündliche Richtlinie. Das Pluszeichen drücken, um die Zeitpläne zu konfigurieren + image:hana-sc-vmfs-asar2-smas-image-072.png["Bild"]
+. Startdatum und -zeit sowie optional ein Ablaufdatum für die Tagesrichtlinie festlegen und OK drücken. + image:hana-sc-vmfs-asar2-smas-image-073.png["Bild"]
+. Klicken Sie auf das Pluszeichen, um die stündliche Richtlinie zu konfigurieren. + image:hana-sc-vmfs-asar2-smas-image-074.png["Bild"]
+. Legen Sie Startdatum und -zeit sowie optional ein Ablaufdatum für die stündliche Richtlinie fest und drücken Sie OK image:hana-sc-vmfs-asar2-smas-image-075.png["Bild"]
+. Drücken Sie „Weiter“, um fortzufahren image:hana-sc-vmfs-asar2-smas-image-076.png["Bild"]
+. Richten Sie die Benachrichtigung wie gewünscht ein und drücken Sie „Weiter“, + image:hana-sc-vmfs-asar2-smas-image-077.png["Bild"]
+. Überprüfen Sie die Zusammenfassung Ihrer Einstellungen und drücken Sie auf „Fertigstellen“. + image:hana-sc-vmfs-asar2-smas-image-078.png["Bild"]
+. Sobald die Backups erfolgreich durchgeführt wurden, wird eine Übersicht der vorhandenen Backups angezeigt. + image:hana-sc-vmfs-asar2-smas-image-079.png["Bild"]
+

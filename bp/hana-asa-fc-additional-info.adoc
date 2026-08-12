@@ -5,13 +5,13 @@ keywords:
 summary:  
 ---
 = Wo Sie weitere Informationen finden
-:hardbreaks:
 :allow-uri-read: 
-:nofooter: 
-:icons: font
-:linkattrs: 
-:imagesdir: ../media/
 
+
+
+
+[[where-to-find-additional-information]]
+== Wo Sie weitere Informationen finden
 
 [role="lead"]
 Weitere Informationen zu den in diesem Dokument beschriebenen Daten finden Sie in den folgenden Dokumenten bzw. auf den folgenden Websites:

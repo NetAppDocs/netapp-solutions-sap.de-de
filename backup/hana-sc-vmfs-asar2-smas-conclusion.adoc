@@ -1,0 +1,28 @@
+---
+sidebar: sidebar 
+permalink: backup/hana-sc-vmfs-asar2-smas-conclusion.html 
+keywords: SAP HANA, VMware, SnapCenter, backup and recovery, SnapMirror active sync, symmetric active-active, NetApp ASA R2 
+summary:  
+---
+= Schlussfolgerung
+:hardbreaks:
+:allow-uri-read: 
+:nofooter: 
+:icons: font
+:linkattrs: 
+:imagesdir: ../media/
+
+
+
+
+[[conclusion]]
+== *Abschluss*
+
+[role="lead"]
+Die in diesem Dokument beschriebene Bereitstellung zeigt, wie SAP HANA Workloads, die auf VMware laufen, mit einer hochverfügbaren, applikationskonsistenten und betrieblich effizienten Datensicherungsarchitektur auf Basis von NetApp ASA, ONTAP, SnapMirror active sync und SnapCenter geschützt werden können.
+
+Durch die Verwendung von SnapMirror active sync mit ONTAP Konsistenzgruppen können SAP HANA Storage-Volumes synchron zwischen zwei ONTAP Clustern repliziert werden, wobei die Schreibreihenfolge über die Datenbankdaten, Protokoll- und gemeinsam genutzten Volumes hinweg erhalten bleibt. Dieses Design ermöglicht kontinuierlichen Zugriff auf Speicherressourcen und unterstützt automatisierte Failover-Funktionen im Falle eines Speicher- oder Standortausfalls. Die Integration von ONTAP Mediator stärkt die Lösung zusätzlich, indem sie automatisierte Entscheidungsfindung in Fehlerszenarien unterstützt.
+
+SnapCenter fügt die erforderliche Applikationsbewusstheit für SAP HANA Backup und Recovery hinzu. Durch SAP HANA-integrierte Snapshot-Backups ermöglicht SnapCenter schnelle, platzsparende und konsistente Backups und vereinfacht gleichzeitig Planung, Aufbewahrung, Überwachung und Replikationsworkflows. In Kombination mit zusätzlicher asynchroner Replizierung kann die Lösung zudem eine verlängerte Backup-Aufbewahrung und eine zusätzliche Wiederherstellungsebene an einem sekundären Standort bieten.
+
+Insgesamt bietet diese Architektur eine robuste Grundlage für den Schutz geschäftskritischer SAP HANA Systeme. Sie vereint hochverfügbare Systeme, synchrone Replizierung, applikationskonsistentes Backup und vereinfachtes Betriebsmanagement in einer einzigen integrierten Lösung. Organisationen, die diesen Ansatz verwenden, können die Serviceverfügbarkeit verbessern, die Wiederherstellungszeit verkürzen, die Datensicherung stärken und die Administration von SAP HANA Umgebungen auf VMware mit NetApp Storage vereinfachen.
