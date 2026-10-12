@@ -13,6 +13,7 @@ summary:
 :imagesdir: ../media/
 
 
+[role="lead"]
 Die folgende Abbildung bietet einen Überblick über das verwendete Labor-Setup. Zwei Single-Host-HANA-MDC-Systeme dienen zur Demonstration der verschiedenen Vorgänge. Das HANA-System VFS ist für die Ausführung von Sicherungs-, Wiederherstellungs- und Recovery-Vorgängen vorgesehen, während das HANA-System QFS als Zielsystem für SAP-Systemaktualisierungen dient. Das SnapCenter Plug-in für VMware ist unerlässlich, damit SnapCenter die mit VMware VMFS konfigurierten HANA-Ressourcen verwalten kann. Obwohl ONTAP Tools für VMware zur Bereitstellung der Speichereinheiten für die HANA-Systeme verwendet wurden, sind diese keine zwingende Komponente.
 
 image:sc-hana-asrr2-vmfs-image1.png["Abbildung zeigt den Inhalt, der besprochen wird"]

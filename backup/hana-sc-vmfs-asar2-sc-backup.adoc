@@ -13,6 +13,7 @@ summary:
 :imagesdir: ../media/
 
 
+[role="lead"]
 Nichts Spezifisches für VMware mit VMFS.
 
 image:sc-hana-asrr2-vmfs-image18.png["Abbildung zeigt den Inhalt, der besprochen wird"]

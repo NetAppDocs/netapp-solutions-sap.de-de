@@ -13,6 +13,9 @@ summary: Der Schwerpunkt dieses Dokuments liegt auf der Sicherung und Wiederhers
 :imagesdir: ../media/
 
 
+[role="lead"]
+Mit NetApp ONTAP Storage, Snapshot Technologie und SnapCenter software lassen sich SAP HANA Datenbanken beliebiger Größe in Sekundenschnelle sichern und wiederherstellen, ohne die Performance in der Produktion zu beeinträchtigen.
+
 
 
 [[the-challenge]]

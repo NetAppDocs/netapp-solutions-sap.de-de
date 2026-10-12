@@ -13,6 +13,9 @@ summary: Der Schwerpunkt dieses Dokuments liegt auf der Notfallwiederherstellung
 :imagesdir: ../media/
 
 
+[role="lead"]
+Mit dem NetApp Portfolio an Technologien und Tools können Disaster-Recovery-Pläne erstellt oder angepasst werden, die geschäftskritische SAP HANA Anwendungen verfügbar halten.
+
 
 
 [[the-challenge]]

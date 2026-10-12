@@ -8,6 +8,7 @@ summary:
 :allow-uri-read: 
 
 
+[role="lead"]
 Bei virtuellen Ressourcen, die auf dem SnapCenter von VMFS/VMDK gespeichert sind, werden Wiederherstellungsvorgänge immer durch einen Klon-, Mount- und Kopiervorgang durchgeführt.
 
 . SnapCenter erstellt einen Speicherklon basierend auf dem ausgewählten Snapshot

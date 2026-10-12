@@ -13,6 +13,9 @@ summary:
 :imagesdir: ../media/
 
 
+[role="lead"]
+Nach Prüfung der Voraussetzungen können Sie SnapCenter zum Schutz von SAP HANA-Systemen konfigurieren, die VMware VMFS-Datenspeicher verwenden.
+
 
 
 [[pre-requisites]]
